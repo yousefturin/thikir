@@ -59,14 +59,21 @@ const GenericPage = ({ route }) => {
       setCurrentIndex((prevIndex) => prevIndex - 1);
     }
   };
+
   const incrementCount = () => {
-    // Check if you are already at the last index
-
-
-    // Increment the count
     setCount((prevCount) => prevCount + 1);
   };
+
+  const handleContainerPress = () => {
+    // Increment count when anywhere inside the container is pressed
+    incrementCount();
+  };
+
+
   return (
+    <TouchableWithoutFeedback
+     onPress={handleContainerPress}
+     disabled={currentIndex === item.subItems.length - 1}>
     <View style={styles.container}>
       <View style={[styles.rectangle, { height: maxDescriptionHeight + 100 }]}>
         <Text style={styles.title}>
@@ -81,25 +88,27 @@ const GenericPage = ({ route }) => {
           source={ControlPaneBackgroundImage}
           style={styles.ControlPaneBackground}
         >
-          <TouchableOpacity
-            style={styles.button}
+          <TouchableWithoutFeedback
             onPress={nextSubItem}
             disabled={currentIndex === item.subItems.length - 1}
           >
+          <View style={styles.button}>
             {/* Display the current index and total length of sub-items */}
             <Text style={styles.textcount}>
               الذكر {currentIndex + 1} من {item.subItems.length}
             </Text>
-          </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
           {/* Display the circular count */}
-          <TouchableOpacity 
-          style={styles.circularButton} 
+          <TouchableWithoutFeedback 
           onPress={incrementCount}
           disabled={currentIndex === item.subItems.length - 1}>
-              <Text>
-                {count}
-              </Text>
-            </TouchableOpacity>
+              <View style={styles.circularButton}>
+                <Text>
+                  {count}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           <View style={styles.button}>
             <Text style={styles.textcount}> 
             {item.subItems[currentIndex].repTime}
@@ -108,6 +117,7 @@ const GenericPage = ({ route }) => {
         </ImageBackground>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -129,10 +139,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 5,
     borderColor: 'black',
-    backgroundColor: 'white',
+    backgroundColor: "#E2F0F4",
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   button: {
     height:'50%',
