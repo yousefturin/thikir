@@ -18,18 +18,21 @@ const GenericPage = ({ route }) => {
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
         let maxHeight = 150; // Default height for descriptions with less than or equal to 1000 characters
-        const subItemDescription = item.subItems[currentIndex].subItemDescription;
+        const subItemDescription = item.subItems[currentIndex].subItemName;
 
         // Remove non-printable characters and control characters
-        const sanitizedDescription = subItemDescription.replace(/[^ -~]+/g, "");
+        const sanitizedDescription = subItemDescription.replace(/[-~]+/g, "");
 
         console.log(
             "sanitized subItemDescription length is:",
             sanitizedDescription.length
         );
 
-        if (sanitizedDescription.length > 30) {
+        if (sanitizedDescription.length > 700) {
             maxHeight = 450;
+        }
+        else if (sanitizedDescription.length > 600){
+            maxHeight = 250;
         }
 
         setMaxDescriptionHeight(maxHeight);
@@ -47,7 +50,7 @@ const GenericPage = ({ route }) => {
     const nextSubItem = () => {
         if (currentIndex < item.subItems.length - 1) {
             setCurrentIndex((prevIndex) => prevIndex + 1);
-            Vibration.vibrate(50); // Vibrate for 50 milliseconds when the button is pressed
+            Vibration.vibrate(150); // Vibrate for 50 milliseconds when the button is pressed
             setCount(0);
         }
     };
@@ -56,6 +59,7 @@ const GenericPage = ({ route }) => {
 
     const incrementCount = () => {
         setCount((prevCount) => prevCount + 1);
+        Vibration.vibrate(50);
     };
 
     const handleContainerPress = () => {
