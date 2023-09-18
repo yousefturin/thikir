@@ -1,89 +1,118 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList,StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {getItems} from './db/GetData'
-
+import { getItems } from './db/GetData';
 
 const HomeScreen = ({ navigation }) => {
-
   const items = getItems();
+
+  const renderBorderRadius = (index) => {
+    if (index === 0) {
+      // First item, apply top-left and top-right borderRadius
+      return {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+      };
+    } else if (index === items.length - 1) {
+      // Last item, apply bottom-left and bottom-right borderRadius
+      return {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+      };
+    }
+    // Default style for other items
+    return {};
+  };
 
   return (
     <View style={styles.container}>
       <FlatList
         data={items}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate('GenericPage', {
-                name: item.name,
-                item: item, 
-              })
-            }
-          >
-          <View style={styles.iconWraper}>
-            <Icon name="bookmark" size={24} color="white" style={styles.icon} />
+        renderItem={({ item, index }) => (
+          <View>
+            <TouchableOpacity
+              style={[styles.button, renderBorderRadius(index)]}
+              onPress={() =>
+                navigation.navigate('GenericPage', {
+                  name: item.name,
+                  item: item,
+                })
+              }
+              activeOpacity={0.7}
+            >
+              <View style={styles.iconWraper}>
+                <Icon name="angle-left" size={24} color="#d1c9c3" style={styles.icon} />
+              </View>
+              <View style={styles.nameWraper}>
+                <Text style={styles.buttonText}>{item.name}</Text>
+              </View>
+              <View style={styles.imageWraper}>
+                {/* Image component */}
+                <Image
+                  style={styles.image}
+                />
+              </View>
+            </TouchableOpacity>
+            {index !== items.length - 1 && (
+              <View style={styles.horizontalLine} />
+            )}
           </View>
-          <View style={styles.nameWraper}>
-            <Text style={styles.buttonText}>{item.name}</Text>
-          </View>
-          <View style={styles.imageWraper}>
-            {/* Image component */}
-            <Image
-              source={require('../../assets/LeftDecorationForButton.png')}
-              style={styles.image}
-            />
-          </View>
-          </TouchableOpacity>
         )}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.flatListContent}
       />
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#151515",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#E2F0F4",
   },
-  iconWraper:{
-    width:'10%',
+  flatListContent: {
+    paddingBottom: 80, // Add padding to the bottom to push the last item up
+    paddingTop: 30, // Add padding to the top to create space from the navigation bar
   },
-  nameWraper:{
-    width:'75%',
+  iconWraper: {
+    width: '10%',
   },
-  imageWraper:{
-    width:'9%',
+  nameWraper: {
+    width: '80%',
+  },
+  imageWraper: {
+    width: '1%',
   },
   button: {
-    backgroundColor: '#023B4F', // Background of the button
-    borderRadius: 10, // Adjust the border radius as needed
-    marginVertical: 10,
-    flexDirection: 'row', // Reverse the direction to place the image on the right
-    alignItems: 'center', // Align text and image vertically
-    justifyContent:'space-evenly'
+    backgroundColor: '#262626',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   buttonText: {
-    color: 'white', // Text color
+    color: 'white',
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '300',
     textAlign: 'right',
-    marginLeft:30,
+    marginLeft: 30,
   },
   image: {
-    width: 44, // Set the width of the image
-    height: 55, // Set the height of the image
+    width: 44,
+    height: 55,
     borderBottomRightRadius: 10,
-    borderTopRightRadius:10, // Adjust the border radius as needed
+    borderTopRightRadius: 10,
   },
   icon: {
-    marginLeft:20
+    marginLeft: 20,
+  },
+  horizontalLine: {
+    borderBottomWidth: 1, // Adjust the border width as needed
+    borderColor: '#262626', // Adjust the color as needed
+    marginLeft: 360, // Adjust the margin as needed
   },
 });
-
 
 export default HomeScreen;
