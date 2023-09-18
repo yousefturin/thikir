@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white', // Background of the entire screen
+    backgroundColor: "#E2F0F4",
   },
   iconWraper:{
     width:'10%',
