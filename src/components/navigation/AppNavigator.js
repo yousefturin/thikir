@@ -33,7 +33,7 @@ const AppNavigator = () => {
           headerLeft: () => (
             <View style={styles.iconContainer}>
               <TouchableOpacity onPress={() => navigation.navigate('القائمة')}>
-                <Icon name="bars" size={24} color="white" />
+                <Icon name="bars" size={24} color="white" style={[{paddingRight:190,marginBottom:10, paddingTop:10}] } />
               </TouchableOpacity>
             </View>
           ),
@@ -57,14 +57,14 @@ const AppNavigator = () => {
           headerLeft: () => (
             <View style={styles.iconContainer}>
               <TouchableOpacity onPress={() => navigation.navigate('الأذكار')}>
-                <Icon name="angle-left" size={34} color="white" />
+                <Icon name="angle-left" size={24} color="white" style={[{paddingRight:190,marginBottom:10, paddingTop:10}] }  />
               </TouchableOpacity>
             </View>
           ),
           headerRight:  () => (
             <View style={styles.iconContainerRight}>
               <TouchableOpacity onPress={() => navigation.navigate('الأذكار')}>
-              <Icon name="bookmark" size={24} color="white" style={styles.icon} />
+              <Icon name="bookmark" size={24} color="white" style={[{marginLeft:170,marginBottom:10, paddingTop:10,paddingRight:20}] }  />
               </TouchableOpacity>
             </View>
           ),
