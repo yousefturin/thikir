@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
             activeOpacity={0.7}
           >
             <View style={styles.iconWrapperTop}>
-            <Ionicons name={topItemIcons[index]} size={35} color="#d1c9c3" style={styles.iconTop} />
+            <Ionicons name={topItemIcons[index]} size={35} color="#fff" style={styles.iconTop} />
             </View>
             <View style={styles.nameWrapper}>
               <Text style={styles.buttonTextTop}>{item.name}</Text>
@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
             activeOpacity={0.7}
           >
             <View style={styles.iconWrapper}>
-              <FontAwesomeIcon name="angle-left" size={24} color="#d1c9c3" style={styles.icon} />
+              <FontAwesomeIcon name="angle-left" size={24} color="#454545" style={styles.icon} />
             </View>
             <View style={styles.nameWrapper}>
               <Text style={styles.buttonText}>{item.name}</Text>
