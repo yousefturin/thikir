@@ -35,24 +35,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: "#E2F0F4",
+    backgroundColor: "#151515",
     paddingTop: 40,
   },
   button: {
     width: '80%', // 80% of screen width
-    backgroundColor: '#023B4F', // Background of the button
+    backgroundColor: '#262626', // Background of the button
     padding: 30,
     borderRadius: 10, // Adjust the border radius as needed
     marginVertical: 10,
     flexDirection: 'row', // Arrange text and icon side by side
     justifyContent:'flex-end', // Space between text and icon
     alignItems: 'center', // Align text and icon vertically
+  
   },
   buttonText: {
     color: 'white', // Text color
     fontSize: 28,
     fontWeight:'700',
     textAlign: 'center',
+    fontFamily: 'ScheherazadeNewBold'
   },
   icon: {
     marginLeft: 10, // Add some spacing between text and icon

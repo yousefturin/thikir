@@ -3,10 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 const NavBar = ({ navigation, route }) => {
   return (
-    <View>
+    <View >
       {/* Left Icon (Menu Icon) */}
-      <TouchableOpacity onPress={() => navigation.navigate('الفائمة')}>
-        <Text>Menu</Text>
+      <TouchableOpacity  onPress={() => navigation.navigate('الفائمة')} >
+        <Text >Menu</Text>
       </TouchableOpacity>
 
       {/* Center Logo */}
