@@ -6,7 +6,6 @@ const AboutScreen = ({ navigation }) => {
     <View>
       {/* Navigation bar */}
       {/* Add your navigation bar here */}
-      <Text>About Page</Text>
       <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
       </TouchableOpacity>
     </View>
