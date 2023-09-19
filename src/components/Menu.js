@@ -1,24 +1,31 @@
-import React from "react";
+import React , { useState }from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"; 
 import { Ionicons } from '@expo/vector-icons';
-
+import{ fetchRandomVerse } from '../components/API/GETAyahofQuran'
 
 const tasbihImage = require('../../assets/tasbihIcon.png');
 
 
 const Menu = ({ navigation }) => {
+  const [verse, setVerse] = useState('');
+  const getRandomVerse = async () => {
+    const fetchedVerse  = await fetchRandomVerse();
+    console.log('Random Quranic Verse:', fetchedVerse);
+     // Set the fetched verse in the component state
+    setVerse(fetchedVerse);
+  };
   return (
     <View style={styles.container}>
           <TouchableOpacity
       style={[styles.button, {borderRadius:10,marginBottom:30, marginTop: 30, }]}
-        
+      onPress={getRandomVerse}
       >
-        <View style={styles.iconWrapper}>
+        <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#d1c9c3"
+            color="#454545"
             style={styles.icon}
           />
         </View>
@@ -43,11 +50,11 @@ const Menu = ({ navigation }) => {
       style={[styles.button, {borderTopRightRadius: 10,
     borderTopLeftRadius: 10, }]}
       >
-        <View style={styles.iconWrapper}>
+        <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#d1c9c3"
+            color="#454545"
             style={styles.icon}
           />
         </View>
@@ -69,11 +76,11 @@ const Menu = ({ navigation }) => {
       style={[styles.button]}
         onPress={() => navigation.navigate("الأذكار المفضلة")}
       >
-        <View style={styles.iconWrapper}>
+        <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#d1c9c3"
+            color="#454545"
             style={styles.icon}
           />
         </View>
@@ -98,11 +105,11 @@ const Menu = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("الاعدادات")}
       >
-        <View style={styles.iconWrapper}>
+        <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#d1c9c3"
+            color="#454545"
             style={styles.icon}
           />
         </View>
@@ -128,11 +135,11 @@ const Menu = ({ navigation }) => {
     borderBottomLeftRadius: 10, }]}
         onPress={() => navigation.navigate("عن البرنامج")}
       >
-        <View style={styles.iconWrapper}>
+        <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#d1c9c3"
+            color="#454545"
             style={styles.icon}
           />
         </View>
@@ -152,6 +159,9 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+      <Text style={[{height:200, width:'50%', textAlign:'center',color:'#fff',fontFamily:'ScheherazadeNew'}]}>
+        {verse}
+      </Text>
     </View>
   );
 };
@@ -165,9 +175,17 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
     paddingTop: 30,
   },
-  iconWrapper: {
+  iconWrapperLeft:{
     width: "10%",
+  },
+  iconWrapper: {
+    width: "8%",
     alignItems: "center",
+    justifyContent:'center',
+    backgroundColor:'#454545',
+    borderRadius:10,
+    padding:5,
+    marginRight: 5,
   },
   nameWrapper: {
     width: "70%",
@@ -183,12 +201,12 @@ const styles = StyleSheet.create({
 
   },
   buttonText: {
-    color: "#dddddd",
+    color: "#fff",
     fontSize: 18,
     fontWeight: "300",
     textAlign: "right",
     marginRight: 20,
-    fontFamily: "ScheherazadeNew",
+    fontFamily: "ScheherazadeNewBold",
   },
   image: {
     width: 44,
@@ -198,13 +216,11 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   iconleft: {
-    marginRight: 20,
+
   },
   specialIconleft:{
-    marginRight: 20,
     width:24,
     height:24,
-    color:'white',
   },
   horizontalLine: {
     borderBottomWidth: 1,
