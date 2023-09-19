@@ -13,14 +13,18 @@ import GenericPage from '../GenericPage';
 const Stack = createStackNavigator();
 
 const headerStyle = {
-  backgroundColor: '#023B4F', // Set the background color of the navigation bar
+  backgroundColor: '#023B4F',
 };
 const headerBackgroundImage = require('../../../assets/HeaderBackground.jpg');
 const headerTintColor = 'white'; // Set the text color to white
 
 const AppNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="الأذكار" screenOptions={{ headerTintColor }}>
+    <Stack.Navigator initialRouteName="الأذكار" screenOptions={{ headerTintColor,
+    headerTitleStyle: {
+          fontFamily: 'ScheherazadeNewBold', // Set your desired font family here
+          fontSize: 22, // Adjust font size as needed
+        }, }}>
       <Stack.Screen
         name="الأذكار"
         component={HomeScreen}
@@ -37,7 +41,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         })}
@@ -47,7 +50,7 @@ const AppNavigator = () => {
         component={GenericPage}
         options={({ route, navigation }) => ({
           headerTitle: () => (
-            <Text style={{ color: 'white', fontSize: 18 }}>
+            <Text style={{ color: 'white', fontSize: 18, fontFamily: 'ScheherazadeNewBold',}}>
               {route.params?.name || 'Default Page Title'}
             </Text>
           ),
@@ -68,7 +71,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         })}
@@ -80,7 +82,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         }}
@@ -92,7 +93,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         }}
@@ -104,7 +104,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         }}
@@ -116,7 +115,6 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
           headerBackground: () => (
             <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
-              {/* You can add any other header components here */}
             </ImageBackground>
           ),
         }}
@@ -127,22 +125,22 @@ const AppNavigator = () => {
 
 const styles = StyleSheet.create({
   iconContainer: {
-    marginLeft: 16, // Adjust the margin as needed
+    marginLeft: 16, 
   },
   iconContainerRight: {
-    marginRight: 16, // Adjust the margin as needed
+    marginRight: 16, 
   },
   headerBackground: {
     flex: 1,
-    resizeMode: 'cover', // or 'stretch' or 'contain'
-    shadowColor: 'black', // Shadow color
+    resizeMode: 'cover', 
+    shadowColor: 'black', 
     shadowOffset: {
       width: 0,
-      height: 2, // Adjust the height to control the shadow's vertical offset
+      height: 5, 
     },
-    shadowOpacity: 0.5, // Adjust the opacity of the shadow
-    shadowRadius: 4, // Adjust the radius of the shadow
-    elevation: 4, // This is for Android elevation
+    shadowOpacity: 0.3, 
+    shadowRadius: 4, 
+    elevation: 4, 
   },
 });
 

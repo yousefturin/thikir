@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image, ScrollView } from 'react-native';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
 import { getItems } from './db/GetData';
 
 const HomeScreen = ({ navigation }) => {
@@ -8,82 +9,108 @@ const HomeScreen = ({ navigation }) => {
 
   const renderBorderRadius = (index) => {
     if (index === 0) {
-      // First item, apply top-left and top-right borderRadius
       return {
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
       };
     } else if (index === items.length - 1) {
-      // Last item, apply bottom-left and bottom-right borderRadius
       return {
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
       };
     }
-    // Default style for other items
     return {};
   };
 
+  // Extract the first 4 items for the new layout
+  const topItems = items.slice(0, 4);
+  const topItemIcons = ['moon', 'partly-sunny', 'notifications', 'bed'];
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={items}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item, index }) => (
-          <View>
-            <TouchableOpacity
-              style={[styles.button, renderBorderRadius(index)]}
-              onPress={() =>
-                navigation.navigate('GenericPage', {
-                  name: item.name,
-                  item: item,
-                })
-              }
-              activeOpacity={0.7}
-            >
-              <View style={styles.iconWraper}>
-                <Icon name="angle-left" size={24} color="#d1c9c3" style={styles.icon} />
-              </View>
-              <View style={styles.nameWraper}>
-                <Text style={styles.buttonText}>{item.name}</Text>
-              </View>
-              <View style={styles.imageWraper}>
-                {/* Image component */}
-                <Image
-                  style={styles.image}
-                />
-              </View>
-            </TouchableOpacity>
-            {index !== items.length - 1 && (
-              <View style={styles.horizontalLine} />
-            )}
-          </View>
-        )}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.flatListContent}
-      />
+    <View style={styles.pageContainer}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.buttonGrid}>
+        {topItems.map((item, index) => (
+          <TouchableOpacity
+            key={item.name}
+            style={[styles.squareButton, renderBorderRadius(index)]}
+            onPress={() =>
+              navigation.navigate('GenericPage', {
+                name: item.name,
+                item: item,
+              })
+            }
+            activeOpacity={0.7}
+          >
+            <View style={styles.iconWrapperTop}>
+            <Ionicons name={topItemIcons[index]} size={35} color="#d1c9c3" style={styles.iconTop} />
+            </View>
+            <View style={styles.nameWrapper}>
+              <Text style={styles.buttonTextTop}>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={styles.TextMidWrapper}>
+      <Text style={styles.TextMid}>
+        الفهرس
+      </Text>
+      </View>
+      {items.map((item, index) => (
+        <View key={item.name}>
+          <TouchableOpacity
+            style={[styles.button, renderBorderRadius(index)]}
+            onPress={() =>
+              navigation.navigate('GenericPage', {
+                name: item.name,
+                item: item,
+              })
+            }
+            activeOpacity={0.7}
+          >
+            <View style={styles.iconWrapper}>
+              <FontAwesomeIcon name="angle-left" size={24} color="#d1c9c3" style={styles.icon} />
+            </View>
+            <View style={styles.nameWrapper}>
+              <Text style={styles.buttonText}>{item.name}</Text>
+            </View>
+            <View style={styles.imageWrapper}>
+              {/* Image component */}
+              <Image
+                style={styles.image}
+              />
+            </View>
+          </TouchableOpacity>
+          {index !== items.length - 1 && (
+            <View style={styles.horizontalLine} />
+          )}
+        </View>
+      ))}
+    </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  pageContainer: {
     flex: 1,
-    backgroundColor: "#151515",
+    backgroundColor: "#151515", // Background color for the entire page
+  },
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#151515',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 80,
+    paddingTop: 30,
   },
-  flatListContent: {
-    paddingBottom: 80, // Add padding to the bottom to push the last item up
-    paddingTop: 30, // Add padding to the top to create space from the navigation bar
-  },
-  iconWraper: {
+  iconWrapper: {
     width: '10%',
   },
-  nameWraper: {
+  nameWrapper: {
     width: '80%',
   },
-  imageWraper: {
+  imageWrapper: {
     width: '1%',
   },
   button: {
@@ -93,11 +120,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   buttonText: {
-    color: 'white',
+    color: '#dddddd',
     fontSize: 18,
     fontWeight: '300',
     textAlign: 'right',
     marginLeft: 30,
+    fontFamily: 'ScheherazadeNew',
   },
   image: {
     width: 44,
@@ -109,9 +137,54 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   horizontalLine: {
-    borderBottomWidth: 1, // Adjust the border width as needed
-    borderColor: '#262626', // Adjust the color as needed
-    marginLeft: 360, // Adjust the margin as needed
+    borderBottomWidth: 1,
+    borderColor: '#262626',
+    marginLeft: 360,
+  },
+  buttonGrid: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    width: '91%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  squareButton: {
+    width: '48%',
+    height: 100,
+    backgroundColor: '#262626',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingBottom: 10,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  buttonTextTop:{
+    color: '#dddddd',
+    fontSize: 20,
+    fontWeight: '300',
+    textAlign: 'right',
+    marginRight: 10,
+    fontFamily: 'ScheherazadeNew',
+  },
+  iconWrapperTop: {
+    alignItems:"flex-end",
+    marginRight: 10,
+    marginBottom: 5,
+  },
+  TextMidWrapper:{
+    width:'100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  TextMid:{
+    width:'22%',
+    color: 'white',
+    fontSize: 22,
+    paddingBottom:10,
+    fontFamily: 'ScheherazadeNewBold',
   },
 });
 
