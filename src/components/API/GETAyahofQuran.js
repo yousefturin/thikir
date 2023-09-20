@@ -5,7 +5,6 @@ const fetchRandomVerse = async () => {
         
         const apiUrl = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${edition}`;
         const response = await fetch(apiUrl);
-        console.log(apiUrl);
   
         if (!response.ok) {
             throw new Error('Failed to fetch data');

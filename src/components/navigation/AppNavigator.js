@@ -8,6 +8,7 @@ import FavouriteScreen from '../FavouriteScreen';
 import SettingScreen from '../SettingsScreen';
 import AboutScreen from '../aboutScreen';
 import Menu from '../Menu';
+import QuranVerseScreen from '../QuranverseScreen';
 import GenericPage from '../GenericPage';
 
 const Stack = createStackNavigator();
@@ -28,6 +29,26 @@ const AppNavigator = () => {
       <Stack.Screen
         name="الأذكار"
         component={HomeScreen}
+        options={({ navigation }) => ({
+          headerTitle: null,
+          headerLeft: () => (
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate('القائمة')}>
+                <Icon name="bars" size={24} color="white" style={[{paddingRight:190,marginBottom:10, paddingTop:10}] } />
+              </TouchableOpacity>
+            </View>
+          ),
+          headerRight: null,
+          headerStyle: headerStyle,
+          headerBackground: () => (
+            <ImageBackground source={headerBackgroundImage} style={styles.headerBackground}>
+            </ImageBackground>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="آية"
+        component={QuranVerseScreen}
         options={({ navigation }) => ({
           headerTitle: null,
           headerLeft: () => (
