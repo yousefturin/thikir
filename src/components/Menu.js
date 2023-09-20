@@ -11,7 +11,6 @@ const Menu = ({ navigation }) => {
   const [verse, setVerse] = useState('');
   const getRandomVerse = async () => {
     const fetchedVerse  = await fetchRandomVerse();
-    console.log('Random Quranic Verse:', fetchedVerse);
      // Set the fetched verse in the component state
     setVerse(fetchedVerse);
   };
