@@ -39,6 +39,10 @@ const GenericPage = ({ route }) => {
             maxHeight = 250;
             MaxFontSize = 17;
         }
+        else if (sanitizedDescription.length > 500) {
+            maxHeight = 250;
+            MaxFontSize = 17;
+        }
         else if (sanitizedDescription.length > 400) {
             MaxFontSize = 17;
         }
