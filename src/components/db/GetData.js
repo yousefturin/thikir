@@ -224,8 +224,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: ' الدعاء إذا نزل المطر', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ صَيِّباً نَافِعاً', subItemDescription: 'البخاري مع الفتح 2/518' },
       // Add more sub-items as needed
     ],
   },
@@ -236,8 +235,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: ' الذكر بعد نزول المطر', repTime: 'مرة واحدة', count: 1, subItemName: 'مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ', subItemDescription: 'البخاري 1/205 ،مسلم 1/83' },
       // Add more sub-items as needed
     ],
   },
