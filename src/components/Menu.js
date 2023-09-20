@@ -1,24 +1,27 @@
-import React , { useState }from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome"; 
-import { Ionicons } from '@expo/vector-icons';
-import{ fetchRandomVerse } from '../components/API/GETAyahofQuran'
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { Ionicons } from "@expo/vector-icons";
+import { fetchRandomVerse } from "../components/API/GETAyahofQuran";
 
-const tasbihImage = require('../../assets/tasbihIcon.png');
-
+const tasbihImage = require("../../assets/tasbihIcon.png");
 
 const Menu = ({ navigation }) => {
-  const [verse, setVerse] = useState('');
+  const [verse, setVerse] = useState("");
   const getRandomVerse = async () => {
-    const fetchedVerse  = await fetchRandomVerse();
-     // Set the fetched verse in the component state
+    const fetchedVerse = await fetchRandomVerse();
+    // Set the fetched verse in the component state
     setVerse(fetchedVerse);
   };
+  //onPress={() => navigation.navigate("آية")}
+  //onPress={getRandomVerse}
   return (
     <View style={styles.container}>
-          <TouchableOpacity
-      style={[styles.button, {borderRadius:10,marginBottom:30, marginTop: 30, }]}
-      onPress={getRandomVerse}
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { borderRadius: 10, marginBottom: 30, marginTop: 30 },
+        ]}
       >
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
@@ -46,8 +49,10 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-      style={[styles.button, {borderTopRightRadius: 10,
-    borderTopLeftRadius: 10, }]}
+        style={[
+          styles.button,
+          { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
+        ]}
       >
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
@@ -61,9 +66,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>السبحة</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <Image source={tasbihImage} style={styles.specialIconleft}>
-
-          </Image>
+          <Image source={tasbihImage} style={styles.specialIconleft}></Image>
         </View>
         <View style={styles.imageWrapper}>
           {/* Image component */}
@@ -72,7 +75,7 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.horizontalLine} />
       <TouchableOpacity
-      style={[styles.button]}
+        style={[styles.button]}
         onPress={() => navigation.navigate("الأذكار المفضلة")}
       >
         <View style={styles.iconWrapperLeft}>
@@ -90,6 +93,35 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="bookmark"
             size={24}
+            color="#fff"
+            style={styles.iconleft}
+          />
+        </View>
+        <View style={styles.imageWrapper}>
+          {/* Image component */}
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+      <View style={styles.horizontalLine} />
+      <TouchableOpacity
+        style={[styles.button]}
+        onPress={() => navigation.navigate("آية")}
+              >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color="#454545"
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.buttonText}>آية</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <Ionicons
+            name="book"
+            size={23}
             color="#fff"
             style={styles.iconleft}
           />
@@ -130,8 +162,10 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.horizontalLine} />
       <TouchableOpacity
-              style={[styles.button, {borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10, }]}
+        style={[
+          styles.button,
+          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+        ]}
         onPress={() => navigation.navigate("عن البرنامج")}
       >
         <View style={styles.iconWrapperLeft}>
@@ -158,7 +192,17 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
-      <Text style={[{height:200, width:'50%', textAlign:'center',color:'#fff',fontFamily:'ScheherazadeNew'}]}>
+      <Text
+        style={[
+          {
+            height: 200,
+            width: "50%",
+            textAlign: "center",
+            color: "#fff",
+            fontFamily: "ScheherazadeNew",
+          },
+        ]}
+      >
         {verse}
       </Text>
     </View>
@@ -174,16 +218,16 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
     paddingTop: 30,
   },
-  iconWrapperLeft:{
+  iconWrapperLeft: {
     width: "10%",
   },
   iconWrapper: {
     width: "8%",
     alignItems: "center",
-    justifyContent:'center',
-    backgroundColor:'#454545',
-    borderRadius:10,
-    padding:5,
+    justifyContent: "center",
+    backgroundColor: "#454545",
+    borderRadius: 10,
+    padding: 5,
     marginRight: 5,
   },
   nameWrapper: {
@@ -197,7 +241,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-
   },
   buttonText: {
     color: "#fff",
@@ -214,17 +257,16 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 20,
   },
-  iconleft: {
-
-  },
-  specialIconleft:{
-    width:24,
-    height:24,
+  iconleft: {},
+  specialIconleft: {
+    width: 24,
+    height: 24,
   },
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: 360,
+    width:13,
+    marginLeft:360
   },
 });
 
