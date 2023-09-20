@@ -200,8 +200,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {  name: 'دعاء الخروج من المسجد', repTime: 'مرة واحدة', count: 1, subItemName: 'يَبْدَأُ بِرِجْلِهِ الْيُسْرَى', subItemDescription: '' },
+      {  name: 'دعاء الخروج من المسجد', repTime: 'مرة واحدة', count: 1, subItemName: 'بِسْمِ اللَّهِ وَالصّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِك، اللَّهُمَّ اعْصِمْنِي مِنَ الشَّيْطَانِ الرَّجِيمِ', subItemDescription: 'انظر تخريج روايات الحديث السابق رقم 20 وزيادة (( اللهم اعصمني من الشيطان الرجيم )) لابن ماجه . انظر صحيح ابن ماجه 1/ 288' },
       // Add more sub-items as needed
     ],
   },
@@ -212,8 +212,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {   name: 'الدعاء عند إفطار الصائم', repTime: 'مرة واحدة', count: 1, subItemName: 'ذَهَبَ الظَّمَأُ وَابْتَلَّتِ العُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ', subItemDescription: 'أخرجه أبي داود 2/306 وغيره وانظر صحيح الجامع 4/209' },
+      {   name: 'الدعاء عند إفطار الصائم', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ أَنْ تَغْفِرَ لِي', subItemDescription: 'أخرجه ابن ماجه 1/557 من دعاء عبد الله بن عمرو رضي الله عنهما ،وحسنه الحافظ في تخريج الأذكار انظر شرح الأذكار 4/342' },
       // Add more sub-items as needed
     ],
   },
