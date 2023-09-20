@@ -200,8 +200,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {  name: 'دعاء الخروج من المسجد', repTime: 'مرة واحدة', count: 1, subItemName: 'يَبْدَأُ بِرِجْلِهِ الْيُسْرَى', subItemDescription: '' },
+      {  name: 'دعاء الخروج من المسجد', repTime: 'مرة واحدة', count: 1, subItemName: 'بِسْمِ اللَّهِ وَالصّلَاةُ وَالسَّلَامُ عَلَى رَسُولِ اللَّهِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِك، اللَّهُمَّ اعْصِمْنِي مِنَ الشَّيْطَانِ الرَّجِيمِ', subItemDescription: 'انظر تخريج روايات الحديث السابق رقم 20 وزيادة (( اللهم اعصمني من الشيطان الرجيم )) لابن ماجه . انظر صحيح ابن ماجه 1/ 288' },
       // Add more sub-items as needed
     ],
   },
@@ -212,8 +212,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {   name: 'الدعاء عند إفطار الصائم', repTime: 'مرة واحدة', count: 1, subItemName: 'ذَهَبَ الظَّمَأُ وَابْتَلَّتِ العُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ', subItemDescription: 'أخرجه أبي داود 2/306 وغيره وانظر صحيح الجامع 4/209' },
+      {   name: 'الدعاء عند إفطار الصائم', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ أَنْ تَغْفِرَ لِي', subItemDescription: 'أخرجه ابن ماجه 1/557 من دعاء عبد الله بن عمرو رضي الله عنهما ،وحسنه الحافظ في تخريج الأذكار انظر شرح الأذكار 4/342' },
       // Add more sub-items as needed
     ],
   },
@@ -224,8 +224,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: ' الدعاء إذا نزل المطر', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ صَيِّباً نَافِعاً', subItemDescription: 'البخاري مع الفتح 2/518' },
       // Add more sub-items as needed
     ],
   },
@@ -236,8 +235,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: ' الذكر بعد نزول المطر', repTime: 'مرة واحدة', count: 1, subItemName: 'مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ', subItemDescription: 'البخاري 1/205 ،مسلم 1/83' },
       // Add more sub-items as needed
     ],
   },
@@ -248,8 +246,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: 'دعاء الريح', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي أَسْــــــأَلُكَ خَيْرَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا', subItemDescription: 'أخرجه أبو داود 4/326وابن ماجه 2/1228 وانظر  صحيح ابن ماجة2/ 305' },
+      { name: 'دعاء الريح', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا، وَشَرِّ مَا فِيهَا، وَشَرِّ مَا أُرْسِلَتْ بِهِ', subItemDescription: 'مسلم 2/616 والبخاري 4/76' },
       // Add more sub-items as needed
     ],
   },
@@ -260,8 +258,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {  name: 'دعاء الرعد', repTime: 'مرة واحدة', count: 1, subItemName: 'سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلاَئِكةُ مِنْ خِيفَتِهِ', subItemDescription: 'كان عبد الله بن الزبير رضي الله عنهما إذا سمع الرعد ترك الحديث وقال :...." الموطأ 2/992 وقال الألباني صحيح الإسناد موقوفاً' },
       // Add more sub-items as needed
     ],
   },
@@ -272,8 +269,7 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {  name: 'دعاء الغضب', repTime: 'مرة واحدة', count: 1, subItemName: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ', subItemDescription: 'البخاري 6/99 ومسلم4/2015' },
       // Add more sub-items as needed
     ],
   },
@@ -284,8 +280,8 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      { name: 'دعاء الهم والحزن', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ، عَدْلٌ فِيَّ قَضَاؤُكَ، أَسْأَلُكَ بِكُــــلِّ اسْمٍ هُوَ لَكَ، سَمَّيْتَ بِهِ نَفْسَكَ، أَوْ أَنْزَلْتَهُ فِي كِتَابِكَ، أَوْ عَلَّمْتَهُ أَحَداً مِنْ خَلْقِكَ، أَوِ اسْتَأْثَرْتَ بِهِ فِي عِلْمِ الغَيْبِ عِنْدَكَ، أَنْ تَجْعَلَ القُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلاَءَ حُزْنِي، وَذَهَابَ هَمِّي', subItemDescription: 'أحمد 1/391وصححه الألباني' },
+      { name: 'دعاء الهم والحزن', repTime: 'مرة واحدة', count: 1, subItemName: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ', subItemDescription: 'البخاري 7/158 كان رسول الله صلى الله عليه وسلم يكثر من هذا الدعاء' },
       // Add more sub-items as needed
     ],
   },
