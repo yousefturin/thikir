@@ -10,16 +10,20 @@ import {
 
 const GenericPage = ({ route }) => {
     const { item } = route.params;
+    const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(0);
     const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
-    const [count, setCount] = useState(0);
+    const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
+    const [maxPadding, setMaxPadding] = useState(0);
     const ControlPaneBackgroundImage = require("../../assets/HeaderBackground.jpg");
 
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
         let maxHeight = 150; // Default height for descriptions with less than or equal to 1000 characters
         let MaxFontSize = 20;
+        let maxPadding = 60;
+        let maxpaddingHorizontal= 20;
         const subItemDescription = item.subItems[currentIndex].subItemName;
 
         // Remove non-printable characters and control characters
@@ -30,25 +34,63 @@ const GenericPage = ({ route }) => {
             sanitizedDescription.length
         );
 
-        if (sanitizedDescription.length > 700) {
+        if (sanitizedDescription.length > 1200) {
             maxHeight = 450;
             MaxFontSize = 16;
-
+            maxPadding = 30; 
+            maxpaddingHorizontal = 10;
         }
+        else if (sanitizedDescription.length > 700) {
+            maxHeight = 450;
+            MaxFontSize = 16;
+            maxPadding =40; 
+            maxpaddingHorizontal = 10;
+        }
+      
         else if (sanitizedDescription.length > 600) {
             maxHeight = 250;
             MaxFontSize = 17;
+            maxPadding =50; 
+        }
+        else if (540 >sanitizedDescription.length > 504) {
+            maxHeight = 220;
+            MaxFontSize = 17;
+            maxPadding =40; 
+        }
+        else if (sanitizedDescription.length > 500) {
+            maxHeight = 350;
+            MaxFontSize = 17;
+            maxPadding =20; 
         }
         else if (sanitizedDescription.length > 500) {
             maxHeight = 250;
             MaxFontSize = 17;
         }
         else if (sanitizedDescription.length > 400) {
+            maxHeight = 200;
             MaxFontSize = 17;
+            maxPadding =35; 
+        }
+        else if (sanitizedDescription.length > 350) {
+            maxHeight = 180;
+            MaxFontSize = 17;
+            maxPadding =40; 
+        }
+        else if (sanitizedDescription.length > 210) {
+            maxHeight = 140;
+            MaxFontSize = 17;
+            maxPadding =40; 
+        }
+        else if (sanitizedDescription.length > 200) {
+            maxHeight = 160;
+            MaxFontSize = 17;
+            maxPadding =40; 
         }
 
         setMaxDescriptionHeight(maxHeight);
         setMaxFontSizeDescription(MaxFontSize);
+        setMaxPadding(maxPadding);
+        setMaxpaddingHorizontal(maxpaddingHorizontal);
     }, [item.subItems, currentIndex]);
 
 
@@ -63,7 +105,7 @@ const GenericPage = ({ route }) => {
     const nextSubItem = () => {
         if (currentIndex < item.subItems.length - 1) {
             setCurrentIndex((prevIndex) => prevIndex + 1);
-            Vibration.vibrate(150); // Vibrate for 50 milliseconds when the button is pressed
+            Vibration.vibrate(150); 
             setCount(0);
         }
     };
@@ -72,7 +114,7 @@ const GenericPage = ({ route }) => {
 
     const incrementCount = () => {
         setCount((prevCount) => prevCount + 1);
-        Vibration.vibrate(50);
+        Vibration.vibrate(80);
     };
 
     const handleContainerPress = () => {
@@ -86,7 +128,7 @@ const GenericPage = ({ route }) => {
             onPress={handleContainerPress}
             disabled={currentIndex === item.subItems.length - 1}>
             <View style={styles.container}>
-                <View style={[styles.rectangle, { height: maxDescriptionHeight + 100 }]}>
+                <View style={[styles.rectangle, { height: maxDescriptionHeight + 100 ,padding:maxPadding,paddingHorizontal:maxpaddingHorizontal}]}>
                     <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
                         {item.subItems[currentIndex].subItemName}
                     </Text>
@@ -174,11 +216,9 @@ const styles = StyleSheet.create({
         borderRadius: 10, // Border radius for the rectangle
         alignItems: "center",
         justifyContent: "space-between", // Distribute content evenly
-        paddingTop: 60,
         paddingBottom: 30,
         padding: 50,
         marginTop: 20,
-        paddingHorizontal: 10,
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
@@ -196,7 +236,7 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 11, // Adjust the font size as needed
         textAlign: "center",
-        color: "white",
+        color: "#767676",
         fontFamily: 'AmiriFont'
     },
     ControlPaneBackground: {
