@@ -126,7 +126,7 @@ const GenericPage = ({ route }) => {
     return (
         <TouchableWithoutFeedback
             onPress={handleContainerPress}
-            disabled={currentIndex === item.subItems.length - 1}>
+            disabled={currentIndex === item.subItems.length - 1}>{/*this line needs a fix for the last thikir to run the count */}
             <View style={styles.container}>
                 <View style={[styles.rectangle, { height: maxDescriptionHeight + 100 ,padding:maxPadding,paddingHorizontal:maxpaddingHorizontal}]}>
                     <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
