@@ -4,6 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerse } from "../components/API/GETAyahofQuran";
 import * as Sharing from 'expo-sharing';
 import { captureRef } from 'react-native-view-shot';
+
+
 const CACHE_KEY = "randomVerseCache";
 const CACHE_EXPIRATION_TIME = 8*60*60*1000;
 

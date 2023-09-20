@@ -6,7 +6,10 @@ import {
     Vibration,
     ImageBackground,
     TouchableWithoutFeedback,
+    TouchableOpacity,
 } from "react-native";
+import * as Sharing from 'expo-sharing';
+import { captureRef } from 'react-native-view-shot';
 
 const GenericPage = ({ route }) => {
     const { item } = route.params;
@@ -17,6 +20,28 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const ControlPaneBackgroundImage = require("../../assets/HeaderBackground.jpg");
+
+    const handleShare = async () => {
+        try {
+          // Capture the content of the component as an image
+          const uri = await captureRef(viewRef, {
+            format: 'png', // or 'jpeg'
+            quality: 1.0,
+          });
+    
+          // Share the captured image
+          await Sharing.shareAsync(uri, {
+            mimeType: 'image/png', // or 'image/jpeg'
+            dialogTitle: 'Share this image',
+            UTI: 'public.png', // On iOS, specify the Universal Type Identifier (UTI)
+          });
+        } catch (error) {
+          console.error('Error sharing:', error);
+        }
+      };
+    
+      let viewRef = React.createRef();
+
 
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
@@ -127,14 +152,23 @@ const GenericPage = ({ route }) => {
         <TouchableWithoutFeedback
             onPress={handleContainerPress}
             disabled={currentIndex === item.subItems.length - 1}>{/*this line needs a fix for the last thikir to run the count */}
-            <View style={styles.container}>
-                <View style={[styles.rectangle, { height: maxDescriptionHeight + 100 ,padding:maxPadding,paddingHorizontal:maxpaddingHorizontal}]}>
+            <View  style={styles.container}>
+            <View style={styles.containerforshare}>
+                <View  ref={viewRef} style={[styles.rectangle, { height: maxDescriptionHeight + 100 ,padding:maxPadding,paddingHorizontal:maxpaddingHorizontal}]}>
                     <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
                         {item.subItems[currentIndex].subItemName}
                     </Text>
                     <Text style={styles.description}>
                         {item.subItems[currentIndex].subItemDescription}
                     </Text>
+                    <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
+        <View style={styles.dotContainer}>
+          <Text style={styles.dot}>&#8226;</Text>
+          <Text style={styles.dot}>&#8226;</Text>
+          <Text style={styles.dot}>&#8226;</Text>
+        </View>
+      </TouchableOpacity>
+                </View>
                 </View>
                 <View style={styles.controlPan}>
                     <ImageBackground
@@ -180,11 +214,16 @@ const styles = StyleSheet.create({
         backgroundColor: "#151515",
         padding: 20,
     },
+    containerforshare:{
+        backgroundColor: "#151515",
+        height:500
+    },
     controlPan: {
         flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 40,
         margin: -20,
+        
     },
     circularButton: {
         width: 70,
@@ -254,6 +293,20 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         elevation: 4,
     },
+    shareButton: {
+        position: 'absolute',
+        top: 10, // Adjust the top value to position the button as desired
+        left: 10, // Adjust the left value to position the button as desired
+      },
+      dotContainer: {
+        flexDirection: 'row',
+      },
+      dot: {
+        color: 'orange',
+        fontSize: 15,
+        fontWeight:'700',
+        marginHorizontal: 1, // Adjust the margin to control spacing between dots
+      },
 });
 
 export default GenericPage;
