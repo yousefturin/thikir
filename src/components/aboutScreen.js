@@ -7,6 +7,8 @@ var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
   const appIconImage = require("../../assets/AppIcon.png");
   return (
+
+    
     <View style={styles.container}>
       {/* Navigation bar */}
       {/* Add your navigation bar here */}
