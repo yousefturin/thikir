@@ -2,19 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
-import { fetchRandomVerse } from "../components/API/GETAyahofQuran";
+
 
 const tasbihImage = require("../../assets/tasbihIcon.png");
 
 const Menu = ({ navigation }) => {
-  const [verse, setVerse] = useState("");
-  const getRandomVerse = async () => {
-    const fetchedVerse = await fetchRandomVerse();
-    // Set the fetched verse in the component state
-    setVerse(fetchedVerse);
-  };
-  //onPress={() => navigation.navigate("آية")}
-  //onPress={getRandomVerse}
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -203,7 +195,7 @@ const Menu = ({ navigation }) => {
           },
         ]}
       >
-        {verse}
+
       </Text>
     </View>
   );

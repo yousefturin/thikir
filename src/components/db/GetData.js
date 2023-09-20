@@ -14,8 +14,18 @@ const items = [
     description: 'البخاري مع الفتح 11/ 113 ومسلم 4/ 2083.',
     title: 'الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
     subItems: [
-      { subItemName: 'Subitem 1', subItemDescription: 'Description 1' },
-      { subItemName: 'Subitem 2', subItemDescription: 'Description 2' },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '﴿اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْـــــــــــدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ﴾.', subItemDescription: 'سورة البقرة ، آية 255 '  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      {  name: 'أذكار الصباح', repTime: 'مرة واحدة', count: 1, subItemName: '', subItemDescription: ''  },
+      
       // Add more sub-items as needed
     ],
   },
