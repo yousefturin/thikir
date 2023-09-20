@@ -62,6 +62,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
+    shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 4,
   },
   rectangleText: {
     color: "#fff",
@@ -75,7 +83,6 @@ const styles = StyleSheet.create({
     width: 126,
     height: 126,
     borderRadius: 27,
-    elevation: 5, // For Android
     shadowColor: "black", // For iOS
     shadowOffset: {
       width: 0,
