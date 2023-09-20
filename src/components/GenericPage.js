@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     },
     shareButton: {
         position: 'absolute',
-        top: 10, // Adjust the top value to position the button as desired
+        top: 7, // Adjust the top value to position the button as desired
         left: 10, // Adjust the left value to position the button as desired
       },
       dotContainer: {
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
       },
       dot: {
         color: 'orange',
-        fontSize: 15,
+        fontSize: 20,
         fontWeight:'700',
         marginHorizontal: 1, // Adjust the margin to control spacing between dots
       },
