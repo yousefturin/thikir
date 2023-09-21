@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 
-
 const tasbihImage = require("../../assets/tasbihIcon.png");
 
 const Menu = ({ navigation }) => {
@@ -98,7 +97,7 @@ const Menu = ({ navigation }) => {
       <TouchableOpacity
         style={[styles.button]}
         onPress={() => navigation.navigate("آية")}
-              >
+      >
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
@@ -190,13 +189,11 @@ const Menu = ({ navigation }) => {
             height: 200,
             width: "50%",
             textAlign: "center",
-            color: "#fff",
+            color: "#be915a",
             fontFamily: "ScheherazadeNew",
           },
         ]}
-      >
-
-      </Text>
+      ></Text>
     </View>
   );
 };
@@ -257,8 +254,8 @@ const styles = StyleSheet.create({
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    width:13,
-    marginLeft:360
+    width: 13,
+    marginLeft: 360,
   },
 });
 
