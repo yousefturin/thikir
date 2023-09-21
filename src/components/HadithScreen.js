@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchRandomVerse } from "../API/GETAyahofQuran";
+import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
 
-const CACHE_KEY = "randomVerseCache_1";
+const CACHE_KEY = "randomVerseCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
-const QuranVerseScreen = ({ navigation }) => {
-  const [verseText, setVerse] = useState("");
-  const [surahName, setSurahName] = useState("");
-  const [ayahNumber, setAyahNumber] = useState("");
+const HADITHVerseScreen = ({ navigation }) => {
+  const [HADITH, setHADITH] = useState("");
+  const [REF, setREF] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
   const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(150);
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
-
   const viewRef = React.useRef();
 
   const Share = async () => {
@@ -25,25 +23,23 @@ const QuranVerseScreen = ({ navigation }) => {
 
   useEffect(() => {
     // Check if cached verse exists and if it's not expired
-    async function getCachedVerse() {
+    async function getCachedVerseHadith() {
       try {
         const cachedData = await AsyncStorage.getItem(CACHE_KEY);
         if (cachedData) {
           const parsedData = JSON.parse(cachedData);
           const {
-            verseText: cachedVerse,
-            surahName: cachedSurahName,
-            ayahNumber: cachedAyahNumber,
+            HADITH: cachedHADITH,
+            REF: cachedREF,
             timestamp,
           } = parsedData;
           const currentTime = new Date().getTime();
           if (currentTime - timestamp <= CACHE_EXPIRATION_TIME) {
             // Use the cached verse if it's not expired
-            setVerse(cachedVerse);
-            setSurahName(cachedSurahName);
-            setAyahNumber(cachedAyahNumber);
+            setHADITH(cachedHADITH);
+            setREF(cachedREF);
             // Calculate the length of the cached verse text and control styles
-            const length = cachedVerse.length;
+            const length = cachedHADITH.length;
             setVerseTextLength(length);
             controlStyle(length);
             return;
@@ -58,30 +54,27 @@ const QuranVerseScreen = ({ navigation }) => {
       }
     }
 
-    getCachedVerse();
+    getCachedVerseHadith();
   }, []);
 
   const getRandomVerse = async () => {
     try {
       const {
-        verseText: fetchedVerse,
-        surahName: fetchedSurahName,
-        ayahNumber: fetchedAyahNumber,
-      } = await fetchRandomVerse();
+        HADITH: fetchedHADITH,
+        REF: cachedREF,
+      } = await fetchRandomVerseFromFile();
       // Set the fetched verse and related information in the component state
-      setVerse(fetchedVerse);
-      setSurahName(fetchedSurahName);
-      setAyahNumber(fetchedAyahNumber);
+      setHADITH(fetchedHADITH);
+      setREF(cachedREF);
       // Calculate the length of the fetched verse text and control styles
-      const length = fetchedVerse.length;
+      const length = fetchedHADITH.length;
       setVerseTextLength(length);
       controlStyle(length);
       // Cache the fetched verse and related information along with the current timestamp
       const currentTime = new Date().getTime();
       const dataToCache = JSON.stringify({
-        verseText: fetchedVerse,
-        surahName: fetchedSurahName,
-        ayahNumber: fetchedAyahNumber,
+        HADITH: fetchedHADITH,
+        REF: cachedREF,
         timestamp: currentTime,
       });
       await AsyncStorage.setItem(CACHE_KEY, dataToCache);
@@ -90,7 +83,6 @@ const QuranVerseScreen = ({ navigation }) => {
       console.error("Error fetching random verse:", error);
     }
   };
-
   const controlStyle = (verseTextLength) => {
     let maxHeight = 550;
     let MaxFontSize = 20;
@@ -120,14 +112,11 @@ const QuranVerseScreen = ({ navigation }) => {
     padding: maxPadding,
     paddingHorizontal: maxpaddingHorizontal,
   };
-
   return (
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
-        <Text style={[styles.title, textStyle]}>
-          {verseText} ﴿ {ayahNumber} ﴾
-        </Text>
-        <Text style={styles.description}>{surahName}</Text>
+        <Text style={[styles.title, textStyle]}>{HADITH}</Text>
+        <Text style={styles.description}>{REF}</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}
           style={styles.shareButton}
@@ -204,4 +193,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuranVerseScreen;
+export default HADITHVerseScreen;

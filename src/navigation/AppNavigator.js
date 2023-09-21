@@ -15,6 +15,7 @@ import SettingScreen from "../components/SettingsScreen";
 import AboutScreen from "../components/aboutScreen";
 import Menu from "../components/Menu";
 import QuranVerseScreen from "../components/QuranVerseScreen";
+import HadithScreen from "../components/HadithScreen";
 import GenericPage from "../components/GenericPage";
 
 const Stack = createStackNavigator();
@@ -69,6 +70,19 @@ const AppNavigator = () => {
       <Stack.Screen
         name="آية"
         component={QuranVerseScreen}
+        options={{
+          headerStyle: headerStyle,
+          headerBackground: () => (
+            <ImageBackground
+              source={headerBackgroundImage}
+              style={styles.headerBackground}
+            ></ImageBackground>
+          ),
+        }}
+      />
+            <Stack.Screen
+        name="حديث"
+        component={HadithScreen}
         options={{
           headerStyle: headerStyle,
           headerBackground: () => (
