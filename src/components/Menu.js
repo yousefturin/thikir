@@ -117,6 +117,37 @@ const Menu = ({ navigation }) => {
             style={styles.iconleft}
           />
         </View>
+        
+        <View style={styles.imageWrapper}>
+          {/* Image component */}
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+      <View style={styles.horizontalLine} />
+      <TouchableOpacity
+        style={[styles.button]}
+        onPress={() => navigation.navigate("حديث")}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color="#454545"
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.buttonText}>حديث</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <Ionicons
+            name="book"
+            size={23}
+            color="#fff"
+            style={styles.iconleft}
+          />
+        </View>
+        
         <View style={styles.imageWrapper}>
           {/* Image component */}
           <Image style={styles.image} />
