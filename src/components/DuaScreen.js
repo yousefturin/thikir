@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: "ScheherazadeNew",
     },
-    translation:{
-        marginBottom:30,
+    translation: {
+        marginBottom: 30,
         fontSize: 11,
         textAlign: "center",
         color: "#767676",
@@ -210,9 +210,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: "#151515",
         width: '100%',
-        marginBottom:5,
-        
-      },
+        marginBottom: 5,
+
+    },
 });
 
 export default DUAVerseScreen;
