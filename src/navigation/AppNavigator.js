@@ -9,20 +9,20 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import HomeScreen from "../HomeScreen";
-import FavouriteScreen from "../FavouriteScreen";
-import SettingScreen from "../SettingsScreen";
-import AboutScreen from "../aboutScreen";
-import Menu from "../Menu";
-import QuranVerseScreen from "../QuranVerseScreen";
-import GenericPage from "../GenericPage";
+import HomeScreen from "../components/HomeScreen";
+import FavouriteScreen from "../components/FavouriteScreen";
+import SettingScreen from "../components/SettingsScreen";
+import AboutScreen from "../components/aboutScreen";
+import Menu from "../components/Menu";
+import QuranVerseScreen from "../components/QuranVerseScreen";
+import GenericPage from "../components/GenericPage";
 
 const Stack = createStackNavigator();
 
 const headerStyle = {
   backgroundColor: "#023B4F",
 };
-const headerBackgroundImage = require("../../../assets/HeaderBackground.jpg");
+const headerBackgroundImage = require("../../assets/HeaderBackground.jpg");
 const headerTintColor = "white"; // Set the text color to white
 
 const AppNavigator = () => {

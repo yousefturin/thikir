@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchRandomVerse } from "../components/API/GETAyahofQuran";
-import * as Sharing from 'expo-sharing';
-import { captureRef } from 'react-native-view-shot';
-
+import { fetchRandomVerse } from "../API/GETAyahofQuran";
+import { handleShare } from "../utils/shareUtils";
 
 const CACHE_KEY = "randomVerseCache";
-const CACHE_EXPIRATION_TIME = 8*60*60*1000;
+const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const QuranVerseScreen = ({ navigation }) => {
   const [verseText, setVerse] = useState("");
@@ -19,26 +17,12 @@ const QuranVerseScreen = ({ navigation }) => {
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
 
-  const handleShare = async () => {
-    try {
-      // Capture the content of the component as an image
-      const uri = await captureRef(viewRef, {
-        format: 'png', // or 'jpeg'
-        quality: 1.0,
-      });
+  const viewRef = React.useRef();
 
-      // Share the captured image
-      await Sharing.shareAsync(uri, {
-        mimeType: 'image/png', // or 'image/jpeg'
-        dialogTitle: 'Share this image',
-        UTI: 'public.png', // On iOS, specify the Universal Type Identifier (UTI)
-      });
-    } catch (error) {
-      console.error('Error sharing:', error);
-    }
+  const Share = async () => {
+    await handleShare(viewRef.current);
   };
 
-  let viewRef = React.createRef();
   useEffect(() => {
     // Check if cached verse exists and if it's not expired
     async function getCachedVerse() {
@@ -46,7 +30,12 @@ const QuranVerseScreen = ({ navigation }) => {
         const cachedData = await AsyncStorage.getItem(CACHE_KEY);
         if (cachedData) {
           const parsedData = JSON.parse(cachedData);
-          const { verseText: cachedVerse, surahName: cachedSurahName, ayahNumber: cachedAyahNumber, timestamp } = parsedData;
+          const {
+            verseText: cachedVerse,
+            surahName: cachedSurahName,
+            ayahNumber: cachedAyahNumber,
+            timestamp,
+          } = parsedData;
           const currentTime = new Date().getTime();
           if (currentTime - timestamp <= CACHE_EXPIRATION_TIME) {
             // Use the cached verse if it's not expired
@@ -74,7 +63,11 @@ const QuranVerseScreen = ({ navigation }) => {
 
   const getRandomVerse = async () => {
     try {
-      const { verseText: fetchedVerse, surahName: fetchedSurahName, ayahNumber: fetchedAyahNumber } = await fetchRandomVerse();
+      const {
+        verseText: fetchedVerse,
+        surahName: fetchedSurahName,
+        ayahNumber: fetchedAyahNumber,
+      } = await fetchRandomVerse();
       // Set the fetched verse and related information in the component state
       setVerse(fetchedVerse);
       setSurahName(fetchedSurahName);
@@ -85,7 +78,12 @@ const QuranVerseScreen = ({ navigation }) => {
       controlStyle(length);
       // Cache the fetched verse and related information along with the current timestamp
       const currentTime = new Date().getTime();
-      const dataToCache = JSON.stringify({ verseText: fetchedVerse, surahName: fetchedSurahName, ayahNumber: fetchedAyahNumber, timestamp: currentTime });
+      const dataToCache = JSON.stringify({
+        verseText: fetchedVerse,
+        surahName: fetchedSurahName,
+        ayahNumber: fetchedAyahNumber,
+        timestamp: currentTime,
+      });
       await AsyncStorage.setItem(CACHE_KEY, dataToCache);
     } catch (error) {
       // Handle any errors that may occur during the API call
@@ -93,10 +91,7 @@ const QuranVerseScreen = ({ navigation }) => {
     }
   };
 
-  // Define the controlStyle function
   const controlStyle = (verseTextLength) => {
-    // Your style control logic here
-    // Example code:
     let maxHeight = 550;
     let MaxFontSize = 20;
     let maxPadding = 40;
@@ -107,23 +102,18 @@ const QuranVerseScreen = ({ navigation }) => {
       MaxFontSize = 16;
       maxPadding = 30;
       maxpaddingHorizontal = 10;
-    }
-    else if (verseTextLength < 100){
+    } else if (verseTextLength < 100) {
       maxHeight = 650;
       MaxFontSize = 27;
       maxPadding = 30;
       maxpaddingHorizontal = 20;
     }
-
-
-    // Update state variables with calculated values
     setMaxDescriptionHeight(maxHeight);
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
     setMaxpaddingHorizontal(maxpaddingHorizontal);
   };
 
-  // You can use the calculated styles in your Text component
   const textStyle = {
     fontSize: maxFontSizeDescription,
     maxHeight: maxDescriptionHeight,
@@ -138,15 +128,17 @@ const QuranVerseScreen = ({ navigation }) => {
           {verseText} ﴿ {ayahNumber} ﴾
         </Text>
         <Text style={styles.description}>{surahName}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Menu')} style={styles.shareButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Menu")}
+          style={styles.shareButton}
+        ></TouchableOpacity>
+        <TouchableOpacity onPress={Share} style={styles.shareButton}>
+          <View style={styles.dotContainer}>
+            <Text style={styles.dot}>&#8226;</Text>
+            <Text style={styles.dot}>&#8226;</Text>
+            <Text style={styles.dot}>&#8226;</Text>
+          </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
-        <View style={styles.dotContainer}>
-          <Text style={styles.dot}>&#8226;</Text>
-          <Text style={styles.dot}>&#8226;</Text>
-          <Text style={styles.dot}>&#8226;</Text>
-        </View>
-      </TouchableOpacity>
       </View>
     </View>
   );
@@ -155,20 +147,19 @@ const QuranVerseScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#151515',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#151515",
+    justifyContent: "center",
+    alignItems: "center",
     paddingBottom: 120,
-    
   },
   rectangle: {
-    backgroundColor: '#262626',
+    backgroundColor: "#262626",
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
     marginTop: 20,
-    width: '90%',
-    shadowColor: 'black',
+    width: "90%",
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -176,42 +167,41 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 4,
-    position: 'relative',
+    position: "relative",
   },
   title: {
-    textAlign: 'center',
-    color: 'white',
-    fontFamily: 'ScheherazadeNew',
+    textAlign: "center",
+    color: "white",
+    fontFamily: "ScheherazadeNew",
   },
   description: {
     fontSize: 11,
-    textAlign: 'center',
-    color: '#767676',
-    fontFamily: 'AmiriFont',
+    textAlign: "center",
+    color: "#767676",
+    fontFamily: "AmiriFont",
   },
   shareButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 10, // Adjust the top value to position the button as desired
     left: 13, // Adjust the left value to position the button as desired
   },
   dotContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   dot: {
-    position: 'absolute',
+    position: "absolute",
     top: 7, // Adjust the top value to position the button as desired
     left: 10, // Adjust the left value to position the button as desired
   },
   dotContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   dot: {
-    color: 'orange',
+    color: "#be915a",
     fontSize: 20,
-    fontWeight:'700',
+    fontWeight: "700",
     marginHorizontal: 1, // Adjust the margin to control spacing between dots
   },
 });
 
 export default QuranVerseScreen;
-

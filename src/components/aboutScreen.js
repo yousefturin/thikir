@@ -8,7 +8,7 @@ const AboutScreen = ({ navigation }) => {
   const appIconImage = require("../../assets/AppIcon.png");
   return (
 
-    
+
     <View style={styles.container}>
       {/* Navigation bar */}
       {/* Add your navigation bar here */}
@@ -23,14 +23,14 @@ const AboutScreen = ({ navigation }) => {
           styles.rectangleWrapper]}
       >
         <View style={styles.rectangleText}>
-        <Text style={styles.rectangleText}>
-  اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق 
-  <Text style={{ color: '#7a9aff' ,    fontFamily: "ScheherazadeNewBold",}}> المُفَرِّدُونَ</Text>».
-  قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
-  قال: «<Text style={{ color: '#7a9aff' ,    fontFamily: "ScheherazadeNewBold",}}> الذاكرون الله كثيرًا والذاكرات</Text>».
+          <Text style={styles.rectangleText}>
+            اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق
+            <Text style={{ color: '#be915a', fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
+            قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
+            قال: «<Text style={{ color: '#be915a', fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
 
-  {'\n'}  <Text style={{ fontSize:16,    fontFamily: "ScheherazadeNew",}}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
-</Text>
+            {'\n'}  <Text style={{ fontSize: 16, fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
+          </Text>
         </View>
       </View>
     </View>
@@ -43,42 +43,42 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: 80,
-    paddingTop:50,
+    paddingTop: 50,
   },
-  appNameText:{
+  appNameText: {
     color: "#fff",
     fontSize: 28,
     fontFamily: "ScheherazadeNewBold",
     marginTop: 10,
   },
-  appVersionText:{
+  appVersionText: {
     color: "#454545",
     fontSize: 12,
   },
   rectangleWrapper: {
-    marginTop:30,
-    height:180,
-    borderRadius:10,
+    marginTop: 30,
+    height: 180,
+    borderRadius: 10,
     backgroundColor: "#262626",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
     shadowColor: 'black',
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
   },
   rectangleText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "300",
     textAlign: "right",
-    marginHorizontal:5,
+    marginHorizontal: 5,
     fontFamily: "ScheherazadeNew",
   },
   appLogoIcon: {
