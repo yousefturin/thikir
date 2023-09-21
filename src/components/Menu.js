@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Menu = ({ navigation }) => {
   const tasbihImage = require("../../assets/tasbihIcon.png");
@@ -224,7 +224,7 @@ const Menu = ({ navigation }) => {
       <TouchableOpacity
         style={[
           styles.button,
-          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+          
         ]}
         onPress={() => navigation.navigate("عن البرنامج")}
         activeOpacity={0.7}
@@ -243,6 +243,39 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapper}>
           <Ionicons
             name="information-circle"
+            size={23}
+            color="#fff"
+            style={styles.iconleft}
+          />
+        </View>
+        <View style={styles.imageWrapper}>
+          {/* Image component */}
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+      <View style={styles.horizontalLine} />
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+        ]}
+        onPress={() => navigation.navigate("الابلاغ عن مشكلة")}
+        activeOpacity={0.7}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color="#454545"
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.buttonText}>الابلاغ عن مشكلة</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <MaterialIcons
+            name="report-problem"
             size={23}
             color="#fff"
             style={styles.iconleft}
