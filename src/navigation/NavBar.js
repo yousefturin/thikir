@@ -5,7 +5,7 @@ const NavBar = ({ navigation, route }) => {
   return (
     <View >
       {/* Left Icon (Menu Icon) */}
-      <TouchableOpacity  onPress={() => navigation.navigate('الفائمة')} >
+      <TouchableOpacity onPress={() => navigation.navigate('الفائمة')} >
         <Text >Menu</Text>
       </TouchableOpacity>
 
