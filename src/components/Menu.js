@@ -161,6 +161,37 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.horizontalLine} />
       <TouchableOpacity
+        style={[styles.button]}
+        onPress={() => navigation.navigate("دعاء")}
+        activeOpacity={0.7}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color="#454545"
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.buttonText}>دعاء</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <MaterialCommunityIcons
+            name="hands-pray"
+            size={24}
+            color="#fff"
+            style={styles.iconleft}
+          />
+        </View>
+        
+        <View style={styles.imageWrapper}>
+          {/* Image component */}
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+      <View style={styles.horizontalLine} />
+      <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("الاعدادات")}
         activeOpacity={0.7}
