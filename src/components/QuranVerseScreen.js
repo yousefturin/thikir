@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerse } from "../API/GETAyahofQuran";
 import { handleShare } from "../utils/shareUtils";
 
-const CACHE_KEY = "randomVerseCache";
+const CACHE_KEY = "randomVerseCache_1";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const QuranVerseScreen = ({ navigation }) => {
