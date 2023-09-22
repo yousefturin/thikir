@@ -10,9 +10,6 @@ import {
 } from "react-native";
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { Ionicons } from "@expo/vector-icons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const GenericPage = ({ route }) => {
     const { item } = route.params;
@@ -131,6 +128,7 @@ const GenericPage = ({ route }) => {
         incrementCount();
     };
 
+
     return (
         <TouchableWithoutFeedback
             onPress={handleContainerPress}
@@ -200,7 +198,7 @@ const GenericPage = ({ route }) => {
                                 <Text style={styles.textcount}>
                                     الذكر التالي
                                 </Text>
-      
+
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -222,18 +220,18 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                        <View style={styles.button}>
-                            {/*back button here*/}
-                            <Text style={styles.textcount}>
-                                الذكر السابق
-                            </Text>
-                            <FontAwesomeIcon
-                                name="angle-right"
-                                size={24}
-                                color="#454545"
-                                style={styles.icon}
-                            />
-                        </View>
+                            <View style={styles.button}>
+                                {/*back button here*/}
+                                <Text style={styles.textcount}>
+                                    الذكر السابق
+                                </Text>
+                                <FontAwesomeIcon
+                                    name="angle-right"
+                                    size={24}
+                                    color="#454545"
+                                    style={styles.icon}
+                                />
+                            </View>
                         </TouchableWithoutFeedback>
                     </ImageBackground>
                 </View>
@@ -276,9 +274,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "#151515",
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        alignContent:'center'
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignContent: 'center'
     },
     textcount: {
         textAlign: "center",
@@ -286,8 +284,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "ScheherazadeNew",
     },
-    icon:{
-        marginTop:2,
+    icon: {
+        marginTop: 2,
     },
     rectangle: {
         backgroundColor: "#262626", // Background color of the rectangle
