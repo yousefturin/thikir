@@ -16,7 +16,7 @@ const ReportProblemScreen = () => {
         quality: 1, // Adjust image quality as needed
       });
 
-      if (!result.cancelled) {
+      if (!result.canceled) {
         // Use the assets array to access selected assets
         if (result.assets && result.assets.length > 0) {
           const selectedImageUri = result.assets[0].uri;
