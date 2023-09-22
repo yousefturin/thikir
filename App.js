@@ -15,10 +15,26 @@ const App = () => {
       });
       setFontLoaded(true);
     }
-
+    const requestNotificationPermissions = async () => {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status === 'granted') {
+        console.log('Notification permissions granted');
+        
+        // Configure notification categories
+        Notifications.setNotificationCategoryAsync('alarm', [
+          {
+            identifier: 'dismiss',
+            buttonTitle: 'Dismiss',
+          },
+        ]);
+      } else {
+        console.log('Notification permissions denied');
+      }
+    };
     loadFonts();
   }, []);
 
+  
   if (!fontLoaded) {
     return console.log(!fontLoaded); // Display a loading indicator
   }

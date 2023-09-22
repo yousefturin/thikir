@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "thikir",
-    "slug": "thikir",
+    "name": "Almufdun",
+    "slug": "Almufdun",
+    "description": "Islamic application that sorts all athkar under one app, as well as giving you random Verses from Quran, a Hadith from Sahih muslim, and a Dua",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +16,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "icon": "./assets/icon.png"
+      "icon": "./assets/icon.png",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
