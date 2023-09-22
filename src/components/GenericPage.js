@@ -19,6 +19,7 @@ const GenericPage = ({ route }) => {
     const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
+    const [longPressDetected, setLongPressDetected] = useState(false);
     const ControlPaneBackgroundImage = require("../../assets/HeaderBackground.jpg");
 
     const viewRef = React.useRef();
@@ -119,19 +120,34 @@ const GenericPage = ({ route }) => {
     };
 
     const incrementCount = () => {
-        setCount((prevCount) => prevCount + 1);
-        Vibration.vibrate(80);
+        if (!longPressDetected) {
+            setCount((prevCount) => prevCount + 1);
+            Vibration.vibrate(80);
+        }
     };
 
-    const handleContainerPress = () => {
-        // Increment count when anywhere inside the container is pressed
+    const handleContainerPressIn = () => {
+        // Use a timeout to distinguish between a short press (click) and a long press
+        setTimeout(() => {
+            // Handle long press logic here
+            setLongPressDetected(true);
+        }, 500); // Adjust the duration as needed for your long press
+    };
+
+    const handleContainerPressOut = () => {
+        // Clear the timeout when the press is released
+        clearTimeout();
+        setLongPressDetected(false);
+
+        // Increment the count only on a short press (click)
         incrementCount();
     };
 
 
     return (
         <TouchableWithoutFeedback
-            onPress={handleContainerPress}
+            onPressIn={handleContainerPressIn}
+            onPressOut={handleContainerPressOut}
             disabled={
                 currentIndex === item.subItems.length - 1 &&
                 count >= item.subItems[currentIndex].count
