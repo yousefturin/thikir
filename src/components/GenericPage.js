@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { handleShare } from "../utils/shareUtils";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 const GenericPage = ({ route }) => {
     const { item } = route.params;
@@ -28,7 +29,7 @@ const GenericPage = ({ route }) => {
 
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
-        let maxHeight = 150; // Default height for descriptions with less than or equal to 1000 characters
+        let maxHeight = 170; // Default height for descriptions with less than or equal to 1000 characters
         let MaxFontSize = 20;
         let maxPadding = 60;
         let maxpaddingHorizontal = 20;
@@ -109,6 +110,13 @@ const GenericPage = ({ route }) => {
             setCount(0);
         }
     };
+    const prevSubItem = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex((prevIndex) => prevIndex - 1);
+            Vibration.vibrate(150);
+            setCount(0);
+        }
+    };
 
     const incrementCount = () => {
         setCount((prevCount) => prevCount + 1);
@@ -120,10 +128,14 @@ const GenericPage = ({ route }) => {
         incrementCount();
     };
 
+
     return (
         <TouchableWithoutFeedback
             onPress={handleContainerPress}
-            disabled={currentIndex === item.subItems.length - 1 && count >= item.subItems[currentIndex].count}
+            disabled={
+                currentIndex === item.subItems.length - 1 &&
+                count >= item.subItems[currentIndex].count
+            }
         >
             {/*this line needs a fix for the last thikir to run the count */}
             <View style={styles.container}>
@@ -142,8 +154,17 @@ const GenericPage = ({ route }) => {
                         <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
                             {item.subItems[currentIndex].subItemName}
                         </Text>
+                        <View style={styles.horizontalLine} />
                         <Text style={styles.description}>
                             {item.subItems[currentIndex].subItemDescription}
+                        </Text>
+                        <Text style={styles.InfoReptTimeIndex}>
+                            الذكر{" "}
+                            <Text style={[{ color: "#be915a" }]}>{currentIndex + 1}</Text> من{" "}
+                            <Text style={[{ color: "#be915a" }]}>{item.subItems.length}</Text>
+                        </Text>
+                        <Text style={styles.InfoReptTime}>
+                            {item.subItems[currentIndex].repTime}
                         </Text>
                         <TouchableOpacity onPress={Share} style={styles.shareButton}>
                             <View style={styles.dotContainer}>
@@ -161,29 +182,57 @@ const GenericPage = ({ route }) => {
                     >
                         <TouchableWithoutFeedback
                             onPress={nextSubItem}
-                            disabled={currentIndex === item.subItems.length - 1 && count >= item.subItems[currentIndex].count}
+                            disabled={
+                                currentIndex === item.subItems.length - 1 &&
+                                count >= item.subItems[currentIndex].count
+                            }
                         >
-                            <View style={styles.button}>
-                                {/* Display the current index and total length of sub-items */}
+                            <View style={[styles.button]}>
+                                {/*next button here button here*/}
+                                <FontAwesomeIcon
+                                    name="angle-left"
+                                    size={24}
+                                    color="#454545"
+                                    style={styles.icon}
+                                />
                                 <Text style={styles.textcount}>
-                                    الذكر {currentIndex + 1} من {item.subItems.length}
+                                    الذكر التالي
                                 </Text>
+
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
                         <TouchableWithoutFeedback
                             onPress={incrementCount}
-                            disabled={currentIndex === item.subItems.length - 1 && count >= item.subItems[currentIndex].count}
+                            disabled={
+                                currentIndex === item.subItems.length - 1 &&
+                                count >= item.subItems[currentIndex].count
+                            }
                         >
                             <View style={styles.circularButton}>
                                 <Text style={styles.textcount}>{count}</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <View style={styles.button}>
-                            <Text style={styles.textcount}>
-                                {item.subItems[currentIndex].repTime}
-                            </Text>
-                        </View>
+                        <TouchableWithoutFeedback
+                            onPress={prevSubItem}
+                            disabled={
+                                currentIndex === item.subItems.length + 1 &&
+                                count >= item.subItems[currentIndex].count
+                            }
+                        >
+                            <View style={styles.button}>
+                                {/*back button here*/}
+                                <Text style={styles.textcount}>
+                                    الذكر السابق
+                                </Text>
+                                <FontAwesomeIcon
+                                    name="angle-right"
+                                    size={24}
+                                    color="#454545"
+                                    style={styles.icon}
+                                />
+                            </View>
+                        </TouchableWithoutFeedback>
                     </ImageBackground>
                 </View>
             </View>
@@ -225,6 +274,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "#151515",
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignContent: 'center'
     },
     textcount: {
         textAlign: "center",
@@ -232,12 +284,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "ScheherazadeNew",
     },
+    icon: {
+        marginTop: 2,
+    },
     rectangle: {
         backgroundColor: "#262626", // Background color of the rectangle
         borderRadius: 10, // Border radius for the rectangle
         alignItems: "center",
-        justifyContent: "space-between", // Distribute content evenly
-        paddingBottom: 30,
+        justifyContent: "space-evenly", // Distribute content evenly
+        paddingBottom: 20,
         padding: 50,
         marginTop: 20,
         shadowColor: "black",
@@ -248,6 +303,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 5,
         elevation: 4,
+        position: "relative",
     },
     title: {
         textAlign: "center",
@@ -259,6 +315,27 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#767676",
         fontFamily: "AmiriFont",
+        paddingBottom: 20,
+    },
+    InfoReptTimeIndex: {
+        fontSize: 11, // Adjust the font size as needed
+        textAlign: "center",
+        color: "#767676",
+        fontFamily: "AmiriFont",
+        position: "absolute",
+        left: 0,
+        bottom: 0,
+        padding: 20,
+    },
+    InfoReptTime: {
+        fontSize: 11, // Adjust the font size as needed
+        textAlign: "center",
+        color: "#be915a",
+        fontFamily: "AmiriFont",
+        position: "absolute",
+        right: 0,
+        bottom: 0,
+        padding: 20,
     },
     ControlPaneBackground: {
         flexDirection: "row",
@@ -289,6 +366,12 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         marginHorizontal: 1, // Adjust the margin to control spacing between dots
     },
+    horizontalLine: {
+        borderBottomWidth: 1,
+        borderColor: "#151515",
+        width: "100%",
+    },
+
 });
 
 export default GenericPage;
