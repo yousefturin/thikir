@@ -14,6 +14,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderRadius: 10, marginBottom: 30, marginTop: 30 },
         ]}
+        onPress={() => navigation.navigate("التذكيرات")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
