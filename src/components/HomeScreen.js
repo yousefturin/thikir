@@ -255,9 +255,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#151515",
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
+    
   },
   searchBarInputContainer: {
     backgroundColor: '#262626',
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
   },
   searchBarInput: {
     backgroundColor: '#262626',

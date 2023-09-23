@@ -19,6 +19,7 @@ import HadithScreen from "../components/HadithScreen";
 import GenericPage from "../components/GenericPage";
 import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
+import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 const Stack = createStackNavigator();
 
 const headerStyle = {
@@ -67,6 +68,19 @@ const AppNavigator = () => {
             ></ImageBackground>
           ),
         })}
+      />
+      <Stack.Screen
+        name="التذكيرات"
+        component={ThikirAlarmScreen}
+        options={{
+          headerStyle: headerStyle,
+          headerBackground: () => (
+            <ImageBackground
+              source={headerBackgroundImage}
+              style={styles.headerBackground}
+            ></ImageBackground>
+          ),
+        }}
       />
       <Stack.Screen
         name="آية"

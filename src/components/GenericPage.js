@@ -19,7 +19,7 @@ const GenericPage = ({ route }) => {
     const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
-    const [longPressDetected, setLongPressDetected] = useState(false);
+    const [isLongPress, setIsLongPress] = useState(false);
     const ControlPaneBackgroundImage = require("../../assets/HeaderBackground.jpg");
 
     const viewRef = React.useRef();
@@ -120,28 +120,25 @@ const GenericPage = ({ route }) => {
     };
 
     const incrementCount = () => {
-        if (!longPressDetected) {
-            setCount((prevCount) => prevCount + 1);
-            Vibration.vibrate(80);
+        if (!isLongPress) {
+          setCount((prevCount) => prevCount + 1);
+          Vibration.vibrate(80);
         }
-    };
-
+      };
+      
+      let pressTimeout;
+      
     const handleContainerPressIn = () => {
-        // Use a timeout to distinguish between a short press (click) and a long press
-        setTimeout(() => {
-            // Handle long press logic here
-            setLongPressDetected(true);
-        }, 500); // Adjust the duration as needed for your long press
-    };
-
-    const handleContainerPressOut = () => {
-        // Clear the timeout when the press is released
-        clearTimeout();
-        setLongPressDetected(false);
-
-        // Increment the count only on a short press (click)
+        pressTimeout = setTimeout(() => {
+          setIsLongPress(true); // Detect long press
+        }, 1000); // Adjust the duration as needed for your long press
+      };
+      
+      const handleContainerPressOut = () => {
+        clearTimeout(pressTimeout); // Clear the timeout on release
         incrementCount();
-    };
+        setIsLongPress(false); // Reset the long press flag
+      };
 
 
     return (
