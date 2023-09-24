@@ -21,9 +21,10 @@ const HomeScreen = ({ navigation }) => {
   const desiredNames = [
     "أذكار المساء",
     "أذكار الصباح",
-    " أذكار بعد الصلاة",
+    "الأذكار بعد الصلاة",
     "أذكار النوم",
   ];
+
 
   // Filter the initial items based on desired names
   const filteredItems = items.filter((item) =>
@@ -60,11 +61,16 @@ const HomeScreen = ({ navigation }) => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-
-    // Filter items based on the search query
-    const filtered = items.filter((item) =>
-      item.name.includes(query)
-    );
+  
+    // Replace "أ" and "إِ" with "ا" in the query
+    const normalizedQuery = query.replace(/[أإِ]/g, 'ا');
+  
+    // Filter items based on the normalized search query and normalized item names
+    const filtered = items.filter((item) => {
+      const normalizedItemName = item.name.replace(/[أإِ]/g, 'ا');
+      return normalizedItemName.includes(normalizedQuery);
+    });
+  
     setSearchedItems(filtered); // Update the searched items state
   };
 
