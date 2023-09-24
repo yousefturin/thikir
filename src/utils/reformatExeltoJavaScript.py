@@ -17,8 +17,6 @@ for index, row in df.iterrows():
             current_subitems = []
         current_item = {
             'name': row['name'],
-            'description': row['description'],
-            'title': row['title'],
             'subItems': []
         }
     sub_item = {
@@ -26,7 +24,7 @@ for index, row in df.iterrows():
         'repTime': row['repTime'],
         'count': int(row['count']),
         'subItemName': row['subItemName'],
-        'subItemDescription': row['subItemDescription']
+        'subItemDescription': row['subItemDescription'] if not pd.isna(row['subItemDescription']) else ''
     }
     current_subitems.append(sub_item)
 
@@ -46,7 +44,7 @@ for item in data:
                 d['subItems'] += item['subItems']
 
 # Define a JavaScript variable and assign the data as an array of objects
-js_code = 'const myData = ' + str(combined_data)
+js_code = 'const items = ' + str(combined_data)
 
 # Write the JavaScript code to a .js file
 with open('output_data.js', mode='w', encoding='utf-8') as js_file:
