@@ -8,6 +8,7 @@ import {
     TouchableWithoutFeedback,
     TouchableOpacity,
 } from "react-native";
+import * as Haptics from 'expo-haptics';
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
@@ -30,63 +31,68 @@ const GenericPage = ({ route }) => {
 
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
-        let maxHeight = 170; // Default height for descriptions with less than or equal to 1000 characters
-        let MaxFontSize = 20;
-        let maxPadding = 60;
-        let maxpaddingHorizontal = 20;
+        const subItemName = item.subItems[currentIndex].subItemDescription;
         const subItemDescription = item.subItems[currentIndex].subItemName;
-
         // Remove non-printable characters and control characters
         const sanitizedDescription = subItemDescription.replace(/[-~]+/g, "");
-
+        const sanitizedName = subItemName.replace(/[-~]+/g, "");
         console.log(
             "sanitized subItemDescription length is:",
             sanitizedDescription.length
         );
+        console.log(
+            "sanitized sanitizedName length is:",
+            sanitizedName.length
+        );
+        let maxHeight = 170;
+        let MaxFontSize = 20;
+        let maxPadding = 60;
+        let maxpaddingHorizontal = 20;
 
-        if (sanitizedDescription.length > 1200) {
+        if (sanitizedDescription.length > 1000) {
             maxHeight = 450;
             MaxFontSize = 16;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 700) {
-            maxHeight = 450;
-            MaxFontSize = 16;
-            maxPadding = 40;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 600) {
-            maxHeight = 250;
-            MaxFontSize = 17;
-            maxPadding = 50;
-        } else if (540 > sanitizedDescription.length > 504) {
-            maxHeight = 220;
-            MaxFontSize = 17;
-            maxPadding = 40;
-        } else if (sanitizedDescription.length > 500) {
+        }else if (sanitizedDescription.length > 700) {
             maxHeight = 350;
             MaxFontSize = 17;
-            maxPadding = 20;
-        } else if (sanitizedDescription.length > 500) {
-            maxHeight = 250;
+            maxPadding = 30;
+            maxpaddingHorizontal = 10;
+        }else if (sanitizedDescription.length > 600) {
+            maxHeight = 300;
             MaxFontSize = 17;
-        } else if (sanitizedDescription.length > 400) {
+            maxPadding = 30;
+            maxpaddingHorizontal = 10;
+        }else if (sanitizedDescription.length > 500) {
+            maxHeight = 300;
+            MaxFontSize = 17;
+            maxPadding = 30;
+            maxpaddingHorizontal = 10;
+        }else if (sanitizedDescription.length > 400) {
+            maxHeight = 250;
+            maxPadding = 30;
+            maxpaddingHorizontal = 10;
+        }else if (sanitizedDescription.length > 300) {
+            maxHeight = 220;
+            maxpaddingHorizontal = 10;
+            maxPadding = 30;
+        }else if (sanitizedDescription.length > 290) {
+            maxHeight = 350;
+            maxpaddingHorizontal = 10;
+            maxPadding = 30;
+        }else if (sanitizedDescription.length > 200) {
+            maxpaddingHorizontal = 10;
+            maxPadding = 30;
+        }else if (sanitizedName.length > 200) {
             maxHeight = 200;
             MaxFontSize = 17;
-            maxPadding = 35;
-        } else if (sanitizedDescription.length > 350) {
-            maxHeight = 180;
-            MaxFontSize = 17;
-            maxPadding = 40;
-        } else if (sanitizedDescription.length > 210) {
-            maxHeight = 140;
-            MaxFontSize = 17;
-            maxPadding = 40;
-        } else if (sanitizedDescription.length > 200) {
-            maxHeight = 160;
-            MaxFontSize = 17;
-            maxPadding = 40;
+            maxPadding = 30;
+            maxpaddingHorizontal = 10;
         }
-
+        console.log(
+            maxHeight,MaxFontSize,maxPadding,maxpaddingHorizontal
+        );
         setMaxDescriptionHeight(maxHeight);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
@@ -106,15 +112,20 @@ const GenericPage = ({ route }) => {
 
     const nextSubItem = () => {
         if (currentIndex < item.subItems.length - 1) {
-            setCurrentIndex((prevIndex) => prevIndex + 1);
-            Vibration.vibrate(150);
-            setCount(0);
+          setCurrentIndex((prevIndex) => prevIndex + 1);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          Haptics.notificationAsync(
+            Haptics.NotificationFeedbackType.Success
+          );
+          setCount(0);
         }
-    };
+      };
     const prevSubItem = () => {
         if (currentIndex > 0) {
             setCurrentIndex((prevIndex) => prevIndex - 1);
-            Vibration.vibrate(150);
+            Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Success
+              );
             setCount(0);
         }
     };
@@ -122,7 +133,8 @@ const GenericPage = ({ route }) => {
     const incrementCount = () => {
         if (!isLongPress) {
           setCount((prevCount) => prevCount + 1);
-          Vibration.vibrate(80);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          
         }
       };
       
