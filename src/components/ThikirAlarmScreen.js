@@ -41,44 +41,31 @@ const ThikirAlarmScreen = () => {
     setSelectedDate(date);
     hideDatePicker();
 
-    // Schedule the daily recurring notification based on the selected time
-    scheduleDailyRecurringNotification(date);
+    // Schedule the notification based on the selected date/time
+    scheduleNotification(date);
   };
 
-  const scheduleDailyRecurringNotification = async (date) => {
-    // Get the selected time (hour and minute)
-    const selectedHour = date.getHours();
-    const selectedMinute = date.getMinutes();
-
-    // Get the current date
-    const currentDate = new Date();
-
-    // Set the time of the selected date to the selected hour and minute
-    const scheduledDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), selectedHour, selectedMinute);
-
-    // Calculate the delay until the next occurrence of the scheduled time
-    let trigger = scheduledDate.getTime() - Date.now();
-
-    if (trigger <= 0) {
-      // If the selected time has already passed today, schedule it for tomorrow
-      trigger += 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  const scheduleNotification = async (date) => {
+    const trigger = date - Date.now(); // Calculate the delay in milliseconds
+  
+    if (trigger > 0) {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'أذكار الصباح',
+          body: 'وقت اذكار الصباح قد حان',
+          sound: 'default',
+          vibrate: [0, 250, 250, 250],
+        },
+        trigger: {
+          seconds: Math.floor(trigger / 1000),
+        },
+        categoryId: 'alarm',
+      });
+  
+      console.log('Notification scheduled.');
+    } else {
+      console.log('Selected time is in the past. No notification scheduled.');
     }
-
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: 'أذكار الصباح',
-        body: 'اذكر الله في صباحك وابدأ يومك بالخير والبركة. الحمـد لله الذي أحـيانا بعـد ما أماتـنا وإليه النـشور.',
-        sound: 'default',
-        vibrate: [0, 250, 250, 250],
-      },
-      trigger: {
-        milliseconds: trigger,
-        repeats: true, // Set the notification to repeat daily
-      },
-      categoryId: 'alarm',
-    });
-
-    console.log('Recurring daily notification scheduled.');
   };
 
   return (
