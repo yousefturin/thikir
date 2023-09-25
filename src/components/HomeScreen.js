@@ -6,12 +6,13 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  Dimensions
 } from "react-native";
 import { SearchBar } from 'react-native-elements';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { getItems } from "../db/GetData";
-import { Dimensions } from 'react-native';
+
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -328,7 +329,7 @@ const styles = StyleSheet.create({
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: windowWidth > 600 ? 610 : 350, // Adjust the value based on screen width
+    marginLeft: windowWidth > 600 ? 610 : 350,
   },
   buttonGrid: {
     paddingTop: 10,
