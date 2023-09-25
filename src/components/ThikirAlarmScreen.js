@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Switch } from "react-native";
+import { View, Text, TouchableOpacity, Switch,  StyleSheet,Dimensions } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Haptics from 'expo-haptics';
+
+
+
+const windowWidth = Dimensions.get('window').width;
+
+
+
 
 const ThikirAlarmScreen = () => {
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState([
@@ -49,6 +58,7 @@ const ThikirAlarmScreen = () => {
   };
 
   const toggleAlarm = async (notificationId, newValue) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const updatedNotifications = notifications.map((notification) =>
       notification.id === notificationId
         ? { ...notification, isActive: newValue }
@@ -71,6 +81,9 @@ const ThikirAlarmScreen = () => {
       console.log(`Alarm for ${selectedNotification.id} activated.`);
     } else {
       // If the toggle is manually switched to inactive, cancel the notification
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Success
+      );
       await cancelNotification(notificationId);
       console.log(`Alarm for ${selectedNotification.id} deactivated.`);
     }
@@ -177,38 +190,55 @@ const ThikirAlarmScreen = () => {
       console.error("Error saving notification data:", error);
     }
   };
-
+  
+  const renderBorderRadius = (index) => {
+    const itemCount = notifications.length;
+    if (index === 0) {
+      return {         
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+      };
+    } else if (index === itemCount - 1) {
+      return { borderBottomLeftRadius: 10, borderBottomRightRadius: 10 };
+    }
+    return {}; // Default: no border radius
+  };
 
   return (
-    <View>
-      {notifications.map((notification) => (
-        <View
-          key={notification.id}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <View>
-            <TouchableOpacity onPress={() => showDatePicker(notification)}>
-              <Text>Select {notification.title} Time</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ marginRight: 10 }}>
-              {notification.date
-                ? formatTime(notification.date)
-                : formatTime(getDefaultTime(notification.id))}
-            </Text>
-            <Switch
-              value={notification.isActive}
-              onValueChange={() =>
-                toggleAlarm(notification.id, !notification.isActive)
-              }
-            />
-          </View>
-        </View>
+    <View style={styles.container}>
+      {notifications.map((notification, index) => (
+        <React.Fragment key={notification.id}>
+          <TouchableOpacity
+            onPress={() => showDatePicker(notification)}
+            activeOpacity={0.7}
+            style={[
+              styles.notificationWrapper,
+            ]}
+          >
+            <View style={[styles.notificationContainer,renderBorderRadius(index),]}>
+              <View style={styles.leftContent}>
+                <Text style={styles.title}>{notification.title}</Text>
+                <Text style={styles.time}>
+                  {notification.date
+                    ? formatTime(notification.date)
+                    : formatTime(getDefaultTime(notification.id))}
+                </Text>
+              </View>
+              <View style={styles.middleContent}></View>
+              <View style={styles.rightContent}>
+                <Switch
+                  value={notification.isActive}
+                  onValueChange={() =>
+                    toggleAlarm(notification.id, !notification.isActive)
+                  }
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+          {index < notifications.length - 1 && (
+            <View style={styles.horizontalLineWrapper} />
+          )}
+        </React.Fragment>
       ))}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -216,7 +246,7 @@ const ThikirAlarmScreen = () => {
         date={
           selectedNotification
             ? selectedNotification.date ||
-            getDefaultTime(selectedNotification.id)
+              getDefaultTime(selectedNotification.id)
             : new Date()
         }
         onConfirm={handleConfirm}
@@ -241,5 +271,59 @@ const getDefaultTime = (notificationId) => {
 
   return new Date(defaultTimes[notificationId]) || new Date();
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#151515",
+    paddingTop: 40,
+    alignItems: "center",
+  },
+  notificationContainer: {
+    flexDirection: 'row-reverse',
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: "#262626",
+    shadowColor: "#262626",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 4,
+    width: '91%',
+    height: 60,
+    paddingHorizontal: 10,
+  },
+  leftContent: {
+    flexDirection: "column",
+    flex: 2,
+    alignItems: "flex-end",
+  },
+  middleContent: {
+    flex: 1,
+  },
+  rightContent: {
+    flex: 1,
+    alignItems: "flex-start",
+    paddingLeft: 10,
+  },
+  title: {
+    color: "#dddddd",
+    textAlign: "right",
+    fontSize: 18,
+    marginRight: 10,
+    fontFamily: "ScheherazadeNewBold",
+  },
+  time: {
+    color: "#777",
+    marginRight: 10,
+    textAlign: "right",
+  },
+  horizontalLineWrapper: {
+    borderBottomWidth: 1,
+    borderColor: "#262626",
+    marginLeft: windowWidth > 600 ? 610 : 350,
+  },
+});
 export default ThikirAlarmScreen;
