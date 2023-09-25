@@ -24,6 +24,7 @@ const Stack = createStackNavigator();
 
 const headerStyle = {
   backgroundColor: "white",
+  height: 100, // Set your desired header height
 };
 const headerBackgroundImage = require("../../assets/HeaderBackground.jpg");
 const headerTintColor = "white"; // Set the text color to white
