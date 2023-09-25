@@ -139,24 +139,41 @@ const GenericPage = ({ route }) => {
       };
       
       let pressTimeout;
+      let startX = 0; // Initial X-coordinate of the touch
+      let isSwiping = false; // Track if a swipe occurred
       
-    const handleContainerPressIn = () => {
+      const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
           setIsLongPress(true); // Detect long press
         }, 1000); // Adjust the duration as needed for your long press
+        startX = e.nativeEvent.pageX; // Store the initial X-coordinate
       };
       
-      const handleContainerPressOut = () => {
+      const handleContainerPressOut = (e) => {
         clearTimeout(pressTimeout); // Clear the timeout on release
-        incrementCount();
+        const endX = e.nativeEvent.pageX; // Get the final X-coordinate
+        const swipeDistance = Math.abs(endX - startX); // Calculate the distance moved
+      
+        if (!isSwiping && swipeDistance < 10) {
+          // Only increment the count if it's not a swipe (adjust the threshold as needed)
+          incrementCount();
+        }
+      
         setIsLongPress(false); // Reset the long press flag
+        isSwiping = false; // Reset the swipe flag
       };
+      
+      const handleSwipe = () => {
+        isSwiping = true;
+      };
+      
 
 
     return (
         <TouchableWithoutFeedback
             onPressIn={handleContainerPressIn}
             onPressOut={handleContainerPressOut}
+            onResponderMove={handleSwipe}
             disabled={
                 currentIndex === item.subItems.length - 1 &&
                 count >= item.subItems[currentIndex].count
