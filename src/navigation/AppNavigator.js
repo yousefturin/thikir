@@ -23,7 +23,7 @@ import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 const Stack = createStackNavigator();
 
 const headerStyle = {
-  backgroundColor: "#023B4F",
+  backgroundColor: "white",
 };
 const headerBackgroundImage = require("../../assets/HeaderBackground.jpg");
 const headerTintColor = "white"; // Set the text color to white
@@ -135,39 +135,6 @@ const AppNavigator = () => {
             >
               {route.params?.name || "Default Page Title"}
             </Text>
-          ),
-          headerLeft: () => (
-            <View style={styles.iconContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate("الأذكار")}>
-                <Icon
-                  name="angle-left"
-                  size={24}
-                  color="white"
-                  style={[
-                    { paddingRight: 190, marginBottom: 10, paddingTop: 10 },
-                  ]}
-                />
-              </TouchableOpacity>
-            </View>
-          ),
-          headerRight: () => (
-            <View style={styles.iconContainerRight}>
-              <TouchableOpacity onPress={() => navigation.navigate("الأذكار")}>
-                <Icon
-                  name="bookmark"
-                  size={24}
-                  color="white"
-                  style={[
-                    {
-                      marginLeft: 170,
-                      marginBottom: 10,
-                      paddingTop: 10,
-                      paddingRight: 20,
-                    },
-                  ]}
-                />
-              </TouchableOpacity>
-            </View>
           ),
           headerStyle: headerStyle,
           headerBackground: () => (
