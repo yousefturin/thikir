@@ -228,6 +228,8 @@ const ThikirAlarmScreen = () => {
                   onValueChange={() =>
                     toggleAlarm(notification.id, !notification.isActive)
                   }
+                  thumbColor={notification.isActive ? '#dddddd' : '#dddddd'} // Set the color of the thumb when it's active and inactive
+                  trackColor={{ true: '#be915a', false: '#454545' }}
                 />
               </View>
             </View>
