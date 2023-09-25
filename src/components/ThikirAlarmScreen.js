@@ -211,9 +211,6 @@ const ThikirAlarmScreen = () => {
           <TouchableOpacity
             onPress={() => showDatePicker(notification)}
             activeOpacity={0.7}
-            style={[
-              styles.notificationWrapper,
-            ]}
           >
             <View style={[styles.notificationContainer,renderBorderRadius(index),]}>
               <View style={styles.leftContent}>
@@ -234,10 +231,10 @@ const ThikirAlarmScreen = () => {
                 />
               </View>
             </View>
-          </TouchableOpacity>
-          {index < notifications.length - 1 && (
+            {index < notifications.length - 1 && (
             <View style={styles.horizontalLineWrapper} />
           )}
+          </TouchableOpacity>
         </React.Fragment>
       ))}
       <DateTimePickerModal
