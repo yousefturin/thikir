@@ -1,35 +1,168 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import * as Notifications from 'expo-notifications';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, Dimensions } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Haptics from 'expo-haptics';
+import { useTheme } from '../context/ThemContex';
+import { ThikirAlarmStyles } from '../context/commonStyles';
 
 const ThikirAlarmScreen = () => {
+  const { isDarkMode } = useTheme();
+
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6",
+    },
+    notificationContainer: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    title: {
+      color: "#000",
+    },
+    horizontalLineWrapper: {
+      borderColor: "#fefffe",
+    },
+
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515",
+    },
+    notificationContainer: {
+      backgroundColor: "#262626",
+      shadowColor: "#262626",
+    },
+    title: {
+      color: "#dddddd",
+    },
+    horizontalLineWrapper: {
+      borderColor: "#262626",
+    },
+
+  });
+  const styles = {
+    ...ThikirAlarmStyles,
+    container: {
+      ...ThikirAlarmStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container,
+    },
+    notificationContainer: {
+      ...ThikirAlarmStyles.notificationContainer,
+      ...isDarkMode ? darkStyles.notificationContainer : lightStyles.notificationContainer,
+    },
+    title: {
+      ...ThikirAlarmStyles.title,
+      ...isDarkMode ? darkStyles.title : lightStyles.title,
+    },
+    horizontalLineWrapper: {
+      ...ThikirAlarmStyles.horizontalLineWrapper,
+      ...isDarkMode ? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
+    },
+  };
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [notifications, setNotifications] = useState([
+    {
+      title: "أذكار النوم",
+      body: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِن أَمْسَكْتَ نَفْسِي فارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا، بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ",
+      id: "thikir_sleep",
+      isActive: true,
+    },
+    {
+      title: "أذكار الاستيقاظ من النوم",
+      body: "الْحَمْدُ للَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ",
+      id: "thikir_wakeup",
+      isActive: true,
+    },
+    {
+      title: "أذكار الصباح",
+      body: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا ، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+      id: "thikir_morning",
+      isActive: true,
+    },
+    {
+      title: "أذكار المساء",
+      body: "اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير",
+      id: "thikir_evening",
+      isActive: true,
+    },
+  ]);
 
   useEffect(() => {
-    // Request notification permissions when the component mounts
     requestNotificationPermissions();
-    
-    // Customize notification handling for foreground notifications
-    Notifications.setNotificationHandler({
-      handleNotification: async () => ({
-        shouldShowAlert: true,  // Show the notification while the app is in the foreground
-        shouldPlaySound: false, // You can set this to true to play sound for foreground notifications
-      }),
-    });
+    loadNotificationStatesAndAlarmTimes();
   }, []);
 
   const requestNotificationPermissions = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
-    if (status === 'granted') {
-      console.log('Notification permissions granted');
+    if (status === "granted") {
+      console.log("Notification permissions granted");
     } else {
-      console.log('Notification permissions denied');
+      console.log("Notification permissions denied");
     }
   };
 
-  const showDatePicker = () => {
+  const toggleAlarm = async (notificationId, newValue) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    const updatedNotifications = notifications.map((notification) =>
+      notification.id === notificationId
+        ? { ...notification, isActive: newValue }
+        : notification
+    );
+
+    setNotifications(updatedNotifications);
+
+    const selectedNotification = updatedNotifications.find(
+      (n) => n.id === notificationId
+    );
+    console.log(
+      "Selected Notification isActive:",
+      selectedNotification.isActive
+    );
+
+    if (selectedNotification.date && selectedNotification.isActive) {
+      // If a time is picked and the toggle is active, schedule the notification
+      await scheduleNotification(notificationId, selectedNotification);
+      console.log(`Alarm for ${selectedNotification.id} activated.`);
+    } else {
+      // If the toggle is manually switched to inactive, cancel the notification
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Success
+      );
+      await cancelNotification(notificationId);
+      console.log(`Alarm for ${selectedNotification.id} deactivated.`);
+    }
+
+    // Save the updated notification state to storage
+    saveNotificationData(updatedNotifications);
+  };
+
+  const scheduleNotification = async (notificationId, selectedNotification) => {
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: selectedNotification.title,
+        body: selectedNotification.body,
+        sound: "default",
+        vibrate: [0, 250, 250, 250],
+      },
+      trigger: {
+        hour: selectedNotification.date.getHours(),
+        minute: selectedNotification.date.getMinutes(),
+        repeats: true, // Repeat the notification every day
+      },
+      identifier: notificationId,
+      categoryId: "alarm",
+    });
+    console.log(`Notification for ${notificationId} scheduled.`);
+  };
+
+  const showDatePicker = (notification) => {
+    setSelectedNotification(notification);
     setDatePickerVisibility(true);
   };
 
@@ -37,52 +170,154 @@ const ThikirAlarmScreen = () => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
-    setSelectedDate(date);
+  const handleConfirm = async (date) => {
     hideDatePicker();
 
-    // Schedule the notification based on the selected date/time
-    scheduleNotification(date);
+    // Update the selected notification with the chosen date and set isActive to true
+    const updatedNotifications = notifications.map((notification) =>
+      notification.id === selectedNotification.id
+        ? { ...notification, date, isActive: true }
+        : notification
+    );
+
+    setNotifications(updatedNotifications);
+
+    // Schedule the updated notifications only if the toggle is active
+    if (selectedNotification.isActive) {
+      await scheduleNotification(selectedNotification.id, selectedNotification);
+    }
+
+    // Save the updated alarm times to storage
+    saveNotificationData(updatedNotifications);
   };
 
-  const scheduleNotification = async (date) => {
-    const trigger = date - Date.now(); // Calculate the delay in milliseconds
-  
-    if (trigger > 0) {
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: 'أذكار الصباح',
-          body: 'وقت اذكار الصباح قد حان',
-          sound: 'default',
-          vibrate: [0, 250, 250, 250],
-        },
-        trigger: {
-          seconds: Math.floor(trigger / 1000),
-        },
-        categoryId: 'alarm',
+  const loadNotificationStatesAndAlarmTimes = async () => {
+    try {
+      const storedDataJSON = await AsyncStorage.getItem("notificationData");
+      const storedData = storedDataJSON ? JSON.parse(storedDataJSON) : {};
+
+      const updatedNotifications = notifications.map((notification) => {
+        const savedData = storedData[notification.id];
+        const date = savedData ? new Date(savedData.date) : null;
+        const isActive = savedData ? savedData.isActive : false;
+        return { ...notification, date, isActive };
       });
-  
-      console.log('Notification scheduled.');
-    } else {
-      console.log('Selected time is in the past. No notification scheduled.');
+
+      setNotifications(updatedNotifications); // Update the state
+
+      // Schedule notifications for active notifications
+      for (const notification of updatedNotifications) {
+        if (notification.isActive && notification.date) {
+          await scheduleNotification(notification.id, notification);
+        }
+      }
+    } catch (error) {
+      console.error("Error loading notification data:", error);
     }
   };
 
+  const cancelNotification = async (notificationId) => {
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
+    console.log(`Notification for ${notificationId} canceled.`);
+  };
+
+  const saveNotificationData = async (notificationsToSave) => {
+    try {
+      const notificationData = {};
+      for (const notification of notificationsToSave) {
+        notificationData[notification.id] = {
+          isActive: notification.isActive,
+          date: notification.date ? notification.date.toString() : null,
+        };
+      }
+      await AsyncStorage.setItem(
+        "notificationData",
+        JSON.stringify(notificationData)
+      );
+      console.log("Notification data saved.");
+    } catch (error) {
+      console.error("Error saving notification data:", error);
+    }
+  };
+
+  const renderBorderRadius = (index) => {
+    const itemCount = notifications.length;
+    if (index === 0) {
+      return {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+      };
+    } else if (index === itemCount - 1) {
+      return { borderBottomLeftRadius: 10, borderBottomRightRadius: 10 };
+    }
+    return {}; // Default: no border radius
+  };
+
   return (
-    <View>
-      <Text>Thikir Alarm Screen</Text>
-      <TouchableOpacity onPress={showDatePicker}>
-        <Text>Select Alarm Time</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      {notifications.map((notification, index) => (
+        <React.Fragment key={notification.id}>
+          <TouchableOpacity
+            onPress={() => showDatePicker(notification)}
+            activeOpacity={0.7}
+          >
+            <View style={[styles.notificationContainer, renderBorderRadius(index),]}>
+              <View style={styles.leftContent}>
+                <Text style={styles.title}>{notification.title}</Text>
+                <Text style={styles.time}>
+                  {notification.date
+                    ? formatTime(notification.date)
+                    : formatTime(getDefaultTime(notification.id))}
+                </Text>
+              </View>
+              <View style={styles.middleContent}></View>
+              <View style={styles.rightContent}>
+                <Switch
+                  value={notification.isActive}
+                  onValueChange={() =>
+                    toggleAlarm(notification.id, !notification.isActive)
+                  }
+                  thumbColor={notification.isActive ? '#fefffe' : '#fefffe'}
+                  trackColor={{ true: '#be915a', false: '#454545' }}
+                />
+              </View>
+            </View>
+            {index < notifications.length - 1 && (
+              <View style={styles.horizontalLineWrapper} />
+            )}
+          </TouchableOpacity>
+        </React.Fragment>
+      ))}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="time"
+        date={
+          selectedNotification
+            ? selectedNotification.date ||
+            getDefaultTime(selectedNotification.id)
+            : new Date()
+        }
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      {selectedDate && <Text>Selected Time: {selectedDate.toString()}</Text>}
     </View>
   );
+};
+
+const formatTime = (time) => {
+  return time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+};
+
+const getDefaultTime = (notificationId) => {
+  // Define default times for each notification based on their IDs
+  const defaultTimes = {
+    thikir_sleep: new Date().setHours(23, 0, 0, 0),
+    thikir_wakeup: new Date().setHours(6, 0, 0, 0),
+    thikir_morning: new Date().setHours(7, 0, 0, 0),
+    thikir_evening: new Date().setHours(18, 0, 0, 0),
+  };
+
+  return new Date(defaultTimes[notificationId]) || new Date();
 };
 
 export default ThikirAlarmScreen;

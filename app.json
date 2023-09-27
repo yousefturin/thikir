@@ -1,13 +1,15 @@
 {
   "expo": {
-    "name": "Almufdun",
-    "slug": "Almufdun",
+    "name": "Al Mufrdun",
+    "slug": "almufrdun",
+    "sdkVersion": "49.0.0",
     "description": "Islamic application that sorts all athkar under one app, as well as giving you random Verses from Quran, a Hadith from Sahih muslim, and a Dua",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
+      "image": "./assets/splashEntro.png",
       "resizeMode": "contain",
       "backgroundColor": "#151515"
     },
@@ -25,12 +27,23 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon-144.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#151515"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "82006e3a-5c19-4949-9631-069673d77d93"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/82006e3a-5c19-4949-9631-069673d77d93"
     }
   }
 }
