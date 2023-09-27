@@ -10,152 +10,157 @@ import {
 import * as Haptics from "expo-haptics";
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { useTheme } from '../context/ThemContex'; 
-import { GenericStyles } from '../context/commonStyles';
+import { useTheme } from "../context/ThemContex";
+import { GenericStyles } from "../context/commonStyles";
+import Svg, { Path } from "react-native-svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GenericPage = ({ route }) => {
     const { isDarkMode } = useTheme();
 
-  const lightStyles = StyleSheet.create({
-    container: {
-        backgroundColor: "#f2f2f6", 
-      },
-      containerforshare: {
-        backgroundColor: "#f2f2f6", 
-      },
-      circularButton: {
-          borderColor: "#151515",
-          backgroundColor: "#fefffe",
-      },
-      button: {
-        backgroundColor: "#fefffe",
-        borderColor: "#151515",
-      },
-      textcount: {
-          textAlign: "center",
-          color: "#000",
-      },
-      rectangle: {
-        backgroundColor: "#fefffe",  
-          shadowColor: "white",
-      },
-      title: {
-          color: "#000",
-      },
-      description: {
-          color: "#767676",
-      },
-      InfoReptTimeIndex: {
-          color: "#767676",
-      },
-      InfoReptTime: {
-          color: "#be915a",
-      },
-      ControlPaneBackground: {
-          shadowColor: "white",
-      },
-      horizontalLine: {
-        borderColor: "#f2f2f6",
-      },
-  
+    const lightStyles = StyleSheet.create({
+        container: {
+            backgroundColor: "#f2f2f6",
+        },
+        containerforshare: {
+            backgroundColor: "#f2f2f6",
+        },
+        circularButton: {
+            borderColor: "#151515",
+            backgroundColor: "#fefffe",
+        },
+        button: {
+            backgroundColor: "#fefffe",
+            borderColor: "#151515",
+        },
+        textcount: {
+            textAlign: "center",
+            color: "#000",
+        },
+        rectangle: {
+            backgroundColor: "#fefffe",
+            shadowColor: "white",
+        },
+        title: {
+            color: "#000",
+        },
+        description: {
+            color: "#767676",
+        },
+        InfoReptTimeIndex: {
+            color: "#767676",
+        },
+        InfoReptTime: {
+            color: "#be915a",
+        },
+        ControlPaneBackground: {
+            shadowColor: "white",
+        },
+        horizontalLine: {
+            borderColor: "#f2f2f6",
+        },
+    });
 
-  });
-
-  const darkStyles = StyleSheet.create({
-    container: {
-      backgroundColor: "#151515", 
-    },
-    containerforshare: {
-        backgroundColor: "#151515",
-    },
-    circularButton: {
-        borderColor: "#151515",
-        backgroundColor: "#262626",
-    },
-    button: {
-      backgroundColor: "#262626",
-      borderColor: "#151515",
-    },
-    textcount: {
-        textAlign: "center",
-        color: "white",
-    },
-    rectangle: {
-        backgroundColor: "#262626", 
-        shadowColor: "black",
-    },
-    title: {
-        color: "white",
-    },
-    description: {
-        color: "#767676",
-    },
-    InfoReptTimeIndex: {
-        color: "#767676",
-    },
-    InfoReptTime: {
-        color: "#be915a",
-    },
-    ControlPaneBackground: {
-        shadowColor: "black",
-    },
-    horizontalLine: {
-      borderColor: "#151515",
-    },
-
-  });
-  const styles = {
-    ...GenericStyles,
-    container: {
-      ...GenericStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container, 
-    },
-    containerforshare: {
-      ...GenericStyles.containerforshare, 
-      ...isDarkMode ? darkStyles.containerforshare : lightStyles.containerforshare,
-    },
-    circularButton: {
-      ...GenericStyles.circularButton, 
-      ...isDarkMode ? darkStyles.circularButton : lightStyles.circularButton,
-    },
-    button: {
-        ...GenericStyles.button, 
-        ...isDarkMode ? darkStyles.button : lightStyles.button,
-      },
-      textcount: {
-        ...GenericStyles.textcount, 
-        ...isDarkMode ? darkStyles.textcount : lightStyles.textcount,
-      },
-      rectangle: {
-        ...GenericStyles.rectangle, 
-        ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle,
-      },
-      title: {
-        ...GenericStyles.title, 
-        ...isDarkMode ? darkStyles.title : lightStyles.title,
-      },
-      description: {
-        ...GenericStyles.description, 
-        ...isDarkMode ? darkStyles.description : lightStyles.description,
-      },
-      InfoReptTimeIndex: {
-        ...GenericStyles.InfoReptTimeIndex, 
-        ...isDarkMode ? darkStyles.InfoReptTimeIndex : lightStyles.InfoReptTimeIndex,
-      },
-      InfoReptTime: {
-        ...GenericStyles.InfoReptTime, 
-        ...isDarkMode ? darkStyles.InfoReptTime : lightStyles.InfoReptTime,
-      },
-      ControlPaneBackground: {
-        ...GenericStyles.ControlPaneBackground, 
-        ...isDarkMode ? darkStyles.ControlPaneBackground : lightStyles.ControlPaneBackground,
-      },
-      horizontalLine: {
-        ...GenericStyles.horizontalLine, 
-        ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine,
-      },
-  };
-    const { item } = route.params;
+    const darkStyles = StyleSheet.create({
+        container: {
+            backgroundColor: "#151515",
+        },
+        containerforshare: {
+            backgroundColor: "#151515",
+        },
+        circularButton: {
+            borderColor: "#151515",
+            backgroundColor: "#262626",
+        },
+        button: {
+            backgroundColor: "#262626",
+            borderColor: "#151515",
+        },
+        textcount: {
+            textAlign: "center",
+            color: "white",
+        },
+        rectangle: {
+            backgroundColor: "#262626",
+            shadowColor: "black",
+        },
+        title: {
+            color: "white",
+        },
+        description: {
+            color: "#767676",
+        },
+        InfoReptTimeIndex: {
+            color: "#767676",
+        },
+        InfoReptTime: {
+            color: "#be915a",
+        },
+        ControlPaneBackground: {
+            shadowColor: "black",
+        },
+        horizontalLine: {
+            borderColor: "#151515",
+        },
+    });
+    const styles = {
+        ...GenericStyles,
+        container: {
+            ...GenericStyles.container,
+            ...(isDarkMode ? darkStyles.container : lightStyles.container),
+        },
+        containerforshare: {
+            ...GenericStyles.containerforshare,
+            ...(isDarkMode
+                ? darkStyles.containerforshare
+                : lightStyles.containerforshare),
+        },
+        circularButton: {
+            ...GenericStyles.circularButton,
+            ...(isDarkMode ? darkStyles.circularButton : lightStyles.circularButton),
+        },
+        button: {
+            ...GenericStyles.button,
+            ...(isDarkMode ? darkStyles.button : lightStyles.button),
+        },
+        textcount: {
+            ...GenericStyles.textcount,
+            ...(isDarkMode ? darkStyles.textcount : lightStyles.textcount),
+        },
+        rectangle: {
+            ...GenericStyles.rectangle,
+            ...(isDarkMode ? darkStyles.rectangle : lightStyles.rectangle),
+        },
+        title: {
+            ...GenericStyles.title,
+            ...(isDarkMode ? darkStyles.title : lightStyles.title),
+        },
+        description: {
+            ...GenericStyles.description,
+            ...(isDarkMode ? darkStyles.description : lightStyles.description),
+        },
+        InfoReptTimeIndex: {
+            ...GenericStyles.InfoReptTimeIndex,
+            ...(isDarkMode
+                ? darkStyles.InfoReptTimeIndex
+                : lightStyles.InfoReptTimeIndex),
+        },
+        InfoReptTime: {
+            ...GenericStyles.InfoReptTime,
+            ...(isDarkMode ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
+        },
+        ControlPaneBackground: {
+            ...GenericStyles.ControlPaneBackground,
+            ...(isDarkMode
+                ? darkStyles.ControlPaneBackground
+                : lightStyles.ControlPaneBackground),
+        },
+        horizontalLine: {
+            ...GenericStyles.horizontalLine,
+            ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+        },
+    };
+    const { item, itemIndex } = route.params;
     const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(0);
@@ -164,8 +169,8 @@ const GenericPage = ({ route }) => {
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
     const ControlPaneBackgroundImage = isDarkMode
-    ? require("../../assets/HeaderBackground.jpg") // Dark theme background image source
-    : require("../../assets/HeaderBackgroundLight.jpg"); // Light theme background image source
+        ? require("../../assets/HeaderBackground.jpg") // Dark theme background image source
+        : require("../../assets/HeaderBackgroundLight.jpg"); // Light theme background image source
     const viewRef = React.useRef();
 
     const Share = async () => {
@@ -300,6 +305,49 @@ const GenericPage = ({ route }) => {
         isSwiping = true;
     };
 
+    const [isFilled, setIsFilled] = useState(false);
+
+    useEffect(() => {
+        // Load the button state from AsyncStorage when the component mounts
+        async function loadButtonState() {
+            try {
+                const savedState = await AsyncStorage.getItem("buttonState");
+                if (savedState !== null) {
+                    const parsedState = JSON.parse(savedState);
+                    setIsFilled(parsedState[itemIndex] || false);
+                }
+            } catch (error) {
+                console.error("Error loading button state from AsyncStorage:", error);
+            }
+        }
+
+        loadButtonState();
+    }, [itemIndex]); // Load button state whenever itemIndex changes
+
+    const handleButtonPress = async () => {
+        // Toggle the button state
+        const updatedState = !isFilled;
+        setIsFilled(updatedState);
+
+        // Load the existing button state from AsyncStorage
+        try {
+            const savedState = await AsyncStorage.getItem("buttonState");
+            let updatedButtonState = savedState ? JSON.parse(savedState) : [];
+
+            // Update the state for the specific itemIndex
+            updatedButtonState[itemIndex] = updatedState;
+
+            // Store the updated button state in AsyncStorage
+            await AsyncStorage.setItem(
+                "buttonState",
+                JSON.stringify(updatedButtonState)
+            );
+        } catch (error) {
+            console.error("Error storing button state in AsyncStorage:", error);
+        }
+    };
+
+    
     return (
         <TouchableWithoutFeedback
             onPressIn={handleContainerPressIn}
@@ -339,6 +387,18 @@ const GenericPage = ({ route }) => {
                         <Text style={styles.InfoReptTime}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
+                        {/*button goes here */}
+                        <TouchableOpacity onPress={handleButtonPress}>
+                            <Svg width={24} height={24} viewBox="0 0 256 256">
+                                <Path
+                                    d="M128,216S28,160,28,92A52,52,0,0,1,128,72h0A52,52,0,0,1,228,92C228,160,128,216,128,216Z"
+                                    stroke={isFilled ? "#b83f3f" : "#7e2a2a"} // Border color
+                                    strokeWidth={2} // Border width
+                                    stroke-linecap="round"
+                                    fill={isFilled ? "#b83f3f" : "transparent"}
+                                />
+                            </Svg>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={Share} style={styles.shareButton}>
                             <View style={styles.dotContainer}>
                                 <Text style={styles.dot}>&#8226;</Text>
@@ -407,7 +467,5 @@ const GenericPage = ({ route }) => {
         </TouchableWithoutFeedback>
     );
 };
-
-
 
 export default GenericPage;
