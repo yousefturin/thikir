@@ -1,17 +1,78 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from '../context/ThemContex';
+import { AboutStyles } from '../context/commonStyles';
 var pkg = require('../../package.json');
-
 const AboutScreen = ({ navigation }) => {
-  const appIconImage = require("../../assets/AppIcon.png");
+  const { isDarkMode } = useTheme(); 
+
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6", 
+    },
+    appNameText: {
+      color: "#000",
+    },
+    horizontalLine: {
+      borderColor: "#fefffe",
+    },  
+    rectangleWrapper: {
+      backgroundColor: "#fefffe",
+      shadowColor: 'white',
+    },
+    rectangleText: {
+      color: "#000",
+    },
+
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515", 
+    },
+    appNameText: {
+      color: "#fff",
+    },
+    horizontalLine: {
+      borderColor: "#262626",
+    }, 
+    rectangleWrapper: {
+      backgroundColor: "#262626",
+      shadowColor: 'black',
+    },
+    rectangleText: {
+      color: "#fff",
+    },
+
+  });
+  const styles = {
+    ...AboutStyles,
+    container: {
+      ...AboutStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+    },
+    appNameText: {
+      ...AboutStyles.appNameText, 
+      ...isDarkMode ? darkStyles.appNameText : lightStyles.appNameText, 
+    },
+    rectangleWrapper: {
+      ...AboutStyles.rectangleWrapper, 
+      ...isDarkMode ? darkStyles.rectangleWrapper : lightStyles.rectangleWrapper, 
+    },
+    rectangleText: {
+      ...AboutStyles.rectangleText, 
+      ...isDarkMode ? darkStyles.rectangleText : lightStyles.rectangleText, 
+    },
+    horizontalLine: {
+      ...AboutStyles.horizontalLine, 
+      ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
+    },
+  };
+
+
+  const appIconImage = require("../../assets/icon.png");
   return (
-
-
     <View style={styles.container}>
-      {/* Navigation bar */}
-      {/* Add your navigation bar here */}
       <TouchableOpacity
         onPress={() => navigation.navigate("Menu")}
       ></TouchableOpacity>
@@ -36,67 +97,5 @@ const AboutScreen = ({ navigation }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#151515",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingBottom: 80,
-    paddingTop: 50,
-  },
-  appNameText: {
-    color: "#fff",
-    fontSize: 28,
-    fontFamily: "ScheherazadeNewBold",
-    marginTop: 10,
-  },
-  appVersionText: {
-    color: "#454545",
-    fontSize: 12,
-  },
-  rectangleWrapper: {
-    marginTop: 30,
-    height: 180,
-    borderRadius: 10,
-    backgroundColor: "#262626",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "90%",
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
-  },
-  rectangleText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "300",
-    textAlign: "right",
-    marginHorizontal: 5,
-    fontFamily: "ScheherazadeNew",
-  },
-  appLogoIcon: {
-    width: 126,
-    height: 126,
-    borderRadius: 27,
-    shadowColor: "black", // For iOS
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 12,
-    shadowRadius: 6,
-  },
-  horizontalLine: {
-    borderBottomWidth: 1,
-    borderColor: "#262626",
-    marginLeft: 360,
-  },
-});
+
 export default AboutScreen;
