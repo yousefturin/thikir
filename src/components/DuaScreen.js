@@ -3,11 +3,64 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
 import { handleShare } from "../utils/shareUtils";
+import { useTheme } from '../context/ThemContex'; 
+import { DuaVerseStyles } from '../context/commonStyles';
 
 const CACHE_KEY = "randomDuaCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const DUAVerseScreen = ({ navigation }) => {
+    const { isDarkMode } = useTheme(); 
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6", 
+    },
+    rectangle: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    title: {
+      color: "#000",
+    },
+    horizontalLine: {
+        borderColor: "#f2f2f6",
+      },  
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515", 
+    },
+    rectangle: {
+      backgroundColor: "#262626",
+      shadowColor: "black",
+    },
+    title: {
+      color: "#fff",
+    },
+    horizontalLine: {
+        borderColor: "#151515",
+      },
+  });
+  const styles = {
+    ...DuaVerseStyles,
+    container: {
+      ...DuaVerseStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+    },
+    rectangle: {
+      ...DuaVerseStyles.rectangle, 
+      ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle, 
+    },
+    title: {
+      ...DuaVerseStyles.title, 
+      ...isDarkMode ? darkStyles.title : lightStyles.title, 
+    },
+    horizontalLine: {
+        ...DuaVerseStyles.horizontalLine, 
+        ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
+      },
+  };
     const [DUA, setDUA] = useState("");
     const [REF, setREF] = useState("");
     const [TRAN, setTRAN] = useState("");
@@ -141,78 +194,6 @@ const DUAVerseScreen = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        backgroundColor: "#151515",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingBottom: 120,
-    },
-    rectangle: {
-        backgroundColor: "#262626",
-        borderRadius: 10,
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginTop: 20,
-        width: "90%",
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 4,
-        position: "relative",
-    },
-    title: {
-        textAlign: "center",
-        color: "white",
-        fontFamily: "ScheherazadeNew",
-    },
-    translation: {
-        marginBottom: 30,
-        fontSize: 11,
-        textAlign: "center",
-        color: "#767676",
-        fontFamily: "AmiriFont",
-    },
-    description: {
-        fontSize: 11,
-        textAlign: "center",
-        color: "#767676",
-        fontFamily: "AmiriFont",
-    },
-    shareButton: {
-        position: "absolute",
-        top: 10, // Adjust the top value to position the button as desired
-        left: 13, // Adjust the left value to position the button as desired
-    },
-    dotContainer: {
-        flexDirection: "row",
-    },
-    dot: {
-        position: "absolute",
-        top: 7, // Adjust the top value to position the button as desired
-        left: 10, // Adjust the left value to position the button as desired
-    },
-    dotContainer: {
-        flexDirection: "row",
-    },
-    dot: {
-        color: "#be915a",
-        fontSize: 20,
-        fontWeight: "700",
-        marginHorizontal: 1, // Adjust the margin to control spacing between dots
-    },
-    horizontalLine: {
-        borderBottomWidth: 1,
-        borderColor: "#151515",
-        width: '100%',
-        marginBottom: 5,
 
-    },
-});
 
 export default DUAVerseScreen;
