@@ -1,18 +1,67 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Switch,  StyleSheet,Dimensions } from "react-native";
+import { View, Text, TouchableOpacity, Switch, StyleSheet, Dimensions } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from 'expo-haptics';
-
-
-
-const windowWidth = Dimensions.get('window').width;
-
-
-
+import { useTheme } from '../context/ThemContex';
+import { ThikirAlarmStyles } from '../context/commonStyles';
 
 const ThikirAlarmScreen = () => {
+  const { isDarkMode } = useTheme();
+
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6",
+    },
+    notificationContainer: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    title: {
+      color: "#000",
+    },
+    horizontalLineWrapper: {
+      borderColor: "#fefffe",
+    },
+
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515",
+    },
+    notificationContainer: {
+      backgroundColor: "#262626",
+      shadowColor: "#262626",
+    },
+    title: {
+      color: "#dddddd",
+    },
+    horizontalLineWrapper: {
+      borderColor: "#262626",
+    },
+
+  });
+  const styles = {
+    ...ThikirAlarmStyles,
+    container: {
+      ...ThikirAlarmStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container,
+    },
+    notificationContainer: {
+      ...ThikirAlarmStyles.notificationContainer,
+      ...isDarkMode ? darkStyles.notificationContainer : lightStyles.notificationContainer,
+    },
+    title: {
+      ...ThikirAlarmStyles.title,
+      ...isDarkMode ? darkStyles.title : lightStyles.title,
+    },
+    horizontalLineWrapper: {
+      ...ThikirAlarmStyles.horizontalLineWrapper,
+      ...isDarkMode ? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
+    },
+  };
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
@@ -190,11 +239,11 @@ const ThikirAlarmScreen = () => {
       console.error("Error saving notification data:", error);
     }
   };
-  
+
   const renderBorderRadius = (index) => {
     const itemCount = notifications.length;
     if (index === 0) {
-      return {         
+      return {
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
       };
@@ -212,7 +261,7 @@ const ThikirAlarmScreen = () => {
             onPress={() => showDatePicker(notification)}
             activeOpacity={0.7}
           >
-            <View style={[styles.notificationContainer,renderBorderRadius(index),]}>
+            <View style={[styles.notificationContainer, renderBorderRadius(index),]}>
               <View style={styles.leftContent}>
                 <Text style={styles.title}>{notification.title}</Text>
                 <Text style={styles.time}>
@@ -228,14 +277,14 @@ const ThikirAlarmScreen = () => {
                   onValueChange={() =>
                     toggleAlarm(notification.id, !notification.isActive)
                   }
-                  thumbColor={notification.isActive ? '#dddddd' : '#dddddd'} // Set the color of the thumb when it's active and inactive
+                  thumbColor={notification.isActive ? '#fefffe' : '#fefffe'}
                   trackColor={{ true: '#be915a', false: '#454545' }}
                 />
               </View>
             </View>
             {index < notifications.length - 1 && (
-            <View style={styles.horizontalLineWrapper} />
-          )}
+              <View style={styles.horizontalLineWrapper} />
+            )}
           </TouchableOpacity>
         </React.Fragment>
       ))}
@@ -245,7 +294,7 @@ const ThikirAlarmScreen = () => {
         date={
           selectedNotification
             ? selectedNotification.date ||
-              getDefaultTime(selectedNotification.id)
+            getDefaultTime(selectedNotification.id)
             : new Date()
         }
         onConfirm={handleConfirm}
@@ -270,59 +319,5 @@ const getDefaultTime = (notificationId) => {
 
   return new Date(defaultTimes[notificationId]) || new Date();
 };
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#151515",
-    paddingTop: 40,
-    alignItems: "center",
-  },
-  notificationContainer: {
-    flexDirection: 'row-reverse',
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    backgroundColor: "#262626",
-    shadowColor: "#262626",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
-    width: '91%',
-    height: 60,
-    paddingHorizontal: 10,
-  },
-  leftContent: {
-    flexDirection: "column",
-    flex: 2,
-    alignItems: "flex-end",
-  },
-  middleContent: {
-    flex: 1,
-  },
-  rightContent: {
-    flex: 1,
-    alignItems: "flex-start",
-    paddingLeft: 10,
-  },
-  title: {
-    color: "#dddddd",
-    textAlign: "right",
-    fontSize: 18,
-    marginRight: 10,
-    fontFamily: "ScheherazadeNewBold",
-  },
-  time: {
-    color: "#777",
-    marginRight: 10,
-    textAlign: "right",
-  },
-  horizontalLineWrapper: {
-    borderBottomWidth: 1,
-    borderColor: "#262626",
-    marginLeft: windowWidth > 600 ? 610 : 350,
-  },
-});
+
 export default ThikirAlarmScreen;
