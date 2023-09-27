@@ -1,11 +1,79 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import { useTheme } from '../context/ThemContex'; 
+import { MainStyles } from '../context/commonStyles';
 const Menu = ({ navigation }) => {
+  const { isDarkMode } = useTheme(); 
+
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6", 
+    },
+    button: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    buttonText:{
+      color: "#000",
+    },
+    iconWrapper: {
+      backgroundColor: "#e9e9ea",
+      shadowColor: "white",
+    },
+    horizontalLine: {
+      borderColor: "#fefffe",
+    },  
+
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515", 
+    },
+    button: {
+      backgroundColor: "#262626",
+      shadowColor: "black",
+    },
+    buttonText:{
+      color: "#fff",
+    },
+    iconWrapper: {
+      backgroundColor: "#454545",
+      shadowColor: "black",
+    },
+    horizontalLine: {
+      borderColor: "#262626",
+    },
+
+  });
+  const styles = {
+    ...MainStyles,
+    container: {
+      ...MainStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+    },
+    buttonText: {
+      ...MainStyles.buttonText, 
+      ...isDarkMode ? darkStyles.buttonText : lightStyles.buttonText, 
+    },
+    button: {
+      ...MainStyles.button, 
+      ...isDarkMode ? darkStyles.button : lightStyles.button, 
+    },
+    iconWrapper: {
+      ...MainStyles.iconWrapper, 
+      ...isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper, 
+    },
+    horizontalLine: {
+      ...MainStyles.horizontalLine, 
+      ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
+    },
+  };
+
   const tasbihImage = require("../../assets/tasbihIcon.png");
   return (
     <View style={styles.container}>
@@ -302,82 +370,6 @@ const Menu = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#151515",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingBottom: 80,
-    paddingTop: 30,
-  },
-  iconWrapperLeft: {
-    width: "10%",
-  },
-  iconWrapper: {
-    width: "8%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#454545",
-    borderRadius: 10,
-    padding: 5,
-    marginRight: 5,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
-  },
-  nameWrapper: {
-    width: "70%",
-    
-  },
-  imageWrapper: {
-    width: "1%",
-  },
-  button: {
-    backgroundColor: "#262626",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "300",
-    textAlign: "right",
-    marginRight: 20,
-    fontFamily: "ScheherazadeNewBold",
-  },
-  image: {
-    width: 44,
-    height: 55,
-  },
-  icon: {
-    marginLeft: 20,
-  },
-  iconleft: {},
-  specialIconleft: {
-    width: 24,
-    height: 24,
-  },
-  horizontalLine: {
-    borderBottomWidth: 1,
-    borderColor: "#262626",
-    width: 13,
-    marginLeft: 360,
-  },
-});
+
 
 export default Menu;
