@@ -353,16 +353,16 @@ const HomeScreen = ({ navigation }) => {
                     searchMode
                   ]}
                   onPress={() => {
-                        // Find the actual index of the item in the items array
-                        const actualIndex = items.findIndex((i) => i.name === item.name);
-                        navigation.navigate("GenericPage", {
-                          name: item.name,
-                          item: item,
-                          itemIndex: actualIndex,
-                        });
-                      }}
-                      activeOpacity={searchMode ? 1 : 0.7}
-                    >
+                      // Find the actual index of the item in the items array
+                      const actualIndex = items.findIndex((i) => i.name === item.name);
+                      navigation.navigate("GenericPage", {
+                        name: item.name,
+                        item: item,
+                        itemIndex: actualIndex,
+                      });
+                    }}
+                    activeOpacity={searchMode ? 1 : 0.7}
+                  >
                   <View style={styles.iconWrapperTop}>
                     <Ionicons
                       name={topItemIcons[index]}
