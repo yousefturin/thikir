@@ -20,18 +20,11 @@ import { useTheme } from '../context/ThemContex';
 const HomeScreen = ({ navigation }) => {
   const items = getItems();
 
-  const desiredNames = [
-    "أذكار المساء",
-    "أذكار الصباح",
-    "الأذكار بعد الصلاة",
-    "أذكار النوم",
-  ];
-
-
   const { isDarkMode } = useTheme();
   const StatusBarColor = isDarkMode
     ? "light-content"
     : "dark-content";
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#f2f2f6", // Background color for the entire page
@@ -82,7 +75,8 @@ const HomeScreen = ({ navigation }) => {
       color: "#be915a",
     },
   });
-
+  //#endregion
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#151515", // Background color for the entire page
@@ -133,6 +127,8 @@ const HomeScreen = ({ navigation }) => {
       color: "#be915a",
     },
   });
+  //#endregion
+  //#region Styles
   const styles = {
     ...HomeStyles,
     pageContainer: {
@@ -196,20 +192,31 @@ const HomeScreen = ({ navigation }) => {
       ...isDarkMode ? darkStyles.iconTop : lightStyles.iconTop, // Override button background color
     },
   };
+  //#endregion
+  //#region  
 
-  // Filter the initial items based on desired names
+  const desiredNames = [
+    "أذكار المساء",
+    "أذكار الصباح",
+    "الأذكار بعد الصلاة",
+    "أذكار النوم",
+  ];
   const filteredItems = items.filter((item) =>
     desiredNames.includes(item.name)
   );
+
   const desiredOrderMap = {};
   desiredNames.forEach((name, index) => {
     desiredOrderMap[name] = index;
   });
+
   const sortedItems = filteredItems.slice().sort((a, b) => {
     const orderA = desiredOrderMap[a.name];
     const orderB = desiredOrderMap[b.name];
     return orderA - orderB;
   });
+
+
   const renderBorderRadius = (index, isSearchedItems) => {
     const itemCount = isSearchedItems ? searchedItems.length : items.length;
 
@@ -263,7 +270,7 @@ const HomeScreen = ({ navigation }) => {
     setSearchedItems([]); // Clear filtered items when cancel button is clicked
   };
 
-
+//#endregion
 
   const topItemIcons = ["moon", "partly-sunny", "notifications", "bed"];
 
@@ -305,6 +312,7 @@ const HomeScreen = ({ navigation }) => {
                       navigation.navigate("GenericPage", {
                         name: item.name,
                         item: item,
+                        itemIndex:index,
                       })
                     }
                     activeOpacity={searchMode ? 1 : 0.7}
@@ -344,14 +352,17 @@ const HomeScreen = ({ navigation }) => {
                     renderBorderRadius(index, false), // Pass false for items
                     searchMode
                   ]}
-                  onPress={() =>
-                    navigation.navigate("GenericPage", {
-                      name: item.name,
-                      item: item,
-                    })
-                  }
-                  activeOpacity={searchMode ? 1 : 0.7}
-                >
+                  onPress={() => {
+                        // Find the actual index of the item in the items array
+                        const actualIndex = items.findIndex((i) => i.name === item.name);
+                        navigation.navigate("GenericPage", {
+                          name: item.name,
+                          item: item,
+                          itemIndex: actualIndex,
+                        });
+                      }}
+                      activeOpacity={searchMode ? 1 : 0.7}
+                    >
                   <View style={styles.iconWrapperTop}>
                     <Ionicons
                       name={topItemIcons[index]}
@@ -380,6 +391,7 @@ const HomeScreen = ({ navigation }) => {
                     navigation.navigate("GenericPage", {
                       name: item.name,
                       item: item,
+                      itemIndex:index,
                     })
                   }
                   activeOpacity={searchMode ? 1 : 0.7}
