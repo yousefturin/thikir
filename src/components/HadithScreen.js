@@ -3,11 +3,53 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
-
+import { useTheme } from '../context/ThemContex'; 
+import { QuranVerseStyles } from '../context/commonStyles';
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const HADITHVerseScreen = ({ navigation }) => {
+  const { isDarkMode } = useTheme(); 
+  const lightStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6", 
+    },
+    rectangle: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    title: {
+      color: "#000",
+    },
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515", 
+    },
+    rectangle: {
+      backgroundColor: "#262626",
+      shadowColor: "black",
+    },
+    title: {
+      color: "#fff",
+    },
+  });
+  const styles = {
+    ...QuranVerseStyles,
+    container: {
+      ...QuranVerseStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+    },
+    rectangle: {
+      ...QuranVerseStyles.rectangle, 
+      ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle, 
+    },
+    title: {
+      ...QuranVerseStyles.title, 
+      ...isDarkMode ? darkStyles.title : lightStyles.title, 
+    },
+  };
   const [HADITH, setHADITH] = useState("");
   const [REF, setREF] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
@@ -133,64 +175,5 @@ const HADITHVerseScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#151515",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 120,
-  },
-  rectangle: {
-    backgroundColor: "#262626",
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 20,
-    width: "90%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
-    position: "relative",
-  },
-  title: {
-    textAlign: "center",
-    color: "white",
-    fontFamily: "ScheherazadeNew",
-  },
-  description: {
-    fontSize: 11,
-    textAlign: "center",
-    color: "#767676",
-    fontFamily: "AmiriFont",
-  },
-  shareButton: {
-    position: "absolute",
-    top: 10, // Adjust the top value to position the button as desired
-    left: 13, // Adjust the left value to position the button as desired
-  },
-  dotContainer: {
-    flexDirection: "row",
-  },
-  dot: {
-    position: "absolute",
-    top: 7, // Adjust the top value to position the button as desired
-    left: 10, // Adjust the left value to position the button as desired
-  },
-  dotContainer: {
-    flexDirection: "row",
-  },
-  dot: {
-    color: "#be915a",
-    fontSize: 20,
-    fontWeight: "700",
-    marginHorizontal: 1, // Adjust the margin to control spacing between dots
-  },
-});
 
 export default HADITHVerseScreen;
