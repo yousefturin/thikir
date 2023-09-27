@@ -3,16 +3,158 @@ import {
     View,
     Text,
     StyleSheet,
-    Vibration,
     ImageBackground,
     TouchableWithoutFeedback,
     TouchableOpacity,
 } from "react-native";
-import * as Haptics from 'expo-haptics';
+import * as Haptics from "expo-haptics";
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { useTheme } from '../context/ThemContex'; 
+import { GenericStyles } from '../context/commonStyles';
 
 const GenericPage = ({ route }) => {
+    const { isDarkMode } = useTheme();
+
+  const lightStyles = StyleSheet.create({
+    container: {
+        backgroundColor: "#f2f2f6", 
+      },
+      containerforshare: {
+        backgroundColor: "#f2f2f6", 
+      },
+      circularButton: {
+          borderColor: "#151515",
+          backgroundColor: "#fefffe",
+      },
+      button: {
+        backgroundColor: "#fefffe",
+        borderColor: "#151515",
+      },
+      textcount: {
+          textAlign: "center",
+          color: "#000",
+      },
+      rectangle: {
+        backgroundColor: "#fefffe",  
+          shadowColor: "white",
+      },
+      title: {
+          color: "#000",
+      },
+      description: {
+          color: "#767676",
+      },
+      InfoReptTimeIndex: {
+          color: "#767676",
+      },
+      InfoReptTime: {
+          color: "#be915a",
+      },
+      ControlPaneBackground: {
+          shadowColor: "white",
+      },
+      horizontalLine: {
+        borderColor: "#f2f2f6",
+      },
+  
+
+  });
+
+  const darkStyles = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515", 
+    },
+    containerforshare: {
+        backgroundColor: "#151515",
+    },
+    circularButton: {
+        borderColor: "#151515",
+        backgroundColor: "#262626",
+    },
+    button: {
+      backgroundColor: "#262626",
+      borderColor: "#151515",
+    },
+    textcount: {
+        textAlign: "center",
+        color: "white",
+    },
+    rectangle: {
+        backgroundColor: "#262626", 
+        shadowColor: "black",
+    },
+    title: {
+        color: "white",
+    },
+    description: {
+        color: "#767676",
+    },
+    InfoReptTimeIndex: {
+        color: "#767676",
+    },
+    InfoReptTime: {
+        color: "#be915a",
+    },
+    ControlPaneBackground: {
+        shadowColor: "black",
+    },
+    horizontalLine: {
+      borderColor: "#151515",
+    },
+
+  });
+  const styles = {
+    ...GenericStyles,
+    container: {
+      ...GenericStyles.container,
+      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+    },
+    containerforshare: {
+      ...GenericStyles.containerforshare, 
+      ...isDarkMode ? darkStyles.containerforshare : lightStyles.containerforshare,
+    },
+    circularButton: {
+      ...GenericStyles.circularButton, 
+      ...isDarkMode ? darkStyles.circularButton : lightStyles.circularButton,
+    },
+    button: {
+        ...GenericStyles.button, 
+        ...isDarkMode ? darkStyles.button : lightStyles.button,
+      },
+      textcount: {
+        ...GenericStyles.textcount, 
+        ...isDarkMode ? darkStyles.textcount : lightStyles.textcount,
+      },
+      rectangle: {
+        ...GenericStyles.rectangle, 
+        ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle,
+      },
+      title: {
+        ...GenericStyles.title, 
+        ...isDarkMode ? darkStyles.title : lightStyles.title,
+      },
+      description: {
+        ...GenericStyles.description, 
+        ...isDarkMode ? darkStyles.description : lightStyles.description,
+      },
+      InfoReptTimeIndex: {
+        ...GenericStyles.InfoReptTimeIndex, 
+        ...isDarkMode ? darkStyles.InfoReptTimeIndex : lightStyles.InfoReptTimeIndex,
+      },
+      InfoReptTime: {
+        ...GenericStyles.InfoReptTime, 
+        ...isDarkMode ? darkStyles.InfoReptTime : lightStyles.InfoReptTime,
+      },
+      ControlPaneBackground: {
+        ...GenericStyles.ControlPaneBackground, 
+        ...isDarkMode ? darkStyles.ControlPaneBackground : lightStyles.ControlPaneBackground,
+      },
+      horizontalLine: {
+        ...GenericStyles.horizontalLine, 
+        ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine,
+      },
+  };
     const { item } = route.params;
     const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,8 +163,9 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
-    const ControlPaneBackgroundImage = require("../../assets/HeaderBackground.jpg");
-
+    const ControlPaneBackgroundImage = isDarkMode
+    ? require("../../assets/HeaderBackground.jpg") // Dark theme background image source
+    : require("../../assets/HeaderBackgroundLight.jpg"); // Light theme background image source
     const viewRef = React.useRef();
 
     const Share = async () => {
@@ -40,10 +183,7 @@ const GenericPage = ({ route }) => {
             "sanitized subItemDescription length is:",
             sanitizedDescription.length
         );
-        console.log(
-            "sanitized sanitizedName length is:",
-            sanitizedName.length
-        );
+        console.log("sanitized sanitizedName length is:", sanitizedName.length);
         let maxHeight = 170;
         let MaxFontSize = 20;
         let maxPadding = 60;
@@ -54,45 +194,43 @@ const GenericPage = ({ route }) => {
             MaxFontSize = 16;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        }else if (sanitizedDescription.length > 700) {
+        } else if (sanitizedDescription.length > 700) {
             maxHeight = 350;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        }else if (sanitizedDescription.length > 600) {
+        } else if (sanitizedDescription.length > 600) {
             maxHeight = 300;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        }else if (sanitizedDescription.length > 500) {
+        } else if (sanitizedDescription.length > 500) {
             maxHeight = 300;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        }else if (sanitizedDescription.length > 400) {
+        } else if (sanitizedDescription.length > 400) {
             maxHeight = 250;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
-        }else if (sanitizedDescription.length > 300) {
+        } else if (sanitizedDescription.length > 300) {
             maxHeight = 220;
             maxpaddingHorizontal = 10;
             maxPadding = 30;
-        }else if (sanitizedDescription.length > 290) {
+        } else if (sanitizedDescription.length > 290) {
             maxHeight = 350;
             maxpaddingHorizontal = 10;
             maxPadding = 30;
-        }else if (sanitizedDescription.length > 200) {
+        } else if (sanitizedDescription.length > 200) {
             maxpaddingHorizontal = 10;
             maxPadding = 30;
-        }else if (sanitizedName.length > 200) {
+        } else if (sanitizedName.length > 200) {
             maxHeight = 200;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         }
-        console.log(
-            maxHeight,MaxFontSize,maxPadding,maxpaddingHorizontal
-        );
+        console.log(maxHeight, MaxFontSize, maxPadding, maxpaddingHorizontal);
         setMaxDescriptionHeight(maxHeight);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
@@ -112,62 +250,55 @@ const GenericPage = ({ route }) => {
 
     const nextSubItem = () => {
         if (currentIndex < item.subItems.length - 1) {
-          setCurrentIndex((prevIndex) => prevIndex + 1);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          Haptics.notificationAsync(
-            Haptics.NotificationFeedbackType.Success
-          );
-          setCount(0);
+            setCurrentIndex((prevIndex) => prevIndex + 1);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+            setCount(0);
         }
-      };
+    };
     const prevSubItem = () => {
         if (currentIndex > 0) {
             setCurrentIndex((prevIndex) => prevIndex - 1);
-            Haptics.notificationAsync(
-                Haptics.NotificationFeedbackType.Success
-              );
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             setCount(0);
         }
     };
 
     const incrementCount = () => {
         if (!isLongPress) {
-          setCount((prevCount) => prevCount + 1);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          
+            setCount((prevCount) => prevCount + 1);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
-      };
-      
-      let pressTimeout;
-      let startX = 0; // Initial X-coordinate of the touch
-      let isSwiping = false; // Track if a swipe occurred
-      
-      const handleContainerPressIn = (e) => {
+    };
+
+    let pressTimeout;
+    let startX = 0; // Initial X-coordinate of the touch
+    let isSwiping = false; // Track if a swipe occurred
+
+    const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
-          setIsLongPress(true); // Detect long press
+            setIsLongPress(true); // Detect long press
         }, 1000); // Adjust the duration as needed for your long press
         startX = e.nativeEvent.pageX; // Store the initial X-coordinate
-      };
-      
-      const handleContainerPressOut = (e) => {
+    };
+
+    const handleContainerPressOut = (e) => {
         clearTimeout(pressTimeout); // Clear the timeout on release
         const endX = e.nativeEvent.pageX; // Get the final X-coordinate
         const swipeDistance = Math.abs(endX - startX); // Calculate the distance moved
-      
+
         if (!isSwiping && swipeDistance < 10) {
-          // Only increment the count if it's not a swipe (adjust the threshold as needed)
-          incrementCount();
+            // Only increment the count if it's not a swipe (adjust the threshold as needed)
+            incrementCount();
         }
-      
+
         setIsLongPress(false); // Reset the long press flag
         isSwiping = false; // Reset the swipe flag
-      };
-      
-      const handleSwipe = () => {
-        isSwiping = true;
-      };
-      
+    };
 
+    const handleSwipe = () => {
+        isSwiping = true;
+    };
 
     return (
         <TouchableWithoutFeedback
@@ -237,10 +368,7 @@ const GenericPage = ({ route }) => {
                                     color="#454545"
                                     style={styles.icon}
                                 />
-                                <Text style={styles.textcount}>
-                                    الذكر التالي
-                                </Text>
-
+                                <Text style={styles.textcount}>الذكر التالي</Text>
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -264,9 +392,7 @@ const GenericPage = ({ route }) => {
                         >
                             <View style={styles.button}>
                                 {/*back button here*/}
-                                <Text style={styles.textcount}>
-                                    الذكر السابق
-                                </Text>
+                                <Text style={styles.textcount}>الذكر السابق</Text>
                                 <FontAwesomeIcon
                                     name="angle-right"
                                     size={24}
@@ -282,138 +408,6 @@ const GenericPage = ({ route }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#151515",
-        padding: 20,
-    },
-    containerforshare: {
-        backgroundColor: "#151515",
-        height: 500,
-    },
-    controlPan: {
-        flex: 1,
-        justifyContent: "flex-end",
-        marginBottom: 40,
-        margin: -20,
-    },
-    circularButton: {
-        width: 70,
-        height: 70,
-        borderRadius: 25,
-        borderWidth: 3,
-        borderColor: "#151515",
-        backgroundColor: "#262626",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    button: {
-        height: "50%",
-        width: "35%",
-        padding: 14,
-        backgroundColor: "#262626",
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: "#151515",
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignContent: 'center'
-    },
-    textcount: {
-        textAlign: "center",
-        color: "white",
-        fontSize: 20,
-        fontFamily: "ScheherazadeNew",
-    },
-    icon: {
-        marginTop: 2,
-    },
-    rectangle: {
-        backgroundColor: "#262626", // Background color of the rectangle
-        borderRadius: 10, // Border radius for the rectangle
-        alignItems: "center",
-        justifyContent: "space-evenly", // Distribute content evenly
-        paddingBottom: 20,
-        padding: 50,
-        marginTop: 20,
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 4,
-        position: "relative",
-    },
-    title: {
-        textAlign: "center",
-        color: "white",
-        fontFamily: "ScheherazadeNew",
-    },
-    description: {
-        fontSize: 11, // Adjust the font size as needed
-        textAlign: "center",
-        color: "#767676",
-        fontFamily: "AmiriFont",
-        paddingBottom: 20,
-    },
-    InfoReptTimeIndex: {
-        fontSize: 11, // Adjust the font size as needed
-        textAlign: "center",
-        color: "#767676",
-        fontFamily: "AmiriFont",
-        position: "absolute",
-        left: 0,
-        bottom: 0,
-        padding: 20,
-    },
-    InfoReptTime: {
-        fontSize: 11, // Adjust the font size as needed
-        textAlign: "center",
-        color: "#be915a",
-        fontFamily: "AmiriFont",
-        position: "absolute",
-        right: 0,
-        bottom: 0,
-        padding: 20,
-    },
-    ControlPaneBackground: {
-        flexDirection: "row",
-        height: 130,
-        resizeMode: "cover", // or 'stretch' or 'contain'
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 4,
-    },
-    shareButton: {
-        position: "absolute",
-        top: 7, // Adjust the top value to position the button as desired
-        left: 10, // Adjust the left value to position the button as desired
-    },
-    dotContainer: {
-        flexDirection: "row",
-    },
-    dot: {
-        color: "#be915a",
-        fontSize: 20,
-        fontWeight: "700",
-        marginHorizontal: 1, // Adjust the margin to control spacing between dots
-    },
-    horizontalLine: {
-        borderBottomWidth: 1,
-        borderColor: "#151515",
-        width: "100%",
-    },
 
-});
 
 export default GenericPage;
