@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  ImageBackground,
+
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -20,24 +20,32 @@ import GenericPage from "../components/GenericPage";
 import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
+import { useTheme } from '../context/ThemContex'; 
 const Stack = createStackNavigator();
 
-const headerStyle = {
-  backgroundColor: "white",
-  height: 100, // Set your desired header height
-};
-const headerBackgroundImage = require("../../assets/HeaderBackground.jpg");
-const headerTintColor = "white"; // Set the text color to white
+
 
 const AppNavigator = () => {
+  const { isDarkMode } = useTheme();
+
+  const headerTintColor = isDarkMode
+  ? "white"
+  :"black";
+  const barColor = isDarkMode
+  ?"white"
+  :"black";
+  const backgroundBarColor = isDarkMode
+  ?"#151515"
+  :"#f2f2f6";
+  const headerStyle = {height: 100, backgroundColor: backgroundBarColor, elevation: 0, shadowOpacity: 0, };
   return (
     <Stack.Navigator
       initialRouteName="الأذكار"
       screenOptions={{
         headerTintColor,
         headerTitleStyle: {
-          fontFamily: "ScheherazadeNewBold", // Set your desired font family here
-          fontSize: 22, // Adjust font size as needed
+          fontFamily: "ScheherazadeNewBold",
+          fontSize: 22, 
         },
       }}
     >
@@ -52,9 +60,8 @@ const AppNavigator = () => {
                 <Icon
                   name="bars"
                   size={24}
-                  color="white"
                   style={[
-                    { paddingRight: 190, marginBottom: 10, paddingTop: 10 },
+                    { paddingRight: 190, marginBottom: 10, paddingTop: 10,color:barColor },
                   ]}
                 />
               </TouchableOpacity>
@@ -62,12 +69,7 @@ const AppNavigator = () => {
           ),
           headerRight: null,
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
+
         })}
       />
       <Stack.Screen
@@ -75,12 +77,6 @@ const AppNavigator = () => {
         component={ThikirAlarmScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -88,12 +84,6 @@ const AppNavigator = () => {
         component={QuranVerseScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -101,12 +91,6 @@ const AppNavigator = () => {
         component={HadithScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -114,22 +98,16 @@ const AppNavigator = () => {
         component={DUAVerseScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
         name="GenericPage"
         component={GenericPage}
-        options={({ route, navigation }) => ({
+        options={({ route }) => ({
           headerTitle: () => (
             <Text
               style={{
-                color: "white",
+                color: barColor,
                 fontSize: 18,
                 fontFamily: "ScheherazadeNewBold",
               }}
@@ -138,12 +116,6 @@ const AppNavigator = () => {
             </Text>
           ),
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         })}
       />
       <Stack.Screen
@@ -151,12 +123,6 @@ const AppNavigator = () => {
         component={FavouriteScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -164,12 +130,6 @@ const AppNavigator = () => {
         component={SettingScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -177,12 +137,6 @@ const AppNavigator = () => {
         component={AboutScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -190,12 +144,6 @@ const AppNavigator = () => {
         component={ReportProblemScreen}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
       />
       <Stack.Screen
@@ -203,15 +151,12 @@ const AppNavigator = () => {
         component={Menu}
         options={{
           headerStyle: headerStyle,
-          headerBackground: () => (
-            <ImageBackground
-              source={headerBackgroundImage}
-              style={styles.headerBackground}
-            ></ImageBackground>
-          ),
         }}
+        
       />
+
     </Stack.Navigator>
+
   );
 };
 
