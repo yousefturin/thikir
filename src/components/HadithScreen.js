@@ -35,6 +35,7 @@ const HADITHVerseScreen = ({ navigation }) => {
       color: "#fff",
     },
   });
+  
   const styles = {
     ...QuranVerseStyles,
     container: {
@@ -125,6 +126,7 @@ const HADITHVerseScreen = ({ navigation }) => {
       console.error("Error fetching random verse:", error);
     }
   };
+
   const controlStyle = (verseTextLength) => {
     let maxHeight = 550;
     let MaxFontSize = 20;
@@ -154,6 +156,7 @@ const HADITHVerseScreen = ({ navigation }) => {
     padding: maxPadding,
     paddingHorizontal: maxpaddingHorizontal,
   };
+
   return (
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
