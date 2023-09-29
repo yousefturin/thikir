@@ -6,6 +6,7 @@ import {
     ImageBackground,
     TouchableWithoutFeedback,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { handleShare } from "../utils/shareUtils";
@@ -18,6 +19,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const GenericPage = ({ route }) => {
     const { isDarkMode } = useTheme();
 
+    //#region LightTheme
     const lightStyles = StyleSheet.create({
         container: {
             backgroundColor: "#f2f2f6",
@@ -60,7 +62,9 @@ const GenericPage = ({ route }) => {
             borderColor: "#f2f2f6",
         },
     });
+    //#endregion
 
+    //#region DarkTheme
     const darkStyles = StyleSheet.create({
         container: {
             backgroundColor: "#151515",
@@ -103,6 +107,9 @@ const GenericPage = ({ route }) => {
             borderColor: "#151515",
         },
     });
+    //#endregion
+
+    //#region StyleMapping
     const styles = {
         ...GenericStyles,
         container: {
@@ -160,6 +167,9 @@ const GenericPage = ({ route }) => {
             ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
         },
     };
+    //#endregion
+
+    //#region
     const { item, itemIndex } = route.params;
     const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -169,14 +179,16 @@ const GenericPage = ({ route }) => {
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
     const ControlPaneBackgroundImage = isDarkMode
-        ? require("../../assets/HeaderBackground.jpg") // Dark theme background image source
-        : require("../../assets/HeaderBackgroundLight.jpg"); // Light theme background image source
+        ? require("../../assets/HeaderBackground.jpg")
+        : require("../../assets/HeaderBackgroundLight.jpg");
     const viewRef = React.useRef();
+    //#endregion
 
     const Share = async () => {
         await handleShare(viewRef.current);
     };
 
+    //#region DisplayViewStyle base on character length
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
         const subItemName = item.subItems[currentIndex].subItemDescription;
@@ -241,7 +253,9 @@ const GenericPage = ({ route }) => {
         setMaxPadding(maxPadding);
         setMaxpaddingHorizontal(maxpaddingHorizontal);
     }, [item.subItems, currentIndex]);
+    //#endregion
 
+    //#region navigationBetweenSubitems
     useEffect(() => {
         if (count >= item.subItems[currentIndex].count) {
             if (currentIndex < item.subItems.length - 1) {
@@ -275,24 +289,30 @@ const GenericPage = ({ route }) => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
     };
+    //#endregion
 
     let pressTimeout;
     let startX = 0; // Initial X-coordinate of the touch
+    let startY = 0; // Initial Y-coordinate of the touch
     let isSwiping = false; // Track if a swipe occurred
 
+    //#region pressControl for long/short
     const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
             setIsLongPress(true); // Detect long press
-        }, 1000); // Adjust the duration as needed for your long press
+        }, 1000);
         startX = e.nativeEvent.pageX; // Store the initial X-coordinate
+        startY = e.nativeEvent.pageY; // Store the initial Y-coordinate
     };
 
     const handleContainerPressOut = (e) => {
         clearTimeout(pressTimeout); // Clear the timeout on release
         const endX = e.nativeEvent.pageX; // Get the final X-coordinate
-        const swipeDistance = Math.abs(endX - startX); // Calculate the distance moved
+        const endY = e.nativeEvent.pageY; // Get the final Y-coordinate
+        const swipeDistanceX = Math.abs(endX - startX); // Calculate the horizontal distance moved
+        const swipeDistanceY = Math.abs(endY - startY); // Calculate the vertical distance moved
 
-        if (!isSwiping && swipeDistance < 10) {
+        if (!isSwiping && swipeDistanceX < 10 && swipeDistanceY < 10) {
             // Only increment the count if it's not a swipe (adjust the threshold as needed)
             incrementCount();
         }
@@ -304,9 +324,11 @@ const GenericPage = ({ route }) => {
     const handleSwipe = () => {
         isSwiping = true;
     };
+    //#endregion
 
     const [isFilled, setIsFilled] = useState(false);
 
+    //#region buttonToFavController
     useEffect(() => {
         // Load the button state from AsyncStorage when the component mounts
         async function loadButtonState() {
@@ -346,8 +368,8 @@ const GenericPage = ({ route }) => {
             console.error("Error storing button state in AsyncStorage:", error);
         }
     };
+    //#endregion
 
-    
     return (
         <TouchableWithoutFeedback
             onPressIn={handleContainerPressIn}
@@ -358,7 +380,6 @@ const GenericPage = ({ route }) => {
                 count >= item.subItems[currentIndex].count
             }
         >
-            {/*this line needs a fix for the last thikir to run the count */}
             <View style={styles.container}>
                 <View style={styles.containerforshare}>
                     <View
@@ -372,28 +393,37 @@ const GenericPage = ({ route }) => {
                             },
                         ]}
                     >
-                        <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
-                            {item.subItems[currentIndex].subItemName}
-                        </Text>
+                    <Text
+                                style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
+                                {item.subItems[currentIndex].subItemName}
+                            </Text>
+
                         <View style={styles.horizontalLine} />
-                        <Text style={styles.description}>
+                        <Text allowFontScaling={false} style={styles.description}>
                             {item.subItems[currentIndex].subItemDescription}
                         </Text>
-                        <Text style={styles.InfoReptTimeIndex}>
+                        <Text allowFontScaling={false} style={styles.InfoReptTimeIndex}>
                             الذكر{" "}
-                            <Text style={[{ color: "#be915a" }]}>{currentIndex + 1}</Text> من{" "}
-                            <Text style={[{ color: "#be915a" }]}>{item.subItems.length}</Text>
+                            <Text allowFontScaling={false} style={[{ color: "#be915a" }]}>
+                                {currentIndex + 1}
+                            </Text>{" "}
+                            من{" "}
+                            <Text allowFontScaling={false} style={[{ color: "#be915a" }]}>
+                                {item.subItems.length}
+                            </Text>
                         </Text>
-                        <Text style={styles.InfoReptTime}>
+                        <Text allowFontScaling={false} style={styles.InfoReptTime}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
-                        {/*button goes here */}
-                        <TouchableOpacity onPress={handleButtonPress}>
+                        <TouchableOpacity
+                            onPress={handleButtonPress}
+                            style={styles.FavButton}
+                        >
                             <Svg width={24} height={24} viewBox="0 0 256 256">
                                 <Path
                                     d="M128,216S28,160,28,92A52,52,0,0,1,128,72h0A52,52,0,0,1,228,92C228,160,128,216,128,216Z"
-                                    stroke={isFilled ? "#b83f3f" : "#7e2a2a"} // Border color
-                                    strokeWidth={2} // Border width
+                                    stroke={isFilled ? "#b83f3f" : "#7e2a2a"}
+                                    strokeWidth={2}
                                     stroke-linecap="round"
                                     fill={isFilled ? "#b83f3f" : "transparent"}
                                 />
@@ -428,7 +458,9 @@ const GenericPage = ({ route }) => {
                                     color="#454545"
                                     style={styles.icon}
                                 />
-                                <Text style={styles.textcount}>الذكر التالي</Text>
+                                <Text allowFontScaling={false} style={styles.textcount}>
+                                    الذكر التالي
+                                </Text>
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -452,7 +484,9 @@ const GenericPage = ({ route }) => {
                         >
                             <View style={styles.button}>
                                 {/*back button here*/}
-                                <Text style={styles.textcount}>الذكر السابق</Text>
+                                <Text allowFontScaling={false} style={styles.textcount}>
+                                    الذكر السابق
+                                </Text>
                                 <FontAwesomeIcon
                                     name="angle-right"
                                     size={24}
