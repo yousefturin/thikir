@@ -15,9 +15,11 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 const FavouriteScreen = ({ navigation }) => {
   const { isDarkMode } = useTheme();
+
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#f2f2f6", // Background color for the entire page
+      backgroundColor: "#f2f2f6", 
     },
     container: {
       backgroundColor: "#f2f2f6",
@@ -65,9 +67,12 @@ const FavouriteScreen = ({ navigation }) => {
       color: "#be915a",
     },
   });
+  //#endregion
+  
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515", // Background color for the entire page
+      backgroundColor: "#151515", 
     },
     container: {
       backgroundColor: "#151515",
@@ -115,81 +120,84 @@ const FavouriteScreen = ({ navigation }) => {
       color: "#be915a",
     },
   });
-
+  //#endregion
+  
+  //#region StyleMapping
   const styles = {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...(isDarkMode ? darkStyles.pageContainer : lightStyles.pageContainer), // Override container background color
+      ...(isDarkMode ? darkStyles.pageContainer : lightStyles.pageContainer), 
     },
     container: {
       ...HomeStyles.container,
-      ...(isDarkMode ? darkStyles.container : lightStyles.container), // Override container background color
+      ...(isDarkMode ? darkStyles.container : lightStyles.container), 
     },
     TextMid: {
       ...HomeStyles.TextMid,
-      ...(isDarkMode ? darkStyles.TextMid : lightStyles.TextMid), // Override container background color
+      ...(isDarkMode ? darkStyles.TextMid : lightStyles.TextMid), 
     },
     buttonText: {
-      ...HomeStyles.buttonText, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.buttonText : lightStyles.buttonText), // Override button background color
+      ...HomeStyles.buttonText, 
+      ...(isDarkMode ? darkStyles.buttonText : lightStyles.buttonText), 
     },
     button: {
-      ...HomeStyles.button, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.button : lightStyles.button), // Override button background color
+      ...HomeStyles.button, 
+      ...(isDarkMode ? darkStyles.button : lightStyles.button), 
     },
     iconWrapper: {
-      ...HomeStyles.iconWrapper, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper), // Override button background color
+      ...HomeStyles.iconWrapper, 
+      ...(isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper), 
     },
     horizontalLine: {
-      ...HomeStyles.horizontalLine, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine), // Override button background color
+      ...HomeStyles.horizontalLine, 
+      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine), 
     },
     containerSearchMode: {
-      ...HomeStyles.containerSearchMode, // Apply all styles from HomeStyles.button
+      ...HomeStyles.containerSearchMode, 
       ...(isDarkMode
         ? darkStyles.containerSearchMode
-        : lightStyles.containerSearchMode), // Override button background color
+        : lightStyles.containerSearchMode), 
     },
     searchBarContainer: {
-      ...HomeStyles.horizonsearchBarContainertalLine, // Apply all styles from HomeStyles.button
+      ...HomeStyles.horizonsearchBarContainertalLine, 
       ...(isDarkMode
         ? darkStyles.searchBarContainer
-        : lightStyles.searchBarContainer), // Override button background color
+        : lightStyles.searchBarContainer), 
     },
     searchBarInputContainer: {
-      ...HomeStyles.searchBarInputContainer, // Apply all styles from HomeStyles.button
+      ...HomeStyles.searchBarInputContainer, 
       ...(isDarkMode
         ? darkStyles.searchBarInputContainer
-        : lightStyles.searchBarInputContainer), // Override button background color
+        : lightStyles.searchBarInputContainer), 
     },
     searchBarInput: {
-      ...HomeStyles.searchBarInput, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.searchBarInput : lightStyles.searchBarInput), // Override button background color
+      ...HomeStyles.searchBarInput, 
+      ...(isDarkMode ? darkStyles.searchBarInput : lightStyles.searchBarInput), 
     },
     buttonGrid: {
-      ...HomeStyles.buttonGrid, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.buttonGrid : lightStyles.buttonGrid), // Override button background color
+      ...HomeStyles.buttonGrid, 
+      ...(isDarkMode ? darkStyles.buttonGrid : lightStyles.buttonGrid), 
     },
     squareButton: {
-      ...HomeStyles.squareButton, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.squareButton : lightStyles.squareButton), // Override button background color
+      ...HomeStyles.squareButton, 
+      ...(isDarkMode ? darkStyles.squareButton : lightStyles.squareButton), 
     },
     buttonTextTop: {
-      ...HomeStyles.buttonTextTop, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.buttonTextTop : lightStyles.buttonTextTop), // Override button background color
+      ...HomeStyles.buttonTextTop, 
+      ...(isDarkMode ? darkStyles.buttonTextTop : lightStyles.buttonTextTop), 
     },
     iconTop: {
-      ...HomeStyles.iconTop, // Apply all styles from HomeStyles.button
-      ...(isDarkMode ? darkStyles.iconTop : lightStyles.iconTop), // Override button background color
+      ...HomeStyles.iconTop, 
+      ...(isDarkMode ? darkStyles.iconTop : lightStyles.iconTop), 
     },
   };
+  //#endregion
 
   const [clickedIndexes, setClickedIndexes] = useState([]);
   const items = getItems(); 
 
-//#region 
+  //#region FavButtonState Load
   useEffect(() => {
     // Load the button state array from AsyncStorage
     async function loadButtonState() {
@@ -212,9 +220,8 @@ const FavouriteScreen = ({ navigation }) => {
 
   //#endregion
 
-//#region
+  //#region Style baed on index
 const renderBorderRadius = (index) => {
-
   if (clickedIndexes.length === 1) {
     return {       
       borderTopLeftRadius: 10,
@@ -222,19 +229,16 @@ const renderBorderRadius = (index) => {
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,};
   } else if (index === clickedIndexes[0]) {
-    // First item in the clickedIndexes array, apply top border radius
     return {
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
     };
   } else if (index === clickedIndexes[clickedIndexes.length - 1]) {
-    // Last item in the clickedIndexes array, apply bottom border radius
     return {
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
     };
   }
-  // Default border radius for other items
   return {};
 };
   //#endregion
