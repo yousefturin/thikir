@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
+//#region MainStyles
 export const MainStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -77,7 +78,9 @@ export const MainStyles = StyleSheet.create({
     marginLeft: 360,
   },
 });
+//#endregion
 
+//#region AboutStyles
 export const AboutStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -141,6 +144,9 @@ export const AboutStyles = StyleSheet.create({
     marginLeft: 360,
   },
 });
+//#endregion
+
+//#region DuaVerseStyles
 export const DuaVerseStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -213,6 +219,9 @@ export const DuaVerseStyles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+//#endregion
+
+//#region QuranVerseStyles
 export const QuranVerseStyles = StyleSheet.create({
   // this is a common between VERSE and HADITH!
   container: {
@@ -273,7 +282,9 @@ export const QuranVerseStyles = StyleSheet.create({
     marginHorizontal: 1,
   },
 });
+//#endregion
 
+//#region HomeStyles
 export const HomeStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
@@ -396,7 +407,7 @@ export const HomeStyles = StyleSheet.create({
   },
   buttonTextTop: {
     color: "#dddddd",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "300",
     textAlign: "right",
     marginRight: 10,
@@ -424,7 +435,9 @@ export const HomeStyles = StyleSheet.create({
     color: "#fff",
   },
 });
+//#endregion
 
+//#region ThikirAlarmStyles
 export const ThikirAlarmStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -480,7 +493,9 @@ export const ThikirAlarmStyles = StyleSheet.create({
     marginLeft: windowWidth > 600 ? 610 : 350,
   },
 });
+//#endregion
 
+//#region GenericStyles
 export const GenericStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -522,8 +537,9 @@ export const GenericStyles = StyleSheet.create({
   textcount: {
     textAlign: "center",
     color: "white",
-    fontSize: 20,
+    fontSize: 17,
     fontFamily: "ScheherazadeNew",
+    justifyContent:"center",
   },
   icon: {
     marginTop: 2,
@@ -552,7 +568,7 @@ export const GenericStyles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
   },
   description: {
-    fontSize: 11,
+    fontSize: 9,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
@@ -577,6 +593,14 @@ export const GenericStyles = StyleSheet.create({
     right: 0,
     bottom: 0,
     padding: 20,
+  },
+  FavButton:{
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    padding: 20,
+    alignItems: 'center', // Horizontal centering
   },
   ControlPaneBackground: {
     flexDirection: "row",
@@ -613,7 +637,9 @@ export const GenericStyles = StyleSheet.create({
     width: "100%",
   },
 });
+//#endregion
 
+//#region ReportProblemStyles
 export const ReportProblemStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -672,3 +698,4 @@ export const ReportProblemStyles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
+//#endregion
