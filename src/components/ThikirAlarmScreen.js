@@ -263,8 +263,8 @@ const ThikirAlarmScreen = () => {
           >
             <View style={[styles.notificationContainer, renderBorderRadius(index),]}>
               <View style={styles.leftContent}>
-                <Text style={styles.title}>{notification.title}</Text>
-                <Text style={styles.time}>
+                <Text allowFontScaling={false} style={styles.title}>{notification.title}</Text>
+                <Text allowFontScaling={false} style={styles.time}>
                   {notification.date
                     ? formatTime(notification.date)
                     : formatTime(getDefaultTime(notification.id))}
