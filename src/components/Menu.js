@@ -5,9 +5,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
 import { MainStyles } from "../context/commonStyles";
 import { Svg, Path, Circle } from "react-native-svg";
-const Menu = ({ navigation }) => {
-  const { isDarkMode } = useTheme();
 
+const Menu = ({ navigation }) => {
+
+  const { isDarkMode } = useTheme();
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
@@ -27,7 +29,9 @@ const Menu = ({ navigation }) => {
       borderColor: "#fefffe",
     },
   });
-
+  //#endregion
+  
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
@@ -47,6 +51,9 @@ const Menu = ({ navigation }) => {
       borderColor: "#262626",
     },
   });
+  //#endregion
+  
+  //#region StyleMapping
   const styles = {
     ...MainStyles,
     container: {
@@ -70,8 +77,8 @@ const Menu = ({ navigation }) => {
       ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
     },
   };
-
-  const tasbihImage = require("../../assets/tasbihIcon.png");
+  //#endregion
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity
