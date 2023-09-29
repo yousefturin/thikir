@@ -561,6 +561,15 @@ export const GenericStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
+    
+  },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    paddingTop:10,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070, 
   },
   title: {
     textAlign: "center",
@@ -572,7 +581,8 @@ export const GenericStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
-    paddingBottom: 20,
+    paddingVertical: 30,
+    paddingBottom:40,
   },
   InfoReptTimeIndex: {
     fontSize: 11,

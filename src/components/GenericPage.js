@@ -173,7 +173,6 @@ const GenericPage = ({ route }) => {
     const { item, itemIndex } = route.params;
     const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(0);
     const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
@@ -201,54 +200,46 @@ const GenericPage = ({ route }) => {
             sanitizedDescription.length
         );
         console.log("sanitized sanitizedName length is:", sanitizedName.length);
-        let maxHeight = 170;
         let MaxFontSize = 20;
         let maxPadding = 60;
         let maxpaddingHorizontal = 20;
 
         if (sanitizedDescription.length > 1000) {
-            maxHeight = 450;
             MaxFontSize = 16;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 700) {
-            maxHeight = 350;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 600) {
-            maxHeight = 300;
+
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 500) {
-            maxHeight = 300;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 400) {
-            maxHeight = 250;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 300) {
-            maxHeight = 220;
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 290) {
-            maxHeight = 350;
+
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 200) {
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedName.length > 200) {
-            maxHeight = 200;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         }
-        console.log(maxHeight, MaxFontSize, maxPadding, maxpaddingHorizontal);
-        setMaxDescriptionHeight(maxHeight);
+        console.log( MaxFontSize, maxPadding, maxpaddingHorizontal);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
         setMaxpaddingHorizontal(maxpaddingHorizontal);
@@ -325,7 +316,7 @@ const GenericPage = ({ route }) => {
         isSwiping = true;
     };
     //#endregion
-
+    
     const [isFilled, setIsFilled] = useState(false);
 
     //#region buttonToFavController
@@ -372,6 +363,9 @@ const GenericPage = ({ route }) => {
 
     return (
         <TouchableWithoutFeedback
+            /* This Button is Disabling the scrollView from Functining
+            and the scrollView does work only wover teh condition 
+              of the button when it is disabled */
             onPressIn={handleContainerPressIn}
             onPressOut={handleContainerPressOut}
             onResponderMove={handleSwipe}
@@ -387,16 +381,22 @@ const GenericPage = ({ route }) => {
                         style={[
                             styles.rectangle,
                             {
-                                height: maxDescriptionHeight + 100,
                                 padding: maxPadding,
                                 paddingHorizontal: maxpaddingHorizontal,
                             },
                         ]}
                     >
-                    <Text
-                                style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
-                                {item.subItems[currentIndex].subItemName}
-                            </Text>
+                    <ScrollView
+                        contentContainerStyle={styles.scrollContainer}
+                        showsVerticalScrollIndicator={false}
+                    >
+                     <TouchableOpacity activeOpacity={1}>
+                        <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
+                        {item.subItems[currentIndex].subItemName}
+                        </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                    
 
                         <View style={styles.horizontalLine} />
                         <Text allowFontScaling={false} style={styles.description}>
@@ -418,6 +418,7 @@ const GenericPage = ({ route }) => {
                         <TouchableOpacity
                             onPress={handleButtonPress}
                             style={styles.FavButton}
+                            activeOpacity={1}
                         >
                             <Svg width={24} height={24} viewBox="0 0 256 256">
                                 <Path
@@ -429,13 +430,14 @@ const GenericPage = ({ route }) => {
                                 />
                             </Svg>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={Share} style={styles.shareButton}>
+                        <TouchableOpacity onPress={Share} style={styles.shareButton} activeOpacity={1}>
                             <View style={styles.dotContainer}>
                                 <Text style={styles.dot}>&#8226;</Text>
                                 <Text style={styles.dot}>&#8226;</Text>
                                 <Text style={styles.dot}>&#8226;</Text>
                             </View>
                         </TouchableOpacity>
+
                     </View>
                 </View>
                 <View style={styles.controlPan}>
@@ -498,7 +500,10 @@ const GenericPage = ({ route }) => {
                     </ImageBackground>
                 </View>
             </View>
-        </TouchableWithoutFeedback>
+</TouchableWithoutFeedback>
+
+
+
     );
 };
 
