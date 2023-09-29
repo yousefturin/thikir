@@ -13,7 +13,6 @@ const App = () => {
         AmiriFont: require("./assets/fonts/Amiri-Regular.ttf"),
         ScheherazadeNew: require("./assets/fonts/ScheherazadeNew-Regular.ttf"),
         ScheherazadeNewBold: require("./assets/fonts/ScheherazadeNew-Bold.ttf"),
-        // Load other fonts as needed
       });
       setFontLoaded(true);
     }
@@ -37,8 +36,9 @@ const App = () => {
   }, []);
 
   if (!fontLoaded) {
-    return console.log(!fontLoaded); // Display a loading indicator
+    return console.log(!fontLoaded);
   }
+
   return (
     <NavigationContainer>
       <ThemeProvider>
