@@ -277,7 +277,7 @@ const HomeScreen = ({ navigation }) => {
   };
   //#endregion
 
-
+  //#region SVG topItemIcons
   const topItemIcons = 
   [
     {
@@ -334,7 +334,8 @@ const HomeScreen = ({ navigation }) => {
       r:"0"
     }
   ];
-
+  //#endregion
+  
   return (
     <View style={styles.pageContainer}>
       <ScrollView
