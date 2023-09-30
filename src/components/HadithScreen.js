@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
@@ -10,6 +10,8 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const HADITHVerseScreen = ({ navigation }) => {
   const { isDarkMode } = useTheme(); 
+  
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6", 
@@ -21,8 +23,13 @@ const HADITHVerseScreen = ({ navigation }) => {
     title: {
       color: "#000",
     },
+    horizontalLine: {
+      borderColor: "#f2f2f6",
+  },
   });
+  //#endregion
 
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515", 
@@ -34,8 +41,13 @@ const HADITHVerseScreen = ({ navigation }) => {
     title: {
       color: "#fff",
     },
+    horizontalLine: {
+      borderColor: "#151515",
+  },
   });
-  
+  //#endregion
+
+  //#region StyleMapping
   const styles = {
     ...QuranVerseStyles,
     container: {
@@ -50,20 +62,28 @@ const HADITHVerseScreen = ({ navigation }) => {
       ...QuranVerseStyles.title, 
       ...isDarkMode ? darkStyles.title : lightStyles.title, 
     },
+    horizontalLine: {
+      ...QuranVerseStyles.horizontalLine,
+      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+  },
   };
+  //#endregion
+  
+  //#region
   const [HADITH, setHADITH] = useState("");
   const [REF, setREF] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
-  const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(150);
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
   const viewRef = React.useRef();
+  //#endregion
 
   const Share = async () => {
     await handleShare(viewRef.current);
   };
 
+  //#region getCachedHadith
   useEffect(() => {
     // Check if cached verse exists and if it's not expired
     async function getCachedVerseHadith() {
@@ -96,10 +116,11 @@ const HADITHVerseScreen = ({ navigation }) => {
         getRandomVerse();
       }
     }
-
     getCachedVerseHadith();
   }, []);
+  //#endregion
 
+  //#region getRandomVerse
   const getRandomVerse = async () => {
     try {
       const {
@@ -126,25 +147,23 @@ const HADITHVerseScreen = ({ navigation }) => {
       console.error("Error fetching random verse:", error);
     }
   };
+  //#endregion
 
+  //#region DisplayViewStyle base on character length
   const controlStyle = (verseTextLength) => {
-    let maxHeight = 550;
     let MaxFontSize = 20;
-    let maxPadding = 40;
+    let maxPadding = 30;
     let maxpaddingHorizontal = 20;
 
     if (verseTextLength > 1200) {
-      maxHeight = 450;
       MaxFontSize = 16;
-      maxPadding = 30;
+      maxPadding = 20;
       maxpaddingHorizontal = 10;
     } else if (verseTextLength < 100) {
-      maxHeight = 650;
       MaxFontSize = 27;
-      maxPadding = 30;
+      maxPadding = 20;
       maxpaddingHorizontal = 20;
     }
-    setMaxDescriptionHeight(maxHeight);
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
     setMaxpaddingHorizontal(maxpaddingHorizontal);
@@ -152,16 +171,22 @@ const HADITHVerseScreen = ({ navigation }) => {
 
   const textStyle = {
     fontSize: maxFontSizeDescription,
-    maxHeight: maxDescriptionHeight,
     padding: maxPadding,
     paddingHorizontal: maxpaddingHorizontal,
   };
-
+  //#endregion
+  
   return (
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
-        <Text style={[styles.title, textStyle]}>{HADITH}</Text>
-        <Text style={styles.description}>{REF}</Text>
+      <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          >
+          <Text style={[styles.title, textStyle]}>{HADITH}</Text>
+          <View style={styles.horizontalLine} />
+          <Text style={styles.description}>{REF}</Text>
+      </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}
           style={styles.shareButton}
