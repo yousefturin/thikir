@@ -5,7 +5,7 @@ import { AboutStyles } from '../context/commonStyles';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
   const { isDarkMode } = useTheme(); 
-
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6", 
@@ -23,9 +23,10 @@ const AboutScreen = ({ navigation }) => {
     rectangleText: {
       color: "#000",
     },
-
   });
-
+  //#endregion
+  
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515", 
@@ -43,8 +44,10 @@ const AboutScreen = ({ navigation }) => {
     rectangleText: {
       color: "#fff",
     },
-
   });
+  //#endregion
+  
+  //#region StyleMapping
   const styles = {
     ...AboutStyles,
     container: {
@@ -68,9 +71,10 @@ const AboutScreen = ({ navigation }) => {
       ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
     },
   };
-
-
+  //#endregion
+  
   const appIconImage = require("../../assets/icon.png");
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
