@@ -1,80 +1,97 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    ScrollView,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
 import { handleShare } from "../utils/shareUtils";
-import { useTheme } from '../context/ThemContex'; 
-import { DuaVerseStyles } from '../context/commonStyles';
+import { useTheme } from "../context/ThemContex";
+import { DuaVerseStyles } from "../context/commonStyles";
 
 const CACHE_KEY = "randomDuaCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const DUAVerseScreen = ({ navigation }) => {
-    const { isDarkMode } = useTheme(); 
-  const lightStyles = StyleSheet.create({
-    container: {
-      backgroundColor: "#f2f2f6", 
-    },
-    rectangle: {
-      backgroundColor: "#fefffe",
-      shadowColor: "white",
-    },
-    title: {
-      color: "#000",
-    },
-    horizontalLine: {
-        borderColor: "#f2f2f6",
-      },  
-  });
+    const { isDarkMode } = useTheme();
+    
+    //#region LightTheme 
+    const lightStyles = StyleSheet.create({
+        container: {
+            backgroundColor: "#f2f2f6",
+        },
+        rectangle: {
+            backgroundColor: "#fefffe",
+            shadowColor: "white",
+        },
+        title: {
+            color: "#000",
+        },
+        horizontalLine: {
+            borderColor: "#f2f2f6",
+        },
+    });
+    //#endregion
 
-  const darkStyles = StyleSheet.create({
-    container: {
-      backgroundColor: "#151515", 
-    },
-    rectangle: {
-      backgroundColor: "#262626",
-      shadowColor: "black",
-    },
-    title: {
-      color: "#fff",
-    },
-    horizontalLine: {
-        borderColor: "#151515",
-      },
-  });
-  const styles = {
-    ...DuaVerseStyles,
-    container: {
-      ...DuaVerseStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container, 
-    },
-    rectangle: {
-      ...DuaVerseStyles.rectangle, 
-      ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle, 
-    },
-    title: {
-      ...DuaVerseStyles.title, 
-      ...isDarkMode ? darkStyles.title : lightStyles.title, 
-    },
-    horizontalLine: {
-        ...DuaVerseStyles.horizontalLine, 
-        ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
-      },
-  };
+    //#region DarkTheme
+    const darkStyles = StyleSheet.create({
+        container: {
+            backgroundColor: "#151515",
+        },
+        rectangle: {
+            backgroundColor: "#262626",
+            shadowColor: "black",
+        },
+        title: {
+            color: "#fff",
+        },
+        horizontalLine: {
+            borderColor: "#151515",
+        },
+    });
+    //#endregion
+    
+    //#region StyleMapping
+    const styles = {
+        ...DuaVerseStyles,
+        container: {
+            ...DuaVerseStyles.container,
+            ...(isDarkMode ? darkStyles.container : lightStyles.container),
+        },
+        rectangle: {
+            ...DuaVerseStyles.rectangle,
+            ...(isDarkMode ? darkStyles.rectangle : lightStyles.rectangle),
+        },
+        title: {
+            ...DuaVerseStyles.title,
+            ...(isDarkMode ? darkStyles.title : lightStyles.title),
+        },
+        horizontalLine: {
+            ...DuaVerseStyles.horizontalLine,
+            ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+        },
+    };
+    //#endregion
+
+    //#region
     const [DUA, setDUA] = useState("");
     const [REF, setREF] = useState("");
     const [TRAN, setTRAN] = useState("");
     const [verseTextLength, setVerseTextLength] = useState(0);
-    const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(150);
     const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
     const [maxPadding, setMaxPadding] = useState(60);
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
     const viewRef = React.useRef();
+    //#endregion
 
     const Share = async () => {
         await handleShare(viewRef.current);
     };
 
+    //#region getCachedDua
     useEffect(() => {
         // Check if cached verse exists and if it's not expired
         async function getCachedVerseHadith() {
@@ -109,10 +126,11 @@ const DUAVerseScreen = ({ navigation }) => {
                 getRandomVerse();
             }
         }
-
         getCachedVerseHadith();
     }, []);
-
+    //#endregion
+    
+    //#region getRandomDua
     const getRandomVerse = async () => {
         try {
             const {
@@ -142,24 +160,24 @@ const DUAVerseScreen = ({ navigation }) => {
             console.error("Error fetching random verse:", error);
         }
     };
+    //#endregion
+
+    
+    //#region DisplayViewStyle base on character length
     const controlStyle = (verseTextLength) => {
-        let maxHeight = 550;
         let MaxFontSize = 20;
         let maxPadding = 30;
         let maxpaddingHorizontal = 20;
 
         if (verseTextLength > 1200) {
-            maxHeight = 450;
             MaxFontSize = 16;
-            maxPadding = 30;
+            maxPadding = 20;
             maxpaddingHorizontal = 10;
         } else if (verseTextLength < 100) {
-            maxHeight = 650;
             MaxFontSize = 27;
-            maxPadding = 30;
+            maxPadding = 20;
             maxpaddingHorizontal = 20;
         }
-        setMaxDescriptionHeight(maxHeight);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
         setMaxpaddingHorizontal(maxpaddingHorizontal);
@@ -167,17 +185,23 @@ const DUAVerseScreen = ({ navigation }) => {
 
     const textStyle = {
         fontSize: maxFontSizeDescription,
-        maxHeight: maxDescriptionHeight,
         padding: maxPadding,
         paddingHorizontal: maxpaddingHorizontal,
     };
+    //#endregion
+    
     return (
         <View ref={viewRef} style={styles.container}>
             <View style={[styles.rectangle, textStyle]}>
-                <Text style={[styles.title, textStyle]}>{DUA}</Text>
-                <View style={styles.horizontalLine} />
-                <Text style={styles.translation}>{TRAN}</Text>
-                <Text style={styles.description}>{REF}</Text>
+                <ScrollView
+                    contentContainerStyle={styles.scrollContainer}
+                    showsVerticalScrollIndicator={false}
+                >
+                    <Text style={[styles.title, textStyle]}>{DUA}</Text>
+                    <View style={styles.horizontalLine} />
+                    <Text style={styles.translation}>{TRAN}</Text>
+                    <Text style={styles.description}>{REF}</Text>
+                </ScrollView>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("Menu")}
                     style={styles.shareButton}
@@ -193,7 +217,5 @@ const DUAVerseScreen = ({ navigation }) => {
         </View>
     );
 };
-
-
 
 export default DUAVerseScreen;
