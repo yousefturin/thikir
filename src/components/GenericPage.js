@@ -390,7 +390,7 @@ const GenericPage = ({ route }) => {
                         contentContainerStyle={styles.scrollContainer}
                         showsVerticalScrollIndicator={false}
                     >
-                     <TouchableOpacity activeOpacity={1}>
+                    <TouchableOpacity activeOpacity={1}>
                         <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
                         {item.subItems[currentIndex].subItemName}
                         </Text>
