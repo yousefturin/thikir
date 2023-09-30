@@ -66,6 +66,9 @@ const FavouriteScreen = ({ navigation }) => {
     iconTop: {
       color: "#be915a",
     },
+    emptyMessageText:{
+      color: "#000",
+    }
   });
   //#endregion
   
@@ -119,6 +122,9 @@ const FavouriteScreen = ({ navigation }) => {
     iconTop: {
       color: "#be915a",
     },
+    emptyMessageText:{
+      color: "#fff",
+    }
   });
   //#endregion
   
@@ -191,6 +197,10 @@ const FavouriteScreen = ({ navigation }) => {
       ...HomeStyles.iconTop, 
       ...(isDarkMode ? darkStyles.iconTop : lightStyles.iconTop), 
     },
+    emptyMessageText: {
+      ...HomeStyles.emptyMessageText, 
+      ...(isDarkMode ? darkStyles.emptyMessageText : lightStyles.emptyMessageText), 
+    },
   };
   //#endregion
 
@@ -252,43 +262,50 @@ const renderBorderRadius = (index) => {
         ]}
         contentOffset={{ x: 0, y: 100 }}
       >
-        {clickedIndexes.map((index) => (
-          <View key={index}>
-            <TouchableOpacity
-              style={[styles.button, renderBorderRadius(index)]}
-              onPress={() =>
-                navigation.navigate("GenericPage", {
-                  name: items[index].name,
-                  item: items[index],
-                  itemIndex: index,
-                })
-              }
-              activeOpacity={0.7}
-            >
-              <View style={styles.iconWrapper}>
-                <FontAwesomeIcon
-                  name="angle-left"
-                  size={24}
-                  color="#454545"
-                  style={styles.icon}
-                />
-              </View>
-              <View style={styles.nameWrapper}>
-                <Text style={styles.buttonText}>{items[index].name}</Text>
-              </View>
-              <View style={styles.imageWrapper}>
-                {/* Image component */}
-                <Image style={styles.image} />
-              </View>
-            </TouchableOpacity>
-            {index !== clickedIndexes[clickedIndexes.length - 1] && (
-              <View style={styles.horizontalLine} />
-            )}
+        {clickedIndexes.length === 0 ? ( // Check if clickedIndexes is empty
+          <View style={styles.emptyMessage}>
+            <Text  allowFontScaling={false}  style={styles.emptyMessageText}>أضف عناصر إلى قائمة المفضلة</Text>
           </View>
-        ))}
+        ) : (
+          clickedIndexes.map((index) => (
+            <View key={index}>
+              <TouchableOpacity
+                style={[styles.button, renderBorderRadius(index)]}
+                onPress={() =>
+                  navigation.navigate("GenericPage", {
+                    name: items[index].name,
+                    item: items[index],
+                    itemIndex: index,
+                  })
+                }
+                activeOpacity={0.7}
+              >
+                <View style={styles.iconWrapper}>
+                  <FontAwesomeIcon
+                    name="angle-left"
+                    size={24}
+                    color="#454545"
+                    style={styles.icon}
+                  />
+                </View>
+                <View style={styles.nameWrapper}>
+                  <Text style={styles.buttonText}>{items[index].name}</Text>
+                </View>
+                <View style={styles.imageWrapper}>
+                  {/* Image component */}
+                  <Image style={styles.image} />
+                </View>
+              </TouchableOpacity>
+              {index !== clickedIndexes[clickedIndexes.length - 1] && (
+                <View style={styles.horizontalLine} />
+              )}
+            </View>
+          ))
+        )}
       </ScrollView>
     </View>
   );
+  
 };
 
 export default FavouriteScreen;
