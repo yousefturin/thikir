@@ -172,14 +172,24 @@ export const DuaVerseStyles = StyleSheet.create({
     elevation: 4,
     position: "relative",
   },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    marginBottom:20,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
+  },
   title: {
     textAlign: "center",
     color: "white",
     fontFamily: "ScheherazadeNew",
+    marginTop:20,
   },
   translation: {
+    marginTop:10,
     marginBottom: 30,
-    fontSize: 11,
+    fontSize: 15,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
@@ -189,6 +199,11 @@ export const DuaVerseStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: -20,
+    alignItems: 'center', // Horizontal centering
   },
   shareButton: {
     position: "absolute",
@@ -247,6 +262,14 @@ export const QuranVerseStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
+  }, 
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    marginBottom:20,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
   },
   title: {
     textAlign: "center",
@@ -258,6 +281,19 @@ export const QuranVerseStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: -20,
+    alignItems: 'center', // Horizontal centering
+  },
+  tafsirStyle:{
+    fontSize: 15,
+    textAlign: "center",
+    color: "#767676",
+    fontFamily: "AmiriFont",
+    paddingTop:20,
+    marginBottom:20,
   },
   shareButton: {
     position: "absolute",
@@ -281,6 +317,13 @@ export const QuranVerseStyles = StyleSheet.create({
     fontWeight: "700",
     marginHorizontal: 1,
   },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#151515",
+    width: "100%",
+    marginBottom: 5,
+  },
+  
 });
 //#endregion
 
@@ -362,6 +405,15 @@ export const HomeStyles = StyleSheet.create({
     fontWeight: "300",
     textAlign: "right",
     marginLeft: 30,
+    fontFamily: "ScheherazadeNew",
+  },
+  emptyMessage:{
+    flex:1,
+    alignItems: "center",
+    justifyContent: "center",
+    opacity:0.3
+  },
+  emptyMessageText:{
     fontFamily: "ScheherazadeNew",
   },
   image: {
@@ -478,7 +530,7 @@ export const ThikirAlarmStyles = StyleSheet.create({
   title: {
     color: "#dddddd",
     textAlign: "right",
-    fontSize: 18,
+    fontSize: 15,
     marginRight: 10,
     fontFamily: "ScheherazadeNewBold",
   },
@@ -486,6 +538,7 @@ export const ThikirAlarmStyles = StyleSheet.create({
     color: "#777",
     marginRight: 10,
     textAlign: "right",
+    fontSize: 12,
   },
   horizontalLineWrapper: {
     borderBottomWidth: 1,
@@ -569,7 +622,7 @@ export const GenericStyles = StyleSheet.create({
     paddingTop:10,
     paddingHorizontal: 10,
     minHeight:170,
-    maxHeight:2070, 
+    maxHeight:2070,
   },
   title: {
     textAlign: "center",
