@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerse } from "../API/GETAyahofQuran";
 import { handleShare } from "../utils/shareUtils";
@@ -10,7 +10,9 @@ const CACHE_KEY = "randomVerseCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const QuranVerseScreen = ({ navigation }) => {
-  const { isDarkMode } = useTheme(); 
+  const { isDarkMode } = useTheme();
+
+  //#region LightTheme 
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6", 
@@ -22,8 +24,13 @@ const QuranVerseScreen = ({ navigation }) => {
     title: {
       color: "#000",
     },
+    horizontalLine: {
+      borderColor: "#f2f2f6",
+  },
   });
-
+  //#endregion
+  
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515", 
@@ -35,7 +42,13 @@ const QuranVerseScreen = ({ navigation }) => {
     title: {
       color: "#fff",
     },
+    horizontalLine: {
+      borderColor: "#151515",
+  },
   });
+  //#endregion
+  
+  //#region StyleMapping
   const styles = {
     ...QuranVerseStyles,
     container: {
@@ -50,22 +63,31 @@ const QuranVerseScreen = ({ navigation }) => {
       ...QuranVerseStyles.title, 
       ...isDarkMode ? darkStyles.title : lightStyles.title, 
     },
+    horizontalLine: {
+      ...QuranVerseStyles.horizontalLine,
+      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+  },
   };
+  //#endregion
+  
+  //#region
   const [verseText, setVerse] = useState("");
   const [surahName, setSurahName] = useState("");
   const [ayahNumber, setAyahNumber] = useState("");
+  const [tafsir, setTafsir] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
-  const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(150);
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
 
   const viewRef = React.useRef();
-
+  //#endregion
+  
   const Share = async () => {
     await handleShare(viewRef.current);
   };
 
+  //#region getCachedVerse
   useEffect(() => {
     // Check if cached verse exists and if it's not expired
     async function getCachedVerse() {
@@ -77,6 +99,7 @@ const QuranVerseScreen = ({ navigation }) => {
             verseText: cachedVerse,
             surahName: cachedSurahName,
             ayahNumber: cachedAyahNumber,
+            tafsirText: cachedTafsir,
             timestamp,
           } = parsedData;
           const currentTime = new Date().getTime();
@@ -85,6 +108,7 @@ const QuranVerseScreen = ({ navigation }) => {
             setVerse(cachedVerse);
             setSurahName(cachedSurahName);
             setAyahNumber(cachedAyahNumber);
+            setTafsir(cachedTafsir);
             // Calculate the length of the cached verse text and control styles
             const length = cachedVerse.length;
             setVerseTextLength(length);
@@ -100,21 +124,24 @@ const QuranVerseScreen = ({ navigation }) => {
         getRandomVerse();
       }
     }
-
     getCachedVerse();
   }, []);
+  //#endregion
 
+  //#region getRandomVerse
   const getRandomVerse = async () => {
     try {
       const {
         verseText: fetchedVerse,
         surahName: fetchedSurahName,
         ayahNumber: fetchedAyahNumber,
+        tafsirText: fetchedTafsir,
       } = await fetchRandomVerse();
       // Set the fetched verse and related information in the component state
       setVerse(fetchedVerse);
       setSurahName(fetchedSurahName);
       setAyahNumber(fetchedAyahNumber);
+      setTafsir(fetchedTafsir);
       // Calculate the length of the fetched verse text and control styles
       const length = fetchedVerse.length;
       setVerseTextLength(length);
@@ -125,6 +152,7 @@ const QuranVerseScreen = ({ navigation }) => {
         verseText: fetchedVerse,
         surahName: fetchedSurahName,
         ayahNumber: fetchedAyahNumber,
+        tafsirText: fetchedTafsir,
         timestamp: currentTime,
       });
       await AsyncStorage.setItem(CACHE_KEY, dataToCache);
@@ -133,25 +161,23 @@ const QuranVerseScreen = ({ navigation }) => {
       console.error("Error fetching random verse:", error);
     }
   };
+  //#endregion
 
+  //#region DisplayViewStyle base on character length
   const controlStyle = (verseTextLength) => {
-    let maxHeight = 550;
     let MaxFontSize = 20;
-    let maxPadding = 40;
+    let maxPadding = 30;
     let maxpaddingHorizontal = 20;
 
     if (verseTextLength > 1200) {
-      maxHeight = 450;
       MaxFontSize = 16;
-      maxPadding = 30;
+      maxPadding = 20;
       maxpaddingHorizontal = 10;
     } else if (verseTextLength < 100) {
-      maxHeight = 650;
       MaxFontSize = 27;
-      maxPadding = 30;
+      maxPadding = 20;
       maxpaddingHorizontal = 20;
     }
-    setMaxDescriptionHeight(maxHeight);
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
     setMaxpaddingHorizontal(maxpaddingHorizontal);
@@ -159,18 +185,25 @@ const QuranVerseScreen = ({ navigation }) => {
 
   const textStyle = {
     fontSize: maxFontSizeDescription,
-    maxHeight: maxDescriptionHeight,
     padding: maxPadding,
     paddingHorizontal: maxpaddingHorizontal,
   };
-
+  //#endregion
+  
   return (
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
+      <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          >
         <Text style={[styles.title, textStyle]}>
           {verseText} ﴿ {ayahNumber} ﴾
         </Text>
+        <View style={styles.horizontalLine} />
+        <Text style={styles.tafsirStyle}>{tafsir}</Text>
         <Text style={styles.description}>{surahName}</Text>
+        </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}
           style={styles.shareButton}
