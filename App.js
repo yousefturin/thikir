@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./src/navigation/AppNavigator";
 import * as Font from "expo-font";
-import { ThemeProvider, useTheme } from "./src/context/ThemContex";
-
+import { ThemeProvider  } from "./src/context/ThemContex";
+import { FontProvider } from "./src/context/FontContext";
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -16,6 +16,10 @@ const App = () => {
       });
       setFontLoaded(true);
     }
+    loadFonts();
+  }, []);
+  
+  useEffect(() => {
     const requestNotificationPermissions = async () => {
       const { status } = await Notifications.requestPermissionsAsync();
       if (status === "granted") {
@@ -32,7 +36,6 @@ const App = () => {
         console.log("Notification permissions denied");
       }
     };
-    loadFonts();
   }, []);
 
   if (!fontLoaded) {
@@ -41,10 +44,12 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <ThemeProvider>
+    <ThemeProvider>
+      <FontProvider> 
         <AppNavigator />
-      </ThemeProvider>
-    </NavigationContainer>
+      </FontProvider>
+    </ThemeProvider>
+  </NavigationContainer>
   );
 };
 
