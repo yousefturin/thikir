@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Switch, StyleSheet, Dimensions } from "react-native";
+import { View, Text, TouchableOpacity, Switch, StyleSheet, Platform  } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from 'expo-haptics';
@@ -105,11 +106,23 @@ const ThikirAlarmScreen = () => {
 
   //#region getNotificationPermission
   const requestNotificationPermissions = async () => {
-    const { status } = await Notifications.requestPermissionsAsync();
+    if (Platform.OS === 'android'){
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== "granted") {
+        const { status: newStatus } = await Notifications.requestPermissionsAsync();
+        if(newStatus ==='granted'){
+          console.log("Notification permissions granted");
+        }
+      } else {
+        console.log("Notification permissions denied");
+      }
+    }else{
+      const { status } = await Notifications.requestPermissionsAsync();
     if (status === "granted") {
       console.log("Notification permissions granted");
     } else {
       console.log("Notification permissions denied");
+    }
     }
   };
   //#endregion
@@ -304,7 +317,7 @@ const ThikirAlarmScreen = () => {
                     toggleAlarm(notification.id, !notification.isActive)
                   }
                   thumbColor={notification.isActive ? '#fefffe' : '#fefffe'}
-                  trackColor={{ true: '#be915a', false: '#454545' }}
+                  trackColor={{ true: '#f2b784', false: '#454545' }}
                 />
               </View>
             </View>
