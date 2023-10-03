@@ -72,7 +72,7 @@ const HomeScreen = ({ navigation }) => {
       color: "#000",
     },
     iconTop: {
-      color: "#be915a",
+      color: "#f2b784",
     },
   });
   //#endregion
@@ -125,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
       color: "#dddddd",
     },
     iconTop: {
-      color: "#be915a",
+      color: "#f2b784",
     },
   });
   //#endregion
@@ -166,7 +166,7 @@ const HomeScreen = ({ navigation }) => {
       ...isDarkMode ? darkStyles.containerSearchMode : lightStyles.containerSearchMode, // Override button background color
     },
     searchBarContainer: {
-      ...HomeStyles.horizonsearchBarContainertalLine, 
+      ...HomeStyles.searchBarContainer, 
       ...isDarkMode ? darkStyles.searchBarContainer : lightStyles.searchBarContainer, // Override button background color
     },
     searchBarInputContainer: {
@@ -431,13 +431,13 @@ const HomeScreen = ({ navigation }) => {
                       <Path
                       key={pathIndex} 
                       d={pathData.d}
-                      fill="#be915a"
-                      stroke="#be915a" // Border color
+                      fill="#f2b784"
+                      stroke="#f2b784" // Border color
                       strokeWidth={1} // Border width
                       stroke-linecap="round"
                       />
                     ))}
-                    <Circle cx={topItemIcons[index].cx} cy={topItemIcons[index].cy} r={topItemIcons[index].r} fill="#be915a"/>
+                    <Circle cx={topItemIcons[index].cx} cy={topItemIcons[index].cy} r={topItemIcons[index].r} fill="#f2b784"/>
                   </Svg>
                 </View>
                   <View style={styles.nameWrapper}>

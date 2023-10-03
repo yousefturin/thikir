@@ -64,7 +64,7 @@ const FavouriteScreen = ({ navigation }) => {
       color: "#000",
     },
     iconTop: {
-      color: "#be915a",
+      color: "#f2b784",
     },
     emptyMessageText:{
       color: "#000",
@@ -120,7 +120,7 @@ const FavouriteScreen = ({ navigation }) => {
       color: "#dddddd",
     },
     iconTop: {
-      color: "#be915a",
+      color: "#f2b784",
     },
     emptyMessageText:{
       color: "#fff",

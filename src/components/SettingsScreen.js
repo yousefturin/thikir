@@ -30,7 +30,7 @@ const SettingScreen = ({ navigation }) => {
     <TouchableOpacity
       style={[
         styles.fontOption,
-        { backgroundColor: selectedFont === item.value ? "#be915a" : 'transparent' },
+        { backgroundColor: selectedFont === item.value ? "#f2b784" : 'transparent' },
       ]}
       onPress={() => setFont(item.value)}
     >
@@ -49,7 +49,7 @@ const SettingScreen = ({ navigation }) => {
           value={isDarkMode}
           onValueChange={toggleTheme}
           thumbColor={isDarkMode ? '#fefffe' : '#fefffe'} 
-          trackColor={{ true: '#be915a', false: '#454545' }}
+          trackColor={{ true: '#f2b784', false: '#454545' }}
         />
       </View>
       </View>

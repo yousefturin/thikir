@@ -53,7 +53,7 @@ const GenericPage = ({ route }) => {
             color: "#767676",
         },
         InfoReptTime: {
-            color: "#be915a",
+            color: "#f2b784",
         },
         ControlPaneBackground: {
             shadowColor: "white",
@@ -98,7 +98,7 @@ const GenericPage = ({ route }) => {
             color: "#767676",
         },
         InfoReptTime: {
-            color: "#be915a",
+            color: "#f2b784",
         },
         ControlPaneBackground: {
             shadowColor: "black",
@@ -404,11 +404,11 @@ const GenericPage = ({ route }) => {
                         </Text>
                         <Text allowFontScaling={false} style={styles.InfoReptTimeIndex}>
                             الذكر{" "}
-                            <Text allowFontScaling={false} style={[{ color: "#be915a" }]}>
+                            <Text allowFontScaling={false} style={[{ color: "#f2b784" }]}>
                                 {currentIndex + 1}
                             </Text>{" "}
                             من{" "}
-                            <Text allowFontScaling={false} style={[{ color: "#be915a" }]}>
+                            <Text allowFontScaling={false} style={[{ color: "#f2b784" }]}>
                                 {item.subItems.length}
                             </Text>
                         </Text>

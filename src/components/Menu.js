@@ -523,7 +523,7 @@ const Menu = ({ navigation }) => {
             height: 200,
             width: "50%",
             textAlign: "center",
-            color: "#be915a",
+            color: "#f2b784",
             fontFamily: "ScheherazadeNew",
           },
         ]}

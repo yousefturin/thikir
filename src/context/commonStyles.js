@@ -102,7 +102,7 @@ export const AboutStyles = StyleSheet.create({
   },
   rectangleWrapper: {
     marginTop: 30,
-    height: 180,
+    height: 230,
     borderRadius: 10,
     backgroundColor: "#262626",
     flexDirection: "row",
@@ -117,6 +117,13 @@ export const AboutStyles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 4,
+    paddingVertical:20
+    },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
   },
   rectangleText: {
     color: "#fff",
@@ -202,7 +209,7 @@ export const DuaVerseStyles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: -20,
+    bottom: -5,
     alignItems: 'center', // Horizontal centering
   },
   shareButton: {
@@ -222,7 +229,7 @@ export const DuaVerseStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
@@ -284,7 +291,7 @@ export const QuranVerseStyles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: -20,
+    bottom: -5,
     alignItems: 'center', // Horizontal centering
   },
   tafsirStyle:{
@@ -312,7 +319,7 @@ export const QuranVerseStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
@@ -650,7 +657,7 @@ export const GenericStyles = StyleSheet.create({
   InfoReptTime: {
     fontSize: 11,
     textAlign: "center",
-    color: "#be915a",
+    color: "#f2b784",
     fontFamily: "AmiriFont",
     position: "absolute",
     right: 0,
@@ -689,7 +696,7 @@ export const GenericStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
