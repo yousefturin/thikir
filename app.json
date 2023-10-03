@@ -3,7 +3,7 @@
     "name": "Al Mufrdun",
     "slug": "almufrdun",
     "sdkVersion": "49.0.0",
-    "description": "Islamic application that sorts all athkar under one app, as well as giving you random Verses from Quran, a Hadith from Sahih muslim, and a Dua",
+    "description": "Islamic application.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,7 +29,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#151515"
-      }
+      },
+      "permissions": ["android.permission.NOTIFICATION"]
     },
     "web": {
       "favicon": "./assets/icon.png"
