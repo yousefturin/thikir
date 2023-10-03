@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import { useTheme } from '../context/ThemContex';
 import { AboutStyles } from '../context/commonStyles';
 var pkg = require('../../package.json');
@@ -87,16 +87,21 @@ const AboutScreen = ({ navigation }) => {
         style={[
           styles.rectangleWrapper]}
       >
-        <View style={styles.rectangleText}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+          >
+        <View>
           <Text style={styles.rectangleText}>
             اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق
-            <Text style={{ color: '#be915a', fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
+            <Text style={{ color: '#f2b784', fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
             قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
-            قال: «<Text style={{ color: '#be915a', fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
+            قال: «<Text style={{ color: '#f2b784', fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
 
             {'\n'}  <Text style={{ fontSize: 16, fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
           </Text>
         </View>
+      </ScrollView>
       </View>
     </View>
   );
