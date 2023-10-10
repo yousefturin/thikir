@@ -10,7 +10,7 @@ const CACHE_KEY = "randomVerseCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const QuranVerseScreen = ({ navigation }) => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
 
   //#region LightTheme 
   const lightStyles = StyleSheet.create({
@@ -53,19 +53,19 @@ const QuranVerseScreen = ({ navigation }) => {
     ...QuranVerseStyles,
     container: {
       ...QuranVerseStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container, 
     },
     rectangle: {
       ...QuranVerseStyles.rectangle, 
-      ...isDarkMode ? darkStyles.rectangle : lightStyles.rectangle, 
+      ...selectedTheme  === 'dark'? darkStyles.rectangle : lightStyles.rectangle, 
     },
     title: {
       ...QuranVerseStyles.title, 
-      ...isDarkMode ? darkStyles.title : lightStyles.title, 
+      ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title, 
     },
     horizontalLine: {
       ...QuranVerseStyles.horizontalLine,
-      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+      ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine),
   },
   };
   //#endregion
