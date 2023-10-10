@@ -1,6 +1,6 @@
-// ThemeContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Appearance } from 'react-native';
 
 // Define Themes
 const lightTheme = {
@@ -17,48 +17,57 @@ const darkTheme = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(null); // Use null to represent initial loading state
+  const [selectedTheme, setSelectedTheme] = useState(null); // Use null to represent initial loading state
 
   useEffect(() => {
     async function fetchTheme() {
       try {
         const themeValue = await AsyncStorage.getItem('@selectedTheme');
-        if (themeValue === 'dark') {
-          setIsDarkMode(true);
+        if (themeValue === 'dark' || themeValue === 'light') {
+          setSelectedTheme(themeValue);
         } else {
-          setIsDarkMode(false);
+          // Use the system theme
+          const systemTheme = Appearance.getColorScheme();
+          setSelectedTheme(systemTheme || 'light');
         }
       } catch (error) {
         console.error('Error fetching theme:', error);
-        setIsDarkMode(false); // Set the default theme in case of an error
+        setSelectedTheme('light'); // Set the default theme in case of an error
       }
     }
-
     fetchTheme();
   }, []);
 
   // Toggle Theme
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev);
+  const toggleTheme = (theme) => {
+    setSelectedTheme(theme);
   };
 
   // Get the current theme
-  const currentTheme = isDarkMode === null ? lightTheme : isDarkMode ? darkTheme : lightTheme;
+  const themes = {
+    light: lightTheme,
+    dark: darkTheme,
+  };
 
   useEffect(() => {
     // Save the selected theme to AsyncStorage whenever it changes
-    if (isDarkMode !== null) {
-      AsyncStorage.setItem('@selectedTheme', isDarkMode ? 'dark' : 'light');
+    if (selectedTheme !== null) {
+      AsyncStorage.setItem('@selectedTheme', selectedTheme);
     }
-  }, [isDarkMode]);
+  }, [selectedTheme]);
 
-  if (isDarkMode === null) {
+  if (selectedTheme === null) {
     // Return null while the theme is loading
     return null;
   }
 
+  const currentTheme =
+    selectedTheme === 'system'
+      ? themes[Appearance.getColorScheme() || 'light'] // Use system theme as detected by Appearance
+      : themes[selectedTheme] || lightTheme;
+
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ selectedTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

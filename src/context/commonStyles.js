@@ -709,6 +709,84 @@ export const GenericStyles = StyleSheet.create({
 });
 //#endregion
 
+//#region settingStyles
+export const  SettingStyles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#151515",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop:20
+  },
+  themeOptionsContainer: {
+    flexDirection: "row-reverse",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+
+  themeOption: {
+    padding: 14,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'space-between',
+    paddingBottom:4
+  },
+  themeCircle: {
+    width: 24, // Set the size of the circle container
+    height: 24,
+    borderRadius: 12, // Make it a circle
+    borderWidth: 1, // Add a border
+    borderColor: '#f2b784', // Border color
+    marginRight: 10, // Spacing between the circle and text
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent:'center',
+  },
+  selectedCircle: {
+    width: 12, // Set the size of the filled circle
+    height: 12,
+    borderRadius: 6, // Make it a circle
+    backgroundColor: '#f2b784', // Color of the filled circle
+  },
+  fontOptionsContainer: {
+    flexDirection: "row-reverse",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+  rectangle: {
+    backgroundColor: "#fefffe",
+    borderRadius: 10,
+    marginTop: 10,
+    width: "90%",
+    shadowColor: "gray",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  HeadertextColor:{
+  color: "#767676",
+  textAlign: 'right',
+  paddingTop: 15,
+  paddingLeft:300
+  },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    marginEnd:15
+  },
+  textColor:{
+    paddingRight:6
+  },
+});
+//#endregion
+
+
 //#region ReportProblemStyles
 export const ReportProblemStyles = StyleSheet.create({
   container: {
