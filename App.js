@@ -15,6 +15,8 @@ const App = () => {
         AmiriFont: require("./assets/fonts/Amiri-Regular.ttf"),
         ScheherazadeNew: require("./assets/fonts/ScheherazadeNew-Regular.ttf"),
         ScheherazadeNewBold: require("./assets/fonts/ScheherazadeNew-Bold.ttf"),
+        Hafs: require("./assets/fonts/Hafs.ttf"),
+        MeQuran: require("./assets/fonts/MeQuran.ttf"),
       });
       setFontLoaded(true);
     }
