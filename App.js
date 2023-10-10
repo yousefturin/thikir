@@ -6,6 +6,7 @@ import { Platform } from 'react-native';
 import * as Notifications from "expo-notifications";
 import { ThemeProvider  } from "./src/context/ThemContex";
 import { FontProvider } from "./src/context/FontContext";
+import { ColorProvider  } from "./src/context/ColorContext";
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -68,7 +69,9 @@ const App = () => {
     <NavigationContainer>
     <ThemeProvider>
       <FontProvider> 
-        <AppNavigator />
+        <ColorProvider>
+          <AppNavigator />
+        </ColorProvider>
       </FontProvider>
     </ThemeProvider>
   </NavigationContainer>
