@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemContex';
 import { AboutStyles } from '../context/commonStyles';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
-  const { isDarkMode } = useTheme(); 
+  const { selectedTheme } = useTheme();
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -52,23 +52,23 @@ const AboutScreen = ({ navigation }) => {
     ...AboutStyles,
     container: {
       ...AboutStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+      ...selectedTheme === 'dark' ? darkStyles.container : lightStyles.container, 
     },
     appNameText: {
       ...AboutStyles.appNameText, 
-      ...isDarkMode ? darkStyles.appNameText : lightStyles.appNameText, 
+      ...selectedTheme === 'dark' ? darkStyles.appNameText : lightStyles.appNameText, 
     },
     rectangleWrapper: {
       ...AboutStyles.rectangleWrapper, 
-      ...isDarkMode ? darkStyles.rectangleWrapper : lightStyles.rectangleWrapper, 
+      ...selectedTheme === 'dark' ? darkStyles.rectangleWrapper : lightStyles.rectangleWrapper, 
     },
     rectangleText: {
       ...AboutStyles.rectangleText, 
-      ...isDarkMode ? darkStyles.rectangleText : lightStyles.rectangleText, 
+      ...selectedTheme === 'dark' ? darkStyles.rectangleText : lightStyles.rectangleText, 
     },
     horizontalLine: {
       ...AboutStyles.horizontalLine, 
-      ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, 
+      ...selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine, 
     },
   };
   //#endregion
