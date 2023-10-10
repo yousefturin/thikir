@@ -16,7 +16,7 @@ const CACHE_KEY = "randomDuaCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const DUAVerseScreen = ({ navigation }) => {
-    const { isDarkMode } = useTheme();
+    const { selectedTheme } = useTheme();
     
     //#region LightTheme 
     const lightStyles = StyleSheet.create({
@@ -59,19 +59,19 @@ const DUAVerseScreen = ({ navigation }) => {
         ...DuaVerseStyles,
         container: {
             ...DuaVerseStyles.container,
-            ...(isDarkMode ? darkStyles.container : lightStyles.container),
+            ...(selectedTheme  === 'dark'? darkStyles.container : lightStyles.container),
         },
         rectangle: {
             ...DuaVerseStyles.rectangle,
-            ...(isDarkMode ? darkStyles.rectangle : lightStyles.rectangle),
+            ...(selectedTheme === 'dark' ? darkStyles.rectangle : lightStyles.rectangle),
         },
         title: {
             ...DuaVerseStyles.title,
-            ...(isDarkMode ? darkStyles.title : lightStyles.title),
+            ...(selectedTheme === 'dark' ? darkStyles.title : lightStyles.title),
         },
         horizontalLine: {
             ...DuaVerseStyles.horizontalLine,
-            ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine),
         },
     };
     //#endregion
