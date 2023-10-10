@@ -8,7 +8,8 @@ import { Svg, Path, Circle } from "react-native-svg";
 
 const Menu = ({ navigation }) => {
 
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
+
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -58,23 +59,23 @@ const Menu = ({ navigation }) => {
     ...MainStyles,
     container: {
       ...MainStyles.container,
-      ...(isDarkMode ? darkStyles.container : lightStyles.container),
+      ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container),
     },
     buttonText: {
       ...MainStyles.buttonText,
-      ...(isDarkMode ? darkStyles.buttonText : lightStyles.buttonText),
+      ...(selectedTheme === 'dark' ? darkStyles.buttonText : lightStyles.buttonText),
     },
     button: {
       ...MainStyles.button,
-      ...(isDarkMode ? darkStyles.button : lightStyles.button),
+      ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
     },
     iconWrapper: {
       ...MainStyles.iconWrapper,
-      ...(isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper),
+      ...(selectedTheme === 'dark' ? darkStyles.iconWrapper : lightStyles.iconWrapper),
     },
     horizontalLine: {
       ...MainStyles.horizontalLine,
-      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+      ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
     },
   };
   //#endregion
@@ -441,7 +442,7 @@ const Menu = ({ navigation }) => {
               cx="12"
               cy="12"
               r="3"
-              fill={isDarkMode ? "#454545" : "#e9e9ea"}
+              fill={selectedTheme === 'dark' ? "#454545" : "#e9e9ea"}
             ></Circle>
           </Svg>
         </View>
