@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
 import { handleShare } from "../utils/shareUtils";
 import { useTheme } from "../context/ThemContex";
+import { useFont } from "../context/FontContext";
 import { DuaVerseStyles } from "../context/commonStyles";
 
 const CACHE_KEY = "randomDuaCache";
@@ -17,7 +18,23 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const DUAVerseScreen = ({ navigation }) => {
     const { selectedTheme } = useTheme();
-    
+    const { selectedFont } = useFont();
+
+    const HafsFont = StyleSheet.create({
+        title:{
+            fontFamily:"Hafs",
+        }
+    });
+    const ScheherazadeNewFont = StyleSheet.create({
+        title:{
+            fontFamily:"ScheherazadeNew",
+        }
+    });
+    const MeQuranFont = StyleSheet.create({
+        title:{
+            fontFamily:"MeQuran",
+        }
+    });
     //#region LightTheme 
     const lightStyles = StyleSheet.create({
         container: {
@@ -68,6 +85,7 @@ const DUAVerseScreen = ({ navigation }) => {
         title: {
             ...DuaVerseStyles.title,
             ...(selectedTheme === 'dark' ? darkStyles.title : lightStyles.title),
+            ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         horizontalLine: {
             ...DuaVerseStyles.horizontalLine,
