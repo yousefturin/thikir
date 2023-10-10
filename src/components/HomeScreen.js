@@ -19,10 +19,9 @@ import { Svg, Path, Circle } from "react-native-svg";
 const HomeScreen = ({ navigation }) => {
   const items = getItems();
 
-  const { isDarkMode } = useTheme();
-  const StatusBarColor = isDarkMode
-    ? "light-content"
-    : "dark-content";
+  const { selectedTheme } = useTheme();
+
+  const StatusBarColor = selectedTheme === 'dark' ? 'light-content' : 'dark-content';
   
   //#region LightTheme
   const lightStyles = StyleSheet.create({
@@ -135,63 +134,63 @@ const HomeScreen = ({ navigation }) => {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...isDarkMode ? darkStyles.pageContainer : lightStyles.pageContainer, 
+      ...selectedTheme === 'dark' ? darkStyles.pageContainer : lightStyles.pageContainer, 
     },
     container: {
       ...HomeStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container, 
+      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container, 
     },
     TextMid: {
       ...HomeStyles.TextMid,
-      ...isDarkMode ? darkStyles.TextMid : lightStyles.TextMid, 
+      ...selectedTheme === 'dark' ? darkStyles.TextMid : lightStyles.TextMid, 
     },
     buttonText: {
       ...HomeStyles.buttonText, 
-      ...isDarkMode ? darkStyles.buttonText : lightStyles.buttonText, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.buttonText : lightStyles.buttonText, // Override button background color
     },
     button: {
       ...HomeStyles.button, 
-      ...isDarkMode ? darkStyles.button : lightStyles.button, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.button : lightStyles.button, // Override button background color
     },
     iconWrapper: {
       ...HomeStyles.iconWrapper, 
-      ...isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper, // Override button background color
+      ...selectedTheme === 'dark' ? darkStyles.iconWrapper : lightStyles.iconWrapper, // Override button background color
     },
     horizontalLine: {
       ...HomeStyles.horizontalLine, 
-      ...isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine, // Override button background color
     },
     containerSearchMode: {
       ...HomeStyles.containerSearchMode, 
-      ...isDarkMode ? darkStyles.containerSearchMode : lightStyles.containerSearchMode, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.containerSearchMode : lightStyles.containerSearchMode, // Override button background color
     },
     searchBarContainer: {
       ...HomeStyles.searchBarContainer, 
-      ...isDarkMode ? darkStyles.searchBarContainer : lightStyles.searchBarContainer, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.searchBarContainer : lightStyles.searchBarContainer, // Override button background color
     },
     searchBarInputContainer: {
       ...HomeStyles.searchBarInputContainer, 
-      ...isDarkMode ? darkStyles.searchBarInputContainer : lightStyles.searchBarInputContainer, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.searchBarInputContainer : lightStyles.searchBarInputContainer, // Override button background color
     },
     searchBarInput: {
       ...HomeStyles.searchBarInput, 
-      ...isDarkMode ? darkStyles.searchBarInput : lightStyles.searchBarInput, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.searchBarInput : lightStyles.searchBarInput, // Override button background color
     },
     buttonGrid: {
       ...HomeStyles.buttonGrid, 
-      ...isDarkMode ? darkStyles.buttonGrid : lightStyles.buttonGrid, // Override button background color
+      ...selectedTheme === 'dark' ? darkStyles.buttonGrid : lightStyles.buttonGrid, // Override button background color
     },
     squareButton: {
       ...HomeStyles.squareButton, 
-      ...isDarkMode ? darkStyles.squareButton : lightStyles.squareButton, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.squareButton : lightStyles.squareButton, // Override button background color
     },
     buttonTextTop: {
       ...HomeStyles.buttonTextTop, 
-      ...isDarkMode ? darkStyles.buttonTextTop : lightStyles.buttonTextTop, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.buttonTextTop : lightStyles.buttonTextTop, // Override button background color
     },
     iconTop: {
       ...HomeStyles.iconTop, 
-      ...isDarkMode ? darkStyles.iconTop : lightStyles.iconTop, // Override button background color
+      ...selectedTheme  === 'dark'? darkStyles.iconTop : lightStyles.iconTop, // Override button background color
     },
   };
   //#endregion
