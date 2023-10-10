@@ -9,7 +9,7 @@ import { useTheme } from '../context/ThemContex';
 import { ThikirAlarmStyles } from '../context/commonStyles';
 
 const ThikirAlarmScreen = () => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -51,19 +51,19 @@ const ThikirAlarmScreen = () => {
     ...ThikirAlarmStyles,
     container: {
       ...ThikirAlarmStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container,
+      ...selectedTheme === 'dark' ? darkStyles.container : lightStyles.container,
     },
     notificationContainer: {
       ...ThikirAlarmStyles.notificationContainer,
-      ...isDarkMode ? darkStyles.notificationContainer : lightStyles.notificationContainer,
+      ...selectedTheme  === 'dark'? darkStyles.notificationContainer : lightStyles.notificationContainer,
     },
     title: {
       ...ThikirAlarmStyles.title,
-      ...isDarkMode ? darkStyles.title : lightStyles.title,
+      ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title,
     },
     horizontalLineWrapper: {
       ...ThikirAlarmStyles.horizontalLineWrapper,
-      ...isDarkMode ? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
+      ...selectedTheme  === 'dark'? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
     },
   };
   //#endregion
