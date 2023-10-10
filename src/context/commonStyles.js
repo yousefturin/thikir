@@ -784,17 +784,35 @@ export const  SettingStyles = StyleSheet.create({
     paddingRight:6
   },
   colorOption: {
-    margin:10
+    margin: 10,
   },
   colorCircle: {
     width: 50,
     height: 50,
     borderRadius: 30, // Make it a circle
+    borderWidth: 1,
+    borderColor: 'transparent', // Default border color
 
   },
+  selectedColorCircle: {
+    borderColor: '#EBEAEA', // Border color for selected color
+    shadowColor: "white",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  checkIcon: {
+    position: 'absolute',
+    top: '32%', // Adjust the position as needed
+    left: '32%', // Adjust the position as needed
+  },
   colorOptionsContainer: {
-    width:"100%",
-    alignItems:'center',
+    width: '100%',
+    alignItems: 'center',
   },
 });
 //#endregion
