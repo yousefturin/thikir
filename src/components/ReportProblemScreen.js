@@ -6,7 +6,8 @@ import { useTheme } from '../context/ThemContex';
 import { ReportProblemStyles } from '../context/commonStyles';
 
 const ReportProblemScreen = () => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
+
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -54,19 +55,19 @@ const ReportProblemScreen = () => {
     ...ReportProblemStyles,
     container: {
       ...ReportProblemStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container,
+      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container,
     },
     heading: {
       ...ReportProblemStyles.heading,
-      ...isDarkMode ? darkStyles.heading : lightStyles.heading,
+      ...selectedTheme  === 'dark'? darkStyles.heading : lightStyles.heading,
     },
     input: {
       ...ReportProblemStyles.input,
-      ...isDarkMode ? darkStyles.input : lightStyles.input,
+      ...selectedTheme === 'dark' ? darkStyles.input : lightStyles.input,
     },
     inputScreenshot: {
       ...ReportProblemStyles.inputScreenshot,
-      ...isDarkMode ? darkStyles.inputScreenshot : lightStyles.inputScreenshot,
+      ...selectedTheme  === 'dark'? darkStyles.inputScreenshot : lightStyles.inputScreenshot,
     },
   };
   //#endregion
