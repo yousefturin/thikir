@@ -1,120 +1,162 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Switch, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { useTheme } from '../context/ThemContex';
 import { useFont } from '../context/FontContext';
+import { SettingStyles } from '../context/commonStyles';
 
 const SettingScreen = ({ navigation }) => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { selectedTheme, toggleTheme } = useTheme(); 
   const { selectedFont, setFont } = useFont();
+  
+  
+  const currentTheme = selectedTheme === 'dark' ? darkTheme : lightTheme; 
 
+  //#region LightTheme
+  const lightTheme = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6",
+    },
+    textColor:{
+      color:"#000",
+    },
+    rectangle: {
+      backgroundColor: "#fefffe",
+      shadowColor: "white",
+    },
+    horizontalLine: {
+      borderColor: "#f2f2f6",
+    },  
+  });
+  //#endregion
+
+
+  //#region DarkTheme
+  const darkTheme = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515",
+    },
+    textColor:{
+      color:"#fff",
+    },
+    rectangle: {
+      backgroundColor: "#262626",
+      shadowColor: "black",
+    },
+    horizontalLine: {
+      borderColor: "#151515",
+    },
+  });
+  //#endregion
+
+  //#region StylesMapping
+  const styles = {
+    ...SettingStyles,
+    container: {
+      ...SettingStyles.container,
+      ...selectedTheme  === 'dark'? darkTheme.container : lightTheme.container, 
+    },
+    textColor: {
+      ...SettingStyles.textColor,
+      ...selectedTheme  === 'dark'? darkTheme.textColor : lightTheme.textColor, 
+    },
+    rectangle: {
+      ...SettingStyles.rectangle, 
+      ...selectedTheme  === 'dark'? darkTheme.rectangle : lightTheme.rectangle, 
+    },
+    horizontalLine: {
+      ...SettingStyles.horizontalLine, 
+      ...selectedTheme  === 'dark'? darkTheme.horizontalLine : lightTheme.horizontalLine, 
+    },
+  };
+  //#endregion
+
+  const themes = [
+    { label: 'داكن', value: 'dark' },
+    { label: 'فاتح', value: 'light' },
+    { label: 'تلقائي', value: 'system' },
+  ];
   const fontOptions = [
     { label: 'شهرازاد نو عريض', value: 'ScheherazadeNewBold' },
     { label: 'شهرازاد نو', value: 'ScheherazadeNew' },
     { label: 'العميري', value: 'AmiriFont' },
   ];
-
-  const lightTheme = {
-    backgroundColor: "#f2f2f6", 
-    textColor: '#000000',
-  };
   
 
-  const darkTheme = {
-    backgroundColor: '#151515',
-    textColor: '#FFFFFF',
-  };
-  
-  const currentTheme = isDarkMode ? darkTheme : lightTheme;
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={[
-        styles.fontOption,
-        { backgroundColor: selectedFont === item.value ? "#f2b784" : 'transparent' },
-      ]}
-      onPress={() => setFont(item.value)}
-    >
-      <Text style={{ color: currentTheme.textColor, fontFamily: item.value }}>{item.label}</Text>
-    </TouchableOpacity>
-  );
-
-  return (
-    <View style={[styles.container, { backgroundColor: currentTheme.backgroundColor }]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
+  const renderThemeItem = ({ item, index }) => (
+    <View>
+      <TouchableOpacity
+        style={styles.themeOption}
+        onPress={() => toggleTheme(item.value)}
+      >
+        <View style={styles.themeCircle}>
+          {selectedTheme === item.value && (
+            <View style={styles.selectedCircle}></View>
+          )}
+        </View>
+        <Text style={styles.textColor}>{item.label}</Text>
       </TouchableOpacity>
-      <View style={[styles.rectangle]}>
-      <View style={styles.toggleContainer}>
-        <Text style={{ color: currentTheme.textColor }}>تغير لون النظام</Text>
-        <Switch
-          value={isDarkMode}
-          onValueChange={toggleTheme}
-          thumbColor={isDarkMode ? '#fefffe' : '#fefffe'} 
-          trackColor={{ true: '#f2b784', false: '#454545' }}
-        />
-      </View>
-      </View>
-      <View style={[styles.rectangle]}>
-      <View style={styles.fontOptionsContainer}>
-        <Text style={[{ color: currentTheme.textColor },styles.textRectangle]}>أختر خط العرض</Text>
-        <FlatList
-          data={fontOptions}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.value}
-          extraData={selectedFont}
-        />
-      </View>
+      {index !== themes.length - 1 && <View style={styles.horizontalLine}></View>}
     </View>
+  );
+  
+  const renderFontItem = ({ item, index }) => (
+    <View>
+      <TouchableOpacity
+        style={styles.themeOption}
+        onPress={() => setFont(item.value)}
+      >
+        <View style={styles.themeCircle}>
+          {selectedFont === item.value && (
+            <View style={styles.selectedCircle}></View>
+          )}
+        </View>
+        <Text style={styles.textColor}>{item.label}</Text>
+      </TouchableOpacity>
+      {index !== fontOptions.length - 1 && <View style={styles.horizontalLine}></View>}
+    </View>
+  );
+  return (
+    <View style={[styles.container]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
+      <Text style={styles.HeadertextColor}>المظهر</Text>
+      <View style={styles.rectangle}>
+        <View style={styles.themeOptionsContainer}>
+          <FlatList
+            data={themes}
+            renderItem={renderThemeItem}
+            keyExtractor={(item) => item.value}
+            extraData={selectedTheme}
+            scrollEnabled={false} // Set scrollEnabled to false to make it not scrollable
+          />
+        </View>
+      </View>
+      <Text style={styles.HeadertextColor}>خط العرض</Text>
+      <View style={styles.rectangle}>
+        <View style={styles.fontOptionsContainer}>
+          <FlatList
+            data={fontOptions}
+            renderItem={renderFontItem}
+            keyExtractor={(item) => item.value}
+            extraData={selectedFont}
+            scrollEnabled={false} // Set scrollEnabled to false to make it not scrollable
+          />
+        </View>
+      </View>
+      
+      <Text style={styles.HeadertextColor}>لون العرض</Text>
+      <View style={styles.rectangle}>
+        <View style={styles.fontOptionsContainer}>
+          <FlatList
+            scrollEnabled={false} 
+          />
+        </View>
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#151515",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingBottom: 120,
-  },
-  toggleContainer: {
-    flexDirection: "row-reverse",
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 20,
-    paddingHorizontal: 16,
-  },
-  fontOptionsContainer: {
-    flexDirection: "row-reverse",
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginVertical: 20,
-    paddingHorizontal: 16,
-  },
-  fontOption: {
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 10,
-    width:"50%",
-    alignItems:"center"
-  },
-  rectangle: {
-    backgroundColor: "#fefffe",
-    borderRadius: 10,
-    marginTop: 20,
-    width: "90%",
-    shadowColor: "gray",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
-  },
-  textRectangle :{
-    textAlignVertical:"center",
-    paddingTop:60
-  },
-});
+
+
 
 export default SettingScreen;
