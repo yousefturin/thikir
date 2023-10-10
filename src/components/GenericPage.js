@@ -364,9 +364,6 @@ const GenericPage = ({ route }) => {
 
     return (
         <TouchableWithoutFeedback
-            /* This Button is Disabling the scrollView from Functining
-            and the scrollView does work only wover teh condition 
-              of the button when it is disabled */
             onPressIn={handleContainerPressIn}
             onPressOut={handleContainerPressOut}
             onResponderMove={handleSwipe}
