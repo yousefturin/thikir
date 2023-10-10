@@ -94,13 +94,30 @@ const SettingScreen = ({ navigation }) => {
   );
   //#endregion
 
+  const colorOptions = [
+    { label: '#F2B784', value: '#F2B784' },
+    { label: '#6682C3', value: '#6682C3' },
+    { label: '#9AB06B', value: '#9AB06B' },
+    { label: '#AA767C', value: '#AA767C' },
+    { label: '#CD7845', value: '#CD7845' },
+  ];
+  
+  const renderColorItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.colorOption}
+      onPress={() => setColor(item.value)} // Assuming you have a function to set the selected color
+    >
+      <View style={[styles.colorCircle, { backgroundColor: item.value }]}></View>
+    </TouchableOpacity>
+  );
+
   //#region renderingFontitem
   const fontOptions = [
     { label: 'خط النظام', value: 'ScheherazadeNew' },
     { label: 'خط القران', value: 'MeQuran' },
     { label: 'خط حفص', value: 'Hafs' },
   ];
-  
+
   const renderFontItem = ({ item, index }) => (
     <View>
       <TouchableOpacity
@@ -146,16 +163,18 @@ const SettingScreen = ({ navigation }) => {
           />
         </View>
       </View>
-      
       <Text style={styles.HeadertextColor}>لون التطبيق</Text>
-      <View style={styles.rectangle}>
-        <View style={styles.fontOptionsContainer}>
-        {/*Need to render the 5 colors that user will select any of to change the extra color in the app */}
-          <FlatList
-            scrollEnabled={false} 
-          />
-        </View>
+    <View style={styles.rectangle}>
+      <View style={styles.colorOptionsContainer}>
+        <FlatList
+          data={colorOptions}
+          renderItem={renderColorItem}
+          keyExtractor={(item) => item.value}
+          horizontal={true} // Display colors in a horizontal row
+          scrollEnabled={false}
+        />
       </View>
+    </View>
       <Text style={styles.HeadertextColor}>أيقون التطبيق</Text>
       <View style={styles.rectangle}>
         <View style={styles.fontOptionsContainer}>
