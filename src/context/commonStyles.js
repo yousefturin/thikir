@@ -783,6 +783,19 @@ export const  SettingStyles = StyleSheet.create({
   textColor:{
     paddingRight:6
   },
+  colorOption: {
+    margin:10
+  },
+  colorCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 30, // Make it a circle
+
+  },
+  colorOptionsContainer: {
+    width:"100%",
+    alignItems:'center',
+  },
 });
 //#endregion
 
