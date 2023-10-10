@@ -17,7 +17,8 @@ import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GenericPage = ({ route }) => {
-    const { isDarkMode } = useTheme();
+    const { selectedTheme } = useTheme();
+
 
     //#region LightTheme
     const lightStyles = StyleSheet.create({
@@ -114,57 +115,57 @@ const GenericPage = ({ route }) => {
         ...GenericStyles,
         container: {
             ...GenericStyles.container,
-            ...(isDarkMode ? darkStyles.container : lightStyles.container),
+            ...(selectedTheme  === 'dark'? darkStyles.container : lightStyles.container),
         },
         containerforshare: {
             ...GenericStyles.containerforshare,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.containerforshare
                 : lightStyles.containerforshare),
         },
         circularButton: {
             ...GenericStyles.circularButton,
-            ...(isDarkMode ? darkStyles.circularButton : lightStyles.circularButton),
+            ...(selectedTheme  === 'dark'? darkStyles.circularButton : lightStyles.circularButton),
         },
         button: {
             ...GenericStyles.button,
-            ...(isDarkMode ? darkStyles.button : lightStyles.button),
+            ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
         },
         textcount: {
             ...GenericStyles.textcount,
-            ...(isDarkMode ? darkStyles.textcount : lightStyles.textcount),
+            ...(selectedTheme === 'dark' ? darkStyles.textcount : lightStyles.textcount),
         },
         rectangle: {
             ...GenericStyles.rectangle,
-            ...(isDarkMode ? darkStyles.rectangle : lightStyles.rectangle),
+            ...(selectedTheme === 'dark' ? darkStyles.rectangle : lightStyles.rectangle),
         },
         title: {
             ...GenericStyles.title,
-            ...(isDarkMode ? darkStyles.title : lightStyles.title),
+            ...(selectedTheme  === 'dark'? darkStyles.title : lightStyles.title),
         },
         description: {
             ...GenericStyles.description,
-            ...(isDarkMode ? darkStyles.description : lightStyles.description),
+            ...(selectedTheme  === 'dark'? darkStyles.description : lightStyles.description),
         },
         InfoReptTimeIndex: {
             ...GenericStyles.InfoReptTimeIndex,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.InfoReptTimeIndex
                 : lightStyles.InfoReptTimeIndex),
         },
         InfoReptTime: {
             ...GenericStyles.InfoReptTime,
-            ...(isDarkMode ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
+            ...(selectedTheme === 'dark' ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
         },
         ControlPaneBackground: {
             ...GenericStyles.ControlPaneBackground,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.ControlPaneBackground
                 : lightStyles.ControlPaneBackground),
         },
         horizontalLine: {
             ...GenericStyles.horizontalLine,
-            ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
         },
     };
     //#endregion
@@ -177,7 +178,7 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
-    const ControlPaneBackgroundImage = isDarkMode
+    const ControlPaneBackgroundImage = selectedTheme ==='dark'
         ? require("../../assets/HeaderBackground.jpg")
         : require("../../assets/HeaderBackgroundLight.jpg");
     const viewRef = React.useRef();
