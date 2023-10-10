@@ -75,7 +75,7 @@ const SettingScreen = ({ navigation }) => {
     { label: 'فاتح', value: 'light' },
     { label: 'تلقائي', value: 'system' },
   ];
-  
+
   const renderThemeItem = ({ item, index }) => (
     <View>
       <TouchableOpacity
@@ -96,9 +96,9 @@ const SettingScreen = ({ navigation }) => {
 
   //#region renderingFontitem
   const fontOptions = [
-    { label: 'شهرازاد نو عريض', value: 'ScheherazadeNewBold' },
-    { label: 'شهرازاد نو', value: 'ScheherazadeNew' },
-    { label: 'العميري', value: 'AmiriFont' },
+    { label: 'خط النظام', value: 'ScheherazadeNew' },
+    { label: 'خط القران', value: 'MeQuran' },
+    { label: 'خط حفص', value: 'Hafs' },
   ];
   
   const renderFontItem = ({ item, index }) => (

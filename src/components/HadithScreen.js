@@ -4,13 +4,30 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
 import { useTheme } from '../context/ThemContex'; 
+import { useFont } from "../context/FontContext";
 import { QuranVerseStyles } from '../context/commonStyles';
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
 const HADITHVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
-  
+  const { selectedFont } = useFont();
+
+  const HafsFont = StyleSheet.create({
+      title:{
+          fontFamily:"Hafs",
+      }
+  });
+  const ScheherazadeNewFont = StyleSheet.create({
+      title:{
+          fontFamily:"ScheherazadeNew",
+      }
+  });
+  const MeQuranFont = StyleSheet.create({
+      title:{
+          fontFamily:"MeQuran",
+      }
+  });
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -61,6 +78,7 @@ const HADITHVerseScreen = ({ navigation }) => {
     title: {
       ...QuranVerseStyles.title, 
       ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title, 
+      ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
     },
     horizontalLine: {
       ...QuranVerseStyles.horizontalLine,

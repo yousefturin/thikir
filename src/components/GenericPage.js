@@ -12,14 +12,30 @@ import * as Haptics from "expo-haptics";
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
+import { useFont } from "../context/FontContext";
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GenericPage = ({ route }) => {
     const { selectedTheme } = useTheme();
+    const { selectedFont } = useFont();
 
-
+    const HafsFont = StyleSheet.create({
+        title:{
+            fontFamily:"Hafs",
+        }
+    });
+    const ScheherazadeNewFont = StyleSheet.create({
+        title:{
+            fontFamily:"ScheherazadeNew",
+        }
+    });
+    const MeQuranFont = StyleSheet.create({
+        title:{
+            fontFamily:"MeQuran",
+        }
+    });
     //#region LightTheme
     const lightStyles = StyleSheet.create({
         container: {
@@ -142,6 +158,7 @@ const GenericPage = ({ route }) => {
         title: {
             ...GenericStyles.title,
             ...(selectedTheme  === 'dark'? darkStyles.title : lightStyles.title),
+            ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         description: {
             ...GenericStyles.description,

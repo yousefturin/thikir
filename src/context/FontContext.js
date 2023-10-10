@@ -2,6 +2,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+
+
+
 const FontContext = createContext();
 
 export function FontProvider({ children }) {
@@ -29,6 +33,18 @@ export function FontProvider({ children }) {
     // Save the selected font to AsyncStorage
     AsyncStorage.setItem('@selectedFont', font);
   };
+  
+  useEffect(() => {
+    // Save the selected theme to AsyncStorage whenever it changes
+    if (selectedFont !== null) {
+      AsyncStorage.setItem('@selectedFont', selectedFont);
+    }
+  }, [selectedFont]);
+
+  if (selectedFont === null) {
+    // Return null while the theme is loading
+    return null;
+  }
 
   return (
     <FontContext.Provider value={{ selectedFont, setFont }}>
