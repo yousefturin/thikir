@@ -29,7 +29,6 @@ const SettingScreen = ({ navigation }) => {
   });
   //#endregion
 
-
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
@@ -70,19 +69,13 @@ const SettingScreen = ({ navigation }) => {
   };
   //#endregion
 
+  //#region redering ThemItem
   const themes = [
     { label: 'داكن', value: 'dark' },
     { label: 'فاتح', value: 'light' },
     { label: 'تلقائي', value: 'system' },
   ];
-  const fontOptions = [
-    { label: 'شهرازاد نو عريض', value: 'ScheherazadeNewBold' },
-    { label: 'شهرازاد نو', value: 'ScheherazadeNew' },
-    { label: 'العميري', value: 'AmiriFont' },
-  ];
   
-
-
   const renderThemeItem = ({ item, index }) => (
     <View>
       <TouchableOpacity
@@ -99,6 +92,14 @@ const SettingScreen = ({ navigation }) => {
       {index !== themes.length - 1 && <View style={styles.horizontalLine}></View>}
     </View>
   );
+  //#endregion
+
+  //#region renderingFontitem
+  const fontOptions = [
+    { label: 'شهرازاد نو عريض', value: 'ScheherazadeNewBold' },
+    { label: 'شهرازاد نو', value: 'ScheherazadeNew' },
+    { label: 'العميري', value: 'AmiriFont' },
+  ];
   
   const renderFontItem = ({ item, index }) => (
     <View>
@@ -116,6 +117,8 @@ const SettingScreen = ({ navigation }) => {
       {index !== fontOptions.length - 1 && <View style={styles.horizontalLine}></View>}
     </View>
   );
+  //#endregion
+  
   return (
     <View style={[styles.container]}>
       <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
@@ -144,9 +147,19 @@ const SettingScreen = ({ navigation }) => {
         </View>
       </View>
       
-      <Text style={styles.HeadertextColor}>لون العرض</Text>
+      <Text style={styles.HeadertextColor}>لون التطبيق</Text>
       <View style={styles.rectangle}>
         <View style={styles.fontOptionsContainer}>
+        {/*Need to render the 5 colors that user will select any of to change the extra color in the app */}
+          <FlatList
+            scrollEnabled={false} 
+          />
+        </View>
+      </View>
+      <Text style={styles.HeadertextColor}>أيقون التطبيق</Text>
+      <View style={styles.rectangle}>
+        <View style={styles.fontOptionsContainer}>
+        {/*Need to render the 5 icons that user will select any of to change the app icon*/}
           <FlatList
             scrollEnabled={false} 
           />
