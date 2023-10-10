@@ -14,7 +14,7 @@ import { useTheme } from "../context/ThemContex";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 const FavouriteScreen = ({ navigation }) => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
 
   //#region LightTheme
   const lightStyles = StyleSheet.create({
@@ -133,73 +133,73 @@ const FavouriteScreen = ({ navigation }) => {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...(isDarkMode ? darkStyles.pageContainer : lightStyles.pageContainer), 
+      ...(selectedTheme === 'dark' ? darkStyles.pageContainer : lightStyles.pageContainer), 
     },
     container: {
       ...HomeStyles.container,
-      ...(isDarkMode ? darkStyles.container : lightStyles.container), 
+      ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container), 
     },
     TextMid: {
       ...HomeStyles.TextMid,
-      ...(isDarkMode ? darkStyles.TextMid : lightStyles.TextMid), 
+      ...(selectedTheme  === 'dark'? darkStyles.TextMid : lightStyles.TextMid), 
     },
     buttonText: {
       ...HomeStyles.buttonText, 
-      ...(isDarkMode ? darkStyles.buttonText : lightStyles.buttonText), 
+      ...(selectedTheme  === 'dark'? darkStyles.buttonText : lightStyles.buttonText), 
     },
     button: {
       ...HomeStyles.button, 
-      ...(isDarkMode ? darkStyles.button : lightStyles.button), 
+      ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button), 
     },
     iconWrapper: {
       ...HomeStyles.iconWrapper, 
-      ...(isDarkMode ? darkStyles.iconWrapper : lightStyles.iconWrapper), 
+      ...(selectedTheme  === 'dark'? darkStyles.iconWrapper : lightStyles.iconWrapper), 
     },
     horizontalLine: {
       ...HomeStyles.horizontalLine, 
-      ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine), 
+      ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine), 
     },
     containerSearchMode: {
       ...HomeStyles.containerSearchMode, 
-      ...(isDarkMode
+      ...(selectedTheme === 'dark'
         ? darkStyles.containerSearchMode
         : lightStyles.containerSearchMode), 
     },
     searchBarContainer: {
       ...HomeStyles.horizonsearchBarContainertalLine, 
-      ...(isDarkMode
+      ...(selectedTheme === 'dark'
         ? darkStyles.searchBarContainer
         : lightStyles.searchBarContainer), 
     },
     searchBarInputContainer: {
       ...HomeStyles.searchBarInputContainer, 
-      ...(isDarkMode
+      ...(selectedTheme === 'dark'
         ? darkStyles.searchBarInputContainer
         : lightStyles.searchBarInputContainer), 
     },
     searchBarInput: {
       ...HomeStyles.searchBarInput, 
-      ...(isDarkMode ? darkStyles.searchBarInput : lightStyles.searchBarInput), 
+      ...(selectedTheme === 'dark' ? darkStyles.searchBarInput : lightStyles.searchBarInput), 
     },
     buttonGrid: {
       ...HomeStyles.buttonGrid, 
-      ...(isDarkMode ? darkStyles.buttonGrid : lightStyles.buttonGrid), 
+      ...(selectedTheme === 'dark' ? darkStyles.buttonGrid : lightStyles.buttonGrid), 
     },
     squareButton: {
       ...HomeStyles.squareButton, 
-      ...(isDarkMode ? darkStyles.squareButton : lightStyles.squareButton), 
+      ...(selectedTheme === 'dark' ? darkStyles.squareButton : lightStyles.squareButton), 
     },
     buttonTextTop: {
       ...HomeStyles.buttonTextTop, 
-      ...(isDarkMode ? darkStyles.buttonTextTop : lightStyles.buttonTextTop), 
+      ...(selectedTheme  === 'dark'? darkStyles.buttonTextTop : lightStyles.buttonTextTop), 
     },
     iconTop: {
       ...HomeStyles.iconTop, 
-      ...(isDarkMode ? darkStyles.iconTop : lightStyles.iconTop), 
+      ...(selectedTheme  === 'dark'? darkStyles.iconTop : lightStyles.iconTop), 
     },
     emptyMessageText: {
       ...HomeStyles.emptyMessageText, 
-      ...(isDarkMode ? darkStyles.emptyMessageText : lightStyles.emptyMessageText), 
+      ...(selectedTheme === 'dark' ? darkStyles.emptyMessageText : lightStyles.emptyMessageText), 
     },
   };
   //#endregion
