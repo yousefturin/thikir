@@ -2,14 +2,58 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { useTheme } from '../context/ThemContex';
 import { useFont } from '../context/FontContext';
+import { useColor } from '../context/ColorContext';
 import { SettingStyles } from '../context/commonStyles';
 
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
   const { selectedFont, setFont } = useFont();
+  const { selectedColor, setColor } = useColor();
   
   
   const currentTheme = selectedTheme === 'dark' ? darkTheme : lightTheme; 
+
+  const orangeMain = StyleSheet.create({
+    themeCircle:{
+      borderColor:"#f2b784"
+    },
+    selectedCircle:{
+      backgroundColor: '#f2b784',
+    },
+  });
+  
+  const pink = StyleSheet.create({
+    themeCircle:{
+      borderColor:"#6682C3"
+    },
+    selectedCircle:{
+      backgroundColor: '#6682C3',
+    },
+  });
+  const green = StyleSheet.create({
+    themeCircle:{
+      borderColor:"#9AB06B"
+    },
+    selectedCircle:{
+      backgroundColor: '#9AB06B',
+    },
+  });
+  const blue = StyleSheet.create({
+    themeCircle:{
+      borderColor:"#AA767C"
+    },
+    selectedCircle:{
+      backgroundColor: '#AA767C',
+    },
+  });
+  const peach = StyleSheet.create({
+    themeCircle:{
+      borderColor:"#CD7845"
+    },
+    selectedCircle:{
+      backgroundColor: '#CD7845',
+    },
+  });
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -66,6 +110,31 @@ const SettingScreen = ({ navigation }) => {
       ...SettingStyles.horizontalLine, 
       ...selectedTheme  === 'dark'? darkTheme.horizontalLine : lightTheme.horizontalLine, 
     },
+    themeCircle: {
+      ...SettingStyles.themeCircle,
+      ...(selectedColor === '#f2b784'
+        ? orangeMain.themeCircle
+        : selectedColor === '#6682C3'
+        ? pink.themeCircle
+        : selectedColor === '#9AB06B'
+        ? green.themeCircle
+        : selectedColor === '#AA767C'
+        ? blue.themeCircle
+        : peach.themeCircle),
+    },
+    selectedCircle: {
+      ...SettingStyles.selectedCircle,
+      ...(selectedColor === '#f2b784'
+        ? orangeMain.selectedCircle
+        : selectedColor === '#6682C3'
+        ? pink.selectedCircle
+        : selectedColor === '#9AB06B'
+        ? green.selectedCircle
+        : selectedColor === '#AA767C'
+        ? blue.selectedCircle
+        : peach.selectedCircle),
+    },
+
   };
   //#endregion
 
@@ -95,11 +164,11 @@ const SettingScreen = ({ navigation }) => {
   //#endregion
 
   const colorOptions = [
-    { label: '#F2B784', value: '#F2B784' },
+    { label: '#CD7845', value: '#CD7845' },
     { label: '#6682C3', value: '#6682C3' },
     { label: '#9AB06B', value: '#9AB06B' },
     { label: '#AA767C', value: '#AA767C' },
-    { label: '#CD7845', value: '#CD7845' },
+    { label: '#f2b784', value: '#f2b784' },
   ];
   
   const renderColorItem = ({ item }) => (
@@ -107,7 +176,20 @@ const SettingScreen = ({ navigation }) => {
       style={styles.colorOption}
       onPress={() => setColor(item.value)} // Assuming you have a function to set the selected color
     >
-      <View style={[styles.colorCircle, { backgroundColor: item.value }]}></View>
+      <View
+        style={[
+          styles.colorCircle,
+          { backgroundColor: item.value },
+          selectedColor === item.value && styles.selectedColorCircle, // Apply border for selected color
+        ]}
+      >
+        {selectedColor === item.value && (
+          <View style={styles.checkIcon}>
+            {/* You can replace this with your check icon component */}
+            <Text>✔️</Text>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   );
 
