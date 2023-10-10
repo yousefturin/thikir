@@ -13,6 +13,7 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getItems } from "../db/GetData";
 import { HomeStyles } from '../context/commonStyles';
 import { useTheme } from '../context/ThemContex';
+import { useColor } from '../context/ColorContext';
 import { Svg, Path, Circle } from "react-native-svg";
 
 
@@ -20,8 +21,10 @@ const HomeScreen = ({ navigation }) => {
   const items = getItems();
 
   const { selectedTheme } = useTheme();
+  const { selectedColor, setColor } = useColor();
 
   const StatusBarColor = selectedTheme === 'dark' ? 'light-content' : 'dark-content';
+  
   
   //#region LightTheme
   const lightStyles = StyleSheet.create({
@@ -430,13 +433,13 @@ const HomeScreen = ({ navigation }) => {
                       <Path
                       key={pathIndex} 
                       d={pathData.d}
-                      fill="#f2b784"
-                      stroke="#f2b784" // Border color
+                      fill={selectedColor}
+                      stroke={selectedColor} // Border color
                       strokeWidth={1} // Border width
                       stroke-linecap="round"
                       />
                     ))}
-                    <Circle cx={topItemIcons[index].cx} cy={topItemIcons[index].cy} r={topItemIcons[index].r} fill="#f2b784"/>
+                    <Circle cx={topItemIcons[index].cx} cy={topItemIcons[index].cy} r={topItemIcons[index].r} fill={selectedColor}/>
                   </Svg>
                 </View>
                   <View style={styles.nameWrapper}>
