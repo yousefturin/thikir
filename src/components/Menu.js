@@ -3,15 +3,18 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
+import { useColor } from '../context/ColorContext';
 import { MainStyles } from "../context/commonStyles";
 import { Svg, Path, Circle } from "react-native-svg";
+import { Appearance } from 'react-native';
 
 const Menu = ({ navigation }) => {
 
   const { selectedTheme } = useTheme();
-
+  const { selectedColor, setColor } = useColor();
+  const systemTheme = selectedTheme === 'system';
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
     },
@@ -33,7 +36,7 @@ const Menu = ({ navigation }) => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
     },
@@ -53,29 +56,36 @@ const Menu = ({ navigation }) => {
     },
   });
   //#endregion
-  
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ? darkTheme
+    : lightTheme
+  : selectedTheme === 'dark'
+  ? darkTheme
+  : lightTheme;
+
   //#region StyleMapping
   const styles = {
     ...MainStyles,
     container: {
       ...MainStyles.container,
-      ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container),
+      ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container),
     },
     buttonText: {
       ...MainStyles.buttonText,
-      ...(selectedTheme === 'dark' ? darkStyles.buttonText : lightStyles.buttonText),
+      ...(selectedTheme === 'dark' ? themeStyles.buttonText : themeStyles.buttonText),
     },
     button: {
       ...MainStyles.button,
-      ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
+      ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button),
     },
     iconWrapper: {
       ...MainStyles.iconWrapper,
-      ...(selectedTheme === 'dark' ? darkStyles.iconWrapper : lightStyles.iconWrapper),
+      ...(selectedTheme === 'dark' ? themeStyles.iconWrapper : themeStyles.iconWrapper),
     },
     horizontalLine: {
       ...MainStyles.horizontalLine,
-      ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+      ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
     },
   };
   //#endregion
@@ -94,7 +104,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -129,7 +139,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -243,7 +253,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -276,7 +286,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -321,7 +331,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -380,7 +390,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -421,7 +431,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -442,7 +452,10 @@ const Menu = ({ navigation }) => {
               cx="12"
               cy="12"
               r="3"
-              fill={selectedTheme === 'dark' ? "#454545" : "#e9e9ea"}
+              fill={systemTheme
+                    ? Appearance.getColorScheme() === 'dark'
+                    ?"#454545" : "#e9e9ea"
+                    :selectedTheme === 'dark' ? "#454545" : "#e9e9ea"}
             ></Circle>
           </Svg>
         </View>
@@ -461,7 +474,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
@@ -494,7 +507,7 @@ const Menu = ({ navigation }) => {
           <FontAwesomeIcon
             name="angle-left"
             size={24}
-            color="#454545"
+            color={selectedColor}
             style={styles.icon}
           />
         </View>
