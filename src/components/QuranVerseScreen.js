@@ -7,6 +7,7 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
+import { Appearance } from 'react-native';
 
 const CACHE_KEY = "randomVerseCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -15,6 +16,7 @@ const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor, setColor } = useColor();
+  const systemTheme = selectedTheme === 'system';
 
   //#region selectedColor
   const orangeMain = StyleSheet.create({
@@ -63,7 +65,7 @@ const QuranVerseScreen = ({ navigation }) => {
   //#endregion
 
   //#region LightTheme 
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6", 
     },
@@ -81,7 +83,7 @@ const QuranVerseScreen = ({ navigation }) => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     container: {
       backgroundColor: "#151515", 
     },
@@ -97,26 +99,32 @@ const QuranVerseScreen = ({ navigation }) => {
   },
   });
   //#endregion
-  
+    const themeStyles = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+      ? darkTheme
+      : lightTheme
+    : selectedTheme === 'dark'
+    ? darkTheme
+    : lightTheme;
   //#region StyleMapping
   const styles = {
     ...QuranVerseStyles,
     container: {
       ...QuranVerseStyles.container,
-      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container, 
+      ...selectedTheme  === 'dark'? themeStyles.container : themeStyles.container, 
     },
     rectangle: {
       ...QuranVerseStyles.rectangle, 
-      ...selectedTheme  === 'dark'? darkStyles.rectangle : lightStyles.rectangle, 
+      ...selectedTheme  === 'dark'? themeStyles.rectangle : themeStyles.rectangle, 
     },
     title: {
       ...QuranVerseStyles.title, 
-      ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title, 
+      ...selectedTheme  === 'dark'? themeStyles.title : themeStyles.title, 
       ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
     },
     horizontalLine: {
       ...QuranVerseStyles.horizontalLine,
-      ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine),
+      ...(selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine),
   },
   dot:{
     ...QuranVerseStyles.dot,
