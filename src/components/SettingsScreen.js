@@ -165,9 +165,9 @@ const SettingScreen = ({ navigation }) => {
 
   const colorOptions = [
     { label: '#CD7845', value: '#CD7845' },
-    { label: '#6682C3', value: '#6682C3' },
-    { label: '#9AB06B', value: '#9AB06B' },
     { label: '#AA767C', value: '#AA767C' },
+    { label: '#9AB06B', value: '#9AB06B' },
+    { label: '#6682C3', value: '#6682C3' },
     { label: '#f2b784', value: '#f2b784' },
   ];
   
