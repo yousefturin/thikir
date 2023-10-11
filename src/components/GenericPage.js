@@ -17,12 +17,13 @@ import { useColor } from '../context/ColorContext';
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Appearance } from 'react-native';
 
 const GenericPage = ({ route }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
     const { selectedColor, setColor } = useColor();
-
+    const systemTheme = selectedTheme === 'system';
     //#region selectedColor
     const orangeMain = StyleSheet.create({
         InfoReptTime: {
@@ -115,7 +116,7 @@ const GenericPage = ({ route }) => {
     //#endregion
 
     //#region LightTheme
-    const lightStyles = StyleSheet.create({
+    const lightTheme = StyleSheet.create({
         container: {
             backgroundColor: "#f2f2f6",
         },
@@ -160,7 +161,7 @@ const GenericPage = ({ route }) => {
     //#endregion
 
     //#region DarkTheme
-    const darkStyles = StyleSheet.create({
+    const darkTheme = StyleSheet.create({
         container: {
             backgroundColor: "#151515",
         },
@@ -203,23 +204,30 @@ const GenericPage = ({ route }) => {
         },
     });
     //#endregion
-
+  
+    const themeStyles = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+      ? darkTheme
+      : lightTheme
+    : selectedTheme === 'dark'
+    ? darkTheme
+    : lightTheme;
     //#region StyleMapping
     const styles = {
         ...GenericStyles,
         container: {
             ...GenericStyles.container,
-            ...(selectedTheme  === 'dark'? darkStyles.container : lightStyles.container),
+            ...(selectedTheme  === 'dark'? themeStyles.container : themeStyles.container),
         },
         containerforshare: {
             ...GenericStyles.containerforshare,
             ...(selectedTheme === 'dark'
-                ? darkStyles.containerforshare
-                : lightStyles.containerforshare),
+                ? themeStyles.containerforshare
+                : themeStyles.containerforshare),
         },
         circularButton: {
             ...GenericStyles.circularButton,
-            ...(selectedTheme  === 'dark'? darkStyles.circularButton : lightStyles.circularButton),
+            ...(selectedTheme  === 'dark'? themeStyles.circularButton : themeStyles.circularButton),
             ...(selectedColor === '#f2b784'
                     ? orangeMain.circularButton
                     : selectedColor === '#6682C3'
@@ -232,7 +240,7 @@ const GenericPage = ({ route }) => {
         },
         button: {
             ...GenericStyles.button,
-            ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
+            ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button),
             ...(selectedColor === '#f2b784'
                     ? orangeMain.button
                     : selectedColor === '#6682C3'
@@ -245,40 +253,40 @@ const GenericPage = ({ route }) => {
         },
         textcount: {
             ...GenericStyles.textcount,
-            ...(selectedTheme === 'dark' ? darkStyles.textcount : lightStyles.textcount),
+            ...(selectedTheme === 'dark' ? themeStyles.textcount : themeStyles.textcount),
         },
         rectangle: {
             ...GenericStyles.rectangle,
-            ...(selectedTheme === 'dark' ? darkStyles.rectangle : lightStyles.rectangle),
+            ...(selectedTheme === 'dark' ? themeStyles.rectangle : themeStyles.rectangle),
         },
         title: {
             ...GenericStyles.title,
-            ...(selectedTheme  === 'dark'? darkStyles.title : lightStyles.title),
+            ...(selectedTheme  === 'dark'? themeStyles.title : themeStyles.title),
             ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         description: {
             ...GenericStyles.description,
-            ...(selectedTheme  === 'dark'? darkStyles.description : lightStyles.description),
+            ...(selectedTheme  === 'dark'? themeStyles.description : themeStyles.description),
         },
         InfoReptTimeIndex: {
             ...GenericStyles.InfoReptTimeIndex,
             ...(selectedTheme === 'dark'
-                ? darkStyles.InfoReptTimeIndex
-                : lightStyles.InfoReptTimeIndex),
+                ? themeStyles.InfoReptTimeIndex
+                : themeStyles.InfoReptTimeIndex),
         },
         InfoReptTime: {
             ...GenericStyles.InfoReptTime,
-            ...(selectedTheme === 'dark' ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
+            ...(selectedTheme === 'dark' ? themeStyles.InfoReptTime : themeStyles.InfoReptTime),
         },
         ControlPaneBackground: {
             ...GenericStyles.ControlPaneBackground,
             ...(selectedTheme === 'dark'
-                ? darkStyles.ControlPaneBackground
-                : lightStyles.ControlPaneBackground),
+                ? themeStyles.ControlPaneBackground
+                : themeStyles.ControlPaneBackground),
         },
         horizontalLine: {
             ...GenericStyles.horizontalLine,
-            ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
         },
         dot:{
             ...GenericStyles.dot,
@@ -315,9 +323,14 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
-    const ControlPaneBackgroundImage = selectedTheme ==='dark'
-        ? require("../../assets/HeaderBackground.jpg")
-        : require("../../assets/HeaderBackgroundLight.jpg");
+    const ControlPaneBackgroundImage = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+    ? require("../../assets/HeaderBackground.jpg")
+    : require("../../assets/HeaderBackgroundLight.jpg")
+    :selectedTheme === 'dark'
+    ? require("../../assets/HeaderBackground.jpg")
+    : require("../../assets/HeaderBackgroundLight.jpg");
+
     const viewRef = React.useRef();
     //#endregion
 
