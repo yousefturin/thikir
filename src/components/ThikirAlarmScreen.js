@@ -6,10 +6,12 @@ import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '../context/ThemContex';
+import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
 
 const ThikirAlarmScreen = () => {
   const { selectedTheme } = useTheme();
+  const { selectedColor, setColor } = useColor();
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -317,7 +319,7 @@ const ThikirAlarmScreen = () => {
                     toggleAlarm(notification.id, !notification.isActive)
                   }
                   thumbColor={notification.isActive ? '#fefffe' : '#fefffe'}
-                  trackColor={{ true: '#f2b784', false: '#454545' }}
+                  trackColor={{ true: selectedColor, false: '#454545' }}
                 />
               </View>
             </View>
