@@ -18,15 +18,13 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [selectedTheme, setSelectedTheme] = useState(null); // Use null to represent initial loading state
-
   useEffect(() => {
     async function fetchTheme() {
       try {
         const themeValue = await AsyncStorage.getItem('@selectedTheme');
-        if (themeValue === 'dark' || themeValue === 'light') {
-          setSelectedTheme(themeValue);
+        if (themeValue === 'dark' || themeValue === 'light' || themeValue === 'system') {
+          setSelectedTheme(themeValue); // Set the selected theme if it's "dark," "light," or "system"
         } else {
-          // Use the system theme
           const systemTheme = Appearance.getColorScheme();
           setSelectedTheme(systemTheme || 'light');
         }
