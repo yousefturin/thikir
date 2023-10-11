@@ -5,6 +5,7 @@ import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
 import { useTheme } from '../context/ThemContex'; 
 import { useFont } from "../context/FontContext";
+import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -12,7 +13,37 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 const HADITHVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
-
+  const { selectedColor, setColor } = useColor();
+  
+  //#region selectedColor
+  const orangeMain = StyleSheet.create({
+      dot: {
+          color: '#f2b784',
+      },
+  });
+  const pink = StyleSheet.create({
+      dot: {
+          color: '#6682C3',
+      },
+  });
+  const green = StyleSheet.create({
+      dot: {
+          color: '#9AB06B',
+      },
+  });
+  const blue = StyleSheet.create({
+      dot: {
+          color: '#AA767C',
+      },
+  });
+  const peach = StyleSheet.create({
+      dot: {
+          color: '#CD7845',
+      },
+  });
+  //#endregion
+  
+  //#region SelectedFont
   const HafsFont = StyleSheet.create({
       title:{
           fontFamily:"Hafs",
@@ -28,6 +59,8 @@ const HADITHVerseScreen = ({ navigation }) => {
           fontFamily:"MeQuran",
       }
   });
+  //#endregion
+
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -84,6 +117,18 @@ const HADITHVerseScreen = ({ navigation }) => {
       ...QuranVerseStyles.horizontalLine,
       ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
   },
+  dot:{
+    ...QuranVerseStyles.dot,
+    ...(selectedColor === '#f2b784'
+        ? orangeMain.dot
+        : selectedColor === '#6682C3'
+        ? pink.dot
+        : selectedColor === '#9AB06B'
+        ? green.dot
+        : selectedColor === '#AA767C'
+        ? blue.dot
+        : peach.dot),
+},
   };
   //#endregion
   
