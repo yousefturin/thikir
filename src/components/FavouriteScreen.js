@@ -11,12 +11,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getItems } from "../db/GetData";
 import { HomeStyles } from "../context/commonStyles";
 import { useTheme } from "../context/ThemContex";
+import { useColor } from '../context/ColorContext';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Appearance } from 'react-native';
 
 const FavouriteScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const systemTheme = selectedTheme === 'system';
+  const { selectedColor, setColor } = useColor();
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     pageContainer: {
@@ -291,7 +293,7 @@ const renderBorderRadius = (index) => {
                   <FontAwesomeIcon
                     name="angle-left"
                     size={24}
-                    color="#454545"
+                    color={selectedColor}
                     style={styles.icon}
                   />
                 </View>
