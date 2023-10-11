@@ -1,10 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import { useTheme } from '../context/ThemContex';
+import { useColor } from '../context/ColorContext';
 import { AboutStyles } from '../context/commonStyles';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
+  const { selectedColor, setColor } = useColor();
+  
   //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
@@ -94,9 +97,9 @@ const AboutScreen = ({ navigation }) => {
         <View>
           <Text style={styles.rectangleText}>
             اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق
-            <Text style={{ color: '#f2b784', fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
+            <Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
             قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
-            قال: «<Text style={{ color: '#f2b784', fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
+            قال: «<Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
 
             {'\n'}  <Text style={{ fontSize: 16, fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
           </Text>
