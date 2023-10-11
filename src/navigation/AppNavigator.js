@@ -26,15 +26,15 @@ const Stack = createStackNavigator();
 
 
 const AppNavigator = () => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
 
-  const headerTintColor = isDarkMode
+  const headerTintColor = selectedTheme === 'dark' 
   ? "white"
   :"black";
-  const barColor = isDarkMode
+  const barColor = selectedTheme === 'dark' 
   ?"white"
   :"black";
-  const backgroundBarColor = isDarkMode
+  const backgroundBarColor = selectedTheme === 'dark' 
   ?"#151515"
   :"#f2f2f6";
   const headerStyle = {height: 100, backgroundColor: backgroundBarColor, elevation: 0, shadowOpacity: 0, };

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./src/navigation/AppNavigator";
 import * as Font from "expo-font";
-import { ThemeProvider, useTheme } from "./src/context/ThemContex";
-
+import { Platform } from 'react-native';
+import * as Notifications from "expo-notifications";
+import { ThemeProvider  } from "./src/context/ThemContex";
+import { FontProvider } from "./src/context/FontContext";
+import { ColorProvider  } from "./src/context/ColorContext";
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -13,38 +16,65 @@ const App = () => {
         AmiriFont: require("./assets/fonts/Amiri-Regular.ttf"),
         ScheherazadeNew: require("./assets/fonts/ScheherazadeNew-Regular.ttf"),
         ScheherazadeNewBold: require("./assets/fonts/ScheherazadeNew-Bold.ttf"),
-        // Load other fonts as needed
+        Hafs: require("./assets/fonts/Hafs.ttf"),
+        MeQuran: require("./assets/fonts/MeQuran.ttf"),
       });
       setFontLoaded(true);
     }
+    loadFonts();
+  }, []);
+  
+  useEffect(() => {
     const requestNotificationPermissions = async () => {
-      const { status } = await Notifications.requestPermissionsAsync();
-      if (status === "granted") {
-        console.log("Notification permissions granted");
-
-        // Configure notification categories
-        Notifications.setNotificationCategoryAsync("alarm", [
-          {
-            identifier: "dismiss",
-            buttonTitle: "Dismiss",
-          },
-        ]);
-      } else {
-        console.log("Notification permissions denied");
+      if (Platform.OS === 'android'){
+        const { status } = await Notifications.requestPermissionsAsync();
+        if (status === "granted") {
+          console.log("Notification permissions granted");
+  
+          // Configure notification categories
+          Notifications.setNotificationCategoryAsync("alarm", [
+            {
+              identifier: "dismiss",
+              buttonTitle: "Dismiss",
+            },
+          ]);
+        } else {
+          console.log("Notification permissions denied");
+        }
+      }else{
+        const { status } = await Notifications.requestPermissionsAsync();
+        if (status === "granted") {
+          console.log("Notification permissions granted");
+  
+          // Configure notification categories
+          Notifications.setNotificationCategoryAsync("alarm", [
+            {
+              identifier: "dismiss",
+              buttonTitle: "Dismiss",
+            },
+          ]);
+        } else {
+          console.log("Notification permissions denied");
+        }
       }
     };
-    loadFonts();
+    requestNotificationPermissions();
   }, []);
 
   if (!fontLoaded) {
-    return console.log(!fontLoaded); // Display a loading indicator
+    return console.log(!fontLoaded);
   }
+
   return (
     <NavigationContainer>
-      <ThemeProvider>
-        <AppNavigator />
-      </ThemeProvider>
-    </NavigationContainer>
+    <ThemeProvider>
+      <FontProvider> 
+        <ColorProvider>
+          <AppNavigator />
+        </ColorProvider>
+      </FontProvider>
+    </ThemeProvider>
+  </NavigationContainer>
   );
 };
 

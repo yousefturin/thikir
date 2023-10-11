@@ -6,8 +6,9 @@ import { useTheme } from '../context/ThemContex';
 import { ReportProblemStyles } from '../context/commonStyles';
 
 const ReportProblemScreen = () => {
-  const { isDarkMode } = useTheme();
+  const { selectedTheme } = useTheme();
 
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
@@ -26,7 +27,9 @@ const ReportProblemScreen = () => {
       shadowColor: 'white',
     },
   });
-
+  //#endregion
+  
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
@@ -45,28 +48,34 @@ const ReportProblemScreen = () => {
       shadowColor: 'black',
     },
   });
+  //#endregion
+  
+  //#region StyleMapping
   const styles = {
     ...ReportProblemStyles,
     container: {
       ...ReportProblemStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container,
+      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container,
     },
     heading: {
       ...ReportProblemStyles.heading,
-      ...isDarkMode ? darkStyles.heading : lightStyles.heading,
+      ...selectedTheme  === 'dark'? darkStyles.heading : lightStyles.heading,
     },
     input: {
       ...ReportProblemStyles.input,
-      ...isDarkMode ? darkStyles.input : lightStyles.input,
+      ...selectedTheme === 'dark' ? darkStyles.input : lightStyles.input,
     },
     inputScreenshot: {
       ...ReportProblemStyles.inputScreenshot,
-      ...isDarkMode ? darkStyles.inputScreenshot : lightStyles.inputScreenshot,
+      ...selectedTheme  === 'dark'? darkStyles.inputScreenshot : lightStyles.inputScreenshot,
     },
   };
+  //#endregion
+  
   const [description, setDescription] = useState('');
   const [screenshot, setScreenshot] = useState(null); // Initialize with null, not an empty string
-
+  
+  //#region PickImage as screenshot
   const pickImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -87,7 +96,9 @@ const ReportProblemScreen = () => {
       console.error('Error picking image:', error);
     }
   };
-
+  //#endregion
+  
+  //#region sentReport
   const sendReport = async () => {
     try {
       const { status } = await MailComposer.composeAsync({
@@ -107,6 +118,7 @@ const ReportProblemScreen = () => {
       // Handle the error and provide user feedback
     }
   };
+  //#endregion
 
   return (
     <View style={styles.container}>

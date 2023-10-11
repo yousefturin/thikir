@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Switch, StyleSheet, Dimensions } from "react-native";
+import { View, Text, TouchableOpacity, Switch, StyleSheet, Platform  } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '../context/ThemContex';
+import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
 
 const ThikirAlarmScreen = () => {
-  const { isDarkMode } = useTheme();
-
+  const { selectedTheme } = useTheme();
+  const { selectedColor, setColor } = useColor();
+  //#region LightTheme
   const lightStyles = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
@@ -24,9 +27,10 @@ const ThikirAlarmScreen = () => {
     horizontalLineWrapper: {
       borderColor: "#fefffe",
     },
-
   });
+  //#endregion
 
+  //#region DarkTheme
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
@@ -41,28 +45,32 @@ const ThikirAlarmScreen = () => {
     horizontalLineWrapper: {
       borderColor: "#262626",
     },
-
   });
+  //#endregion
+
+  //#region StyleMapping
   const styles = {
     ...ThikirAlarmStyles,
     container: {
       ...ThikirAlarmStyles.container,
-      ...isDarkMode ? darkStyles.container : lightStyles.container,
+      ...selectedTheme === 'dark' ? darkStyles.container : lightStyles.container,
     },
     notificationContainer: {
       ...ThikirAlarmStyles.notificationContainer,
-      ...isDarkMode ? darkStyles.notificationContainer : lightStyles.notificationContainer,
+      ...selectedTheme  === 'dark'? darkStyles.notificationContainer : lightStyles.notificationContainer,
     },
     title: {
       ...ThikirAlarmStyles.title,
-      ...isDarkMode ? darkStyles.title : lightStyles.title,
+      ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title,
     },
     horizontalLineWrapper: {
       ...ThikirAlarmStyles.horizontalLineWrapper,
-      ...isDarkMode ? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
+      ...selectedTheme  === 'dark'? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
     },
   };
-
+  //#endregion
+  
+  //#region notification structure
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState([
@@ -91,21 +99,37 @@ const ThikirAlarmScreen = () => {
       isActive: true,
     },
   ]);
+  //#endregion
 
   useEffect(() => {
     requestNotificationPermissions();
     loadNotificationStatesAndAlarmTimes();
   }, []);
 
+  //#region getNotificationPermission
   const requestNotificationPermissions = async () => {
-    const { status } = await Notifications.requestPermissionsAsync();
+    if (Platform.OS === 'android'){
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== "granted") {
+        const { status: newStatus } = await Notifications.requestPermissionsAsync();
+        if(newStatus ==='granted'){
+          console.log("Notification permissions granted");
+        }
+      } else {
+        console.log("Notification permissions denied");
+      }
+    }else{
+      const { status } = await Notifications.requestPermissionsAsync();
     if (status === "granted") {
       console.log("Notification permissions granted");
     } else {
       console.log("Notification permissions denied");
     }
+    }
   };
+  //#endregion
 
+  //#region toggleAlarm
   const toggleAlarm = async (notificationId, newValue) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const updatedNotifications = notifications.map((notification) =>
@@ -140,7 +164,9 @@ const ThikirAlarmScreen = () => {
     // Save the updated notification state to storage
     saveNotificationData(updatedNotifications);
   };
+  //#endregion
 
+  //#region scheduleNotifications
   const scheduleNotification = async (notificationId, selectedNotification) => {
     await Notifications.cancelScheduledNotificationAsync(notificationId);
     await Notifications.scheduleNotificationAsync({
@@ -160,19 +186,24 @@ const ThikirAlarmScreen = () => {
     });
     console.log(`Notification for ${notificationId} scheduled.`);
   };
-
+  //#endregion
+  
+  //#region display datapicker
   const showDatePicker = (notification) => {
     setSelectedNotification(notification);
     setDatePickerVisibility(true);
   };
 
+
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
+  //#endregion
+  
+  //#region handleConfirmation
   const handleConfirm = async (date) => {
     hideDatePicker();
-
     // Update the selected notification with the chosen date and set isActive to true
     const updatedNotifications = notifications.map((notification) =>
       notification.id === selectedNotification.id
@@ -191,6 +222,9 @@ const ThikirAlarmScreen = () => {
     saveNotificationData(updatedNotifications);
   };
 
+  //#endregion
+  
+  //#region loadStatesOfalarmTimeAndNotifications
   const loadNotificationStatesAndAlarmTimes = async () => {
     try {
       const storedDataJSON = await AsyncStorage.getItem("notificationData");
@@ -215,12 +249,16 @@ const ThikirAlarmScreen = () => {
       console.error("Error loading notification data:", error);
     }
   };
+  //#endregion
 
+  //#region handleCancelNotifaction
   const cancelNotification = async (notificationId) => {
     await Notifications.cancelScheduledNotificationAsync(notificationId);
     console.log(`Notification for ${notificationId} canceled.`);
   };
-
+  //#endregion
+    
+  //#region handleSaveNotifactiondData
   const saveNotificationData = async (notificationsToSave) => {
     try {
       const notificationData = {};
@@ -239,7 +277,9 @@ const ThikirAlarmScreen = () => {
       console.error("Error saving notification data:", error);
     }
   };
-
+  //#endregion
+  
+  //#region DispalyBorderRadiusBasedOnItemCount
   const renderBorderRadius = (index) => {
     const itemCount = notifications.length;
     if (index === 0) {
@@ -250,8 +290,9 @@ const ThikirAlarmScreen = () => {
     } else if (index === itemCount - 1) {
       return { borderBottomLeftRadius: 10, borderBottomRightRadius: 10 };
     }
-    return {}; // Default: no border radius
+    return {}; 
   };
+  //#endregion
 
   return (
     <View style={styles.container}>
@@ -263,8 +304,8 @@ const ThikirAlarmScreen = () => {
           >
             <View style={[styles.notificationContainer, renderBorderRadius(index),]}>
               <View style={styles.leftContent}>
-                <Text style={styles.title}>{notification.title}</Text>
-                <Text style={styles.time}>
+                <Text allowFontScaling={false} style={styles.title}>{notification.title}</Text>
+                <Text allowFontScaling={false} style={styles.time}>
                   {notification.date
                     ? formatTime(notification.date)
                     : formatTime(getDefaultTime(notification.id))}
@@ -278,7 +319,7 @@ const ThikirAlarmScreen = () => {
                     toggleAlarm(notification.id, !notification.isActive)
                   }
                   thumbColor={notification.isActive ? '#fefffe' : '#fefffe'}
-                  trackColor={{ true: '#be915a', false: '#454545' }}
+                  trackColor={{ true: selectedColor, false: '#454545' }}
                 />
               </View>
             </View>
@@ -304,10 +345,13 @@ const ThikirAlarmScreen = () => {
   );
 };
 
+//#region FormatTimeForTwoDigits
 const formatTime = (time) => {
   return time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 };
+//#endregion
 
+//#region GetDefaulTimeOfNotifications
 const getDefaultTime = (notificationId) => {
   // Define default times for each notification based on their IDs
   const defaultTimes = {
@@ -316,8 +360,8 @@ const getDefaultTime = (notificationId) => {
     thikir_morning: new Date().setHours(7, 0, 0, 0),
     thikir_evening: new Date().setHours(18, 0, 0, 0),
   };
-
   return new Date(defaultTimes[notificationId]) || new Date();
 };
+//#endregion
 
 export default ThikirAlarmScreen;

@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
+//#region MainStyles
 export const MainStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -77,7 +78,9 @@ export const MainStyles = StyleSheet.create({
     marginLeft: 360,
   },
 });
+//#endregion
 
+//#region AboutStyles
 export const AboutStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -99,7 +102,7 @@ export const AboutStyles = StyleSheet.create({
   },
   rectangleWrapper: {
     marginTop: 30,
-    height: 180,
+    height: 230,
     borderRadius: 10,
     backgroundColor: "#262626",
     flexDirection: "row",
@@ -114,6 +117,13 @@ export const AboutStyles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 4,
+    paddingVertical:20
+    },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
   },
   rectangleText: {
     color: "#fff",
@@ -141,6 +151,9 @@ export const AboutStyles = StyleSheet.create({
     marginLeft: 360,
   },
 });
+//#endregion
+
+//#region DuaVerseStyles
 export const DuaVerseStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -166,14 +179,24 @@ export const DuaVerseStyles = StyleSheet.create({
     elevation: 4,
     position: "relative",
   },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    marginBottom:20,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
+  },
   title: {
     textAlign: "center",
     color: "white",
     fontFamily: "ScheherazadeNew",
+    marginTop:20,
   },
   translation: {
+    marginTop:10,
     marginBottom: 30,
-    fontSize: 11,
+    fontSize: 15,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
@@ -183,6 +206,11 @@ export const DuaVerseStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: -5,
+    alignItems: 'center', // Horizontal centering
   },
   shareButton: {
     position: "absolute",
@@ -201,7 +229,7 @@ export const DuaVerseStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
@@ -213,6 +241,9 @@ export const DuaVerseStyles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+//#endregion
+
+//#region QuranVerseStyles
 export const QuranVerseStyles = StyleSheet.create({
   // this is a common between VERSE and HADITH!
   container: {
@@ -238,6 +269,14 @@ export const QuranVerseStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
+  }, 
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    marginBottom:20,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
   },
   title: {
     textAlign: "center",
@@ -249,6 +288,19 @@ export const QuranVerseStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: -5,
+    alignItems: 'center', // Horizontal centering
+  },
+  tafsirStyle:{
+    fontSize: 15,
+    textAlign: "center",
+    color: "#767676",
+    fontFamily: "AmiriFont",
+    paddingTop:20,
+    marginBottom:20,
   },
   shareButton: {
     position: "absolute",
@@ -267,13 +319,22 @@ export const QuranVerseStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
   },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#151515",
+    width: "100%",
+    marginBottom: 5,
+  },
+  
 });
+//#endregion
 
+//#region HomeStyles
 export const HomeStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
@@ -353,6 +414,15 @@ export const HomeStyles = StyleSheet.create({
     marginLeft: 30,
     fontFamily: "ScheherazadeNew",
   },
+  emptyMessage:{
+    flex:1,
+    alignItems: "center",
+    justifyContent: "center",
+    opacity:0.3
+  },
+  emptyMessageText:{
+    fontFamily: "ScheherazadeNew",
+  },
   image: {
     width: 44,
     height: 55,
@@ -396,7 +466,7 @@ export const HomeStyles = StyleSheet.create({
   },
   buttonTextTop: {
     color: "#dddddd",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "300",
     textAlign: "right",
     marginRight: 10,
@@ -424,7 +494,9 @@ export const HomeStyles = StyleSheet.create({
     color: "#fff",
   },
 });
+//#endregion
 
+//#region ThikirAlarmStyles
 export const ThikirAlarmStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -465,7 +537,7 @@ export const ThikirAlarmStyles = StyleSheet.create({
   title: {
     color: "#dddddd",
     textAlign: "right",
-    fontSize: 18,
+    fontSize: 15,
     marginRight: 10,
     fontFamily: "ScheherazadeNewBold",
   },
@@ -473,6 +545,7 @@ export const ThikirAlarmStyles = StyleSheet.create({
     color: "#777",
     marginRight: 10,
     textAlign: "right",
+    fontSize: 12,
   },
   horizontalLineWrapper: {
     borderBottomWidth: 1,
@@ -480,7 +553,9 @@ export const ThikirAlarmStyles = StyleSheet.create({
     marginLeft: windowWidth > 600 ? 610 : 350,
   },
 });
+//#endregion
 
+//#region GenericStyles
 export const GenericStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -501,7 +576,7 @@ export const GenericStyles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 25,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "#151515",
     backgroundColor: "#262626",
     alignItems: "center",
@@ -513,7 +588,7 @@ export const GenericStyles = StyleSheet.create({
     padding: 14,
     backgroundColor: "#262626",
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth: 0.9,
     borderColor: "#151515",
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -522,8 +597,9 @@ export const GenericStyles = StyleSheet.create({
   textcount: {
     textAlign: "center",
     color: "white",
-    fontSize: 20,
+    fontSize: 17,
     fontFamily: "ScheherazadeNew",
+    justifyContent:"center",
   },
   icon: {
     marginTop: 2,
@@ -545,6 +621,15 @@ export const GenericStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
+    
+  },
+  scrollContainer: {
+    justifyContent:'center',
+    paddingBottom:20,
+    paddingTop:10,
+    paddingHorizontal: 10,
+    minHeight:170,
+    maxHeight:2070,
   },
   title: {
     textAlign: "center",
@@ -552,11 +637,12 @@ export const GenericStyles = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
   },
   description: {
-    fontSize: 11,
+    fontSize: 9,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
-    paddingBottom: 20,
+    paddingVertical: 30,
+    paddingBottom:40,
   },
   InfoReptTimeIndex: {
     fontSize: 11,
@@ -571,12 +657,20 @@ export const GenericStyles = StyleSheet.create({
   InfoReptTime: {
     fontSize: 11,
     textAlign: "center",
-    color: "#be915a",
+    color: "#f2b784",
     fontFamily: "AmiriFont",
     position: "absolute",
     right: 0,
     bottom: 0,
     padding: 20,
+  },
+  FavButton:{
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    padding: 20,
+    alignItems: 'center', // Horizontal centering
   },
   ControlPaneBackground: {
     flexDirection: "row",
@@ -602,7 +696,7 @@ export const GenericStyles = StyleSheet.create({
     flexDirection: "row",
   },
   dot: {
-    color: "#be915a",
+    color: "#f2b784",
     fontSize: 20,
     fontWeight: "700",
     marginHorizontal: 1,
@@ -613,7 +707,118 @@ export const GenericStyles = StyleSheet.create({
     width: "100%",
   },
 });
+//#endregion
 
+//#region settingStyles
+export const  SettingStyles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#151515",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop:20
+  },
+  themeOptionsContainer: {
+    flexDirection: "row-reverse",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+
+  themeOption: {
+    padding: 14,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'space-between',
+    paddingBottom:4
+  },
+  themeCircle: {
+    width: 24, // Set the size of the circle container
+    height: 24,
+    borderRadius: 12, // Make it a circle
+    borderWidth: 1, // Add a border
+    borderColor: '#f2b784', // Border color
+    marginRight: 10, // Spacing between the circle and text
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent:'center',
+  },
+  selectedCircle: {
+    width: 12, // Set the size of the filled circle
+    height: 12,
+    borderRadius: 6, // Make it a circle
+    backgroundColor: '#f2b784', // Color of the filled circle
+  },
+  fontOptionsContainer: {
+    flexDirection: "row-reverse",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+  rectangle: {
+    backgroundColor: "#fefffe",
+    borderRadius: 10,
+    marginTop: 10,
+    width: "90%",
+    shadowColor: "gray",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  HeadertextColor:{
+  color: "#767676",
+  textAlign: 'right',
+  paddingTop: 15,
+  paddingLeft:300
+  },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    marginEnd:15
+  },
+  textColor:{
+    paddingRight:6
+  },
+  colorOption: {
+    margin: 10,
+  },
+  colorCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 30, // Make it a circle
+    borderWidth: 1,
+    borderColor: 'transparent', // Default border color
+
+  },
+  selectedColorCircle: {
+    borderColor: '#EBEAEA', // Border color for selected color
+    shadowColor: "white",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  checkIcon: {
+    position: 'absolute',
+    top: '32%', // Adjust the position as needed
+    left: '32%', // Adjust the position as needed
+  },
+  colorOptionsContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+});
+//#endregion
+
+
+//#region ReportProblemStyles
 export const ReportProblemStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -672,3 +877,4 @@ export const ReportProblemStyles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
+//#endregion

@@ -6,18 +6,115 @@ import {
     ImageBackground,
     TouchableWithoutFeedback,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
+import { useFont } from "../context/FontContext";
+import { useColor } from '../context/ColorContext';
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GenericPage = ({ route }) => {
-    const { isDarkMode } = useTheme();
+    const { selectedTheme } = useTheme();
+    const { selectedFont } = useFont();
+    const { selectedColor, setColor } = useColor();
 
+    //#region selectedColor
+    const orangeMain = StyleSheet.create({
+        InfoReptTime: {
+            color: '#f2b784',
+        },
+        dot: {
+            color: '#f2b784',
+        },
+        circularButton:{
+            borderColor:'#f2b784',
+        },
+        button:{
+            borderColor:'#f2b784',
+        },
+    });
+    const pink = StyleSheet.create({
+        InfoReptTime: {
+            color: '#6682C3',
+        },
+        dot: {
+            color: '#6682C3',
+        },
+        circularButton:{
+            borderColor:'#6682C3',
+        },
+        button:{
+            borderColor:'#6682C3',
+        },
+    });
+    const green = StyleSheet.create({
+        InfoReptTime: {
+            color: '#9AB06B',
+        },
+        dot: {
+            color: '#9AB06B',
+        },
+        circularButton:{
+            borderColor:'#9AB06B',
+        },
+        button:{
+            borderColor:'#9AB06B',
+        },
+    });
+    const blue = StyleSheet.create({
+        InfoReptTime: {
+            color: '#AA767C',
+        },
+        dot: {
+            color: '#AA767C',
+        },
+        circularButton:{
+            borderColor:'#AA767C',
+        },
+        button:{
+            borderColor:'#AA767C',
+        },
+    });
+    const peach = StyleSheet.create({
+        InfoReptTime: {
+            color: '#CD7845',
+        },
+        dot: {
+            color: '#CD7845',
+        },
+        circularButton:{
+            borderColor:'#CD7845',
+        },
+        button:{
+            borderColor:'#CD7845',
+        },
+    });
+    //#endregion
+
+    //#region selectedFont
+    const HafsFont = StyleSheet.create({
+        title:{
+            fontFamily:"Hafs",
+        }
+    });
+    const ScheherazadeNewFont = StyleSheet.create({
+        title:{
+            fontFamily:"ScheherazadeNew",
+        }
+    });
+    const MeQuranFont = StyleSheet.create({
+        title:{
+            fontFamily:"MeQuran",
+        }
+    });
+    //#endregion
+
+    //#region LightTheme
     const lightStyles = StyleSheet.create({
         container: {
             backgroundColor: "#f2f2f6",
@@ -51,7 +148,7 @@ const GenericPage = ({ route }) => {
             color: "#767676",
         },
         InfoReptTime: {
-            color: "#be915a",
+            color: "#f2b784",
         },
         ControlPaneBackground: {
             shadowColor: "white",
@@ -60,7 +157,9 @@ const GenericPage = ({ route }) => {
             borderColor: "#f2f2f6",
         },
     });
+    //#endregion
 
+    //#region DarkTheme
     const darkStyles = StyleSheet.create({
         container: {
             backgroundColor: "#151515",
@@ -94,7 +193,7 @@ const GenericPage = ({ route }) => {
             color: "#767676",
         },
         InfoReptTime: {
-            color: "#be915a",
+            color: "#f2b784",
         },
         ControlPaneBackground: {
             shadowColor: "black",
@@ -103,80 +202,130 @@ const GenericPage = ({ route }) => {
             borderColor: "#151515",
         },
     });
+    //#endregion
+
+    //#region StyleMapping
     const styles = {
         ...GenericStyles,
         container: {
             ...GenericStyles.container,
-            ...(isDarkMode ? darkStyles.container : lightStyles.container),
+            ...(selectedTheme  === 'dark'? darkStyles.container : lightStyles.container),
         },
         containerforshare: {
             ...GenericStyles.containerforshare,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.containerforshare
                 : lightStyles.containerforshare),
         },
         circularButton: {
             ...GenericStyles.circularButton,
-            ...(isDarkMode ? darkStyles.circularButton : lightStyles.circularButton),
+            ...(selectedTheme  === 'dark'? darkStyles.circularButton : lightStyles.circularButton),
+            ...(selectedColor === '#f2b784'
+                    ? orangeMain.circularButton
+                    : selectedColor === '#6682C3'
+                    ? pink.circularButton
+                    : selectedColor === '#9AB06B'
+                    ? green.circularButton
+                    : selectedColor === '#AA767C'
+                    ? blue.circularButton
+                    : peach.circularButton),
         },
         button: {
             ...GenericStyles.button,
-            ...(isDarkMode ? darkStyles.button : lightStyles.button),
+            ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
+            ...(selectedColor === '#f2b784'
+                    ? orangeMain.button
+                    : selectedColor === '#6682C3'
+                    ? pink.button
+                    : selectedColor === '#9AB06B'
+                    ? green.button
+                    : selectedColor === '#AA767C'
+                    ? blue.button
+                    : peach.button),
         },
         textcount: {
             ...GenericStyles.textcount,
-            ...(isDarkMode ? darkStyles.textcount : lightStyles.textcount),
+            ...(selectedTheme === 'dark' ? darkStyles.textcount : lightStyles.textcount),
         },
         rectangle: {
             ...GenericStyles.rectangle,
-            ...(isDarkMode ? darkStyles.rectangle : lightStyles.rectangle),
+            ...(selectedTheme === 'dark' ? darkStyles.rectangle : lightStyles.rectangle),
         },
         title: {
             ...GenericStyles.title,
-            ...(isDarkMode ? darkStyles.title : lightStyles.title),
+            ...(selectedTheme  === 'dark'? darkStyles.title : lightStyles.title),
+            ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         description: {
             ...GenericStyles.description,
-            ...(isDarkMode ? darkStyles.description : lightStyles.description),
+            ...(selectedTheme  === 'dark'? darkStyles.description : lightStyles.description),
         },
         InfoReptTimeIndex: {
             ...GenericStyles.InfoReptTimeIndex,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.InfoReptTimeIndex
                 : lightStyles.InfoReptTimeIndex),
         },
         InfoReptTime: {
             ...GenericStyles.InfoReptTime,
-            ...(isDarkMode ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
+            ...(selectedTheme === 'dark' ? darkStyles.InfoReptTime : lightStyles.InfoReptTime),
         },
         ControlPaneBackground: {
             ...GenericStyles.ControlPaneBackground,
-            ...(isDarkMode
+            ...(selectedTheme === 'dark'
                 ? darkStyles.ControlPaneBackground
                 : lightStyles.ControlPaneBackground),
         },
         horizontalLine: {
             ...GenericStyles.horizontalLine,
-            ...(isDarkMode ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+        },
+        dot:{
+            ...GenericStyles.dot,
+            ...(selectedColor === '#f2b784'
+                ? orangeMain.dot
+                : selectedColor === '#6682C3'
+                ? pink.dot
+                : selectedColor === '#9AB06B'
+                ? green.dot
+                : selectedColor === '#AA767C'
+                ? blue.dot
+                : peach.dot),
+        },
+        InfoReptTime:{
+            ...GenericStyles.InfoReptTime,
+            ...(selectedColor === '#f2b784'
+                ? orangeMain.InfoReptTime
+                : selectedColor === '#6682C3'
+                ? pink.InfoReptTime
+                : selectedColor === '#9AB06B'
+                ? green.InfoReptTime
+                : selectedColor === '#AA767C'
+                ? blue.InfoReptTime
+                : peach.InfoReptTime),
         },
     };
+    //#endregion
+
+    //#region
     const { item, itemIndex } = route.params;
     const [count, setCount] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [maxDescriptionHeight, setMaxDescriptionHeight] = useState(0);
     const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
-    const ControlPaneBackgroundImage = isDarkMode
-        ? require("../../assets/HeaderBackground.jpg") // Dark theme background image source
-        : require("../../assets/HeaderBackgroundLight.jpg"); // Light theme background image source
+    const ControlPaneBackgroundImage = selectedTheme ==='dark'
+        ? require("../../assets/HeaderBackground.jpg")
+        : require("../../assets/HeaderBackgroundLight.jpg");
     const viewRef = React.useRef();
+    //#endregion
 
     const Share = async () => {
         await handleShare(viewRef.current);
     };
 
+    //#region DisplayViewStyle base on character length
     useEffect(() => {
         // Find the maximum height based on the character length of subItemDescription
         const subItemName = item.subItems[currentIndex].subItemDescription;
@@ -189,59 +338,53 @@ const GenericPage = ({ route }) => {
             sanitizedDescription.length
         );
         console.log("sanitized sanitizedName length is:", sanitizedName.length);
-        let maxHeight = 170;
         let MaxFontSize = 20;
         let maxPadding = 60;
         let maxpaddingHorizontal = 20;
 
         if (sanitizedDescription.length > 1000) {
-            maxHeight = 450;
             MaxFontSize = 16;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 700) {
-            maxHeight = 350;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 600) {
-            maxHeight = 300;
+
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 500) {
-            maxHeight = 300;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 400) {
-            maxHeight = 250;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 300) {
-            maxHeight = 220;
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 290) {
-            maxHeight = 350;
+
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 200) {
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedName.length > 200) {
-            maxHeight = 200;
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         }
-        console.log(maxHeight, MaxFontSize, maxPadding, maxpaddingHorizontal);
-        setMaxDescriptionHeight(maxHeight);
+        console.log( MaxFontSize, maxPadding, maxpaddingHorizontal);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
         setMaxpaddingHorizontal(maxpaddingHorizontal);
     }, [item.subItems, currentIndex]);
+    //#endregion
 
+    //#region navigationBetweenSubitems
     useEffect(() => {
         if (count >= item.subItems[currentIndex].count) {
             if (currentIndex < item.subItems.length - 1) {
@@ -275,24 +418,30 @@ const GenericPage = ({ route }) => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
     };
+    //#endregion
 
     let pressTimeout;
     let startX = 0; // Initial X-coordinate of the touch
+    let startY = 0; // Initial Y-coordinate of the touch
     let isSwiping = false; // Track if a swipe occurred
 
+    //#region pressControl for long/short
     const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
             setIsLongPress(true); // Detect long press
-        }, 1000); // Adjust the duration as needed for your long press
+        }, 1000);
         startX = e.nativeEvent.pageX; // Store the initial X-coordinate
+        startY = e.nativeEvent.pageY; // Store the initial Y-coordinate
     };
 
     const handleContainerPressOut = (e) => {
         clearTimeout(pressTimeout); // Clear the timeout on release
         const endX = e.nativeEvent.pageX; // Get the final X-coordinate
-        const swipeDistance = Math.abs(endX - startX); // Calculate the distance moved
+        const endY = e.nativeEvent.pageY; // Get the final Y-coordinate
+        const swipeDistanceX = Math.abs(endX - startX); // Calculate the horizontal distance moved
+        const swipeDistanceY = Math.abs(endY - startY); // Calculate the vertical distance moved
 
-        if (!isSwiping && swipeDistance < 10) {
+        if (!isSwiping && swipeDistanceX < 10 && swipeDistanceY < 10) {
             // Only increment the count if it's not a swipe (adjust the threshold as needed)
             incrementCount();
         }
@@ -304,9 +453,11 @@ const GenericPage = ({ route }) => {
     const handleSwipe = () => {
         isSwiping = true;
     };
-
+    //#endregion
+    
     const [isFilled, setIsFilled] = useState(false);
 
+    //#region buttonToFavController
     useEffect(() => {
         // Load the button state from AsyncStorage when the component mounts
         async function loadButtonState() {
@@ -346,8 +497,8 @@ const GenericPage = ({ route }) => {
             console.error("Error storing button state in AsyncStorage:", error);
         }
     };
+    //#endregion
 
-    
     return (
         <TouchableWithoutFeedback
             onPressIn={handleContainerPressIn}
@@ -358,7 +509,6 @@ const GenericPage = ({ route }) => {
                 count >= item.subItems[currentIndex].count
             }
         >
-            {/*this line needs a fix for the last thikir to run the count */}
             <View style={styles.container}>
                 <View style={styles.containerforshare}>
                     <View
@@ -366,46 +516,63 @@ const GenericPage = ({ route }) => {
                         style={[
                             styles.rectangle,
                             {
-                                height: maxDescriptionHeight + 100,
                                 padding: maxPadding,
                                 paddingHorizontal: maxpaddingHorizontal,
                             },
                         ]}
                     >
+                    <ScrollView
+                        contentContainerStyle={styles.scrollContainer}
+                        showsVerticalScrollIndicator={false}
+                    >
+                    <TouchableOpacity activeOpacity={1}>
                         <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
-                            {item.subItems[currentIndex].subItemName}
+                        {item.subItems[currentIndex].subItemName}
                         </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                    
+
                         <View style={styles.horizontalLine} />
-                        <Text style={styles.description}>
+                        <Text allowFontScaling={false} style={styles.description}>
                             {item.subItems[currentIndex].subItemDescription}
                         </Text>
-                        <Text style={styles.InfoReptTimeIndex}>
+                        <Text allowFontScaling={false} style={styles.InfoReptTimeIndex}>
                             الذكر{" "}
-                            <Text style={[{ color: "#be915a" }]}>{currentIndex + 1}</Text> من{" "}
-                            <Text style={[{ color: "#be915a" }]}>{item.subItems.length}</Text>
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
+                                {currentIndex + 1}
+                            </Text>{" "}
+                            من{" "}
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
+                                {item.subItems.length}
+                            </Text>
                         </Text>
-                        <Text style={styles.InfoReptTime}>
+                        <Text allowFontScaling={false} style={styles.InfoReptTime}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
-                        {/*button goes here */}
-                        <TouchableOpacity onPress={handleButtonPress}>
+                        <TouchableOpacity
+                            onPress={handleButtonPress}
+                            style={styles.FavButton}
+                            activeOpacity={1}
+                        >
                             <Svg width={24} height={24} viewBox="0 0 256 256">
                                 <Path
                                     d="M128,216S28,160,28,92A52,52,0,0,1,128,72h0A52,52,0,0,1,228,92C228,160,128,216,128,216Z"
-                                    stroke={isFilled ? "#b83f3f" : "#7e2a2a"} // Border color
-                                    strokeWidth={2} // Border width
+                                    stroke={isFilled ? "#b83f3f" : "#7e2a2a"}
+                                    strokeWidth={2}
                                     stroke-linecap="round"
                                     fill={isFilled ? "#b83f3f" : "transparent"}
                                 />
                             </Svg>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={Share} style={styles.shareButton}>
+                        <TouchableOpacity onPress={Share} style={styles.shareButton} activeOpacity={1}>
                             <View style={styles.dotContainer}>
                                 <Text style={styles.dot}>&#8226;</Text>
                                 <Text style={styles.dot}>&#8226;</Text>
                                 <Text style={styles.dot}>&#8226;</Text>
                             </View>
                         </TouchableOpacity>
+
                     </View>
                 </View>
                 <View style={styles.controlPan}>
@@ -428,7 +595,9 @@ const GenericPage = ({ route }) => {
                                     color="#454545"
                                     style={styles.icon}
                                 />
-                                <Text style={styles.textcount}>الذكر التالي</Text>
+                                <Text allowFontScaling={false} style={styles.textcount}>
+                                    الذكر التالي
+                                </Text>
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -452,7 +621,9 @@ const GenericPage = ({ route }) => {
                         >
                             <View style={styles.button}>
                                 {/*back button here*/}
-                                <Text style={styles.textcount}>الذكر السابق</Text>
+                                <Text allowFontScaling={false} style={styles.textcount}>
+                                    الذكر السابق
+                                </Text>
                                 <FontAwesomeIcon
                                     name="angle-right"
                                     size={24}
@@ -464,7 +635,10 @@ const GenericPage = ({ route }) => {
                     </ImageBackground>
                 </View>
             </View>
-        </TouchableWithoutFeedback>
+</TouchableWithoutFeedback>
+
+
+
     );
 };
 
