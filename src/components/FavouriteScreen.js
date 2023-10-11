@@ -12,12 +12,13 @@ import { getItems } from "../db/GetData";
 import { HomeStyles } from "../context/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { Appearance } from 'react-native';
 
 const FavouriteScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
-
+  const systemTheme = selectedTheme === 'system';
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#f2f2f6", 
     },
@@ -73,7 +74,7 @@ const FavouriteScreen = ({ navigation }) => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#151515", 
     },
@@ -127,79 +128,85 @@ const FavouriteScreen = ({ navigation }) => {
     }
   });
   //#endregion
-  
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ? darkTheme
+    : lightTheme
+  : selectedTheme === 'dark'
+  ? darkTheme
+  : lightTheme;
   //#region StyleMapping
   const styles = {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...(selectedTheme === 'dark' ? darkStyles.pageContainer : lightStyles.pageContainer), 
+      ...(selectedTheme === 'dark' ? themeStyles.pageContainer : themeStyles.pageContainer), 
     },
     container: {
       ...HomeStyles.container,
-      ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container), 
+      ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container), 
     },
     TextMid: {
       ...HomeStyles.TextMid,
-      ...(selectedTheme  === 'dark'? darkStyles.TextMid : lightStyles.TextMid), 
+      ...(selectedTheme  === 'dark'? themeStyles.TextMid : themeStyles.TextMid), 
     },
     buttonText: {
       ...HomeStyles.buttonText, 
-      ...(selectedTheme  === 'dark'? darkStyles.buttonText : lightStyles.buttonText), 
+      ...(selectedTheme  === 'dark'? themeStyles.buttonText : themeStyles.buttonText), 
     },
     button: {
       ...HomeStyles.button, 
-      ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button), 
+      ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button), 
     },
     iconWrapper: {
       ...HomeStyles.iconWrapper, 
-      ...(selectedTheme  === 'dark'? darkStyles.iconWrapper : lightStyles.iconWrapper), 
+      ...(selectedTheme  === 'dark'? themeStyles.iconWrapper : themeStyles.iconWrapper), 
     },
     horizontalLine: {
       ...HomeStyles.horizontalLine, 
-      ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine), 
+      ...(selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine), 
     },
     containerSearchMode: {
       ...HomeStyles.containerSearchMode, 
       ...(selectedTheme === 'dark'
-        ? darkStyles.containerSearchMode
-        : lightStyles.containerSearchMode), 
+        ? themeStyles.containerSearchMode
+        : themeStyles.containerSearchMode), 
     },
     searchBarContainer: {
       ...HomeStyles.horizonsearchBarContainertalLine, 
       ...(selectedTheme === 'dark'
-        ? darkStyles.searchBarContainer
-        : lightStyles.searchBarContainer), 
+        ? themeStyles.searchBarContainer
+        : themeStyles.searchBarContainer), 
     },
     searchBarInputContainer: {
       ...HomeStyles.searchBarInputContainer, 
       ...(selectedTheme === 'dark'
-        ? darkStyles.searchBarInputContainer
-        : lightStyles.searchBarInputContainer), 
+        ? themeStyles.searchBarInputContainer
+        : themeStyles.searchBarInputContainer), 
     },
     searchBarInput: {
       ...HomeStyles.searchBarInput, 
-      ...(selectedTheme === 'dark' ? darkStyles.searchBarInput : lightStyles.searchBarInput), 
+      ...(selectedTheme === 'dark' ? themeStyles.searchBarInput : themeStyles.searchBarInput), 
     },
     buttonGrid: {
       ...HomeStyles.buttonGrid, 
-      ...(selectedTheme === 'dark' ? darkStyles.buttonGrid : lightStyles.buttonGrid), 
+      ...(selectedTheme === 'dark' ? themeStyles.buttonGrid : themeStyles.buttonGrid), 
     },
     squareButton: {
       ...HomeStyles.squareButton, 
-      ...(selectedTheme === 'dark' ? darkStyles.squareButton : lightStyles.squareButton), 
+      ...(selectedTheme === 'dark' ? themeStyles.squareButton : themeStyles.squareButton), 
     },
     buttonTextTop: {
       ...HomeStyles.buttonTextTop, 
-      ...(selectedTheme  === 'dark'? darkStyles.buttonTextTop : lightStyles.buttonTextTop), 
+      ...(selectedTheme  === 'dark'? themeStyles.buttonTextTop : themeStyles.buttonTextTop), 
     },
     iconTop: {
       ...HomeStyles.iconTop, 
-      ...(selectedTheme  === 'dark'? darkStyles.iconTop : lightStyles.iconTop), 
+      ...(selectedTheme  === 'dark'? themeStyles.iconTop : themeStyles.iconTop), 
     },
     emptyMessageText: {
       ...HomeStyles.emptyMessageText, 
-      ...(selectedTheme === 'dark' ? darkStyles.emptyMessageText : lightStyles.emptyMessageText), 
+      ...(selectedTheme === 'dark' ? themeStyles.emptyMessageText : themeStyles.emptyMessageText), 
     },
   };
   //#endregion
