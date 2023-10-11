@@ -13,6 +13,7 @@ import { handleShare } from "../utils/shareUtils";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
+import { useColor } from '../context/ColorContext';
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -20,7 +21,82 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const GenericPage = ({ route }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
+    const { selectedColor, setColor } = useColor();
 
+    //#region selectedColor
+    const orangeMain = StyleSheet.create({
+        InfoReptTime: {
+            color: '#f2b784',
+        },
+        dot: {
+            color: '#f2b784',
+        },
+        circularButton:{
+            borderColor:'#f2b784',
+        },
+        button:{
+            borderColor:'#f2b784',
+        },
+    });
+    const pink = StyleSheet.create({
+        InfoReptTime: {
+            color: '#6682C3',
+        },
+        dot: {
+            color: '#6682C3',
+        },
+        circularButton:{
+            borderColor:'#6682C3',
+        },
+        button:{
+            borderColor:'#6682C3',
+        },
+    });
+    const green = StyleSheet.create({
+        InfoReptTime: {
+            color: '#9AB06B',
+        },
+        dot: {
+            color: '#9AB06B',
+        },
+        circularButton:{
+            borderColor:'#9AB06B',
+        },
+        button:{
+            borderColor:'#9AB06B',
+        },
+    });
+    const blue = StyleSheet.create({
+        InfoReptTime: {
+            color: '#AA767C',
+        },
+        dot: {
+            color: '#AA767C',
+        },
+        circularButton:{
+            borderColor:'#AA767C',
+        },
+        button:{
+            borderColor:'#AA767C',
+        },
+    });
+    const peach = StyleSheet.create({
+        InfoReptTime: {
+            color: '#CD7845',
+        },
+        dot: {
+            color: '#CD7845',
+        },
+        circularButton:{
+            borderColor:'#CD7845',
+        },
+        button:{
+            borderColor:'#CD7845',
+        },
+    });
+    //#endregion
+
+    //#region selectedFont
     const HafsFont = StyleSheet.create({
         title:{
             fontFamily:"Hafs",
@@ -36,6 +112,8 @@ const GenericPage = ({ route }) => {
             fontFamily:"MeQuran",
         }
     });
+    //#endregion
+
     //#region LightTheme
     const lightStyles = StyleSheet.create({
         container: {
@@ -142,10 +220,28 @@ const GenericPage = ({ route }) => {
         circularButton: {
             ...GenericStyles.circularButton,
             ...(selectedTheme  === 'dark'? darkStyles.circularButton : lightStyles.circularButton),
+            ...(selectedColor === '#f2b784'
+                    ? orangeMain.circularButton
+                    : selectedColor === '#6682C3'
+                    ? pink.circularButton
+                    : selectedColor === '#9AB06B'
+                    ? green.circularButton
+                    : selectedColor === '#AA767C'
+                    ? blue.circularButton
+                    : peach.circularButton),
         },
         button: {
             ...GenericStyles.button,
             ...(selectedTheme  === 'dark'? darkStyles.button : lightStyles.button),
+            ...(selectedColor === '#f2b784'
+                    ? orangeMain.button
+                    : selectedColor === '#6682C3'
+                    ? pink.button
+                    : selectedColor === '#9AB06B'
+                    ? green.button
+                    : selectedColor === '#AA767C'
+                    ? blue.button
+                    : peach.button),
         },
         textcount: {
             ...GenericStyles.textcount,
@@ -183,6 +279,30 @@ const GenericPage = ({ route }) => {
         horizontalLine: {
             ...GenericStyles.horizontalLine,
             ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+        },
+        dot:{
+            ...GenericStyles.dot,
+            ...(selectedColor === '#f2b784'
+                ? orangeMain.dot
+                : selectedColor === '#6682C3'
+                ? pink.dot
+                : selectedColor === '#9AB06B'
+                ? green.dot
+                : selectedColor === '#AA767C'
+                ? blue.dot
+                : peach.dot),
+        },
+        InfoReptTime:{
+            ...GenericStyles.InfoReptTime,
+            ...(selectedColor === '#f2b784'
+                ? orangeMain.InfoReptTime
+                : selectedColor === '#6682C3'
+                ? pink.InfoReptTime
+                : selectedColor === '#9AB06B'
+                ? green.InfoReptTime
+                : selectedColor === '#AA767C'
+                ? blue.InfoReptTime
+                : peach.InfoReptTime),
         },
     };
     //#endregion
@@ -419,11 +539,11 @@ const GenericPage = ({ route }) => {
                         </Text>
                         <Text allowFontScaling={false} style={styles.InfoReptTimeIndex}>
                             الذكر{" "}
-                            <Text allowFontScaling={false} style={[{ color: "#f2b784" }]}>
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
                                 {currentIndex + 1}
                             </Text>{" "}
                             من{" "}
-                            <Text allowFontScaling={false} style={[{ color: "#f2b784" }]}>
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
                                 {item.subItems.length}
                             </Text>
                         </Text>
