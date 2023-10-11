@@ -15,6 +15,7 @@ import { HomeStyles } from '../context/commonStyles';
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { Svg, Path, Circle } from "react-native-svg";
+import { Appearance } from 'react-native';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -22,12 +23,19 @@ const HomeScreen = ({ navigation }) => {
 
   const { selectedTheme } = useTheme();
   const { selectedColor, setColor } = useColor();
-
-  const StatusBarColor = selectedTheme === 'dark' ? 'light-content' : 'dark-content';
+  const systemTheme = selectedTheme === 'system';
+  
+  const StatusBarColor = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+  ? 'light-content' 
+  : 'dark-content'
+  : selectedTheme === 'dark'
+  ? 'light-content' 
+  : 'dark-content';
   
   
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#f2f2f6", 
     },
@@ -80,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     pageContainer: {
       backgroundColor: "#151515", 
     },
@@ -131,69 +139,75 @@ const HomeScreen = ({ navigation }) => {
     },
   });
   //#endregion
-  
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ? darkTheme
+    : lightTheme
+  : selectedTheme === 'dark'
+  ? darkTheme
+  : lightTheme;
   //#region StylesMapping
   const styles = {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...selectedTheme === 'dark' ? darkStyles.pageContainer : lightStyles.pageContainer, 
+      ...selectedTheme === 'dark' ? themeStyles.pageContainer : themeStyles.pageContainer, 
     },
     container: {
       ...HomeStyles.container,
-      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container, 
+      ...selectedTheme  === 'dark'? themeStyles.container : themeStyles.container, 
     },
     TextMid: {
       ...HomeStyles.TextMid,
-      ...selectedTheme === 'dark' ? darkStyles.TextMid : lightStyles.TextMid, 
+      ...selectedTheme === 'dark' ? themeStyles.TextMid : themeStyles.TextMid, 
     },
     buttonText: {
       ...HomeStyles.buttonText, 
-      ...selectedTheme  === 'dark'? darkStyles.buttonText : lightStyles.buttonText, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.buttonText : themeStyles.buttonText, // Override button background color
     },
     button: {
       ...HomeStyles.button, 
-      ...selectedTheme  === 'dark'? darkStyles.button : lightStyles.button, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.button : themeStyles.button, // Override button background color
     },
     iconWrapper: {
       ...HomeStyles.iconWrapper, 
-      ...selectedTheme === 'dark' ? darkStyles.iconWrapper : lightStyles.iconWrapper, // Override button background color
+      ...selectedTheme === 'dark' ? themeStyles.iconWrapper : themeStyles.iconWrapper, // Override button background color
     },
     horizontalLine: {
       ...HomeStyles.horizontalLine, 
-      ...selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine, // Override button background color
     },
     containerSearchMode: {
       ...HomeStyles.containerSearchMode, 
-      ...selectedTheme  === 'dark'? darkStyles.containerSearchMode : lightStyles.containerSearchMode, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.containerSearchMode : themeStyles.containerSearchMode, // Override button background color
     },
     searchBarContainer: {
       ...HomeStyles.searchBarContainer, 
-      ...selectedTheme  === 'dark'? darkStyles.searchBarContainer : lightStyles.searchBarContainer, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.searchBarContainer : themeStyles.searchBarContainer, // Override button background color
     },
     searchBarInputContainer: {
       ...HomeStyles.searchBarInputContainer, 
-      ...selectedTheme  === 'dark'? darkStyles.searchBarInputContainer : lightStyles.searchBarInputContainer, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.searchBarInputContainer : themeStyles.searchBarInputContainer, // Override button background color
     },
     searchBarInput: {
       ...HomeStyles.searchBarInput, 
-      ...selectedTheme  === 'dark'? darkStyles.searchBarInput : lightStyles.searchBarInput, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.searchBarInput : themeStyles.searchBarInput, // Override button background color
     },
     buttonGrid: {
       ...HomeStyles.buttonGrid, 
-      ...selectedTheme === 'dark' ? darkStyles.buttonGrid : lightStyles.buttonGrid, // Override button background color
+      ...selectedTheme === 'dark' ? themeStyles.buttonGrid : themeStyles.buttonGrid, // Override button background color
     },
     squareButton: {
       ...HomeStyles.squareButton, 
-      ...selectedTheme  === 'dark'? darkStyles.squareButton : lightStyles.squareButton, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.squareButton : themeStyles.squareButton, // Override button background color
     },
     buttonTextTop: {
       ...HomeStyles.buttonTextTop, 
-      ...selectedTheme  === 'dark'? darkStyles.buttonTextTop : lightStyles.buttonTextTop, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.buttonTextTop : themeStyles.buttonTextTop, // Override button background color
     },
     iconTop: {
       ...HomeStyles.iconTop, 
-      ...selectedTheme  === 'dark'? darkStyles.iconTop : lightStyles.iconTop, // Override button background color
+      ...selectedTheme  === 'dark'? themeStyles.iconTop : themeStyles.iconTop, // Override button background color
     },
   };
   //#endregion
@@ -472,7 +486,7 @@ const HomeScreen = ({ navigation }) => {
                     <FontAwesomeIcon
                       name="angle-left"
                       size={24}
-                      color="#454545"
+                      color={selectedColor}
                       style={styles.icon}
                     />
                   </View>
