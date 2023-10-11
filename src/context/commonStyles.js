@@ -65,6 +65,7 @@ export const MainStyles = StyleSheet.create({
   },
   icon: {
     marginLeft: 20,
+    opacity:0.5
   },
   iconleft: {},
   specialIconleft: {
@@ -431,6 +432,7 @@ export const HomeStyles = StyleSheet.create({
   },
   icon: {
     marginLeft: 20,
+    opacity:0.5
   },
   horizontalLine: {
     borderBottomWidth: 1,
