@@ -8,12 +8,15 @@ import * as Haptics from 'expo-haptics';
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
+import { Appearance } from 'react-native';
+
 
 const ThikirAlarmScreen = () => {
   const { selectedTheme } = useTheme();
   const { selectedColor, setColor } = useColor();
+  const systemTheme = selectedTheme === 'system'; 
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
     },
@@ -31,7 +34,7 @@ const ThikirAlarmScreen = () => {
   //#endregion
 
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
     },
@@ -47,25 +50,32 @@ const ThikirAlarmScreen = () => {
     },
   });
   //#endregion
+  const themeStyles = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+      ? darkTheme
+      : lightTheme
+    : selectedTheme === 'dark'
+    ? darkTheme
+    : lightTheme;
 
   //#region StyleMapping
   const styles = {
     ...ThikirAlarmStyles,
     container: {
       ...ThikirAlarmStyles.container,
-      ...selectedTheme === 'dark' ? darkStyles.container : lightStyles.container,
+      ...selectedTheme === 'dark' ? themeStyles.container : themeStyles.container,
     },
     notificationContainer: {
       ...ThikirAlarmStyles.notificationContainer,
-      ...selectedTheme  === 'dark'? darkStyles.notificationContainer : lightStyles.notificationContainer,
+      ...selectedTheme  === 'dark'? themeStyles.notificationContainer : themeStyles.notificationContainer,
     },
     title: {
       ...ThikirAlarmStyles.title,
-      ...selectedTheme  === 'dark'? darkStyles.title : lightStyles.title,
+      ...selectedTheme  === 'dark'? themeStyles.title : themeStyles.title,
     },
     horizontalLineWrapper: {
       ...ThikirAlarmStyles.horizontalLineWrapper,
-      ...selectedTheme  === 'dark'? darkStyles.horizontalLineWrapper : lightStyles.horizontalLineWrapper,
+      ...selectedTheme  === 'dark'? themeStyles.horizontalLineWrapper : themeStyles.horizontalLineWrapper,
     },
   };
   //#endregion
