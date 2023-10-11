@@ -11,6 +11,7 @@ import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
 import { handleShare } from "../utils/shareUtils";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
+import { useColor } from '../context/ColorContext';
 import { DuaVerseStyles } from "../context/commonStyles";
 
 const CACHE_KEY = "randomDuaCache";
@@ -19,22 +20,54 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 const DUAVerseScreen = ({ navigation }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
+    const { selectedColor, setColor } = useColor();
+    
+    //#region selectedColor
+    const orangeMain = StyleSheet.create({
+        dot: {
+            color: '#f2b784',
+        },
+    });
+    const pink = StyleSheet.create({
+        dot: {
+            color: '#6682C3',
+        },
+    });
+    const green = StyleSheet.create({
+        dot: {
+            color: '#9AB06B',
+        },
+    });
+    const blue = StyleSheet.create({
+        dot: {
+            color: '#AA767C',
+        },
+    });
+    const peach = StyleSheet.create({
+        dot: {
+            color: '#CD7845',
+        },
+    });
+    //#endregion
 
+    //#region selectedFont
     const HafsFont = StyleSheet.create({
-        title:{
-            fontFamily:"Hafs",
+        title: {
+            fontFamily: "Hafs",
         }
     });
     const ScheherazadeNewFont = StyleSheet.create({
-        title:{
-            fontFamily:"ScheherazadeNew",
+        title: {
+            fontFamily: "ScheherazadeNew",
         }
     });
     const MeQuranFont = StyleSheet.create({
-        title:{
-            fontFamily:"MeQuran",
+        title: {
+            fontFamily: "MeQuran",
         }
     });
+    //#endregion
+
     //#region LightTheme 
     const lightStyles = StyleSheet.create({
         container: {
@@ -70,13 +103,13 @@ const DUAVerseScreen = ({ navigation }) => {
         },
     });
     //#endregion
-    
+
     //#region StyleMapping
     const styles = {
         ...DuaVerseStyles,
         container: {
             ...DuaVerseStyles.container,
-            ...(selectedTheme  === 'dark'? darkStyles.container : lightStyles.container),
+            ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container),
         },
         rectangle: {
             ...DuaVerseStyles.rectangle,
@@ -89,7 +122,19 @@ const DUAVerseScreen = ({ navigation }) => {
         },
         horizontalLine: {
             ...DuaVerseStyles.horizontalLine,
-            ...(selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+        },
+        dot:{
+            ...DuaVerseStyles.dot,
+            ...(selectedColor === '#f2b784'
+                ? orangeMain.dot
+                : selectedColor === '#6682C3'
+                ? pink.dot
+                : selectedColor === '#9AB06B'
+                ? green.dot
+                : selectedColor === '#AA767C'
+                ? blue.dot
+                : peach.dot),
         },
     };
     //#endregion
@@ -147,7 +192,7 @@ const DUAVerseScreen = ({ navigation }) => {
         getCachedVerseHadith();
     }, []);
     //#endregion
-    
+
     //#region getRandomDua
     const getRandomVerse = async () => {
         try {
@@ -180,7 +225,7 @@ const DUAVerseScreen = ({ navigation }) => {
     };
     //#endregion
 
-    
+
     //#region DisplayViewStyle base on character length
     const controlStyle = (verseTextLength) => {
         let MaxFontSize = 20;
@@ -207,7 +252,7 @@ const DUAVerseScreen = ({ navigation }) => {
         paddingHorizontal: maxpaddingHorizontal,
     };
     //#endregion
-    
+
     return (
         <View ref={viewRef} style={styles.container}>
             <View style={[styles.rectangle, textStyle]}>
@@ -226,7 +271,7 @@ const DUAVerseScreen = ({ navigation }) => {
                 ></TouchableOpacity>
                 <TouchableOpacity onPress={Share} style={styles.shareButton}>
                     <View style={styles.dotContainer}>
-                        <Text style={styles.dot}>&#8226;</Text>
+                        <Text style={[styles.dot]}>&#8226;</Text>
                         <Text style={styles.dot}>&#8226;</Text>
                         <Text style={styles.dot}>&#8226;</Text>
                     </View>
