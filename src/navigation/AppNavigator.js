@@ -21,22 +21,37 @@ import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 import { useTheme } from '../context/ThemContex'; 
+import { Appearance } from 'react-native';
 const Stack = createStackNavigator();
 
 
 
 const AppNavigator = () => {
   const { selectedTheme } = useTheme();
+  const systemTheme = selectedTheme === 'system'; 
 
-  const headerTintColor = selectedTheme === 'dark' 
-  ? "white"
-  :"black";
-  const barColor = selectedTheme === 'dark' 
-  ?"white"
-  :"black";
-  const backgroundBarColor = selectedTheme === 'dark' 
-  ?"#151515"
-  :"#f2f2f6";
+  const headerTintColor = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ?"white"
+    :"black"
+  : selectedTheme === 'dark'
+    ?"white"
+    :"black";
+  const barColor = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+      ?"white"
+      :"black"
+    : selectedTheme === 'dark'
+      ?"white"
+      :"black";
+  const backgroundBarColor = systemTheme
+      ? Appearance.getColorScheme() === 'dark'
+      ?"#151515"
+      :"#f2f2f6"
+      : selectedTheme === 'dark'
+      ?"#151515"
+      :"#f2f2f6"
+        
   const headerStyle = {height: 100, backgroundColor: backgroundBarColor, elevation: 0, shadowOpacity: 0, };
   return (
     <Stack.Navigator
