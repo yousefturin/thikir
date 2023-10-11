@@ -13,6 +13,7 @@ import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { DuaVerseStyles } from "../context/commonStyles";
+import { Appearance } from 'react-native';
 
 const CACHE_KEY = "randomDuaCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -21,7 +22,7 @@ const DUAVerseScreen = ({ navigation }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
     const { selectedColor, setColor } = useColor();
-    
+    const systemTheme = selectedTheme === 'system';
     //#region selectedColor
     const orangeMain = StyleSheet.create({
         dot: {
@@ -69,7 +70,7 @@ const DUAVerseScreen = ({ navigation }) => {
     //#endregion
 
     //#region LightTheme 
-    const lightStyles = StyleSheet.create({
+    const lightTheme = StyleSheet.create({
         container: {
             backgroundColor: "#f2f2f6",
         },
@@ -87,7 +88,7 @@ const DUAVerseScreen = ({ navigation }) => {
     //#endregion
 
     //#region DarkTheme
-    const darkStyles = StyleSheet.create({
+    const darkTheme = StyleSheet.create({
         container: {
             backgroundColor: "#151515",
         },
@@ -103,26 +104,32 @@ const DUAVerseScreen = ({ navigation }) => {
         },
     });
     //#endregion
-
+    const themeStyles = systemTheme
+    ? Appearance.getColorScheme() === 'dark'
+      ? darkTheme
+      : lightTheme
+    : selectedTheme === 'dark'
+    ? darkTheme
+    : lightTheme;
     //#region StyleMapping
     const styles = {
         ...DuaVerseStyles,
         container: {
             ...DuaVerseStyles.container,
-            ...(selectedTheme === 'dark' ? darkStyles.container : lightStyles.container),
+            ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container),
         },
         rectangle: {
             ...DuaVerseStyles.rectangle,
-            ...(selectedTheme === 'dark' ? darkStyles.rectangle : lightStyles.rectangle),
+            ...(selectedTheme === 'dark' ? themeStyles.rectangle : themeStyles.rectangle),
         },
         title: {
             ...DuaVerseStyles.title,
-            ...(selectedTheme === 'dark' ? darkStyles.title : lightStyles.title),
+            ...(selectedTheme === 'dark' ? themeStyles.title : themeStyles.title),
             ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         horizontalLine: {
             ...DuaVerseStyles.horizontalLine,
-            ...(selectedTheme === 'dark' ? darkStyles.horizontalLine : lightStyles.horizontalLine),
+            ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
         },
         dot:{
             ...DuaVerseStyles.dot,
