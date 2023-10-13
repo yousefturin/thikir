@@ -133,6 +133,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
         ]}
+        onPress={() => navigation.navigate("سبحة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
