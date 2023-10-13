@@ -34,6 +34,7 @@
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-screens": "^3.25.0",
     "react-native-svg": "^13.14.0",
+    "react-native-swipeable-row": "^0.8.1",
     "react-native-text-size": "^4.0.0-rc.1",
     "react-native-vector-icons": "^10.0.0",
     "react-native-version-number": "^0.3.6",
