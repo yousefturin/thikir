@@ -616,8 +616,8 @@ export const GenericStyles = StyleSheet.create({
     marginTop: 20,
     shadowColor: "black",
     shadowOffset: {
-      width: 0,
-      height: 4,
+        width: 0,
+        height: 4,
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
