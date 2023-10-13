@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator} from "@react-navigation/stack";
 import {
   Text,
   TouchableOpacity,
@@ -20,11 +20,39 @@ import GenericPage from "../components/GenericPage";
 import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
+import TasbihScreen from "../components/tasbihScreen";
 import { useTheme } from '../context/ThemContex'; 
 import { Appearance } from 'react-native';
+
 const Stack = createStackNavigator();
-
-
+const customCardStyleInterpolator = ({ current, next, layouts }) => {
+  return {
+    cardStyle: {
+      transform: [
+        {
+          translateX: current.progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [layouts.screen.width, 0],
+          }),
+        },
+        {
+          translateX: next
+            ? next.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -layouts.screen.width],
+              })
+            : 0,
+        },
+      ],
+    },
+    overlayStyle: {
+      opacity: current.progress.interpolate({
+        inputRange: [0, 0.5, 0.9, 1],
+        outputRange: [0, 0.25, 0.7, 1],
+      }),
+    },
+  };
+};
 
 const AppNavigator = () => {
   const { selectedTheme } = useTheme();
@@ -55,45 +83,52 @@ const AppNavigator = () => {
   const headerStyle = {height: 100, backgroundColor: backgroundBarColor, elevation: 0, shadowOpacity: 0, };
   return (
     <Stack.Navigator
-      initialRouteName="الأذكار"
-      screenOptions={{
-        headerTintColor,
-        headerTitleStyle: {
-          fontFamily: "ScheherazadeNewBold",
-          fontSize: 22, 
-        },
+    initialRouteName="الأذكار"
+    screenOptions={{
+      headerTintColor,
+      headerTitleStyle: {
+        fontFamily: "ScheherazadeNewBold",
+        fontSize: 22,
+      },
+      cardStyleInterpolator: customCardStyleInterpolator, // Custom animation
+    }}
+  >
+    <Stack.Screen
+      name="الأذكار"
+      component={HomeScreen}
+      options={({ navigation }) => ({
+        headerTitle: null,
+        headerLeft: () => (
+          <View style={styles.iconContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate("القائمة")}>
+              <Icon
+                name="bars"
+                size={24}
+                style={[
+                  { paddingRight: 190, marginBottom: 10, paddingTop: 10, color: barColor },
+                ]}
+              />
+            </TouchableOpacity>
+          </View>
+        ),
+        headerRight: null,
+        headerStyle: headerStyle,
+      })}
+    />
+    <Stack.Screen
+      name="التذكيرات"
+      component={ThikirAlarmScreen}
+      options={{
+        headerStyle: headerStyle,
       }}
-    >
-      <Stack.Screen
-        name="الأذكار"
-        component={HomeScreen}
-        options={({ navigation }) => ({
-          headerTitle: null,
-          headerLeft: () => (
-            <View style={styles.iconContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate("القائمة")}>
-                <Icon
-                  name="bars"
-                  size={24}
-                  style={[
-                    { paddingRight: 190, marginBottom: 10, paddingTop: 10,color:barColor },
-                  ]}
-                />
-              </TouchableOpacity>
-            </View>
-          ),
-          headerRight: null,
-          headerStyle: headerStyle,
-
-        })}
-      />
-      <Stack.Screen
-        name="التذكيرات"
-        component={ThikirAlarmScreen}
-        options={{
-          headerStyle: headerStyle,
-        }}
-      />
+    />
+    <Stack.Screen
+      name="سبحة"
+      component={TasbihScreen}
+      options={{
+        headerStyle: headerStyle,
+      }}
+    />
       <Stack.Screen
         name="آية"
         component={QuranVerseScreen}
