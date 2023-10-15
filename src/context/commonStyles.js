@@ -65,7 +65,7 @@ export const MainStyles = StyleSheet.create({
   },
   icon: {
     marginLeft: 20,
-    opacity:0.5
+    opacity: 0.5
   },
   iconleft: {},
   specialIconleft: {
@@ -118,13 +118,13 @@ export const AboutStyles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 4,
-    paddingVertical:20
-    },
+    paddingVertical: 20
+  },
   scrollContainer: {
-    justifyContent:'center',
+    justifyContent: 'center',
     paddingHorizontal: 10,
-    minHeight:170,
-    maxHeight:2070,
+    minHeight: 170,
+    maxHeight: 2070,
   },
   rectangleText: {
     color: "#fff",
@@ -181,21 +181,21 @@ export const DuaVerseStyles = StyleSheet.create({
     position: "relative",
   },
   scrollContainer: {
-    justifyContent:'center',
-    paddingBottom:20,
-    marginBottom:20,
+    justifyContent: 'center',
+    paddingBottom: 20,
+    marginBottom: 20,
     paddingHorizontal: 10,
-    minHeight:170,
-    maxHeight:2070,
+    minHeight: 170,
+    maxHeight: 2070,
   },
   title: {
     textAlign: "center",
     color: "white",
     fontFamily: "ScheherazadeNew",
-    marginTop:20,
+    marginTop: 20,
   },
   translation: {
-    marginTop:10,
+    marginTop: 10,
     marginBottom: 30,
     fontSize: 15,
     textAlign: "center",
@@ -270,14 +270,14 @@ export const QuranVerseStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
-  }, 
+  },
   scrollContainer: {
-    justifyContent:'center',
-    paddingBottom:20,
-    marginBottom:20,
+    justifyContent: 'center',
+    paddingBottom: 20,
+    marginBottom: 20,
     paddingHorizontal: 10,
-    minHeight:170,
-    maxHeight:2070,
+    minHeight: 170,
+    maxHeight: 2070,
   },
   title: {
     textAlign: "center",
@@ -295,13 +295,13 @@ export const QuranVerseStyles = StyleSheet.create({
     bottom: -5,
     alignItems: 'center', // Horizontal centering
   },
-  tafsirStyle:{
+  tafsirStyle: {
     fontSize: 15,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
-    paddingTop:20,
-    marginBottom:20,
+    paddingTop: 20,
+    marginBottom: 20,
   },
   shareButton: {
     position: "absolute",
@@ -331,7 +331,7 @@ export const QuranVerseStyles = StyleSheet.create({
     width: "100%",
     marginBottom: 5,
   },
-  
+
 });
 //#endregion
 
@@ -358,7 +358,7 @@ export const HomeStyles = StyleSheet.create({
     paddingTop: 20,
   },
   searchBarContainer: {
-    
+
     paddingHorizontal: 10,
     backgroundColor: "#151515",
     borderBottomColor: "transparent",
@@ -415,13 +415,13 @@ export const HomeStyles = StyleSheet.create({
     marginLeft: 30,
     fontFamily: "ScheherazadeNew",
   },
-  emptyMessage:{
-    flex:1,
+  emptyMessage: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    opacity:0.3
+    opacity: 0.3
   },
-  emptyMessageText:{
+  emptyMessageText: {
     fontFamily: "ScheherazadeNew",
   },
   image: {
@@ -432,7 +432,7 @@ export const HomeStyles = StyleSheet.create({
   },
   icon: {
     marginLeft: 20,
-    opacity:0.5
+    opacity: 0.5
   },
   horizontalLine: {
     borderBottomWidth: 1,
@@ -601,7 +601,7 @@ export const GenericStyles = StyleSheet.create({
     color: "white",
     fontSize: 17,
     fontFamily: "ScheherazadeNew",
-    justifyContent:"center",
+    justifyContent: "center",
   },
   icon: {
     marginTop: 2,
@@ -616,22 +616,22 @@ export const GenericStyles = StyleSheet.create({
     marginTop: 20,
     shadowColor: "black",
     shadowOffset: {
-        width: 0,
-        height: 4,
+      width: 0,
+      height: 4,
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 4,
     position: "relative",
-    
+
   },
   scrollContainer: {
-    justifyContent:'center',
-    paddingBottom:20,
-    paddingTop:10,
+    justifyContent: 'center',
+    paddingBottom: 20,
+    paddingTop: 10,
     paddingHorizontal: 10,
-    minHeight:170,
-    maxHeight:2070,
+    minHeight: 170,
+    maxHeight: 2070,
   },
   title: {
     textAlign: "center",
@@ -644,7 +644,7 @@ export const GenericStyles = StyleSheet.create({
     color: "#767676",
     fontFamily: "AmiriFont",
     paddingVertical: 30,
-    paddingBottom:40,
+    paddingBottom: 40,
   },
   InfoReptTimeIndex: {
     fontSize: 11,
@@ -666,7 +666,7 @@ export const GenericStyles = StyleSheet.create({
     bottom: 0,
     padding: 20,
   },
-  FavButton:{
+  FavButton: {
     position: 'absolute',
     left: 0,
     right: 0,
@@ -712,13 +712,13 @@ export const GenericStyles = StyleSheet.create({
 //#endregion
 
 //#region settingStyles
-export const  SettingStyles = StyleSheet.create({
+export const SettingStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: "#151515",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingTop:20
+    paddingTop: 20
   },
   themeOptionsContainer: {
     flexDirection: "row-reverse",
@@ -732,8 +732,8 @@ export const  SettingStyles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
-    paddingBottom:4
+    justifyContent: 'space-between',
+    paddingBottom: 4
   },
   themeCircle: {
     width: 24, // Set the size of the circle container
@@ -744,7 +744,7 @@ export const  SettingStyles = StyleSheet.create({
     marginRight: 10, // Spacing between the circle and text
     alignItems: 'center',
     justifyContent: 'center',
-    alignContent:'center',
+    alignContent: 'center',
   },
   selectedCircle: {
     width: 12, // Set the size of the filled circle
@@ -772,18 +772,18 @@ export const  SettingStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
   },
-  HeadertextColor:{
-  color: "#767676",
-  textAlign: 'right',
-  paddingTop: 15,
-  paddingLeft:300
+  HeadertextColor: {
+    color: "#767676",
+    textAlign: 'right',
+    paddingTop: 15,
+    paddingLeft: 300
   },
   horizontalLine: {
     borderBottomWidth: 1,
-    marginEnd:15
+    marginEnd: 15
   },
-  textColor:{
-    paddingRight:6
+  textColor: {
+    paddingRight: 6
   },
   colorOption: {
     margin: 10,
@@ -877,6 +877,183 @@ export const ReportProblemStyles = StyleSheet.create({
     width: 300,
     height: 250,
     resizeMode: "contain",
+  },
+});
+//#endregion
+
+//#region tasbehScreen
+export const TasbehScreenStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#151515",
+    padding: 20,
+    paddingTop: 40,
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  resetBtn: {
+    width: "100%",
+    alignItems: "flex-end",
+  },
+  wrapercountValue: {
+    width: '100%',
+    height: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleContainer: {
+    width: 200,
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circle: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#262626',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  duplica: {
+    width: 200, 
+    height: 200, 
+    borderRadius: 100, 
+    position: 'absolute', 
+    opacity: 0.5
+  },
+  countValue: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 72,
+    fontWeight: '700',
+  },
+  thikirNameDispalyBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 150,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: "#262626",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+    overflow: "hidden",
+    padding: 10,
+  },
+  thikirNameDispaly: {
+    textAlign: "center",
+    fontFamily:"ScheherazadeNewBold",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  pickThikirText: {
+    textAlign: "center",
+    fontSize: 20,
+    color: "white",
+    fontWeight: "600",
+    fontFamily:"ScheherazadeNewBold",
+  },
+  ModalTopNotch: {
+    height: 5,
+    width: 40,
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    position: "absolute",
+    top: 7,
+    left: "50%",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  ThikirNewText: {
+    color: "#007AFF",
+    fontSize: 22,
+    paddingRight: 5,
+    fontWeight: 500,
+  },
+  addNewThikirModalContainer: {
+    backgroundColor: "#151515",
+    width: 350,
+    height: 130,
+    borderRadius: 10,
+    alignItems: "center", 
+    justifyContent: "space-between",
+  },
+  buttonThikirDisplayInModal: {
+    flexDirection: "row-reverse",
+    flex: 1,
+    alignItems: "center",
+    height: 45,
+    backgroundColor: "#262626",
+  },
+  newThikirTextInModal: {
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 20,
+    color: "white",
+    borderRadius: 10,
+    fontWeight: "600",
+  },
+  inputTextContainerInModa: {
+    width: "91%",
+    paddingVertical: 20,
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize: 20,
+    color: "white",
+    backgroundColor: "#262626",
+    borderRadius: 10,
+  },
+  modaldisplay: {
+    flexDirection: "row-reverse",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginVertical: 5,
+  },
+  rectangle: {
+    backgroundColor: "#151515",
+    borderRadius: 10,
+    marginTop: 10,
+    width: "100%",
+  },
+  separator: {
+    borderBottomWidth: 1,
+    marginStart: 355,
+    borderColor: "#262626",
+  },
+  itemText: {
+    width: "82%",
+    textAlign: "right",
+    fontSize: 20,
+    color: "#fff",
+    paddingRight: 20,
+    fontFamily:"ScheherazadeNew",
+  },
+  itemCount: {
+    width: "20%",
+    textAlign: "left",
+    fontSize: 20,
+    color: "#6682C3",
+    paddingLeft: 20,
   },
 });
 //#endregion
