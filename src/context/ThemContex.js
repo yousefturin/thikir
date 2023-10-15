@@ -17,7 +17,7 @@ const darkTheme = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [selectedTheme, setSelectedTheme] = useState(null); // Use null to represent initial loading state
+  const [selectedTheme, setSelectedTheme] = useState('system'); // Use null to represent initial loading state
   useEffect(() => {
     async function fetchTheme() {
       try {
@@ -30,7 +30,7 @@ export function ThemeProvider({ children }) {
         }
       } catch (error) {
         console.error('Error fetching theme:', error);
-        setSelectedTheme('light'); // Set the default theme in case of an error
+        setSelectedTheme('system'); // Set the default theme in case of an error
       }
     }
     fetchTheme();
