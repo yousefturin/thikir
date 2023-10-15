@@ -32,7 +32,14 @@ const HomeScreen = ({ navigation }) => {
   : selectedTheme === 'dark'
   ? 'light-content' 
   : 'dark-content';
-  
+
+  const keyboardTheme = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+  ?"dark"
+  :"light"
+  : selectedTheme === 'dark'
+  ?"dark"
+  :"light"
   
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -373,6 +380,7 @@ const HomeScreen = ({ navigation }) => {
           onCancel={handleCancel}
           showCancel
           cancelButtonTitle="الغاء"
+          keyboardAppearance={keyboardTheme}
         />
         {searchMode ? (
           // Display search results when searchMode is true
