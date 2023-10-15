@@ -381,6 +381,7 @@ const HomeScreen = ({ navigation }) => {
           showCancel
           cancelButtonTitle="الغاء"
           keyboardAppearance={keyboardTheme}
+          searchIcon={{ color: selectedColor}}
         />
         {searchMode ? (
           // Display search results when searchMode is true
