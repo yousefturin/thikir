@@ -555,7 +555,7 @@ const TasbihScreen = () => {
                                 <FlatList
                                     style={[{ borderRadius: 10 }]}
                                     data={names}
-                                    keyExtractor={(index) => index.toString()}
+                                    keyExtractor={(item) => item.name}
                                     renderItem={({ item, index }) => (
                                         <Swipeable
                                             renderRightActions={(dragX) =>
