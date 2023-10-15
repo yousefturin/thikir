@@ -191,7 +191,7 @@ const SettingScreen = ({ navigation }) => {
         style={[
           styles.colorCircle,
           { backgroundColor: item.value },
-          selectedColor === item.value && styles.selectedColorCircle, // Apply border for selected color
+          selectedColor === item.value && styles.selectedColorCircle, 
         ]}
       >
         {selectedColor === item.value && (
