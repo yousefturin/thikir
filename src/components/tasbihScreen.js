@@ -499,7 +499,7 @@ const TasbihScreen = () => {
                     >
                         {names[selectedNameIndex] && names[selectedNameIndex].name
                             ? names[selectedNameIndex].name
-                            : "اختر الذكر"}
+                            : "اختار الذكر"}
                     </Text>
                 </TouchableOpacity>
                 <Modal
