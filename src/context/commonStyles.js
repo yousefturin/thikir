@@ -1012,6 +1012,7 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "white",
     borderRadius: 10,
     fontWeight: "600",
+    fontFamily:"ScheherazadeNewBold",
   },
   inputTextContainerInModa: {
     width: "91%",
