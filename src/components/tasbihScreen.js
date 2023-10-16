@@ -10,17 +10,18 @@ import {
     TouchableWithoutFeedback,
     Animated,
     Easing,
+    ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
-import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Svg, Path, Circle } from "react-native-svg";
 import * as Animatable from "react-native-animatable";
-import { TasbehScreenStyle } from '../context/commonStyles';
-import { useTheme } from '../context/ThemContex';
-import { useColor } from '../context/ColorContext';
-import { Appearance } from 'react-native';
+import { TasbehScreenStyle } from "../context/commonStyles";
+import { useTheme } from "../context/ThemContex";
+import { useColor } from "../context/ColorContext";
+import { Appearance } from "react-native";
+import { useNumberContext } from "../context/NumberContext";
 
 const defaultNames = [
     { name: "سبحان الله وبحمده", count: 0, thikir: [] },
@@ -39,17 +40,18 @@ const TasbihScreen = () => {
     const [selectedNameIndex, setSelectedNameIndex] = useState(0);
     const [isContainerVisible, setContainerVisible] = useState(false);
     const inputRef = useRef(null);
+    const { state, convertToEasternArabicNumerals } = useNumberContext();
 
     const { selectedTheme } = useTheme();
-    const { selectedColor, setColor } = useColor();
-    const systemTheme = selectedTheme === 'system';
+    const { selectedColor } = useColor();
+    const systemTheme = selectedTheme === "system";
     const keyboardTheme = systemTheme
-    ? Appearance.getColorScheme() === 'dark'
-    ?"dark"
-    :"light"
-    : selectedTheme === 'dark'
-    ?"dark"
-    :"light"
+        ? Appearance.getColorScheme() === "dark"
+            ? "dark"
+            : "light"
+        : selectedTheme === "dark"
+            ? "dark"
+            : "light";
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -57,11 +59,11 @@ const TasbihScreen = () => {
             backgroundColor: "#f2f2f6",
         },
         circle: {
-            backgroundColor: '#fefffe',
-            shadowColor: 'white',
+            backgroundColor: "#fefffe",
+            shadowColor: "white",
         },
         countValue: {
-            color: '#000',
+            color: "#000",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#fefffe",
@@ -105,11 +107,11 @@ const TasbihScreen = () => {
             backgroundColor: "#151515",
         },
         circle: {
-            backgroundColor: '#262626',
-            shadowColor: 'black',
+            backgroundColor: "#262626",
+            shadowColor: "black",
         },
         countValue: {
-            color: '#fff',
+            color: "#fff",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#262626",
@@ -148,10 +150,10 @@ const TasbihScreen = () => {
     //#endregion
 
     const themeStyles = systemTheme
-        ? Appearance.getColorScheme() === 'dark'
+        ? Appearance.getColorScheme() === "dark"
             ? darkTheme
             : lightTheme
-        : selectedTheme === 'dark'
+        : selectedTheme === "dark"
             ? darkTheme
             : lightTheme;
 
@@ -160,58 +162,130 @@ const TasbihScreen = () => {
         ...TasbehScreenStyle,
         container: {
             ...TasbehScreenStyle.container,
-            ...selectedTheme === 'dark' ? themeStyles.container : themeStyles.container,
+            ...(selectedTheme === "dark"
+                ? themeStyles.container
+                : themeStyles.container),
         },
         circle: {
             ...TasbehScreenStyle.circle,
-            ...selectedTheme === 'dark' ? themeStyles.circle : themeStyles.circle,
+            ...(selectedTheme === "dark" ? themeStyles.circle : themeStyles.circle),
         },
         countValue: {
             ...TasbehScreenStyle.countValue,
-            ...selectedTheme === 'dark' ? themeStyles.countValue : themeStyles.countValue,
+            ...(selectedTheme === "dark"
+                ? themeStyles.countValue
+                : themeStyles.countValue),
         },
         thikirNameDispalyBtn: {
             ...TasbehScreenStyle.thikirNameDispalyBtn,
-            ...selectedTheme === 'dark' ? themeStyles.thikirNameDispalyBtn : themeStyles.thikirNameDispalyBtn,
+            ...(selectedTheme === "dark"
+                ? themeStyles.thikirNameDispalyBtn
+                : themeStyles.thikirNameDispalyBtn),
         },
         pickThikirText: {
             ...TasbehScreenStyle.pickThikirText,
-            ...selectedTheme === 'dark' ? themeStyles.pickThikirText : themeStyles.pickThikirText,
+            ...(selectedTheme === "dark"
+                ? themeStyles.pickThikirText
+                : themeStyles.pickThikirText),
         },
         ModalTopNotch: {
             ...TasbehScreenStyle.ModalTopNotch,
-            ...selectedTheme === 'dark' ? themeStyles.ModalTopNotch : themeStyles.ModalTopNotch,
+            ...(selectedTheme === "dark"
+                ? themeStyles.ModalTopNotch
+                : themeStyles.ModalTopNotch),
         },
         addNewThikirModalContainer: {
             ...TasbehScreenStyle.addNewThikirModalContainer,
-            ...selectedTheme === 'dark' ? themeStyles.addNewThikirModalContainer : themeStyles.addNewThikirModalContainer,
+            ...(selectedTheme === "dark"
+                ? themeStyles.addNewThikirModalContainer
+                : themeStyles.addNewThikirModalContainer),
         },
         buttonThikirDisplayInModal: {
             ...TasbehScreenStyle.buttonThikirDisplayInModal,
-            ...selectedTheme === 'dark' ? themeStyles.buttonThikirDisplayInModal : themeStyles.buttonThikirDisplayInModal,
+            ...(selectedTheme === "dark"
+                ? themeStyles.buttonThikirDisplayInModal
+                : themeStyles.buttonThikirDisplayInModal),
         },
         newThikirTextInModal: {
             ...TasbehScreenStyle.newThikirTextInModal,
-            ...selectedTheme === 'dark' ? themeStyles.newThikirTextInModal : themeStyles.newThikirTextInModal,
+            ...(selectedTheme === "dark"
+                ? themeStyles.newThikirTextInModal
+                : themeStyles.newThikirTextInModal),
         },
         inputTextContainerInModa: {
             ...TasbehScreenStyle.inputTextContainerInModa,
-            ...selectedTheme === 'dark' ? themeStyles.inputTextContainerInModa : themeStyles.inputTextContainerInModa,
+            ...(selectedTheme === "dark"
+                ? themeStyles.inputTextContainerInModa
+                : themeStyles.inputTextContainerInModa),
         },
         rectangle: {
             ...TasbehScreenStyle.rectangle,
-            ...selectedTheme === 'dark' ? themeStyles.rectangle : themeStyles.rectangle,
+            ...(selectedTheme === "dark"
+                ? themeStyles.rectangle
+                : themeStyles.rectangle),
         },
         separator: {
             ...TasbehScreenStyle.separator,
-            ...selectedTheme === 'dark' ? themeStyles.separator : themeStyles.separator,
+            ...(selectedTheme === "dark"
+                ? themeStyles.separator
+                : themeStyles.separator),
         },
         itemText: {
             ...TasbehScreenStyle.itemText,
-            ...selectedTheme === 'dark' ? themeStyles.itemText : themeStyles.itemText,
+            ...(selectedTheme === "dark"
+                ? themeStyles.itemText
+                : themeStyles.itemText),
         },
     };
     //#endregion
+    
+    const [isScrolling, setIsScrolling] = useState(false);
+
+    // Set a ref for the ScrollView
+    const scrollViewRef = useRef(null);
+    
+    // Add an onScroll event handler to the ScrollView to track scrolling
+    const handleScroll = (event) => {
+      const offsetY = event.nativeEvent.contentOffset.y;
+      if (offsetY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+    const renderBorderRadius = (index) => {
+        const itemCount = names.length;
+        if (isDeleteButtonVisible) {
+          if (index === 0) {
+            return {
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 0,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+            };
+          } else if (index === itemCount - 1 && isScrolling) {
+            return {
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10,
+            };
+          } else if (index === itemCount - 1) {
+            return {
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
+            };
+          } else {
+            return {
+                borderRadius: 0,
+            };
+          }
+        } else {
+          return {};
+        }
+      };
 
     //#region LoadData
     useEffect(() => {
@@ -283,7 +357,7 @@ const TasbihScreen = () => {
     };
     //#endregion
 
-    //#region Circle animation 
+    //#region Circle animation
     const animateCircle = () => {
         // Reset the animation value
         animation.setValue(0);
@@ -299,7 +373,7 @@ const TasbihScreen = () => {
         });
     };
     //#endregion
-    
+
     //#region handleReset
     const handleReset = () => {
         const updatedNames = [...names];
@@ -344,7 +418,7 @@ const TasbihScreen = () => {
         }
     };
     //#endregion
-    
+
     //#region DeleteName
     const deleteName = (index) => {
         const updatedNames = [...names];
@@ -408,7 +482,7 @@ const TasbihScreen = () => {
     //#endregion
 
     useEffect(() => {
-        animateCircle(); 
+        animateCircle();
     }, []);
 
     return (
@@ -449,7 +523,11 @@ const TasbihScreen = () => {
                         {/* Original Circle */}
                         <View style={styles.circle}>
                             <Text allowFontScaling={false} style={styles.countValue}>
-                                {count}
+                                {
+                                    (NumberCountMainToDisplay = state.isArabicNumbers
+                                        ? convertToEasternArabicNumerals(count.toString())
+                                        : count.toString())
+                                }
                             </Text>
                         </View>
 
@@ -464,8 +542,7 @@ const TasbihScreen = () => {
                                             scale: animation.interpolate({
                                                 inputRange: [0, 1],
                                                 outputRange: [1, 1.8],
-                                            },
-                                            )
+                                            }),
                                         },
                                     ],
                                 },
@@ -514,9 +591,7 @@ const TasbihScreen = () => {
                     }}
                 >
                     <View style={styles.container}>
-                        <Text style={styles.pickThikirText}>
-                            اختيار الذكر
-                        </Text>
+                        <Text style={styles.pickThikirText}>اختيار الذكر</Text>
                         <View style={styles.ModalTopNotch} />
                         <TouchableOpacity
                             onPress={() => {
@@ -538,9 +613,7 @@ const TasbihScreen = () => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                <Text style={styles.ThikirNewText}>
-                                    ذكر جديد
-                                </Text>
+                                <Text style={styles.ThikirNewText}>ذكر جديد</Text>
                                 <Svg width="24" height="24" viewBox="0 0 512 512">
                                     <Path
                                         d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
@@ -552,12 +625,13 @@ const TasbihScreen = () => {
 
                         <View style={styles.rectangle}>
                             <View style={styles.modaldisplay}>
-                                <FlatList
-                                    style={[{ borderRadius: 10 }]}
-                                    data={names}
-                                    keyExtractor={(item) => item.name}
-                                    renderItem={({ item, index }) => (
+                                <ScrollView 
+                                style={{ borderRadius: 10 }}
+                                ref={scrollViewRef}
+                                onScroll={handleScroll}>
+                                    {names.map((item, index) => (
                                         <Swipeable
+                                            key={item.name}
                                             renderRightActions={(dragX) =>
                                                 isDeleteButtonVisible ? (
                                                     <DeleteButton
@@ -566,7 +640,7 @@ const TasbihScreen = () => {
                                                     />
                                                 ) : null
                                             }
-                                            containerStyle={{ backgroundColor: "#ff453a" }}
+                                            containerStyle={renderBorderRadius(index)}
                                             overshootRight={false}
                                             onSwipeableWillOpen={() => {
                                                 Haptics.notificationAsync(
@@ -579,11 +653,16 @@ const TasbihScreen = () => {
                                                 );
                                             }}
                                         >
-                                            <RectButton
+                                            <TouchableWithoutFeedback
                                                 onPress={() => selectName(index)}
-                                                activeOpacity={0}
+                                                activeOpacity={0.8}
                                             >
-                                                <View style={styles.buttonThikirDisplayInModal}>
+                                                <View
+                                                    style={[
+                                                        styles.buttonThikirDisplayInModal,
+                                                        renderBorderRadius(index),
+                                                    ]}
+                                                >
                                                     <Text
                                                         style={styles.itemText}
                                                         numberOfLines={1}
@@ -596,14 +675,25 @@ const TasbihScreen = () => {
                                                         numberOfLines={1}
                                                         ellipsizeMode="tail"
                                                     >
-                                                        {item.count}
+                                                        {
+                                                            (itemCountMainToDisplay = state.isArabicNumbers
+                                                                ? convertToEasternArabicNumerals(
+                                                                    item.count.toString()
+                                                                )
+                                                                : item.count.toString())
+                                                        }
                                                     </Text>
                                                 </View>
-                                            </RectButton>
+                                            </TouchableWithoutFeedback>
+                                            {index < names.length - 1 && (
+                                                <View
+                                                    key={`separator-${index}`}
+                                                    style={styles.separator}
+                                                />
+                                            )}
                                         </Swipeable>
-                                    )}
-                                    ItemSeparatorComponent={Separator} // Add separator
-                                />
+                                    ))}
+                                </ScrollView>
                             </View>
                             <View>
                                 <Modal
@@ -639,7 +729,8 @@ const TasbihScreen = () => {
                                                     onChangeText={setNewName}
                                                     onSubmitEditing={addName}
                                                     keyboardAppearance={keyboardTheme}
-                                                    style={styles.inputTextContainerInModa} />
+                                                    style={styles.inputTextContainerInModa}
+                                                />
                                             </View>
                                         </Animatable.View>
                                     </TouchableOpacity>

@@ -8,12 +8,14 @@ import * as Haptics from 'expo-haptics';
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
+import {useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 
 
 const ThikirAlarmScreen = () => {
   const { selectedTheme } = useTheme();
   const { selectedColor, setColor } = useColor();
+  const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system'; 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -316,9 +318,13 @@ const ThikirAlarmScreen = () => {
               <View style={styles.leftContent}>
                 <Text allowFontScaling={false} style={styles.title}>{notification.title}</Text>
                 <Text allowFontScaling={false} style={styles.time}>
-                  {notification.date
+                    {TimeToDisplay = state.isArabicNumbers
+                    ? convertToEasternArabicNumerals(notification.date
                     ? formatTime(notification.date)
-                    : formatTime(getDefaultTime(notification.id))}
+                    : formatTime(getDefaultTime(notification.id)).toString())
+                    : notification.date
+                    ? formatTime(notification.date)
+                    : formatTime(getDefaultTime(notification.id)).toString()}
                 </Text>
               </View>
               <View style={styles.middleContent}></View>

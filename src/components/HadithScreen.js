@@ -7,6 +7,7 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
+import {useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -15,6 +16,7 @@ const HADITHVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor, setColor } = useColor();
+  const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
   
   //#region selectedColor
@@ -254,9 +256,17 @@ const HADITHVerseScreen = ({ navigation }) => {
           contentContainerStyle={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
           >
-          <Text style={[styles.title, textStyle]}>{HADITH}</Text>
+          <Text style={[styles.title, textStyle]}>
+          {HadithToDisplay = state.isArabicNumbers
+          ? convertToEasternArabicNumerals(HADITH.toString())
+          : HADITH.toString()}
+          </Text>
           <View style={styles.horizontalLine} />
-          <Text style={styles.description}>{REF}</Text>
+          <Text style={styles.description}>
+          {REFToDisplay = state.isArabicNumbers
+          ? convertToEasternArabicNumerals(REF.toString())
+          : REF.toString()}
+          </Text>
       </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}

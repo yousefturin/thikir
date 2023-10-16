@@ -54,7 +54,6 @@ export const MainStyles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "300",
     textAlign: "right",
     marginRight: 20,
     fontFamily: "ScheherazadeNewBold",
@@ -129,7 +128,6 @@ export const AboutStyles = StyleSheet.create({
   rectangleText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "300",
     textAlign: "right",
     marginHorizontal: 5,
     fontFamily: "ScheherazadeNew",
@@ -410,7 +408,6 @@ export const HomeStyles = StyleSheet.create({
   buttonText: {
     color: "#dddddd",
     fontSize: 18,
-    fontWeight: "300",
     textAlign: "right",
     marginLeft: 30,
     fontFamily: "ScheherazadeNew",
@@ -469,7 +466,6 @@ export const HomeStyles = StyleSheet.create({
   buttonTextTop: {
     color: "#dddddd",
     fontSize: 18,
-    fontWeight: "300",
     textAlign: "right",
     marginRight: 10,
     fontFamily: "ScheherazadeNew",
@@ -934,7 +930,6 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 72,
-    fontWeight: '700',
   },
   thikirNameDispalyBtn: {
     justifyContent: "center",
@@ -958,13 +953,11 @@ export const TasbehScreenStyle = StyleSheet.create({
     textAlign: "center",
     fontFamily:"ScheherazadeNewBold",
     fontSize: 20,
-    fontWeight: "700",
   },
   pickThikirText: {
     textAlign: "center",
     fontSize: 20,
     color: "white",
-    fontWeight: "600",
     fontFamily:"ScheherazadeNewBold",
   },
   ModalTopNotch: {
@@ -988,8 +981,7 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "#007AFF",
     fontSize: 22,
     paddingRight: 5,
-    fontWeight: 500,
-  },
+    },
   addNewThikirModalContainer: {
     backgroundColor: "#151515",
     width: 350,
@@ -1011,7 +1003,6 @@ export const TasbehScreenStyle = StyleSheet.create({
     fontSize: 20,
     color: "white",
     borderRadius: 10,
-    fontWeight: "600",
     fontFamily:"ScheherazadeNewBold",
   },
   inputTextContainerInModa: {
@@ -1038,7 +1029,8 @@ export const TasbehScreenStyle = StyleSheet.create({
   },
   separator: {
     borderBottomWidth: 1,
-    marginStart: 355,
+    marginLeft: windowWidth > 600 ? 650 : 355,
+
     borderColor: "#262626",
   },
   itemText: {

@@ -7,6 +7,7 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
+import {useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 
 const CACHE_KEY = "randomVerseCache";
@@ -16,6 +17,7 @@ const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor, setColor } = useColor();
+  const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
   //#region selectedColor
@@ -269,7 +271,11 @@ const QuranVerseScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           >
         <Text style={[styles.title, textStyle]}>
-          {verseText} ﴿ {ayahNumber} ﴾
+          {verseText} 
+          ﴿ 
+          {ayahNumberToDisplay = state.isArabicNumbers
+          ? convertToEasternArabicNumerals(ayahNumber.toString())
+          : ayahNumber.toString()}﴾
         </Text>
         <View style={styles.horizontalLine} />
         <Text style={styles.tafsirStyle}>{tafsir}</Text>

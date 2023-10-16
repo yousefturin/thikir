@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList,Switch } from 'react-native';
 import { useTheme } from '../context/ThemContex';
 import { useFont } from '../context/FontContext';
 import { useColor } from '../context/ColorContext';
+import {useNumberContext } from '../context/NumberContext'
 import { SettingStyles } from '../context/commonStyles';
 import Svg, { Path } from "react-native-svg";
 import { Appearance } from 'react-native';
@@ -11,8 +12,12 @@ const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
   const { selectedFont, setFont } = useFont();
   const { selectedColor, setColor } = useColor();
+  const { state, dispatch, convertToEasternArabicNumerals } = useNumberContext(); // Get the context values
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
-
+  const toggleSwitch = () => {
+    // Dispatch the action to toggle the numbers
+    dispatch({ type: 'TOGGLE_NUMBERS' });
+  };
 
   const orangeMain = StyleSheet.create({
     themeCircle:{
@@ -270,12 +275,19 @@ const SettingScreen = ({ navigation }) => {
         />
       </View>
     </View>
-      <Text style={styles.HeadertextColor}>أيقون التطبيق</Text>
+    <Text style={styles.HeadertextColor}>نظام الارقام</Text>
       <View style={styles.rectangle}>
         <View style={styles.fontOptionsContainer}>
-        {/*Need to render the 5 icons that user will select any of to change the app icon*/}
-          <FlatList
-            scrollEnabled={false} 
+          <Text>
+            {state.isArabicNumbers
+              ? convertToEasternArabicNumerals('0123456789') // Convert to Arabic numerals
+              : '0123456789'} {/* Display Arabic or English numbers */}
+          </Text>
+          <Switch
+            value={state.isArabicNumbers}
+            onValueChange={toggleSwitch}
+            thumbColor={state.isArabicNumbers ? '#fefffe' : '#fefffe'}
+            trackColor={{ true: selectedColor, false: '#454545' }}
           />
         </View>
       </View>
