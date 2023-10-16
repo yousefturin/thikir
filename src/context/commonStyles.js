@@ -713,8 +713,8 @@ export const SettingStyles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#151515",
     justifyContent: "flex-start",
+    paddingTop: 20,
     alignItems: "center",
-    paddingTop: 20
   },
   themeOptionsContainer: {
     flexDirection: "row-reverse",
@@ -722,8 +722,8 @@ export const SettingStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
   },
-
   themeOption: {
+    
     padding: 14,
     marginBottom: 10,
     flexDirection: 'row',
@@ -768,11 +768,16 @@ export const SettingStyles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
   },
-  HeadertextColor: {
-    color: "#767676",
+  wrapHeaderText: {
+    width: '90%',
+    justifyContent: 'center',
     textAlign: 'right',
+    paddingRight:10
+  },
+  HeadertextColor: {
+    color: '#767676',
     paddingTop: 15,
-    paddingLeft: 300
+    //paddingLeft: windowWidth > 600 ? 560 : 300,
   },
   horizontalLine: {
     borderBottomWidth: 1,
@@ -790,10 +795,9 @@ export const SettingStyles = StyleSheet.create({
     borderRadius: 30, // Make it a circle
     borderWidth: 1,
     borderColor: 'transparent', // Default border color
-
   },
   selectedColorCircle: {
-    borderColor: '#EBEAEA', // Border color for selected color
+    borderColor: '#EBEAEA',
     shadowColor: "white",
     shadowOffset: {
       width: 0,
@@ -805,12 +809,13 @@ export const SettingStyles = StyleSheet.create({
   },
   checkIcon: {
     position: 'absolute',
-    top: '32%', // Adjust the position as needed
-    left: '32%', // Adjust the position as needed
+    top: '32%', 
+    left: '32%', 
   },
   colorOptionsContainer: {
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 //#endregion
@@ -947,12 +952,12 @@ export const TasbehScreenStyle = StyleSheet.create({
     shadowRadius: 5,
     elevation: 4,
     overflow: "hidden",
-    padding: 10,
+
   },
   thikirNameDispaly: {
     textAlign: "center",
     fontFamily:"ScheherazadeNewBold",
-    fontSize: 20,
+    fontSize: 18,
   },
   pickThikirText: {
     textAlign: "center",
@@ -979,7 +984,7 @@ export const TasbehScreenStyle = StyleSheet.create({
   },
   ThikirNewText: {
     color: "#007AFF",
-    fontSize: 22,
+    fontSize: 20,
     paddingRight: 5,
     },
   addNewThikirModalContainer: {
@@ -1029,7 +1034,7 @@ export const TasbehScreenStyle = StyleSheet.create({
   },
   separator: {
     borderBottomWidth: 1,
-    marginLeft: windowWidth > 600 ? 650 : 355,
+    marginRight: windowWidth > 600 ? 20 : 20,
 
     borderColor: "#262626",
   },

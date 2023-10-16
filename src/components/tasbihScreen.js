@@ -6,14 +6,17 @@ import {
     Modal,
     TextInput,
     StyleSheet,
-    FlatList,
     TouchableWithoutFeedback,
     Animated,
     Easing,
     ScrollView,
+    Platform,
 } from "react-native";
 import * as Haptics from "expo-haptics";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import {
+    Swipeable,
+    GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Svg, Path, Circle } from "react-native-svg";
 import * as Animatable from "react-native-animatable";
@@ -40,6 +43,8 @@ const TasbihScreen = () => {
     const [selectedNameIndex, setSelectedNameIndex] = useState(0);
     const [isContainerVisible, setContainerVisible] = useState(false);
     const inputRef = useRef(null);
+    const [isScrolling, setIsScrolling] = useState(false);
+    const scrollViewRef = useRef(null);
     const { state, convertToEasternArabicNumerals } = useNumberContext();
 
     const { selectedTheme } = useTheme();
@@ -141,7 +146,7 @@ const TasbihScreen = () => {
             backgroundColor: "#151515",
         },
         separator: {
-            borderColor: "#262626",
+            borderColor: "#151515",
         },
         itemText: {
             color: "#fff",
@@ -238,54 +243,56 @@ const TasbihScreen = () => {
         },
     };
     //#endregion
-    
-    const [isScrolling, setIsScrolling] = useState(false);
 
-    // Set a ref for the ScrollView
-    const scrollViewRef = useRef(null);
-    
     // Add an onScroll event handler to the ScrollView to track scrolling
     const handleScroll = (event) => {
-      const offsetY = event.nativeEvent.contentOffset.y;
-      if (offsetY > 0) {
-        setIsScrolling(true);
-      } else {
-        setIsScrolling(false);
-      }
+        const offsetY = event.nativeEvent.contentOffset.y;
+        if (offsetY > 0) {
+            setIsScrolling(true);
+        } else {
+            setIsScrolling(false);
+        }
     };
+
     const renderBorderRadius = (index) => {
         const itemCount = names.length;
-        if (isDeleteButtonVisible) {
-          if (index === 0) {
+        if (itemCount === 1) {
             return {
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 0,
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
-            };
-          } else if (index === itemCount - 1 && isScrolling) {
-            return {
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10,
             };
-          } else if (index === itemCount - 1) {
+        } else if (index === 0) {
             return {
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
             };
-          } else {
+        } else if (index === itemCount - 1) {
             return {
-                borderRadius: 0,
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10,
             };
-          }
-        } else {
-          return {};
         }
-      };
+        else {
+            if (isDeleteButtonVisible) {
+                if (index === 0) {
+                    return {
+                        borderTopLeftRadius: 0,
+                        borderTopRightRadius: 0,
+                        borderBottomLeftRadius: 0,
+                        borderBottomRightRadius: 0,
+                    };
+                } else if (index === itemCount - 1) {
+                    return {
+                        borderBottomLeftRadius: 0,
+                        borderBottomRightRadius: 0,
+                    };
+                }
+            }
+        }
+        return {};
+    };
 
     //#region LoadData
     useEffect(() => {
@@ -402,10 +409,52 @@ const TasbihScreen = () => {
     };
     //#endregion
 
+    const handleButtonPress = () => {
+        setIsNameListVisible(false);
+    };
     const toggleContainer = () => {
         setContainerVisible(!isContainerVisible);
     };
-
+    const renderButtonCloseModal = () => {
+        if (Platform.OS === "android") {
+            return (
+                <TouchableOpacity
+                    onPress={handleButtonPress}
+                    style={{
+                        position: "absolute",
+                        bottom: 45,
+                        left: 25,
+                    }}
+                >
+                    <View
+                        style={{
+                            flexDirection: "row-reverse",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Text allowFontScaling={false} style={styles.ThikirNewText}>
+                            أغلاق
+                        </Text>
+                        <Svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 512 512"
+                            style={styles.ThikirNewText}
+                        >
+                            <Path
+                                d="M48,256c0,114.87,93.13,208,208,208s208-93.13,208-208S370.87,48,256,48,48,141.13,48,256Zm224-80.09L208.42,240H358v32H208.42L272,336.09,249.3,358.63,147.46,256,249.3,153.37Z"
+                                fill="currentColor"
+                            />
+                        </Svg>
+                    </View>
+                </TouchableOpacity>
+            );
+        } else {
+            // Return null for iOS as you mentioned you want to do nothing
+            return null;
+        }
+    };
     //#region AddName
     const addName = () => {
         if (newName) {
@@ -494,7 +543,12 @@ const TasbihScreen = () => {
             <View style={styles.container}>
                 <View style={styles.resetBtn}>
                     <TouchableOpacity onPress={handleReset}>
-                        <Svg height="24" viewBox="0 0 21 21" width="24">
+                        <Svg
+                            height="24"
+                            viewBox="0 0 21 21"
+                            width="24"
+                            style={[{ margin: 20 }]}
+                        >
                             <Path
                                 d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"
                                 fill="none"
@@ -570,6 +624,7 @@ const TasbihScreen = () => {
                     }}
                 >
                     <Text
+                        allowFontScaling={false}
                         style={[styles.thikirNameDispaly, { color: selectedColor }]}
                         numberOfLines={1}
                         ellipsizeMode="tail"
@@ -579,6 +634,7 @@ const TasbihScreen = () => {
                             : "اختار الذكر"}
                     </Text>
                 </TouchableOpacity>
+
                 <Modal
                     visible={isNameListVisible}
                     animationType="slide"
@@ -591,7 +647,9 @@ const TasbihScreen = () => {
                     }}
                 >
                     <View style={styles.container}>
-                        <Text style={styles.pickThikirText}>اختيار الذكر</Text>
+                        <Text allowFontScaling={false} style={styles.pickThikirText}>
+                            اختيار الذكر
+                        </Text>
                         <View style={styles.ModalTopNotch} />
                         <TouchableOpacity
                             onPress={() => {
@@ -613,8 +671,15 @@ const TasbihScreen = () => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                <Text style={styles.ThikirNewText}>ذكر جديد</Text>
-                                <Svg width="24" height="24" viewBox="0 0 512 512">
+                                <Text allowFontScaling={false} style={styles.ThikirNewText}>
+                                    ذكر جديد
+                                </Text>
+                                <Svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 512 512"
+                                    style={styles.ThikirNewText}
+                                >
                                     <Path
                                         d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
                                         fill="currentColor"
@@ -622,76 +687,83 @@ const TasbihScreen = () => {
                                 </Svg>
                             </View>
                         </TouchableOpacity>
-
+                        {renderButtonCloseModal()}
                         <View style={styles.rectangle}>
                             <View style={styles.modaldisplay}>
-                                <ScrollView 
-                                style={{ borderRadius: 10 }}
-                                ref={scrollViewRef}
-                                onScroll={handleScroll}>
+                                <ScrollView
+                                    style={{ borderRadius: 10 }}
+                                    ref={scrollViewRef}
+                                    onScroll={handleScroll}
+                                >
                                     {names.map((item, index) => (
-                                        <Swipeable
-                                            key={item.name}
-                                            renderRightActions={(dragX) =>
-                                                isDeleteButtonVisible ? (
-                                                    <DeleteButton
-                                                        onDelete={() => deleteName(index)}
-                                                        dragX={dragX}
-                                                    />
-                                                ) : null
-                                            }
-                                            containerStyle={renderBorderRadius(index)}
-                                            overshootRight={false}
-                                            onSwipeableWillOpen={() => {
-                                                Haptics.notificationAsync(
-                                                    Haptics.NotificationFeedbackType.Success
-                                                );
-                                            }}
-                                            onSwipeableWillClose={() => {
-                                                Haptics.notificationAsync(
-                                                    Haptics.NotificationFeedbackType.Error
-                                                );
-                                            }}
-                                        >
-                                            <TouchableWithoutFeedback
-                                                onPress={() => selectName(index)}
-                                                activeOpacity={0.8}
+                                        <GestureHandlerRootView>
+                                            <Swipeable
+                                                key={item.name}
+                                                renderRightActions={(dragX) =>
+                                                    isDeleteButtonVisible ? (
+                                                        <DeleteButton
+                                                            onDelete={() => deleteName(index)}
+                                                            dragX={dragX}
+                                                        />
+                                                    ) : null
+                                                }
+                                                containerStyle={[renderBorderRadius(index),{backgroundColor:"#262626"}]}
+                                                overshootRight={false}
+                                                onSwipeableWillOpen={() => {
+                                                    Haptics.notificationAsync(
+                                                        Haptics.NotificationFeedbackType.Success
+                                                    );
+                                                }}
+                                                onSwipeableWillClose={() => {
+                                                    Haptics.notificationAsync(
+                                                        Haptics.NotificationFeedbackType.Error
+                                                    );
+                                                }}
                                             >
-                                                <View
-                                                    style={[
-                                                        styles.buttonThikirDisplayInModal,
-                                                        renderBorderRadius(index),
-                                                    ]}
+                                                <TouchableWithoutFeedback
+                                                    onPress={() => selectName(index)}
+                                                    activeOpacity={0.8}
                                                 >
-                                                    <Text
-                                                        style={styles.itemText}
-                                                        numberOfLines={1}
-                                                        ellipsizeMode="tail"
+                                                    <View
+                                                        style={[
+                                                            styles.buttonThikirDisplayInModal,
+                                                            renderBorderRadius(index),
+                                                            
+                                                        ]}
                                                     >
-                                                        {item.name}
-                                                    </Text>
-                                                    <Text
-                                                        style={[styles.itemCount, { color: selectedColor }]}
-                                                        numberOfLines={1}
-                                                        ellipsizeMode="tail"
-                                                    >
-                                                        {
-                                                            (itemCountMainToDisplay = state.isArabicNumbers
-                                                                ? convertToEasternArabicNumerals(
-                                                                    item.count.toString()
-                                                                )
-                                                                : item.count.toString())
-                                                        }
-                                                    </Text>
-                                                </View>
-                                            </TouchableWithoutFeedback>
-                                            {index < names.length - 1 && (
-                                                <View
-                                                    key={`separator-${index}`}
-                                                    style={styles.separator}
-                                                />
-                                            )}
-                                        </Swipeable>
+                                                        <Text
+                                                            style={[styles.itemText]}
+                                                            numberOfLines={1}
+                                                            ellipsizeMode="tail"
+                                                        >
+                                                            {item.name}
+                                                        </Text>
+                                                        <Text
+                                                            style={[
+                                                                styles.itemCount,
+                                                                { color: selectedColor },
+                                                            ]}
+                                                            numberOfLines={1}
+                                                            ellipsizeMode="tail"
+                                                        >
+                                                            {
+                                                                (itemCountMainToDisplay = state.isArabicNumbers
+                                                                    ? convertToEasternArabicNumerals(
+                                                                        item.count.toString()
+                                                                    )
+                                                                    : item.count.toString())
+                                                            }
+                                                        </Text>
+                                                    </View>
+                                                </TouchableWithoutFeedback>
+                                                {index < names.length - 1 && (
+                                                    <View
+                                                        key={`separator-${index}`}
+                                                        style={styles.separator}
+                                                    />
+                                                )}
+                                            </Swipeable>
+                                        </GestureHandlerRootView>
                                     ))}
                                 </ScrollView>
                             </View>
