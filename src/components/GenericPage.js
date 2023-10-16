@@ -14,6 +14,7 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
+import {useNumberContext } from '../context/NumberContext'
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -24,6 +25,8 @@ const GenericPage = ({ route }) => {
     const { selectedFont } = useFont();
     const { selectedColor, setColor } = useColor();
     const systemTheme = selectedTheme === 'system';
+    const { state, convertToEasternArabicNumerals } = useNumberContext(); 
+    
     //#region selectedColor
     const orangeMain = StyleSheet.create({
         InfoReptTime: {
@@ -540,7 +543,9 @@ const GenericPage = ({ route }) => {
                     >
                     <TouchableOpacity activeOpacity={1}>
                         <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
-                        {item.subItems[currentIndex].subItemName}
+                        {subItemNameToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemName.toString())
+                                : item.subItems[currentIndex].subItemName.toString()}
                         </Text>
                         </TouchableOpacity>
                     </ScrollView>
@@ -548,16 +553,23 @@ const GenericPage = ({ route }) => {
 
                         <View style={styles.horizontalLine} />
                         <Text allowFontScaling={false} style={styles.description}>
-                            {item.subItems[currentIndex].subItemDescription}
+                            {subItemDescriptionToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemDescription.toString())
+                                : item.subItems[currentIndex].subItemDescription.toString()}
                         </Text>
-                        <Text allowFontScaling={false} style={styles.InfoReptTimeIndex}>
+                        <Text 
+                        allowFontScaling={false} style={styles.InfoReptTimeIndex}>
                             الذكر{" "}
                             <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {currentIndex + 1}
+                                {indexToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals((currentIndex + 1).toString())
+                                : (currentIndex + 1).toString()}
                             </Text>{" "}
                             من{" "}
                             <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {item.subItems.length}
+                                {totalItemsToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(item.subItems.length.toString())
+                                : item.subItems.length.toString()}
                             </Text>
                         </Text>
                         <Text allowFontScaling={false} style={styles.InfoReptTime}>
@@ -622,7 +634,10 @@ const GenericPage = ({ route }) => {
                             }
                         >
                             <View style={styles.circularButton}>
-                                <Text style={styles.textcount}>{count}</Text>
+                                <Text style={styles.textcount}>{countDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(count.toString())
+                                : count.toString()}</Text>
+
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
