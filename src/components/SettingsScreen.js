@@ -239,7 +239,9 @@ const SettingScreen = ({ navigation }) => {
   return (
     <View style={[styles.container]}>
       <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
+      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
       <Text style={styles.HeadertextColor}>المظهر</Text>
+      </View>
       <View style={styles.rectangle}>
         <View style={styles.themeOptionsContainer}>
           <FlatList
@@ -251,7 +253,9 @@ const SettingScreen = ({ navigation }) => {
           />
         </View>
       </View>
+      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
       <Text style={styles.HeadertextColor}>خط العرض</Text>
+      </View>
       <View style={styles.rectangle}>
         <View style={styles.fontOptionsContainer}>
           <FlatList
@@ -263,7 +267,9 @@ const SettingScreen = ({ navigation }) => {
           />
         </View>
       </View>
+      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
       <Text style={styles.HeadertextColor}>لون التطبيق</Text>
+      </View>
     <View style={styles.rectangle}>
       <View style={styles.colorOptionsContainer}>
         <FlatList
@@ -275,15 +281,23 @@ const SettingScreen = ({ navigation }) => {
         />
       </View>
     </View>
+    <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
     <Text style={styles.HeadertextColor}>نظام الارقام</Text>
+    </View>
       <View style={styles.rectangle}>
-        <View style={styles.fontOptionsContainer}>
-          <Text>
+        <View style={[{     
+                  flexDirection: "row-reverse",
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginVertical: 5,
+                  height:50}]}>
+          <Text style={[styles.textColor,{paddingRight:22}]}>
             {state.isArabicNumbers
               ? convertToEasternArabicNumerals('0123456789') // Convert to Arabic numerals
               : '0123456789'} {/* Display Arabic or English numbers */}
           </Text>
           <Switch
+          style={[{marginLeft:10}]}
             value={state.isArabicNumbers}
             onValueChange={toggleSwitch}
             thumbColor={state.isArabicNumbers ? '#fefffe' : '#fefffe'}
