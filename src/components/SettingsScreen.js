@@ -214,7 +214,7 @@ const SettingScreen = ({ navigation }) => {
   const fontOptions = [
     { label: 'خط النظام', value: 'ScheherazadeNew' },
     { label: 'خط القران', value: 'MeQuran' },
-    { label: 'خط حفص', value: 'Hafs' },
+    { label: 'خط حفص ', value: 'Hafs' },
   ];
 
   const renderFontItem = ({ item, index }) => (
@@ -292,9 +292,9 @@ const SettingScreen = ({ navigation }) => {
                   marginVertical: 5,
                   height:50}]}>
           <Text style={[styles.textColor,{paddingRight:22}]}>
-            {state.isArabicNumbers
-              ? convertToEasternArabicNumerals('0123456789') // Convert to Arabic numerals
-              : '0123456789'} {/* Display Arabic or English numbers */}
+            {
+               convertToEasternArabicNumerals('0123456789') 
+              }
           </Text>
           <Switch
           style={[{marginLeft:10}]}
