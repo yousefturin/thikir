@@ -17,22 +17,20 @@ const darkTheme = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [selectedTheme, setSelectedTheme] = useState(null); // Use null to represent initial loading state
-
+  const [selectedTheme, setSelectedTheme] = useState('system'); // Use null to represent initial loading state
   useEffect(() => {
     async function fetchTheme() {
       try {
         const themeValue = await AsyncStorage.getItem('@selectedTheme');
-        if (themeValue === 'dark' || themeValue === 'light') {
-          setSelectedTheme(themeValue);
+        if (themeValue === 'dark' || themeValue === 'light' || themeValue === 'system') {
+          setSelectedTheme(themeValue); // Set the selected theme if it's "dark," "light," or "system"
         } else {
-          // Use the system theme
           const systemTheme = Appearance.getColorScheme();
           setSelectedTheme(systemTheme || 'light');
         }
       } catch (error) {
         console.error('Error fetching theme:', error);
-        setSelectedTheme('light'); // Set the default theme in case of an error
+        setSelectedTheme('system'); // Set the default theme in case of an error
       }
     }
     fetchTheme();

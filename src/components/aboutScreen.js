@@ -3,13 +3,15 @@ import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "reac
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { AboutStyles } from '../context/commonStyles';
+import { Appearance } from 'react-native';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedColor, setColor } = useColor();
+  const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
   
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6", 
     },
@@ -30,7 +32,7 @@ const AboutScreen = ({ navigation }) => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     container: {
       backgroundColor: "#151515", 
     },
@@ -50,28 +52,36 @@ const AboutScreen = ({ navigation }) => {
   });
   //#endregion
   
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ? darkTheme
+    : lightTheme
+  : selectedTheme === 'dark'
+  ? darkTheme
+  : lightTheme;
+
   //#region StyleMapping
   const styles = {
     ...AboutStyles,
     container: {
       ...AboutStyles.container,
-      ...selectedTheme === 'dark' ? darkStyles.container : lightStyles.container, 
+      ...selectedTheme === 'dark' ? themeStyles.container : themeStyles.container, 
     },
     appNameText: {
       ...AboutStyles.appNameText, 
-      ...selectedTheme === 'dark' ? darkStyles.appNameText : lightStyles.appNameText, 
+      ...selectedTheme === 'dark' ? themeStyles.appNameText : themeStyles.appNameText, 
     },
     rectangleWrapper: {
       ...AboutStyles.rectangleWrapper, 
-      ...selectedTheme === 'dark' ? darkStyles.rectangleWrapper : lightStyles.rectangleWrapper, 
+      ...selectedTheme === 'dark' ? themeStyles.rectangleWrapper : themeStyles.rectangleWrapper, 
     },
     rectangleText: {
       ...AboutStyles.rectangleText, 
-      ...selectedTheme === 'dark' ? darkStyles.rectangleText : lightStyles.rectangleText, 
+      ...selectedTheme === 'dark' ? themeStyles.rectangleText : themeStyles.rectangleText, 
     },
     horizontalLine: {
       ...AboutStyles.horizontalLine, 
-      ...selectedTheme  === 'dark'? darkStyles.horizontalLine : lightStyles.horizontalLine, 
+      ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine, 
     },
   };
   //#endregion

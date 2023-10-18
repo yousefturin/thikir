@@ -4,12 +4,13 @@ import * as MailComposer from 'expo-mail-composer';
 import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '../context/ThemContex';
 import { ReportProblemStyles } from '../context/commonStyles';
+import { Appearance } from 'react-native';
 
 const ReportProblemScreen = () => {
   const { selectedTheme } = useTheme();
-
+  const systemTheme = selectedTheme === 'system';
   //#region LightTheme
-  const lightStyles = StyleSheet.create({
+  const lightTheme = StyleSheet.create({
     container: {
       backgroundColor: "#f2f2f6",
     },
@@ -30,7 +31,7 @@ const ReportProblemScreen = () => {
   //#endregion
   
   //#region DarkTheme
-  const darkStyles = StyleSheet.create({
+  const darkTheme = StyleSheet.create({
     container: {
       backgroundColor: "#151515",
     },
@@ -49,25 +50,31 @@ const ReportProblemScreen = () => {
     },
   });
   //#endregion
-  
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+    ? darkTheme
+    : lightTheme
+  : selectedTheme === 'dark'
+  ? darkTheme
+  : lightTheme;
   //#region StyleMapping
   const styles = {
     ...ReportProblemStyles,
     container: {
       ...ReportProblemStyles.container,
-      ...selectedTheme  === 'dark'? darkStyles.container : lightStyles.container,
+      ...selectedTheme  === 'dark'? themeStyles.container : themeStyles.container,
     },
     heading: {
       ...ReportProblemStyles.heading,
-      ...selectedTheme  === 'dark'? darkStyles.heading : lightStyles.heading,
+      ...selectedTheme  === 'dark'? themeStyles.heading : themeStyles.heading,
     },
     input: {
       ...ReportProblemStyles.input,
-      ...selectedTheme === 'dark' ? darkStyles.input : lightStyles.input,
+      ...selectedTheme === 'dark' ? themeStyles.input : themeStyles.input,
     },
     inputScreenshot: {
       ...ReportProblemStyles.inputScreenshot,
-      ...selectedTheme  === 'dark'? darkStyles.inputScreenshot : lightStyles.inputScreenshot,
+      ...selectedTheme  === 'dark'? themeStyles.inputScreenshot : themeStyles.inputScreenshot,
     },
   };
   //#endregion

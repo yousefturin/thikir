@@ -7,6 +7,7 @@ import * as Notifications from "expo-notifications";
 import { ThemeProvider  } from "./src/context/ThemContex";
 import { FontProvider } from "./src/context/FontContext";
 import { ColorProvider  } from "./src/context/ColorContext";
+import  {NumberProvider} from './src/context/NumberContext'
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -70,7 +71,9 @@ const App = () => {
     <ThemeProvider>
       <FontProvider> 
         <ColorProvider>
+        <NumberProvider>
           <AppNavigator />
+          </NumberProvider>
         </ColorProvider>
       </FontProvider>
     </ThemeProvider>
