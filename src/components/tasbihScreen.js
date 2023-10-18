@@ -98,7 +98,7 @@ const TasbihScreen = () => {
             backgroundColor: "#f2f2f6",
         },
         separator: {
-            borderColor: "#fefffe",
+            borderColor: "#f2f2f6",
         },
         itemText: {
             color: "#000",
@@ -696,9 +696,8 @@ const TasbihScreen = () => {
                                     onScroll={handleScroll}
                                 >
                                     {names.map((item, index) => (
-                                        <GestureHandlerRootView>
+                                        <GestureHandlerRootView  key={item.name}>
                                             <Swipeable
-                                                key={item.name}
                                                 renderRightActions={(dragX) =>
                                                     isDeleteButtonVisible ? (
                                                         <DeleteButton
@@ -707,7 +706,13 @@ const TasbihScreen = () => {
                                                         />
                                                     ) : null
                                                 }
-                                                containerStyle={[renderBorderRadius(index),{backgroundColor:"#262626"}]}
+                                                containerStyle={[renderBorderRadius(index),{ backgroundColor:backgroundSwipDisplay = systemTheme
+                                                                            ? Appearance.getColorScheme() === 'dark'
+                                                                            ? "#262626"
+                                                                            : "#fefffe"
+                                                                            : selectedTheme === 'dark'
+                                                                            ? "#262626"
+                                                                            : "#fefffe"}]}
                                                 overshootRight={false}
                                                 onSwipeableWillOpen={() => {
                                                     Haptics.notificationAsync(
