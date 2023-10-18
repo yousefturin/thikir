@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -21,6 +20,7 @@ import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 import TasbihScreen from "../components/tasbihScreen";
+import QablaScreen from "../components/QablaScreen";
 import { useTheme } from '../context/ThemContex'; 
 import { Appearance } from 'react-native';
 
@@ -129,6 +129,7 @@ const AppNavigator = () => {
         headerStyle: headerStyle,
       }}
     />
+    
       <Stack.Screen
         name="آية"
         component={QuranVerseScreen}
@@ -171,6 +172,13 @@ const AppNavigator = () => {
       <Stack.Screen
         name="الأذكار المفضلة"
         component={FavouriteScreen}
+        options={{
+          headerStyle: headerStyle,
+        }}
+      />
+      <Stack.Screen
+        name="القبلة"
+        component={QablaScreen}
         options={{
           headerStyle: headerStyle,
         }}
