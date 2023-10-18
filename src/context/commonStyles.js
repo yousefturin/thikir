@@ -946,11 +946,11 @@ export const TasbehScreenStyle = StyleSheet.create({
     shadowColor: "black",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 0,
     },
     shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
+    shadowRadius: 3,
+    elevation: 2,
     overflow: "hidden",
 
   },
