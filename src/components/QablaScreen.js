@@ -95,7 +95,7 @@ const QiblaScreen = () => {
         </Text>
         <View style={styles.compass}>
           {renderNumbers()}
-          <View style={[styles.arrow, { transform: [{ rotate: `${compassRotation}deg` }] }]} />
+          <View style={[styles.triangle, { transform: [{ rotate: `rotate(${compassRotation}deg)` }] }]} />
         </View>
       </View>
     </View>
@@ -124,10 +124,21 @@ const styles = StyleSheet.create({
     width: 3,
     height: 120,
   },
-  arrow: {
-    width: 3,
-    height: 120,
-    backgroundColor: 'red',
+  triangle: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 10,
+    borderRightWidth: 10,
+    borderBottomWidth: 20,
+    borderStyle: 'solid',
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: 'red',
+    position: "absolute",
+    top: 65, // This positions the triangle at the top
+    left: '50%', // This centers it horizontally
+    marginLeft: -9, // This adjusts the position to center it properly
   },
   compassText: {
     fontSize: 18,

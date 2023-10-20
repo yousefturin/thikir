@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
@@ -277,6 +277,217 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+      <View style={styles.horizontalLine} />
+      <TouchableOpacity
+        style={[styles.button]}
+        onPress={() => navigation.navigate("أسماء الله الحسنى")}
+        activeOpacity={0.7}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color={selectedColor}
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+          <Text style={styles.buttonText}>أسماء الله الحسنى</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <Svg width={24} height={24} viewBox="0 0 64 64">
+            <Path d="M49,32l-4.6-4.6l-1.2,0.5l3.7,3.7c0.2,0.2,0.2,0.5,0,0.7l-3.7,3.7l1.2,0.5L49,32z"
+              fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M44,44v-6.5l-1.2-0.5v5.3c0,0.3-0.2,0.5-0.5,0.5h-5.3l0.5,1.2H44z"
+                            fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M44,26.5V20h-6.5l-0.5,1.2h5.3c0.3,0,0.5,0.2,0.5,0.5v5.3L44,26.5z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M46.3,38.1c0-0.1,0.1-0.3,0.1-0.4l5.2-5.2H50l-4.9,4.9v6.9l1.2,1.2V38.1z"
+                                                        fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M37.8,17.6l-5.2-5.2V14l4.9,4.9h6.9l1.2-1.2h-7.4C38,17.7,37.9,17.7,37.8,17.6z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M49.2,24.3v-9.5h-9.5l-0.8,1.9h7.9c0.3,0,0.5,0.2,0.5,0.5v7.9L49.2,24.3z"
+
+            />
+            <Path d="M46.4,26.3c-0.1-0.1-0.2-0.3-0.2-0.4v-7.4l-1.2,1.2v6.9l4.9,4.9h1.7L46.4,26.3z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M27.4,19.6l0.5,1.2l3.7-3.7c0.2-0.2,0.5-0.2,0.7,0l3.7,3.7l0.5-1.2L32,15L27.4,19.6z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={3}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="12"
+            />
+            <Path d="M20.7,36.1L17,32.4c-0.2-0.2-0.2-0.5,0-0.7l3.7-3.7l-1.2-0.5L15,32l4.6,4.6L20.7,36.1z"
+                                          fill="#FE7F2D"
+                                          strokeWidth={1}
+                                          stroke="#FE7F2D"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M18.9,26.6v-6.9l-1.2-1.2v7.4c0,0.1-0.1,0.3-0.2,0.4l-5.2,5.2H14L18.9,26.6z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M21.1,21.7c0-0.3,0.2-0.5,0.5-0.5h5.3L26.5,20H20v6.5l1.2,0.5V21.7z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M25,33.5c0.3,0.3,1.3,0.2,2.1,0.1v-3.2c-1.1,1.1-2.1,2.4-2.1,3C24.9,33.4,24.9,33.5,25,33.5z"
+              
+            />
+            <Path d="M18.9,44.4v-6.9L14,32.5h-1.7l5.2,5.2c0,0,0,0,0,0l0,0c0.1,0.1,0.2,0.2,0.2,0.4v7.4L18.9,44.4z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M28.1,42l3.9,3.9l3.9-3.9c0.1-0.1,0.2-0.2,0.4-0.2h5.5v-5.5c0-0.1,0.1-0.3,0.1-0.4l3.9-3.9L42,28.1    c-0.1-0.1-0.1-0.2-0.1-0.4v-5.5h-5.5c-0.1,0-0.3-0.1-0.4-0.1L32,18.1L28.1,22c-0.1,0.1-0.2,0.1-0.4,0.1h-5.5v5.5    c0,0.1-0.1,0.3-0.2,0.4L18.1,32l3.9,3.9c0.1,0.1,0.2,0.2,0.2,0.4v5.5h5.5C27.9,41.8,28,41.9,28.1,42z M39.1,27.8    c0-0.3,0.2-0.5,0.5-0.5c0.3,0,0.5,0.2,0.5,0.5v8.4c0,0.3-0.2,0.5-0.5,0.5c-0.3,0-0.5-0.2-0.5-0.5V27.8z M24.3,34.3    c-0.3-0.2-0.5-0.6-0.5-1c0-1.5,2.8-4.1,3.3-4.6c0.2-0.1,0.4-0.2,0.6-0.1s0.3,0.3,0.3,0.5v5.4c0,1,0.8,1.8,1.7,1.8    c1,0,1.8-0.8,1.8-1.8v-7.4c0-0.3,0.2-0.5,0.5-0.5c0.3,0,0.5,0.2,0.5,0.5v7.4c0,1,0.8,1.8,1.7,1.8c1,0,1.8-0.8,1.8-1.8v-6.1    c0-0.3,0.2-0.5,0.5-0.5c0.3,0,0.5,0.2,0.5,0.5v6.1c0,1.5-1.3,2.8-2.8,2.8c-0.9,0-1.8-0.5-2.3-1.2c-0.5,0.7-1.3,1.2-2.3,1.2    c-1.5,0-2.8-1.2-2.8-2.8C26.2,34.7,25,34.8,24.3,34.3z"/>
+            <Path d="M26.9,42.9h-5.3c-0.3,0-0.5-0.2-0.5-0.5v-5.3L20,37.5V44h6.5L26.9,42.9z"
+                                          fill="#FE7F2D"
+                                          strokeWidth={1}
+                                          stroke="#FE7F2D"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M50.3,14.5v9.9l7,7H60l-7.7-7.7c-0.1-0.1-0.2-0.2-0.2-0.4V12.6L50.3,14.5z"
+              
+            />
+            <Path d="M13.7,24.4v-9.9l-1.9-1.9v10.9c0,0.1-0.1,0.3-0.1,0.4L4,31.5h2.7L13.7,24.4z"
+              
+            />
+            <Path d="M24.4,13.7l7-7V4l-7.7,7.7c-0.1,0.1-0.2,0.2-0.4,0.2H12.6l1.9,1.9H24.4z"
+              
+            />
+            <Path d="M13.7,49.5v-9.9l-7-7H4l7.7,7.7c0.1,0.1,0.1,0.2,0.1,0.4v10.8L13.7,49.5z"
+              
+            />
+            <Path d="M26.1,16.3l5.6-5.6c0.2-0.2,0.5-0.2,0.7,0l5.6,5.6l0.8-1.9L32,7.7l-6.7,6.7L26.1,16.3z"
+              
+            />
+            <Path d="M49.5,13.7l1.9-1.9H40.6c-0.1,0-0.3-0.1-0.4-0.2L32.5,4v2.7l7,7H49.5z"
+              
+            />
+            <Path d="M39.6,50.3l-7,7V60l7.7-7.7c0.1-0.1,0.3-0.2,0.4-0.2h10.9l-1.9-1.9H39.6z"
+              
+            />
+            <Path d="M14.5,50.3l-1.9,1.9h10.8c0.1,0,0.3,0.1,0.4,0.1l7.7,7.7v-2.7l-7-7H14.5z"
+              
+            />
+            <Path d="M50.3,39.6v9.9l1.9,1.9V40.6c0-0.1,0.1-0.3,0.2-0.4l7.7-7.7h-2.7L50.3,39.6z"
+              
+            />
+            <Path d="M37.9,47.7l-5.6,5.6c-0.1,0.1-0.2,0.1-0.4,0.1s-0.3-0.1-0.4-0.1l-5.6-5.6l-0.8,1.9l6.8,6.7l6.7-6.7L37.9,47.7z"
+              
+            />
+            <Path d="M14.8,14.8v9.5l1.9,0.8v-7.9c0-0.3,0.2-0.5,0.5-0.5h7.9l-0.8-1.9H14.8z"
+              
+            />
+            <Path d="M7.7,32l6.7,6.7l1.9-0.8l-5.6-5.6c-0.2-0.2-0.2-0.5,0-0.7l5.6-5.6l-1.9-0.8L7.7,32z"
+              
+            />
+            <Path d="M26.2,46.4l5.2,5.2V50l-4.9-4.9h-6.9l-1.2,1.2h7.4C26,46.3,26.2,46.3,26.2,46.4z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M56.3,32l-6.7-6.7l-1.9,0.8l5.6,5.6c0.2,0.2,0.2,0.5,0,0.7l-5.6,5.6l1.9,0.8L56.3,32z"
+              
+            />
+            <Path d="M26.2,17.6c-0.1,0.1-0.2,0.1-0.4,0.1h-7.4l1.2,1.2h6.9l4.9-4.9v-1.7L26.2,17.6L26.2,17.6z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M25.1,47.3h-7.9c-0.3,0-0.5-0.2-0.5-0.5v-7.9l-1.9,0.8v9.5h9.5L25.1,47.3z"
+              
+            />
+            <Path d="M49.2,49.2v-9.5l-1.9-0.8v7.9c0,0.3-0.2,0.5-0.5,0.5h-7.9l0.8,1.9H49.2z"
+              
+            />
+            <Path d="M36.6,44.4l-0.5-1.2L32.4,47c-0.1,0.1-0.2,0.1-0.4,0.1s-0.3-0.1-0.4-0.1l-3.7-3.7l-0.5,1.2L32,49L36.6,44.4z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+            <Path d="M38.1,46.3h7.4l-1.2-1.2h-6.9L32.5,50v1.7l5.2-5.2C37.8,46.3,38,46.3,38.1,46.3z"
+                                          fill="#FE7F2D"
+              stroke="#FE7F2D"
+              strokeWidth={1}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+          </Svg>
+        </View>
+
+
+        <View style={styles.imageWrapper}>
+          {/* Image component */}
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+
+
+
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
@@ -607,9 +818,6 @@ const Menu = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
-
-
-
       <View style={styles.horizontalLine} />
       <TouchableOpacity
                 style={[
@@ -654,6 +862,7 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+
       <TouchableOpacity
                 style={[
           styles.button,
