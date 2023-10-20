@@ -16,6 +16,8 @@ import Menu from "../components/Menu";
 import QuranVerseScreen from "../components/QuranVerseScreen";
 import HadithScreen from "../components/HadithScreen";
 import GenericPage from "../components/GenericPage";
+import NamesOfAllahGenericPage from "../components/namseOfAllahGenericPage"
+import namesOfAllahScreen from "../components/namesOfAllahScreen"
 import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
@@ -154,6 +156,31 @@ const AppNavigator = () => {
       <Stack.Screen
         name="GenericPage"
         component={GenericPage}
+        options={({ route }) => ({
+          headerTitle: () => (
+            <Text
+              style={{
+                color: barColor,
+                fontSize: 18,
+                fontFamily: "ScheherazadeNewBold",
+              }}
+            >
+              {route.params?.name || "Default Page Title"}
+            </Text>
+          ),
+          headerStyle: headerStyle,
+        })}
+      />
+      <Stack.Screen
+        name="أسماء الله الحسنى"
+        component={namesOfAllahScreen}
+        options={{
+          headerStyle: headerStyle,
+        }}
+      />
+      <Stack.Screen
+        name="namesOfAllahGenericPage"
+        component={NamesOfAllahGenericPage}
         options={({ route }) => ({
           headerTitle: () => (
             <Text

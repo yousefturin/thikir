@@ -269,7 +269,7 @@ const renderBorderRadius = (index) => {
           styles.container,
           { justifyContent: "flex-start", paddingTop: 40 },
         ]}
-        contentOffset={{ x: 0, y: 100 }}
+        contentOffset={{ x: 0, y: 0 }}
       >
         {clickedIndexes.length === 0 ? ( // Check if clickedIndexes is empty
           <View style={styles.emptyMessage}>

@@ -881,7 +881,84 @@ export const ReportProblemStyles = StyleSheet.create({
   },
 });
 //#endregion
-
+export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
+  container:{
+    flexGrow: 1,
+    backgroundColor: "#151515",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 120,
+  },
+  rectangle:{
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 20,
+    width: "90%",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+    position: "relative",
+    paddingHorizontal: 20,
+    paddingVertical: 40,
+  },
+  nameDisplay:{
+    fontSize: 42, 
+    paddingBottom: 30,
+    fontFamily: "ScheherazadeNew",
+    color: "#fff",
+  },
+  textDescription:{
+    fontFamily: "ScheherazadeNew",
+    color: "#fff",
+    textAlign: "right",
+    paddingBottom: 30
+  },
+  textDescriptionMain:{
+    fontFamily: "ScheherazadeNew",
+    color: "#fff",
+    textAlign: "right",
+    paddingBottom:20
+  },
+  horizontalLine:{
+    borderBottomWidth: 1,
+    borderColor: "#151515",
+    width: "100%",
+  },
+  suraNameNumber:{
+    fontFamily: "ScheherazadeNew",
+    color: "#767676", 
+    paddingTop: 10 
+  },
+  shareButton: {
+    position: "absolute",
+    top: 7,
+    left: 10,
+  },
+  dotContainer: {
+    flexDirection: "row",
+  },
+  dot: {
+    position: "absolute",
+    top: 7,
+    left: 10,
+  },
+  dotContainer: {
+    flexDirection: "row",
+  },
+  dot: {
+    color: "#f2b784",
+    fontSize: 20,
+    fontWeight: "700",
+    marginHorizontal: 1,
+  },
+});
 //#region tasbehScreen
 export const TasbehScreenStyle = StyleSheet.create({
   container: {
