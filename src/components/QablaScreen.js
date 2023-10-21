@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Image, View, Text, Dimensions, StyleSheet } from "react-native";
+import { Magnetometer} from "expo-sensors";
 import * as Location from 'expo-location';
-import { DeviceMotion } from 'expo-sensors';
+
+
+const { height, width } = Dimensions.get("window");
 
 const QiblaScreen = () => {
   const [location, setLocation] = useState(null);
   const [qiblaDirection, setQiblaDirection] = useState(null);
-  const [compassRotation, setCompassRotation] = useState(0);
 
-  useEffect(() => {
-    getLocation();
-    startCompass();
-  }, []);
+  const [subscription, setSubscription] = useState(null);
+  const [magnetometerData, setMagnetometerData] = useState([]);
+  const [movingAverage, setMovingAverage] = useState(0);
 
+  
+  const degreesToRadians = (degrees) => {
+    return degrees * (Math.PI / 180);
+  };
+  
   const getLocation = async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -20,129 +26,196 @@ const QiblaScreen = () => {
         console.log('Permission to access location was denied');
         return;
       }
-
+  
       const { coords } = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = coords;
-
       setLocation({ latitude, longitude });
-      fetchQiblaDirection(latitude, longitude);
+      calculateQiblaDirection(latitude, longitude);
     } catch (error) {
       console.error('Error getting location', error);
     }
   };
+  
+  const calculateQiblaDirection = (currentLatitude, currentLongitude) => {
+    const destLatitude = 21.4225; // Destination latitude
+    const destLongitude = 39.8262; // Destination longitude
+  
+    currentLatitude = degreesToRadians(currentLatitude);
+    currentLongitude = degreesToRadians(currentLongitude);
+    const destLat = degreesToRadians(destLatitude);
+    const destLon = degreesToRadians(destLongitude);
+  
+    const y = Math.sin(destLon - currentLongitude);
+    const x =
+      Math.cos(currentLatitude) * Math.sin(destLat) -
+      Math.sin(currentLatitude) * Math.cos(destLat) * Math.cos(destLon - currentLongitude);
+  
+    let bearing = Math.atan2(y, x);
+    bearing = (bearing * 180) / Math.PI;
+    bearing = (bearing + 360) % 360; // Ensure the bearing is in the range [0, 360]
+  
+    setQiblaDirection(bearing);
+    console.log(`The direction to your destination is ${bearing} degrees`);
+  };
 
-  const fetchQiblaDirection = (latitude, longitude) => {
-    const apiUrl = `http://api.aladhan.com/v1/qibla/${latitude}/${longitude}`;
+  useEffect(() => {
+    getLocation();
+    toggle();
+    return () => {
+      _unsubscribe();
+    };
+  }, []);
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setQiblaDirection(data.data.direction);
+  const toggle = () => {
+    if (subscription) {
+      _unsubscribe();
+    } else {
+      subscripe();
+    }
+  };
+
+  const subscripe = () => {
+    setSubscription(
+      Magnetometer.addListener((data) => {
+        setMagnetometerData((prevData) => {
+          // Keep only the last 10 data points
+          const newData = [...prevData, angle(data)];
+          if (newData.length > 10) {
+            newData.shift();
+          }
+          // Calculate the moving average
+          const avg = newData.reduce((acc, val) => acc + val, 0) / newData.length;
+          setMovingAverage(avg);
+          return newData;
+        });
       })
-      .catch((error) => {
-        console.error('Error fetching Qibla direction:', error);
-      });
+    );
   };
 
-  const startCompass = async () => {
-    DeviceMotion.addListener((data) => {
-      if (data.rotation) {
-        const { alpha } = data.rotation;
-        updateCompassRotation(alpha || 0);
+  const _unsubscribe = () => {
+    subscription && subscription.remove();
+    setSubscription(null);
+  };
+
+  const angle = (magnetometer) => {
+    let angle = 0;
+    if (magnetometer) {
+      let { x, y, z } = magnetometer;
+      if (Math.atan2(y, x) >= 0) {
+        angle = Math.atan2(y, x) * (180 / Math.PI);
+      } else {
+        angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
       }
-    });
+    }
+    return Math.round(angle);
   };
 
-  const updateCompassRotation = (alpha) => {
-    if (qiblaDirection !== null) {
-      // Calculate the new rotation of the arrow based on Qibla Direction and Compass Rotation.
-      const newRotation = qiblaDirection - alpha; // Note the subtraction here.
-      setCompassRotation(newRotation);
-    }
-  };
-
-  const renderNumbers = () => {
-    const numbers = [];
-    for (let i = 0; i < 360; i += 15) {
-      numbers.push(
-        <Text
-          key={i}
-          style={{
-            position: 'absolute',
-            top: Dimensions.get('window').height / 2 - 280,
-            left: Dimensions.get('window').width / 2 - 85,
-            transform: [{ rotate: `${i}deg` },
-            { translateY: -120 }]
-          }}
-        >
-          {i}
-        </Text>
-      );
-    }
-    return numbers;
+  const degree = (magnetometer) => {
+    return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
   };
 
   return (
-    <View style={styles.container}>
-      {qiblaDirection !== null && (
-        <Text>
-          Qibla Direction: {qiblaDirection} degrees
-        </Text>
-      )}
-      <View style={styles.compassContainer}>
-        <Text style={styles.compassText}>
-          Compass Rotation: {Math.round(compassRotation)} degrees
-        </Text>
-        <View style={styles.compass}>
-          {renderNumbers()}
-          <View style={[styles.triangle, { transform: [{ rotate: `rotate(${compassRotation}deg)` }] }]} />
-        </View>
-      </View>
-    </View>
+<View style={styles.container}>
+  {qiblaDirection !== null ? (
+    <Text style={styles.textDirection}> اتجاه القبلة : {Math.round(qiblaDirection)}</Text>
+  ) : null}
+  <View style={styles.degreeContainer}>
+  <Image
+      x="0"
+      y="0"
+      source={require("../../assets/compass.png")}
+      style={[
+        styles.compassImage,
+        {
+          transform: [{ rotate: 360 - Math.round(movingAverage) + "deg" }],
+        },
+      ]}
+    />
+    {qiblaDirection !== null ? (
+    <Image
+      x="0"
+      y="0"
+      source={require("../../assets/compassQablePointer.png")}
+      style={[
+        styles.compassImageRed,
+        {
+          transform: 
+            [{ rotate: 90 + qiblaDirection - Math.round(movingAverage) + "deg" }]
+          
+        },
+        
+      ]}
+    />
+    ) : null}
+    <Text style={styles.degreeText}>
+      {degree(Math.round(movingAverage))}°
+    </Text>
+  </View>
+      
+  <View style={styles.triangleContainer}>
+    <View style={styles.triangle}></View>
+  </View>
+</View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#151515',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  compassContainer: {
-    marginTop: 20,
-    alignItems: 'center',
+  textDirection:{
+    color:"#656565",
+    position:"absolute",
+    top:"10%",
+    fontFamily:"AmiriFont",
+    fontSize:30
   },
-  compass: {
-    width: 250,
-    height: 250,
-    justifyContent: 'center',
+  degreeContainer: {
+    justifyContent:"center",
     alignItems: 'center',
+    position: 'relative',
   },
-  arrowContainer: {
-    justifyContent: 'flex-end', // Adjust the positioning
+  degreeText: {
+    color: '#fff',
+    fontSize: height / 27,
+    textAlign: 'center',
+  },
+  compassImage: {
+    position: "absolute",
+    height: width - 80,
+    resizeMode: 'contain',
+  },
+  compassImageRed: {
+    position: "absolute",
+    height: width - 80,
+    resizeMode: 'contain',
+    width:350,
+    height:350,
+  },
+  triangleContainer: {
+    position: 'absolute',
+    top: "24.4%",
+    left: 0,
+    width: width,
     alignItems: 'center',
-    width: 3,
-    height: 120,
   },
   triangle: {
     width: 0,
     height: 0,
-    borderLeftWidth: 10,
-    borderRightWidth: 10,
-    borderBottomWidth: 20,
-    borderStyle: 'solid',
     backgroundColor: 'transparent',
-    borderLeftColor: 'transparent',
+    borderStyle: 'solid',
+    borderTopWidth: 0,
+    borderRightWidth: 15,
+    borderBottomWidth: 30,
+    borderLeftWidth: 15,
+    borderTopColor: 'transparent',
     borderRightColor: 'transparent',
-    borderBottomColor: 'red',
-    position: "absolute",
-    top: 65, // This positions the triangle at the top
-    left: '50%', // This centers it horizontally
-    marginLeft: -9, // This adjusts the position to center it properly
-  },
-  compassText: {
-    fontSize: 18,
-  },
+    borderBottomColor: 'red', // Change this to your desired color
+    borderLeftColor: 'transparent',
+    position: 'absolute', // Added position absolute
+  }
 });
-
 export default QiblaScreen;
