@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from '../context/FontContext';
 import { useColor } from '../context/ColorContext';
 import {useNumberContext } from '../context/NumberContext'
+import * as Haptics from 'expo-haptics';
 import { SettingStyles } from '../context/commonStyles';
 import Svg, { Path } from "react-native-svg";
 import { Appearance } from 'react-native';
@@ -163,8 +164,11 @@ const SettingScreen = ({ navigation }) => {
     <View>
       <TouchableOpacity
         style={styles.themeOption}
-        onPress={() => toggleTheme(item.value)}
-        activeOpacity={0.7}
+        onPress={() => {
+        toggleTheme(item.value);
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+      }}
+      activeOpacity={0.7}
       >
         <View style={styles.themeCircle}>
           {selectedTheme === item.value && (
@@ -189,7 +193,10 @@ const SettingScreen = ({ navigation }) => {
   const renderColorItem = ({ item }) => (
     <TouchableOpacity
       style={styles.colorOption}
-      onPress={() => setColor(item.value)} 
+      onPress={() => {
+        setColor(item.value);
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+      }}
       activeOpacity={0.7}
     >
       <View
@@ -221,7 +228,10 @@ const SettingScreen = ({ navigation }) => {
     <View>
       <TouchableOpacity
         style={styles.themeOption}
-        onPress={() => setFont(item.value)}
+        onPress={() => {
+        setFont(item.value);
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+      }}
         activeOpacity={0.7}
       >
         <View style={styles.themeCircle}>
@@ -263,7 +273,7 @@ const SettingScreen = ({ navigation }) => {
             renderItem={renderFontItem}
             keyExtractor={(item) => item.value}
             extraData={selectedFont}
-            scrollEnabled={false} // Set scrollEnabled to false to make it not scrollable
+            scrollEnabled={false} 
           />
         </View>
       </View>
