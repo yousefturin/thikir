@@ -397,7 +397,10 @@ const HomeScreen = ({ navigation }) => {
             styles.searchBarInputContainer,
             searchMode && styles.searchBarInputContainerTop, // Apply this style when searchMode is true
           ]}
-          inputStyle={styles.searchBarInput}
+          inputStyle={[
+            styles.searchBarInput,
+            { textAlign: 'right' }, // Align the text to the right
+          ]}
           onFocus={handleSearchBarClick}
           onCancel={handleCancel}
           showCancel
@@ -430,7 +433,7 @@ const HomeScreen = ({ navigation }) => {
                       <FontAwesomeIcon
                         name="angle-left"
                         size={24}
-                        color="#454545"
+                        color={selectedColor}
                         style={styles.icon}
                       />
                     </View>
