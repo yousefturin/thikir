@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { 
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet, 
+    ScrollView 
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
@@ -7,8 +13,9 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
-import {useNumberContext } from '../context/NumberContext';
+import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
+
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
