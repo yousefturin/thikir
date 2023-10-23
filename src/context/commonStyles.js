@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-const windowWidth = Dimensions.get("window").width;
+const {width, height} = Dimensions.get("window");
 
 //#region MainStyles
 export const MainStyles = StyleSheet.create({
@@ -434,7 +434,7 @@ export const HomeStyles = StyleSheet.create({
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: windowWidth > 600 ? 610 : 350,
+    marginLeft: width > 600 ? 610 : 350,
   },
   buttonGrid: {
     paddingTop: 10,
@@ -480,7 +480,7 @@ export const HomeStyles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-around",
     alignItems: "flex-end",
-    marginRight: windowWidth > 600 ? 60 : 35,
+    marginRight: width > 600 ? 60 : 35,
   },
   TextMid: {
     color: "white",
@@ -548,7 +548,7 @@ export const ThikirAlarmStyles = StyleSheet.create({
   horizontalLineWrapper: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: windowWidth > 600 ? 610 : 350,
+    marginLeft: width > 600 ? 610 : 350,
   },
 });
 //#endregion
@@ -777,7 +777,7 @@ export const SettingStyles = StyleSheet.create({
   HeadertextColor: {
     color: '#767676',
     paddingTop: 15,
-    //paddingLeft: windowWidth > 600 ? 560 : 300,
+    //paddingLeft: width > 600 ? 560 : 300,
   },
   horizontalLine: {
     borderBottomWidth: 1,
@@ -1111,7 +1111,7 @@ export const TasbehScreenStyle = StyleSheet.create({
   },
   separator: {
     borderBottomWidth: 1,
-    marginRight: windowWidth > 600 ? 20 : 20,
+    marginRight: width > 600 ? 20 : 20,
 
     borderColor: "#262626",
   },
@@ -1130,5 +1130,62 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "#6682C3",
     paddingLeft: 20,
   },
+});
+//#endregion
+
+
+
+//#region tasbehScreen
+export const QablaScreenStyle  = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#151515',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textDirection:{
+    color:"#656565",
+    position:"absolute",
+    top:"10%",
+    fontFamily:"AmiriFont",
+    fontSize:30
+  },
+  degreeContainer: {
+    justifyContent:"center",
+    alignItems: 'center',
+    position: 'relative',
+  },
+  degreeText: {
+    color: '#fff',
+    fontSize: height / 27,
+    textAlign: 'center',
+  },
+  compassImage: {
+    position: "absolute",
+    height: width - 80,
+    resizeMode: 'contain',
+  },
+  compassImageRed: {
+    position: "absolute",
+    height: width - 80,
+    resizeMode: 'contain',
+    width:345,
+    height:345,
+  },
+  triangleContainer: {
+    position: 'absolute',
+    top: "24.4%",
+    left: 0,
+    width: width,
+    alignItems: 'center',
+  },
+  triangle: {
+    width: 6, 
+    height: 55,
+    backgroundColor: '#dd3131', 
+    position: 'absolute',
+    borderBottomWidth: 5, 
+    borderBottomColor: '#dd3131',
+  }
 });
 //#endregion
