@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Image, View, Text, Dimensions, StyleSheet } from "react-native";
 import { Magnetometer} from "expo-sensors";
 import * as Location from 'expo-location';
+import * as Haptics from "expo-haptics";
+import { useTheme } from "../context/ThemContex";
+import { QablaScreenStyle } from "../context/commonStyles";
+import { Appearance } from "react-native";
 
-
-const { height, width } = Dimensions.get("window");
 
 const QiblaScreen = () => {
   const [location, setLocation] = useState(null);
@@ -13,12 +15,85 @@ const QiblaScreen = () => {
   const [subscription, setSubscription] = useState(null);
   const [magnetometerData, setMagnetometerData] = useState([]);
   const [movingAverage, setMovingAverage] = useState(0);
+  const vibrationAngleValues = [
+    '0', '30', '60', '90', '120', '150',
+    '180', '210','240', '270','300','330',
+  ];
 
+
+  const { selectedTheme } = useTheme();
+  const systemTheme = selectedTheme === "system";
+
+  const CompassTheme = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+  ? require("../../assets/compass.png")
+  : require("../../assets/compassLightTheme.png")
+  :selectedTheme === 'dark'
+  ? require("../../assets/compass.png")
+  : require("../../assets/compassLightTheme.png");
+
+  const CompassPointerTheme = systemTheme
+  ? Appearance.getColorScheme() === 'dark'
+  ? require("../../assets/compassQablePointerDark.png")
+  : require("../../assets/compassQablePointerLight.png")
+  :selectedTheme === 'dark'
+  ? require("../../assets/compassQablePointerDark.png")
+  : require("../../assets/compassQablePointerLight.png");
+
+  //#region LightTheme
+  const lightTheme = StyleSheet.create({
+    container: {
+        backgroundColor: "#f2f2f6",
+    },
+    degreeText: {
+      color: '#363f3f',
+    },
+  });
+  //#endregion
+
+  //#region DarkTheme
+  const darkTheme = StyleSheet.create({
+      container: {
+          backgroundColor: "#151515",
+      },
+      degreeText: {
+        color: '#fff',
+      },
+  });
+  //#endregion
   
+  const themeStyles = systemTheme
+  ? Appearance.getColorScheme() === "dark"
+      ? darkTheme
+      : lightTheme
+  : selectedTheme === "dark"
+      ? darkTheme
+      : lightTheme;
+
+
+    //#region StylesMapping
+    const styles = {
+      ...QablaScreenStyle,
+      degreeText: {
+          ...QablaScreenStyle.degreeText,
+          ...(selectedTheme === "dark"
+              ? themeStyles.degreeText
+              : themeStyles.degreeText),
+      },
+      container: {
+          ...QablaScreenStyle.container,
+          ...(selectedTheme === "dark"
+              ? themeStyles.container
+              : themeStyles.container),
+      },
+  };
+  //#endregion
+
+
   const degreesToRadians = (degrees) => {
     return degrees * (Math.PI / 180);
   };
-  
+
   const getLocation = async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -35,6 +110,7 @@ const QiblaScreen = () => {
       console.error('Error getting location', error);
     }
   };
+
   
   const calculateQiblaDirection = (currentLatitude, currentLongitude) => {
     const destLatitude = 21.4225; // Destination latitude
@@ -53,9 +129,7 @@ const QiblaScreen = () => {
     let bearing = Math.atan2(y, x);
     bearing = (bearing * 180) / Math.PI;
     bearing = (bearing + 360) % 360; // Ensure the bearing is in the range [0, 360]
-  
     setQiblaDirection(bearing);
-    console.log(`The direction to your destination is ${bearing} degrees`);
   };
 
   useEffect(() => {
@@ -77,15 +151,22 @@ const QiblaScreen = () => {
   const subscripe = () => {
     setSubscription(
       Magnetometer.addListener((data) => {
+        const filteredData = angle(data); // Apply any filtering method to the raw data
+  
         setMagnetometerData((prevData) => {
-          // Keep only the last 10 data points
-          const newData = [...prevData, angle(data)];
-          if (newData.length > 10) {
+          // Keep a larger number of data points
+          const newData = [...prevData, filteredData];
+          if (newData.length > 30) {
             newData.shift();
           }
+          
           // Calculate the moving average
           const avg = newData.reduce((acc, val) => acc + val, 0) / newData.length;
-          setMovingAverage(avg);
+  
+          // Apply a threshold  -?>  only update if the change is significant
+          if (Math.abs(avg - movingAverage) > 10.0) {
+            setMovingAverage(Math.round(avg));
+          }
           return newData;
         });
       })
@@ -110,8 +191,16 @@ const QiblaScreen = () => {
     return Math.round(angle);
   };
 
-  const degree = (magnetometer) => {
-    return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
+
+
+  const vibrationAngle = () => {
+    if (vibrationAngleValues.includes(Math.round(qiblaDirection).toString())) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    }
+  };
+  
+  const degree = (movingAverage) => {
+    return movingAverage - 90 >= 0 ? movingAverage - 90 : movingAverage + 271;
   };
 
   return (
@@ -123,7 +212,7 @@ const QiblaScreen = () => {
   <Image
       x="0"
       y="0"
-      source={require("../../assets/compass.png")}
+      source={CompassTheme}
       style={[
         styles.compassImage,
         {
@@ -135,12 +224,12 @@ const QiblaScreen = () => {
     <Image
       x="0"
       y="0"
-      source={require("../../assets/compassQablePointer.png")}
+      source={CompassPointerTheme}
       style={[
         styles.compassImageRed,
         {
           transform: 
-            [{ rotate: 90 + qiblaDirection - Math.round(movingAverage) + "deg" }]
+            [{ rotate: 90 + qiblaDirection - Math.round(movingAverage) + "deg" }],
           
         },
         
@@ -159,63 +248,5 @@ const QiblaScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#151515',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textDirection:{
-    color:"#656565",
-    position:"absolute",
-    top:"10%",
-    fontFamily:"AmiriFont",
-    fontSize:30
-  },
-  degreeContainer: {
-    justifyContent:"center",
-    alignItems: 'center',
-    position: 'relative',
-  },
-  degreeText: {
-    color: '#fff',
-    fontSize: height / 27,
-    textAlign: 'center',
-  },
-  compassImage: {
-    position: "absolute",
-    height: width - 80,
-    resizeMode: 'contain',
-  },
-  compassImageRed: {
-    position: "absolute",
-    height: width - 80,
-    resizeMode: 'contain',
-    width:350,
-    height:350,
-  },
-  triangleContainer: {
-    position: 'absolute',
-    top: "24.4%",
-    left: 0,
-    width: width,
-    alignItems: 'center',
-  },
-  triangle: {
-    width: 0,
-    height: 0,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderTopWidth: 0,
-    borderRightWidth: 15,
-    borderBottomWidth: 30,
-    borderLeftWidth: 15,
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: 'red', // Change this to your desired color
-    borderLeftColor: 'transparent',
-    position: 'absolute', // Added position absolute
-  }
-});
+
 export default QiblaScreen;
