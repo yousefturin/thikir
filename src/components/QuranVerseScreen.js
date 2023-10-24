@@ -20,33 +20,6 @@ const QuranVerseScreen = ({ navigation }) => {
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
-  //#region selectedColor
-  const orangeMain = StyleSheet.create({
-      dot: {
-          color: '#f2b784',
-      },
-  });
-  const pink = StyleSheet.create({
-      dot: {
-          color: '#6682C3',
-      },
-  });
-  const green = StyleSheet.create({
-      dot: {
-          color: '#9AB06B',
-      },
-  });
-  const blue = StyleSheet.create({
-      dot: {
-          color: '#AA767C',
-      },
-  });
-  const peach = StyleSheet.create({
-      dot: {
-          color: '#CD7845',
-      },
-  });
-  //#endregion
 
   //#region selectedFont
   const HafsFont = StyleSheet.create({
@@ -127,18 +100,6 @@ const QuranVerseScreen = ({ navigation }) => {
     horizontalLine: {
       ...QuranVerseStyles.horizontalLine,
       ...(selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine),
-  },
-  dot:{
-    ...QuranVerseStyles.dot,
-    ...(selectedColor === '#f2b784'
-        ? orangeMain.dot
-        : selectedColor === '#6682C3'
-        ? pink.dot
-        : selectedColor === '#9AB06B'
-        ? green.dot
-        : selectedColor === '#AA767C'
-        ? blue.dot
-        : peach.dot),
   },
   };
   //#endregion
@@ -287,9 +248,9 @@ const QuranVerseScreen = ({ navigation }) => {
         ></TouchableOpacity>
         <TouchableOpacity onPress={Share} style={styles.shareButton}>
           <View style={styles.dotContainer}>
-            <Text style={styles.dot}>&#8226;</Text>
-            <Text style={styles.dot}>&#8226;</Text>
-            <Text style={styles.dot}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
           </View>
         </TouchableOpacity>
       </View>

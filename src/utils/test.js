@@ -17,27 +17,23 @@ const darkTheme = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [selectedTheme, setSelectedTheme] = useState("system"); // Start with a null state
+  const [selectedTheme, setSelectedTheme] = useState('system'); // Use null to represent initial loading state
   const [systemAppearance, setSystemAppearance] = useState(Appearance.getColorScheme());
-  const [isLoading, setIsLoading] = useState(true); // Track loading state
 
   useEffect(() => {
     async function fetchTheme() {
       try {
         const themeValue = await AsyncStorage.getItem('@selectedTheme');
         if (themeValue === 'dark' || themeValue === 'light' || themeValue === 'system') {
-          setSelectedTheme(themeValue); // Set the selected theme if it's "dark" or "light"
+          setSelectedTheme(themeValue); // Set the selected theme if it's "dark," "light," or "system"
         } else {
           const appearance = Appearance.getColorScheme();
           setSelectedTheme('system');
-          setSystemAppearance(appearance || 'light'); // Set the theme based on the system appearance
+          setSystemAppearance(appearance || 'light');
         }
       } catch (error) {
         console.error('Error fetching theme:', error);
-        setSelectedTheme('system');
-      } finally {
-
-        setIsLoading(false); // Mark loading as complete
+        setSelectedTheme('system'); // Set the default theme in case of an error
       }
     }
     fetchTheme();
@@ -61,7 +57,7 @@ export function ThemeProvider({ children }) {
     }
   }, [selectedTheme]);
 
-  if (isLoading) {
+  if (selectedTheme === null) {
     // Return null while the theme is loading
     return null;
   }
@@ -70,6 +66,7 @@ export function ThemeProvider({ children }) {
     selectedTheme === 'system'
       ? themes[systemAppearance || 'light'] // Use the stored system appearance
       : themes[selectedTheme] || lightTheme;
+
   return (
     <ThemeContext.Provider value={{ selectedTheme, toggleTheme }}>
       {children}

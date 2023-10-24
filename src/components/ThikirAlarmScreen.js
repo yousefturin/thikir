@@ -4,7 +4,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Haptics from 'expo-haptics';
+
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
@@ -143,7 +143,7 @@ const ThikirAlarmScreen = () => {
 
   //#region toggleAlarm
   const toggleAlarm = async (notificationId, newValue) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
     const updatedNotifications = notifications.map((notification) =>
       notification.id === notificationId
         ? { ...notification, isActive: newValue }
@@ -166,9 +166,7 @@ const ThikirAlarmScreen = () => {
       console.log(`Alarm for ${selectedNotification.id} activated.`);
     } else {
       // If the toggle is manually switched to inactive, cancel the notification
-      Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Success
-      );
+
       await cancelNotification(notificationId);
       console.log(`Alarm for ${selectedNotification.id} deactivated.`);
     }

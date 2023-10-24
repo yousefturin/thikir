@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { 
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet, 
+    ScrollView 
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../utils/shareUtils";
@@ -7,8 +13,9 @@ import { useTheme } from '../context/ThemContex';
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../context/commonStyles';
-import {useNumberContext } from '../context/NumberContext';
+import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
+
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
@@ -18,34 +25,6 @@ const HADITHVerseScreen = ({ navigation }) => {
   const { selectedColor, setColor } = useColor();
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
-  
-  //#region selectedColor
-  const orangeMain = StyleSheet.create({
-      dot: {
-          color: '#f2b784',
-      },
-  });
-  const pink = StyleSheet.create({
-      dot: {
-          color: '#6682C3',
-      },
-  });
-  const green = StyleSheet.create({
-      dot: {
-          color: '#9AB06B',
-      },
-  });
-  const blue = StyleSheet.create({
-      dot: {
-          color: '#AA767C',
-      },
-  });
-  const peach = StyleSheet.create({
-      dot: {
-          color: '#CD7845',
-      },
-  });
-  //#endregion
   
   //#region SelectedFont
   const HafsFont = StyleSheet.create({
@@ -127,18 +106,6 @@ const HADITHVerseScreen = ({ navigation }) => {
       ...QuranVerseStyles.horizontalLine,
       ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
   },
-  dot:{
-    ...QuranVerseStyles.dot,
-    ...(selectedColor === '#f2b784'
-        ? orangeMain.dot
-        : selectedColor === '#6682C3'
-        ? pink.dot
-        : selectedColor === '#9AB06B'
-        ? green.dot
-        : selectedColor === '#AA767C'
-        ? blue.dot
-        : peach.dot),
-},
   };
   //#endregion
   
@@ -274,9 +241,9 @@ const HADITHVerseScreen = ({ navigation }) => {
         ></TouchableOpacity>
         <TouchableOpacity onPress={Share} style={styles.shareButton}>
           <View style={styles.dotContainer}>
-            <Text style={styles.dot}>&#8226;</Text>
-            <Text style={styles.dot}>&#8226;</Text>
-            <Text style={styles.dot}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
           </View>
         </TouchableOpacity>
       </View>
