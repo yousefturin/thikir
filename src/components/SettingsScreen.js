@@ -20,48 +20,6 @@ const SettingScreen = ({ navigation }) => {
     dispatch({ type: 'TOGGLE_NUMBERS' });
   };
 
-  const orangeMain = StyleSheet.create({
-    themeCircle:{
-      borderColor:"#f2b784"
-    },
-    selectedCircle:{
-      backgroundColor: '#f2b784',
-    },
-  });
-  
-  const pink = StyleSheet.create({
-    themeCircle:{
-      borderColor:"#6682C3"
-    },
-    selectedCircle:{
-      backgroundColor: '#6682C3',
-    },
-  });
-  const green = StyleSheet.create({
-    themeCircle:{
-      borderColor:"#9AB06B"
-    },
-    selectedCircle:{
-      backgroundColor: '#9AB06B',
-    },
-  });
-  const blue = StyleSheet.create({
-    themeCircle:{
-      borderColor:"#AA767C"
-    },
-    selectedCircle:{
-      backgroundColor: '#AA767C',
-    },
-  });
-  const peach = StyleSheet.create({
-    themeCircle:{
-      borderColor:"#CD7845"
-    },
-    selectedCircle:{
-      backgroundColor: '#CD7845',
-    },
-  });
-
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
@@ -125,31 +83,6 @@ const SettingScreen = ({ navigation }) => {
       ...SettingStyles.horizontalLine, 
       ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine, 
     },
-    themeCircle: {
-      ...SettingStyles.themeCircle,
-      ...(selectedColor === '#f2b784'
-        ? orangeMain.themeCircle
-        : selectedColor === '#6682C3'
-        ? pink.themeCircle
-        : selectedColor === '#9AB06B'
-        ? green.themeCircle
-        : selectedColor === '#AA767C'
-        ? blue.themeCircle
-        : peach.themeCircle),
-    },
-    selectedCircle: {
-      ...SettingStyles.selectedCircle,
-      ...(selectedColor === '#f2b784'
-        ? orangeMain.selectedCircle
-        : selectedColor === '#6682C3'
-        ? pink.selectedCircle
-        : selectedColor === '#9AB06B'
-        ? green.selectedCircle
-        : selectedColor === '#AA767C'
-        ? blue.selectedCircle
-        : peach.selectedCircle),
-    },
-
   };
   //#endregion
 
@@ -170,9 +103,9 @@ const SettingScreen = ({ navigation }) => {
       }}
       activeOpacity={0.7}
       >
-        <View style={styles.themeCircle}>
+        <View style={[styles.themeCircle,{borderColor:selectedColor}]}>
           {selectedTheme === item.value && (
-            <View style={styles.selectedCircle}></View>
+            <View style={[styles.selectedCircle,{backgroundColor:selectedColor}]}></View>
           )}
         </View>
         <Text style={styles.textColor}>{item.label}</Text>
@@ -182,12 +115,12 @@ const SettingScreen = ({ navigation }) => {
   );
   //#endregion
 
-  const colorOptions = [
-    { label: '#CD7845', value: '#CD7845' },
-    { label: '#AA767C', value: '#AA767C' },
-    { label: '#9AB06B', value: '#9AB06B' },
-    { label: '#6682C3', value: '#6682C3' },
-    { label: '#f2b784', value: '#f2b784' },
+  const colorOptions = [ 
+    { label: '#8d5b3c', value: '#8d5b3c' },//Oragish Color
+    { label: '#AA767C', value: '#AA767C' },//Pinkish Color
+    { label: '#9AB06B', value: '#9AB06B' },//Greenish Color
+    { label: '#495064', value: '#495064' },//Blueish Color
+    { label: '#f2b784', value: '#f2b784' },//System Orang Color
   ];
   
   const renderColorItem = ({ item }) => (
@@ -203,7 +136,7 @@ const SettingScreen = ({ navigation }) => {
         style={[
           styles.colorCircle,
           { backgroundColor: item.value },
-          selectedColor === item.value && styles.selectedColorCircle, 
+          selectedColor === item.value && styles.selectedColorCircle,
         ]}
       >
         {selectedColor === item.value && (
@@ -234,9 +167,9 @@ const SettingScreen = ({ navigation }) => {
       }}
         activeOpacity={0.7}
       >
-        <View style={styles.themeCircle}>
+        <View style={[styles.themeCircle,{borderColor:selectedColor}]}>
           {selectedFont === item.value && (
-            <View style={styles.selectedCircle}></View>
+            <View style={[styles.selectedCircle,{backgroundColor:selectedColor}]}></View>
           )}
         </View>
         <Text style={styles.textColor}>{item.label}</Text>
