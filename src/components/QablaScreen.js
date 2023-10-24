@@ -94,7 +94,6 @@ const QiblaScreen = () => {
   const degreesToRadians = (degrees) => {
     return degrees * (Math.PI / 180);
   };
-
   const saveLocation = async (latitude, longitude) => {
     try {
       await AsyncStorage.setItem('storedLocation', JSON.stringify({ latitude, longitude }));
@@ -102,7 +101,7 @@ const QiblaScreen = () => {
       console.error('Error saving location', error);
     }
   };
-
+  
   const getLocation = async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -110,49 +109,65 @@ const QiblaScreen = () => {
         console.log('Permission to access location was denied');
         return;
       }
-
+  
       const { coords } = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = coords;
-
+  
       // Check if the stored location is equal to the new one
       const storedLocation = await AsyncStorage.getItem('storedLocation');
+      
       if (storedLocation) {
         const { storedLatitude, storedLongitude } = JSON.parse(storedLocation);
         if (latitude !== storedLatitude || longitude !== storedLongitude) {
+          // If the new location is different from the stored location, update it
           saveLocation(latitude, longitude);
         }
       } else {
+        // If there's no stored location, store the current location
         saveLocation(latitude, longitude);
       }
-
+  
       setLocation({ latitude, longitude });
       calculateQiblaDirection(latitude, longitude);
     } catch (error) {
       console.error('Error getting location', error);
     }
   };
-
+  
   useEffect(() => {
     getLocation();
-
+  
     // Set up a location listener to update the location when it changes
     const locationListener = Location.watchPositionAsync(
       { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 1000 }, // Adjust the options as needed
-      (location) => {
+      async (location) => {
         const { coords } = location;
         const { latitude, longitude } = coords;
+  
+        // Check if the new location is different from the stored location
+        const storedLocation = await AsyncStorage.getItem('storedLocation');
+        if (storedLocation) {
+          const { storedLatitude, storedLongitude } = JSON.parse(storedLocation);
+          if (latitude !== storedLatitude || longitude !== storedLongitude) {
+            // If the new location is different from the stored location, update it
+            saveLocation(latitude, longitude);
+          }
+        } else {
+          // If there's no stored location, store the current location
+          saveLocation(latitude, longitude);
+        }
+  
         setLocation({ latitude, longitude });
         calculateQiblaDirection(latitude, longitude);
       }
     );
-
+  
     return () => {
       if (locationListener.remove) {
         locationListener.remove();
       }
     };
-  }, []); 
-
+  }, []);
 
   const calculateQiblaDirection = (currentLatitude, currentLongitude) => {
     const destLatitude = 21.4225; // Destination latitude
@@ -171,6 +186,7 @@ const QiblaScreen = () => {
     let bearing = Math.atan2(y, x);
     bearing = (bearing * 180) / Math.PI;
     bearing = (bearing + 360) % 360; // Ensure the bearing is in the range [0, 360]
+    Math.round(bearing);
     setQiblaDirection(bearing);
   };
 
@@ -286,7 +302,7 @@ const QiblaScreen = () => {
               styles.compassImageRed,
               {
                 transform:
-                  [{ rotate: 90 + qiblaDirection - Math.round(movingAverage) + "deg" }],
+                  [{ rotate: 90 + Math.round(qiblaDirection) - Math.round(movingAverage) + "deg" }],
 
               },
 
