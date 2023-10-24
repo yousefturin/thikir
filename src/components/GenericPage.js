@@ -27,78 +27,6 @@ const GenericPage = ({ route }) => {
     const systemTheme = selectedTheme === 'system';
     const { state, convertToEasternArabicNumerals } = useNumberContext(); 
     
-    //#region selectedColor
-    const orangeMain = StyleSheet.create({
-        InfoReptTime: {
-            color: '#f2b784',
-        },
-        dot: {
-            color: '#f2b784',
-        },
-        circularButton:{
-            borderColor:'#f2b784',
-        },
-        button:{
-            borderColor:'#f2b784',
-        },
-    });
-    const pink = StyleSheet.create({
-        InfoReptTime: {
-            color: '#6682C3',
-        },
-        dot: {
-            color: '#6682C3',
-        },
-        circularButton:{
-            borderColor:'#6682C3',
-        },
-        button:{
-            borderColor:'#6682C3',
-        },
-    });
-    const green = StyleSheet.create({
-        InfoReptTime: {
-            color: '#9AB06B',
-        },
-        dot: {
-            color: '#9AB06B',
-        },
-        circularButton:{
-            borderColor:'#9AB06B',
-        },
-        button:{
-            borderColor:'#9AB06B',
-        },
-    });
-    const blue = StyleSheet.create({
-        InfoReptTime: {
-            color: '#AA767C',
-        },
-        dot: {
-            color: '#AA767C',
-        },
-        circularButton:{
-            borderColor:'#AA767C',
-        },
-        button:{
-            borderColor:'#AA767C',
-        },
-    });
-    const peach = StyleSheet.create({
-        InfoReptTime: {
-            color: '#CD7845',
-        },
-        dot: {
-            color: '#CD7845',
-        },
-        circularButton:{
-            borderColor:'#CD7845',
-        },
-        button:{
-            borderColor:'#CD7845',
-        },
-    });
-    //#endregion
 
     //#region selectedFont
     const HafsFont = StyleSheet.create({
@@ -231,28 +159,10 @@ const GenericPage = ({ route }) => {
         circularButton: {
             ...GenericStyles.circularButton,
             ...(selectedTheme  === 'dark'? themeStyles.circularButton : themeStyles.circularButton),
-            ...(selectedColor === '#f2b784'
-                    ? orangeMain.circularButton
-                    : selectedColor === '#6682C3'
-                    ? pink.circularButton
-                    : selectedColor === '#9AB06B'
-                    ? green.circularButton
-                    : selectedColor === '#AA767C'
-                    ? blue.circularButton
-                    : peach.circularButton),
         },
         button: {
             ...GenericStyles.button,
             ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button),
-            ...(selectedColor === '#f2b784'
-                    ? orangeMain.button
-                    : selectedColor === '#6682C3'
-                    ? pink.button
-                    : selectedColor === '#9AB06B'
-                    ? green.button
-                    : selectedColor === '#AA767C'
-                    ? blue.button
-                    : peach.button),
         },
         textcount: {
             ...GenericStyles.textcount,
@@ -290,30 +200,6 @@ const GenericPage = ({ route }) => {
         horizontalLine: {
             ...GenericStyles.horizontalLine,
             ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
-        },
-        dot:{
-            ...GenericStyles.dot,
-            ...(selectedColor === '#f2b784'
-                ? orangeMain.dot
-                : selectedColor === '#6682C3'
-                ? pink.dot
-                : selectedColor === '#9AB06B'
-                ? green.dot
-                : selectedColor === '#AA767C'
-                ? blue.dot
-                : peach.dot),
-        },
-        InfoReptTime:{
-            ...GenericStyles.InfoReptTime,
-            ...(selectedColor === '#f2b784'
-                ? orangeMain.InfoReptTime
-                : selectedColor === '#6682C3'
-                ? pink.InfoReptTime
-                : selectedColor === '#9AB06B'
-                ? green.InfoReptTime
-                : selectedColor === '#AA767C'
-                ? blue.InfoReptTime
-                : peach.InfoReptTime),
         },
     };
     //#endregion
@@ -572,7 +458,7 @@ const GenericPage = ({ route }) => {
                                 : item.subItems.length.toString()}
                             </Text>
                         </Text>
-                        <Text allowFontScaling={false} style={styles.InfoReptTime}>
+                        <Text allowFontScaling={false} style={[styles.InfoReptTime,{color:selectedColor}]}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
                         <TouchableOpacity
@@ -592,9 +478,9 @@ const GenericPage = ({ route }) => {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={Share} style={styles.shareButton} activeOpacity={1}>
                             <View style={styles.dotContainer}>
-                                <Text style={styles.dot}>&#8226;</Text>
-                                <Text style={styles.dot}>&#8226;</Text>
-                                <Text style={styles.dot}>&#8226;</Text>
+                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -612,7 +498,7 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={[styles.button]}>
+                             <View style={[styles.button,{borderColor:selectedColor}]}>
                                 {/*next button here button here*/}
                                 <FontAwesomeIcon
                                     name="angle-left"
@@ -633,7 +519,7 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={styles.circularButton}>
+                            <View style={[styles.circularButton,{ borderColor:selectedColor}]}>
                                 <Text style={styles.textcount}>{countDisplay = state.isArabicNumbers
                                 ? convertToEasternArabicNumerals(count.toString())
                                 : count.toString()}</Text>
@@ -647,7 +533,7 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={styles.button}>
+                            <View style={[styles.button,{borderColor:selectedColor}]}>
                                 {/*back button here*/}
                                 <Text allowFontScaling={false} style={styles.textcount}>
                                     الذكر السابق
