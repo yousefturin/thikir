@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, Text, Dimensions, StyleSheet } from "react-native";
+import { Image,
+          View,
+          Text,
+          StyleSheet,
+           } from "react-native";
 import { Magnetometer } from "expo-sensors";
 import * as Location from 'expo-location';
-import * as Haptics from "expo-haptics";
 import { useTheme } from "../context/ThemContex";
 import { QablaScreenStyle } from "../context/commonStyles";
 import { Appearance } from "react-native";
@@ -16,10 +19,7 @@ const QiblaScreen = () => {
   const [subscription, setSubscription] = useState(null);
   const [magnetometerData, setMagnetometerData] = useState([]);
   const [movingAverage, setMovingAverage] = useState(0);
-  const vibrationAngleValues = [
-    '0', '30', '60', '90', '120', '150',
-    '180', '210', '240', '270', '300', '330',
-  ];
+
 
 
   const { selectedTheme } = useTheme();
@@ -94,6 +94,7 @@ const QiblaScreen = () => {
   const degreesToRadians = (degrees) => {
     return degrees * (Math.PI / 180);
   };
+
   const saveLocation = async (latitude, longitude) => {
     try {
       await AsyncStorage.setItem('storedLocation', JSON.stringify({ latitude, longitude }));
@@ -136,10 +137,9 @@ const QiblaScreen = () => {
   
   useEffect(() => {
     getLocation();
-  
     // Set up a location listener to update the location when it changes
     const locationListener = Location.watchPositionAsync(
-      { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 1000 }, // Adjust the options as needed
+      { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 5000 }, // Adjust the options as needed
       async (location) => {
         const { coords } = location;
         const { latitude, longitude } = coords;
@@ -180,12 +180,12 @@ const QiblaScreen = () => {
 
     const y = Math.sin(destLon - currentLongitude);
     const x =
-      Math.cos(currentLatitude) * Math.sin(destLat) -
-      Math.sin(currentLatitude) * Math.cos(destLat) * Math.cos(destLon - currentLongitude);
+              Math.cos(currentLatitude) * Math.sin(destLat) -
+              Math.sin(currentLatitude) * Math.cos(destLat) * Math.cos(destLon - currentLongitude);
 
     let bearing = Math.atan2(y, x);
     bearing = (bearing * 180) / Math.PI;
-    bearing = (bearing + 360) % 360; // Ensure the bearing is in the range [0, 360]
+    bearing = (bearing + 360) % 360; 
     Math.round(bearing);
     setQiblaDirection(bearing);
   };
@@ -206,6 +206,7 @@ const QiblaScreen = () => {
   };
 
   const subscripe = () => {
+    Magnetometer.setUpdateInterval(16);
     setSubscription(
       Magnetometer.addListener((data) => {
         const filteredData = angle(data); // Apply any filtering method to the raw data
@@ -218,11 +219,11 @@ const QiblaScreen = () => {
           }
 
           // Calculate the moving average
-          const avg = newData.reduce((acc, val) => acc + val, 0) / newData.length;
+          const avg = Math.round(newData.reduce((acc, val) => acc + val, 0) / newData.length);
 
           // Apply a threshold  -?>  only update if the change is significant
-          if (Math.abs(avg - movingAverage) > 10.0) {
-            setMovingAverage(Math.round(avg));
+          if (Math.abs(avg - movingAverage) > 1.0) {
+            setMovingAverage(avg);
           }
           return newData;
         });
@@ -234,6 +235,7 @@ const QiblaScreen = () => {
     subscription && subscription.remove();
     setSubscription(null);
   };
+
 
   const angle = (magnetometer) => {
     let angle = 0;
@@ -250,15 +252,16 @@ const QiblaScreen = () => {
 
 
 
-  const vibrationAngle = () => {
-    if (vibrationAngleValues.includes(Math.round(qiblaDirection).toString())) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    }
-  };
+  // const vibrationAngle = () => {
+  //   if (vibrationAngleValues.includes(Math.round(qiblaDirection).toString())) {
+  //     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  //   }
+  // };
 
   const degree = (movingAverage) => {
     return movingAverage - 90 >= 0 ? movingAverage - 90 : movingAverage + 271;
   };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setLoadingDots((prevDots) => {
@@ -289,7 +292,7 @@ const QiblaScreen = () => {
           style={[
             styles.compassImage,
             {
-              transform: [{ rotate: 360 - Math.round(movingAverage) + "deg" }],
+              transform: [{ rotate: 360 - movingAverage + "deg" }],
             },
           ]}
         />
@@ -302,17 +305,16 @@ const QiblaScreen = () => {
               styles.compassImageRed,
               {
                 transform:
-                  [{ rotate: 90 + Math.round(qiblaDirection) - Math.round(movingAverage) + "deg" }],
-
+                  [{ rotate: 90 + Math.round(qiblaDirection) - movingAverage + "deg" }],
               },
-
             ]}
           />
         ) : null}
         <Text style={styles.degreeText}>
-          {degree(Math.round(movingAverage))}°
+          {degree(movingAverage)}°
         </Text>
       </View>
+            {/* circle with arrow animation will be here */}
 
       <View style={styles.triangleContainer}>
         <View style={styles.triangle}></View>
@@ -320,6 +322,5 @@ const QiblaScreen = () => {
     </View>
   );
 };
-
 
 export default QiblaScreen;
