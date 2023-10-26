@@ -65,21 +65,18 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         countValue: {
             color: "#000",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         pickThikirText: {
             color: "#000",
         },
         ModalTopNotch: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         addNewThikirModalContainer: {
             backgroundColor: "#f2f2f6",
@@ -113,21 +110,20 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#262626",
-            shadowColor: "black",
+
         },
         countValue: {
             color: "#fff",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#262626",
-            shadowColor: "black",
+
         },
         pickThikirText: {
             color: "#fff",
         },
         ModalTopNotch: {
             backgroundColor: "#262626",
-            shadowColor: "#000",
         },
         addNewThikirModalContainer: {
             backgroundColor: "#151515",

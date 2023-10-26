@@ -53,7 +53,6 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     buttonText: {
       color: "#000",
@@ -72,14 +71,12 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     searchBarInput: {
       backgroundColor: "#fefffe",
       color: "#dddddd",
     },
     buttonGrid: {
-      shadowColor: "white",
     },
     squareButton: {
       backgroundColor: "#fefffe",
@@ -106,7 +103,6 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",
@@ -125,14 +121,12 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     searchBarInput: {
       backgroundColor: "#262626",
       color: "#dddddd",
     },
     buttonGrid: {
-      shadowColor: "black",
     },
     squareButton: {
       backgroundColor: "#262626",

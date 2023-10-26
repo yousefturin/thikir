@@ -23,7 +23,6 @@ const AboutScreen = ({ navigation }) => {
     },  
     rectangleWrapper: {
       backgroundColor: "#fefffe",
-      shadowColor: 'white',
     },
     rectangleText: {
       color: "#000",
@@ -44,7 +43,6 @@ const AboutScreen = ({ navigation }) => {
     }, 
     rectangleWrapper: {
       backgroundColor: "#262626",
-      shadowColor: 'black',
     },
     rectangleText: {
       color: "#fff",

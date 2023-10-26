@@ -11,10 +11,15 @@ import { Appearance } from 'react-native';
 
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
-  const { selectedFont, setFont } = useFont();
-  const { selectedColor, setColor } = useColor();
-  const { state, dispatch, convertToEasternArabicNumerals } = useNumberContext(); // Get the context values
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
+  
+  const { selectedFont, setFont } = useFont();
+
+  const { selectedColor, setColor } = useColor();
+
+  const { state, dispatch, convertToEasternArabicNumerals } = useNumberContext(); // Get the context values
+
+
   const toggleSwitch = () => {
     // Dispatch the action to toggle the numbers
     dispatch({ type: 'TOGGLE_NUMBERS' });
@@ -30,7 +35,7 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
+
     },
     horizontalLine: {
       borderColor: "#f2f2f6",
@@ -48,7 +53,6 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     horizontalLine: {
       borderColor: "#151515",

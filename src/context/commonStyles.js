@@ -22,14 +22,7 @@ export const MainStyles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     marginRight: 5,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
+    
   },
   nameWrapper: {
     width: "70%",
@@ -42,14 +35,6 @@ export const MainStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
   },
   buttonText: {
     color: "#fff",
@@ -74,8 +59,8 @@ export const MainStyles = StyleSheet.create({
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    width: 13,
-    marginLeft: 360,
+    width: 60,
+    marginLeft: 313,
   },
 });
 //#endregion
@@ -109,14 +94,6 @@ export const AboutStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
     paddingVertical: 20
   },
   scrollContainer: {
@@ -168,14 +145,6 @@ export const DuaVerseStyles = StyleSheet.create({
     justifyContent: "space-around",
     marginTop: 20,
     width: "90%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
     position: "relative",
   },
   scrollContainer: {
@@ -259,14 +228,6 @@ export const QuranVerseStyles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 20,
     width: "90%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
     position: "relative",
   },
   scrollContainer: {
@@ -345,7 +306,6 @@ export const HomeStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 80,
-    paddingTop: 20,
   },
   containerSearchMode: {
     flexGrow: 1,
@@ -364,14 +324,6 @@ export const HomeStyles = StyleSheet.create({
   },
   searchBarInputContainer: {
     backgroundColor: "#262626",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   searchBarInput: {
     backgroundColor: "#262626",
@@ -396,14 +348,6 @@ export const HomeStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
-    shadowColor: "#262626",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
   },
   buttonText: {
     color: "#dddddd",
@@ -444,14 +388,6 @@ export const HomeStyles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   squareButton: {
     width: "48%",
@@ -507,14 +443,6 @@ export const ThikirAlarmStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: "#262626",
-    shadowColor: "#262626",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 4,
     width: "91%",
     height: 60,
     paddingHorizontal: 10,
@@ -610,14 +538,6 @@ export const GenericStyles = StyleSheet.create({
     paddingBottom: 20,
     padding: 50,
     marginTop: 20,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
     position: "relative",
 
   },
@@ -676,14 +596,6 @@ export const GenericStyles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "space-evenly",
     alignItems: "center",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   shareButton: {
     position: "absolute",
@@ -759,14 +671,6 @@ export const SettingStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     width: "90%",
-    shadowColor: "gray",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   wrapHeaderText: {
     width: '90%',
@@ -842,14 +746,6 @@ export const ReportProblemStyles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
     height: 120,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   inputScreenshot: {
     flex: 0.5,
@@ -864,14 +760,6 @@ export const ReportProblemStyles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
     height: 220,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   screenshot: {
     padding: 20,
@@ -896,14 +784,6 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 20,
     width: "90%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
     position: "relative",
     paddingHorizontal: 20,
     paddingVertical: 40,
@@ -992,14 +872,6 @@ export const TasbehScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#262626',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   duplica: {
     width: 200, 
@@ -1016,18 +888,10 @@ export const TasbehScreenStyle = StyleSheet.create({
   thikirNameDispalyBtn: {
     justifyContent: "center",
     alignItems: "center",
-    width: 150,
+    width: 200,
     height: 50,
     borderRadius: 10,
     backgroundColor: "#262626",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 2,
     overflow: "hidden",
 
   },
@@ -1035,6 +899,7 @@ export const TasbehScreenStyle = StyleSheet.create({
     textAlign: "center",
     fontFamily:"ScheherazadeNewBold",
     fontSize: 18,
+    paddingHorizontal:10,
   },
   pickThikirText: {
     textAlign: "center",
@@ -1050,14 +915,6 @@ export const TasbehScreenStyle = StyleSheet.create({
     position: "absolute",
     top: 7,
     left: "50%",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 4,
   },
   ThikirNewText: {
     color: "#007AFF",
@@ -1186,6 +1043,7 @@ export const QablaScreenStyle  = StyleSheet.create({
     position: 'absolute',
     borderBottomWidth: 5, 
     borderBottomColor: '#dd3131',
-  }
+  },
+  
 });
 //#endregion

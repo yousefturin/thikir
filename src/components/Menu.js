@@ -12,7 +12,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { MainStyles } from "../context/commonStyles";
-import { Svg, Path, Circle } from "react-native-svg";
 import { Appearance } from "react-native";
 import SvgComponent from "../../assets/svgComponents";
 
@@ -27,7 +26,7 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
+
     },
     buttonText: {
       color: "#000",
@@ -49,7 +48,6 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",

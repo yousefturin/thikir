@@ -46,7 +46,6 @@ const QuranVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     title: {
       color: "#000",
@@ -64,7 +63,6 @@ const QuranVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     title: {
       color: "#fff",

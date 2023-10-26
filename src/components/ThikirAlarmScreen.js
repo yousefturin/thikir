@@ -24,7 +24,7 @@ const ThikirAlarmScreen = () => {
     },
     notificationContainer: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
+
     },
     title: {
       color: "#000",
@@ -42,7 +42,6 @@ const ThikirAlarmScreen = () => {
     },
     notificationContainer: {
       backgroundColor: "#262626",
-      shadowColor: "#262626",
     },
     title: {
       color: "#dddddd",

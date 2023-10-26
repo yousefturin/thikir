@@ -20,12 +20,10 @@ const ReportProblemScreen = () => {
     input: {
       color: '#000',
       backgroundColor: '#fefffe',
-      shadowColor: 'white',
     },
     inputScreenshot: {
       color: '#000',
       backgroundColor: '#fefffe',
-      shadowColor: 'white',
     },
   });
   //#endregion
@@ -41,12 +39,10 @@ const ReportProblemScreen = () => {
     input: {
       color: '#fff',
       backgroundColor: '#262626',
-      shadowColor: 'black',
     },
     inputScreenshot: {
       color: '#fff',
       backgroundColor: '#262626',
-      shadowColor: 'black',
     },
   });
   //#endregion

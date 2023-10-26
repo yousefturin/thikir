@@ -255,14 +255,6 @@ const styles = StyleSheet.create({
   headerBackground: {
     flex: 1,
     resizeMode: "cover",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
   },
 });
 

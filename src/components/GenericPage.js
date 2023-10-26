@@ -68,7 +68,6 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         title: {
             color: "#000",
@@ -83,7 +82,6 @@ const GenericPage = ({ route }) => {
             color: "#f2b784",
         },
         ControlPaneBackground: {
-            shadowColor: "white",
         },
         horizontalLine: {
             borderColor: "#f2f2f6",
@@ -113,7 +111,6 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#262626",
-            shadowColor: "black",
         },
         title: {
             color: "white",
@@ -128,7 +125,6 @@ const GenericPage = ({ route }) => {
             color: "#f2b784",
         },
         ControlPaneBackground: {
-            shadowColor: "black",
         },
         horizontalLine: {
             borderColor: "#151515",
