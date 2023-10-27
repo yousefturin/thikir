@@ -8,7 +8,7 @@ import { ThemeProvider } from "./src/context/ThemContex";
 import { FontProvider } from "./src/context/FontContext";
 import { ColorProvider  } from "./src/context/ColorContext";
 import { NumberProvider } from './src/context/NumberContext';
-
+import { LanguageProvider } from "./src/context/LanguageContext";
 
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -43,6 +43,7 @@ const App = () => {
         ScheherazadeNewBold: require("./assets/fonts/ScheherazadeNew-Bold.ttf"),
         Hafs: require("./assets/fonts/Hafs.ttf"),
         MeQuran: require("./assets/fonts/MeQuran.ttf"),
+        Montserrat: require("./assets/fonts/Montserrat-Regular.ttf"),
       });
       setFontLoaded(true);
     }
@@ -97,7 +98,9 @@ const App = () => {
       <FontProvider> 
         <ColorProvider>
         <NumberProvider>
-          <AppNavigator />
+          <LanguageProvider>
+            <AppNavigator />
+          </LanguageProvider>
           </NumberProvider>
         </ColorProvider>
       </FontProvider>
