@@ -344,7 +344,6 @@ export const HomeStyles = StyleSheet.create({
   buttonText: {
     color: "#dddddd",
     fontSize: 18,
-
   },
   emptyMessage: {
     flex: 1,
