@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
 import { SearchBar } from "react-native-elements";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getItems } from "../db/GetData";
+import { getEnItems } from "../db/GetDataEn";
 import { HomeStyles } from "../context/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
@@ -21,9 +22,16 @@ import { Appearance } from "react-native";
 const {width} = Dimensions.get("window");
 
 const HomeScreen = ({ navigation }) => {
-  const items = getItems();
-
   const { selectedLanguage } = useLanguage();
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    if (selectedLanguage !== "Arabic") {
+      setItems(getEnItems());
+    } else {
+      setItems(getItems());
+    }
+  }, [selectedLanguage]);
+
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const systemTheme = selectedTheme === "system";
@@ -152,14 +160,16 @@ const HomeScreen = ({ navigation }) => {
       ? darkTheme
       : lightTheme;
 
-        //#region ArabicLanguage
+    //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({
     button: {
       flexDirection: "row",
+      fontFamily: "ScheherazadeNew",
     },
     buttonText: {
       textAlign: "right",
       marginLeft: 30,
+      fontFamily: "ScheherazadeNew",
     },
     squareButton: {
       alignItems: "flex-end",
@@ -172,9 +182,10 @@ const HomeScreen = ({ navigation }) => {
       textAlign: "right",
       marginRight: 10,
       fontFamily: "ScheherazadeNew",
+      fontSize: 18,
     },
     iconWrapperTop: {
-      marginRight: 10,
+      right: 10,
     },
     TextMidWrapper: {
       alignItems: "flex-end",
@@ -197,6 +208,7 @@ const HomeScreen = ({ navigation }) => {
     buttonText: {
       textAlign: "left",
       marginRight: 30,
+      fontFamily: "Montserrat",
     },
     squareButton: {
       alignItems: "flex-start",
@@ -209,9 +221,10 @@ const HomeScreen = ({ navigation }) => {
       textAlign: "left",
       marginLeft: 10,
       fontFamily: "Montserrat",
+      fontSize: 16,
     },
     iconWrapperTop: {
-      marginLeft: 10,
+      left: 10,
     },
     TextMidWrapper: {
       alignItems: "flex-start",
@@ -336,12 +349,21 @@ const HomeScreen = ({ navigation }) => {
 
   //#region Filtering top 4 displayed
 
-  const desiredNames = [
+  const desiredNames = selectedLanguage != "Arabic" ? 
+  [   
+  "Evening remembrance",
+  "Morning remembrance",
+  "After salam remembrance",
+  "Befor sleeping remembrance",
+  ]
+  :
+  [
     "أذكار المساء",
     "أذكار الصباح",
     "الأذكار بعد الصلاة",
     "أذكار النوم",
-  ];
+  ]
+
   const filteredItems = items.filter((item) =>
     desiredNames.includes(item.name)
   );
@@ -393,11 +415,11 @@ const HomeScreen = ({ navigation }) => {
   const handleSearch = (query) => {
     setSearchQuery(query);
 
-    const normalizedQuery = query.replace(/[أإِ]/g, "ا");
+    const normalizedQuery = query.toLowerCase().replace(/[أإِ]/g, "ا");
 
     // Filter items based on the normalized search query and normalized item names
     const filtered = items.filter((item) => {
-      const normalizedItemName = item.name.replace(/[أإِ]/g, "ا");
+      const normalizedItemName = item.name.toLowerCase().replace(/[أإِ]/g, "ا");
       return normalizedItemName.includes(normalizedQuery);
     });
 
@@ -496,6 +518,7 @@ const HomeScreen = ({ navigation }) => {
           onFocus={handleSearchBarClick}
           onCancel={handleCancel}
           showCancel
+          
           cancelButtonTitle={selectedLanguage != "Arabic" ? "Cancel" : "الغاء"}
           keyboardAppearance={keyboardTheme}
           searchIcon={{ color: selectedColor }}
@@ -594,7 +617,11 @@ const HomeScreen = ({ navigation }) => {
                     </Svg>
                   </View>
                   <View style={styles.nameWrapper}>
-                    <Text allowFontScaling={false} style={styles.buttonTextTop}>
+                    <Text                       
+                        numberOfLines={2}
+                        ellipsizeMode="tail" 
+                        allowFontScaling={false} 
+                        style={styles.buttonTextTop}>
                       {item.name}
                     </Text>
                   </View>
@@ -626,7 +653,11 @@ const HomeScreen = ({ navigation }) => {
                     />
                   </View>
                   <View style={styles.nameWrapper}>
-                    <Text style={styles.buttonText}>{item.name}</Text>
+                    <Text                         
+                        numberOfLines={2}
+                        ellipsizeMode="tail" 
+                        style={styles.buttonText}>
+                            {item.name}</Text>
                   </View>
                   <View style={styles.imageWrapper}>
                     {/* Image component */}
