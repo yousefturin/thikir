@@ -23,6 +23,7 @@ import * as Animatable from "react-native-animatable";
 import { TasbehScreenStyle } from "../context/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
+import { useLanguage } from "../context/LanguageContext";
 import { Appearance } from "react-native";
 import { useNumberContext } from "../context/NumberContext";
 
@@ -49,6 +50,7 @@ const TasbihScreen = () => {
 
     const { selectedTheme } = useTheme();
     const { selectedColor } = useColor();
+    const { selectedLanguage } = useLanguage();
     const systemTheme = selectedTheme === "system";
     const keyboardTheme = systemTheme
         ? Appearance.getColorScheme() === "dark"
@@ -643,10 +645,48 @@ const TasbihScreen = () => {
                     }}
                 >
                     <View style={styles.container}>
-                        <Text allowFontScaling={false} style={styles.pickThikirText}>
-                            اختيار الذكر
+                        <Text allowFontScaling={false} style={[styles.pickThikirText,{fontFamily:selectedLanguage != "Arabic"?"Montserrat":"ScheherazadeNewBold"}]}>
+                            {selectedLanguage != "Arabic"?"Select a Supplication":"اختيار الذكر"}
                         </Text>
                         <View style={styles.ModalTopNotch} />
+                        {selectedLanguage != "Arabic"?(                        
+                            <TouchableOpacity
+                            onPress={() => {
+                                toggleContainer();
+                                setTimeout(() => {
+                                    inputRef.current.focus();
+                                }, 100);
+                            }}
+                            style={{
+                                position: "absolute",
+                                bottom: 45,
+                                left: 25,
+                            }}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 512 512"
+                                    style={styles.ThikirNewText}
+                                >
+                                    <Path
+                                        d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
+                                        fill="currentColor"
+                                    />
+                                </Svg>
+                                <Text allowFontScaling={false} style={styles.ThikirNewText}>
+                                        New Supplication
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        ):(
                         <TouchableOpacity
                             onPress={() => {
                                 toggleContainer();
@@ -668,7 +708,7 @@ const TasbihScreen = () => {
                                 }}
                             >
                                 <Text allowFontScaling={false} style={styles.ThikirNewText}>
-                                    ذكر جديد
+                                  ذكر جديد
                                 </Text>
                                 <Svg
                                     width="24"
@@ -683,6 +723,8 @@ const TasbihScreen = () => {
                                 </Svg>
                             </View>
                         </TouchableOpacity>
+                        )}
+
                         {renderButtonCloseModal()}
                         <View style={styles.rectangle}>
                             <View style={styles.modaldisplay}>
@@ -793,8 +835,8 @@ const TasbihScreen = () => {
                                             }}
                                         >
                                             <View style={styles.addNewThikirModalContainer}>
-                                                <Text style={styles.newThikirTextInModal}>
-                                                    ذكر جديد
+                                                <Text style={[styles.newThikirTextInModal,{fontFamily:selectedLanguage != "Arabic"?"Montserrat":"ScheherazadeNewBold"}]}>
+                                                    {selectedLanguage != "Arabic"?"New Supplication":"ذكر جديد"}
                                                 </Text>
                                                 <TextInput
                                                     ref={inputRef}
@@ -819,7 +861,7 @@ const TasbihScreen = () => {
 
 const DeleteButton = ({ onDelete }) => {
     const [isVisible, setIsVisible] = useState(true);
-
+    const { selectedLanguage } = useLanguage();
     const handleDelete = () => {
         onDelete();
         setIsVisible(false);
@@ -838,7 +880,7 @@ const DeleteButton = ({ onDelete }) => {
             activeOpacity={0.2}
             onPress={handleDelete}
         >
-            <Text style={{ padding: 10, color: "#fff" }}>حذف</Text>
+            <Text style={{ padding: 10, color: "#fff" }}>{selectedLanguage != "Arabic"?"Delete":"حذف"}</Text>
         </TouchableOpacity>
     );
 };
