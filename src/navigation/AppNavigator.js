@@ -23,7 +23,8 @@ import ReportProblemScreen from "../components/ReportProblemScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 import TasbihScreen from "../components/tasbihScreen";
 import QablaScreen from "../components/QablaScreen";
-import { useTheme } from '../context/ThemContex'; 
+import { useTheme } from '../context/ThemContex';
+import { useLanguage } from '../context/LanguageContext';
 import { Appearance } from 'react-native';
 
 const Stack = createStackNavigator();
@@ -60,6 +61,8 @@ const AppNavigator = () => {
   const { selectedTheme } = useTheme();
   const systemTheme = selectedTheme === 'system'; 
 
+  const { selectedLanguage } = useLanguage();
+
   const headerTintColor = systemTheme
   ? Appearance.getColorScheme() === 'dark'
     ?"white"
@@ -85,24 +88,25 @@ const AppNavigator = () => {
   const headerStyle = {height: 100, backgroundColor: backgroundBarColor, elevation: 0, shadowOpacity: 0, };
   return (
     <Stack.Navigator
-    initialRouteName="الأذكار"
+    initialRouteName= {selectedLanguage != "Arabic" ?  "Home": "الأذكار" }
     screenOptions={{
       headerTintColor,
       headerTitleStyle: {
-        fontFamily: "ScheherazadeNewBold",
+        fontFamily: selectedLanguage != "Arabic" ?  "Montserrat": "ScheherazadeNewBold",
         fontSize: 22,
       },
       cardStyleInterpolator: customCardStyleInterpolator, // Custom animation
     }}
   >
     <Stack.Screen
-      name="الأذكار"
+      name= {selectedLanguage != "Arabic" ?  "Home": "الأذكار" }
       component={HomeScreen}
       options={({ navigation }) => ({
         headerTitle: null,
         headerLeft: () => (
           <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("القائمة")}>
+            <TouchableOpacity onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Menu"): navigation.navigate("القائمة")}
+            >
               <Icon
                 name="bars"
                 size={24}
@@ -118,14 +122,14 @@ const AppNavigator = () => {
       })}
     />
     <Stack.Screen
-      name="التذكيرات"
+      name={selectedLanguage != "Arabic" ?  "Notifications": "التذكيرات"}
       component={ThikirAlarmScreen}
       options={{
         headerStyle: headerStyle,
       }}
     />
     <Stack.Screen
-      name="سبحة"
+      name={selectedLanguage != "Arabic" ?  "Glorification": "سبحة"}
       component={TasbihScreen}
       options={{
         headerStyle: headerStyle,
@@ -159,10 +163,14 @@ const AppNavigator = () => {
         options={({ route }) => ({
           headerTitle: () => (
             <Text
+            numberOfLines={2}
+            ellipsizeMode="tail"
               style={{
                 color: barColor,
                 fontSize: 18,
-                fontFamily: "ScheherazadeNewBold",
+                textAlign:"center",
+
+                fontFamily: selectedLanguage != "Arabic" ?  "Montserrat": "ScheherazadeNewBold"
               }}
             >
               {route.params?.name || "Default Page Title"}
@@ -197,7 +205,7 @@ const AppNavigator = () => {
         })}
       />
       <Stack.Screen
-        name="الأذكار المفضلة"
+        name={selectedLanguage != "Arabic" ?  "Favorite": "الأذكار المفضلة" }
         component={FavouriteScreen}
         options={{
           headerStyle: headerStyle,
@@ -211,7 +219,7 @@ const AppNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="الاعدادات"
+        name= {selectedLanguage != "Arabic" ?  "Settings": "الاعدادات" }
         component={SettingScreen}
         options={{
           headerStyle: headerStyle,
@@ -232,16 +240,14 @@ const AppNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="القائمة"
+        name= {selectedLanguage != "Arabic" ?  "Menu": "القائمة" }
         component={Menu}
         options={{
           headerStyle: headerStyle,
         }}
         
       />
-
     </Stack.Navigator>
-
   );
 };
 
@@ -255,14 +261,6 @@ const styles = StyleSheet.create({
   headerBackground: {
     flex: 1,
     resizeMode: "cover",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
   },
 });
 

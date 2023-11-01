@@ -11,14 +11,15 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
+import { useLanguage } from "../context/LanguageContext";
 import { MainStyles } from "../context/commonStyles";
-import { Svg, Path, Circle } from "react-native-svg";
 import { Appearance } from "react-native";
 import SvgComponent from "../../assets/svgComponents";
 
 const Menu = ({ navigation }) => {
   const { selectedTheme } = useTheme();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
+  const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -27,7 +28,6 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     buttonText: {
       color: "#000",
@@ -49,7 +49,6 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",
@@ -71,6 +70,54 @@ const Menu = ({ navigation }) => {
     ? darkTheme
     : lightTheme;
 
+
+  //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
+    button: {
+      flexDirection: "row",
+    },
+    iconWrapper: {
+      marginRight: 5,
+    },
+    buttonText: {
+      textAlign: "right",
+      marginRight: 20,
+    },
+    icon: {
+      transform: [{ rotate: 0  + "deg" }],
+      marginLeft: 20,
+    },
+    horizontalLine:{
+      marginLeft: 313,
+    },
+  });
+  //#endregion
+
+  //#region EnglishLanguage
+  const EnglishLanguage = StyleSheet.create({
+  button: {
+    flexDirection: "row-reverse",
+  },
+  iconWrapper: {
+    marginLeft: 5,
+  },
+  buttonText: {
+    textAlign: "left",
+    marginLeft: 20,
+    fontFamily:"Montserrat",
+  },
+  icon: {
+    transform: [{ rotate: 180  + "deg" }],
+    marginRight: 20,
+  },
+  horizontalLine:{
+    marginRight: 313,
+  },
+  });
+  //#endregion
+
+
+
   //#region StyleMapping
   const styles = {
     ...MainStyles,
@@ -85,23 +132,31 @@ const Menu = ({ navigation }) => {
       ...(selectedTheme === "dark"
         ? themeStyles.buttonText
         : themeStyles.buttonText),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText )
     },
     button: {
       ...MainStyles.button,
       ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button )
     },
     iconWrapper: {
       ...MainStyles.iconWrapper,
       ...(selectedTheme === "dark"
         ? themeStyles.iconWrapper
         : themeStyles.iconWrapper),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapper : ArabicLanguage.iconWrapper )
     },
     horizontalLine: {
       ...MainStyles.horizontalLine,
       ...(selectedTheme === "dark"
         ? themeStyles.horizontalLine
         : themeStyles.horizontalLine),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
     },
+    icon:{
+      ...MainStyles.icon,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
+    }
   };
   //#endregion
 
@@ -112,7 +167,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderRadius: 10, marginBottom: 30, marginTop: 30 },
         ]}
-        onPress={() => navigation.navigate("التذكيرات")}
+        onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Notifications") : navigation.navigate("التذكيرات")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -124,7 +179,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>التذكيرات</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Notification" : "التذكيرات"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="ThikirAlarmSVG" style={styles.iconleft} />
@@ -139,7 +194,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
         ]}
-        onPress={() => navigation.navigate("سبحة")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Glorification"): navigation.navigate("سبحة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -151,7 +206,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>السبحة</Text>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Glorification" : "السبحة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="TasbihSVG" style={styles.iconleft} />
@@ -163,7 +218,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("الأذكار المفضلة")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Favorite"): navigation.navigate("الأذكار المفضلة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -175,7 +230,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>الأذكار المفضلة</Text>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Favorite Supplications" : "الأذكار المفضلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="FavThikirSVG" style={styles.iconleft} />
@@ -199,7 +254,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>أسماء الله الحسنى</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Names of Allah" : "أسماء الله الحسنى"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="NamesOfAllahSVG" style={styles.iconleft} />
@@ -225,7 +280,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>آية</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Verse of Quran" : "آية"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="AyaSVG" style={styles.iconleft} />
@@ -250,7 +305,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>حديث</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Hadith" : "حديث"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="HadithSVG" style={styles.iconleft} />
@@ -275,7 +330,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>القبلة</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Direction of Prayer" : "القبلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="QiblaSVG" style={styles.iconleft} />
@@ -304,7 +359,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>دعاء</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Invocational" : "دعاء"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="DuaaSVG" style={styles.iconleft} />
@@ -320,7 +375,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderTopRightRadius: 10, borderTopLeftRadius: 10, marginTop: 30 },
         ]}
-        onPress={() => navigation.navigate("الاعدادات")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Settings") : navigation.navigate("الاعدادات")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -332,7 +387,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>الاعدادات</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Settings" : "الاعدادات"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="SettingSVG" style={styles.iconleft} />
@@ -356,7 +411,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>عن البرنامج</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "About us" : "عن البرنامج"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="AboutAppSVG" style={styles.iconleft} />
@@ -383,7 +438,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>الابلاغ عن مشكلة</Text>
+          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Report a Problem" : "الابلاغ عن مشكلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="ReportProblemSVG" style={styles.iconleft} />

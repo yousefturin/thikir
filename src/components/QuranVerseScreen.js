@@ -16,7 +16,7 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
@@ -46,7 +46,6 @@ const QuranVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     title: {
       color: "#000",
@@ -64,7 +63,6 @@ const QuranVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     title: {
       color: "#fff",

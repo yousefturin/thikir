@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,21 +7,33 @@ import {
   Image,
   ScrollView,
   StatusBar,
+  Dimensions,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getItems } from "../db/GetData";
+import { getEnItems } from "../db/GetDataEn";
 import { HomeStyles } from "../context/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
+import { useLanguage } from "../context/LanguageContext";
 import { Svg, Path, Circle } from "react-native-svg";
 import { Appearance } from "react-native";
+const {width} = Dimensions.get("window");
 
 const HomeScreen = ({ navigation }) => {
-  const items = getItems();
+  const { selectedLanguage } = useLanguage();
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    if (selectedLanguage !== "Arabic") {
+      setItems(getEnItems());
+    } else {
+      setItems(getItems());
+    }
+  }, [selectedLanguage]);
 
   const { selectedTheme } = useTheme();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
   const systemTheme = selectedTheme === "system";
 
   const StatusBarColor = systemTheme
@@ -53,7 +65,6 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     buttonText: {
       color: "#000",
@@ -72,14 +83,12 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     searchBarInput: {
       backgroundColor: "#fefffe",
       color: "#dddddd",
     },
     buttonGrid: {
-      shadowColor: "white",
     },
     squareButton: {
       backgroundColor: "#fefffe",
@@ -106,7 +115,6 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",
@@ -125,14 +133,12 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     searchBarInput: {
       backgroundColor: "#262626",
       color: "#dddddd",
     },
     buttonGrid: {
-      shadowColor: "black",
     },
     squareButton: {
       backgroundColor: "#262626",
@@ -145,6 +151,7 @@ const HomeScreen = ({ navigation }) => {
     },
   });
   //#endregion
+  
   const themeStyles = systemTheme
     ? Appearance.getColorScheme() === "dark"
       ? darkTheme
@@ -152,6 +159,86 @@ const HomeScreen = ({ navigation }) => {
     : selectedTheme === "dark"
       ? darkTheme
       : lightTheme;
+
+    //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
+    button: {
+      flexDirection: "row",
+      fontFamily: "ScheherazadeNew",
+    },
+    buttonText: {
+      textAlign: "right",
+      marginLeft: 30,
+      fontFamily: "ScheherazadeNew",
+    },
+    squareButton: {
+      alignItems: "flex-end",
+    },
+    icon: {
+      transform: [{ rotate: 0  + "deg" }],
+      marginLeft: 20,
+    },
+    buttonTextTop: {
+      textAlign: "right",
+      marginRight: 10,
+      fontFamily: "ScheherazadeNew",
+      fontSize: 18,
+    },
+    iconWrapperTop: {
+      right: 10,
+    },
+    TextMidWrapper: {
+      alignItems: "flex-end",
+      marginRight: width > 600 ? 60 : 35,
+    },
+    horizontalLine: {
+      marginLeft: width > 600 ? 610 : 350,
+    },
+    TextMid: {
+      fontFamily:"ScheherazadeNewBold",
+    },
+  });
+  //#endregion
+
+  //#region EnglishLanguage
+  const EnglishLanguage = StyleSheet.create({
+    button: {
+      flexDirection:"row-reverse",
+    },
+    buttonText: {
+      textAlign: "left",
+      marginRight: 30,
+      fontFamily: "Montserrat",
+    },
+    squareButton: {
+      alignItems: "flex-start",
+    },
+    icon: {
+      transform: [{ rotate: 180  + "deg" }],
+      marginRight: 20,
+    },
+    buttonTextTop: {
+      textAlign: "left",
+      marginLeft: 10,
+      fontFamily: "Montserrat",
+      fontSize: 16,
+    },
+    iconWrapperTop: {
+      left: 10,
+    },
+    TextMidWrapper: {
+      alignItems: "flex-start",
+      marginLeft: width > 600 ? 60 : 35,
+    },
+    horizontalLine: {
+      marginRight: width > 600 ? 610 : 350,
+    },
+    TextMid: {
+      fontFamily:"Montserrat",
+    },
+  });
+  //#endregion
+
   //#region StylesMapping
   const styles = {
     ...HomeStyles,
@@ -170,86 +257,113 @@ const HomeScreen = ({ navigation }) => {
     TextMid: {
       ...HomeStyles.TextMid,
       ...(selectedTheme === "dark" ? themeStyles.TextMid : themeStyles.TextMid),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMid : ArabicLanguage.TextMid )
     },
     buttonText: {
       ...HomeStyles.buttonText,
       ...(selectedTheme === "dark"
         ? themeStyles.buttonText
-        : themeStyles.buttonText), // Override button background color
+        : themeStyles.buttonText),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText )
     },
     button: {
       ...HomeStyles.button,
-      ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button), // Override button background color
+      ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button), 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button )
     },
     iconWrapper: {
       ...HomeStyles.iconWrapper,
       ...(selectedTheme === "dark"
         ? themeStyles.iconWrapper
-        : themeStyles.iconWrapper), // Override button background color
+        : themeStyles.iconWrapper), 
     },
     horizontalLine: {
       ...HomeStyles.horizontalLine,
       ...(selectedTheme === "dark"
         ? themeStyles.horizontalLine
-        : themeStyles.horizontalLine), // Override button background color
+        : themeStyles.horizontalLine), 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
     },
     containerSearchMode: {
       ...HomeStyles.containerSearchMode,
       ...(selectedTheme === "dark"
         ? themeStyles.containerSearchMode
-        : themeStyles.containerSearchMode), // Override button background color
+        : themeStyles.containerSearchMode), 
     },
     searchBarContainer: {
       ...HomeStyles.searchBarContainer,
       ...(selectedTheme === "dark"
         ? themeStyles.searchBarContainer
-        : themeStyles.searchBarContainer), // Override button background color
+        : themeStyles.searchBarContainer), 
     },
     searchBarInputContainer: {
       ...HomeStyles.searchBarInputContainer,
       ...(selectedTheme === "dark"
         ? themeStyles.searchBarInputContainer
-        : themeStyles.searchBarInputContainer), // Override button background color
+        : themeStyles.searchBarInputContainer), 
     },
     searchBarInput: {
       ...HomeStyles.searchBarInput,
       ...(selectedTheme === "dark"
         ? themeStyles.searchBarInput
-        : themeStyles.searchBarInput), // Override button background color
+        : themeStyles.searchBarInput), 
     },
     buttonGrid: {
       ...HomeStyles.buttonGrid,
       ...(selectedTheme === "dark"
         ? themeStyles.buttonGrid
-        : themeStyles.buttonGrid), // Override button background color
+        : themeStyles.buttonGrid), 
     },
     squareButton: {
       ...HomeStyles.squareButton,
       ...(selectedTheme === "dark"
         ? themeStyles.squareButton
-        : themeStyles.squareButton), // Override button background color
+        : themeStyles.squareButton), 
+        ...(selectedLanguage != "Arabic" ? EnglishLanguage.squareButton : ArabicLanguage.squareButton )
     },
     buttonTextTop: {
       ...HomeStyles.buttonTextTop,
       ...(selectedTheme === "dark"
         ? themeStyles.buttonTextTop
-        : themeStyles.buttonTextTop), // Override button background color
+        : themeStyles.buttonTextTop), 
+        ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonTextTop : ArabicLanguage.buttonTextTop )
     },
     iconTop: {
       ...HomeStyles.iconTop,
-      ...(selectedTheme === "dark" ? themeStyles.iconTop : themeStyles.iconTop), // Override button background color
+      ...(selectedTheme === "dark" ? themeStyles.iconTop : themeStyles.iconTop), 
+    },
+    icon:{
+      ...HomeStyles.icon,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
+    },
+    iconWrapperTop:{
+      ...HomeStyles.iconWrapperTop,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapperTop : ArabicLanguage.iconWrapperTop )
+    },
+    TextMidWrapper:{
+      ...HomeStyles.TextMidWrapper,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMidWrapper : ArabicLanguage.TextMidWrapper )
     },
   };
   //#endregion
 
   //#region Filtering top 4 displayed
 
-  const desiredNames = [
+  const desiredNames = selectedLanguage != "Arabic" ? 
+  [   
+  "Evening remembrance",
+  "Morning remembrance",
+  "After salam remembrance",
+  "Befor sleeping remembrance",
+  ]
+  :
+  [
     "أذكار المساء",
     "أذكار الصباح",
     "الأذكار بعد الصلاة",
     "أذكار النوم",
-  ];
+  ]
+
   const filteredItems = items.filter((item) =>
     desiredNames.includes(item.name)
   );
@@ -301,11 +415,11 @@ const HomeScreen = ({ navigation }) => {
   const handleSearch = (query) => {
     setSearchQuery(query);
 
-    const normalizedQuery = query.replace(/[أإِ]/g, "ا");
+    const normalizedQuery = query.toLowerCase().replace(/[أإِ]/g, "ا");
 
     // Filter items based on the normalized search query and normalized item names
     const filtered = items.filter((item) => {
-      const normalizedItemName = item.name.replace(/[أإِ]/g, "ا");
+      const normalizedItemName = item.name.toLowerCase().replace(/[أإِ]/g, "ا");
       return normalizedItemName.includes(normalizedQuery);
     });
 
@@ -385,10 +499,10 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.pageContainer}>
       <ScrollView
         contentContainerStyle={styles.container}
-        contentOffset={{ x: 0, y: 100 }}
+        contentOffset={{ x: 0, y: 7 }}
       >
         <SearchBar
-          placeholder="بحث..."
+          placeholder={selectedLanguage != "Arabic" ? "Search..." : "بحث..."}
           onChangeText={handleSearch}
           value={searchQuery}
           platform="ios"
@@ -399,12 +513,13 @@ const HomeScreen = ({ navigation }) => {
           ]}
           inputStyle={[
             styles.searchBarInput,
-            { textAlign: 'right' }, // Align the text to the right
+            { textAlign: selectedLanguage != "Arabic" ? "left" : "right"}, // Align the text to the right
           ]}
           onFocus={handleSearchBarClick}
           onCancel={handleCancel}
           showCancel
-          cancelButtonTitle="الغاء"
+          
+          cancelButtonTitle={selectedLanguage != "Arabic" ? "Cancel" : "الغاء"}
           keyboardAppearance={keyboardTheme}
           searchIcon={{ color: selectedColor }}
         />
@@ -502,7 +617,11 @@ const HomeScreen = ({ navigation }) => {
                     </Svg>
                   </View>
                   <View style={styles.nameWrapper}>
-                    <Text allowFontScaling={false} style={styles.buttonTextTop}>
+                    <Text                       
+                        numberOfLines={2}
+                        ellipsizeMode="tail" 
+                        allowFontScaling={false} 
+                        style={styles.buttonTextTop}>
                       {item.name}
                     </Text>
                   </View>
@@ -510,7 +629,7 @@ const HomeScreen = ({ navigation }) => {
               ))}
             </View>
             <View style={styles.TextMidWrapper}>
-              <Text style={styles.TextMid}>الفهرس</Text>
+              <Text style={styles.TextMid}>{selectedLanguage != "Arabic" ? "Catalogue" : "الفهرس"}</Text>
             </View>
             {items.map((item, index) => (
               <View key={item.name}>
@@ -534,7 +653,11 @@ const HomeScreen = ({ navigation }) => {
                     />
                   </View>
                   <View style={styles.nameWrapper}>
-                    <Text style={styles.buttonText}>{item.name}</Text>
+                    <Text                         
+                        numberOfLines={2}
+                        ellipsizeMode="tail" 
+                        style={styles.buttonText}>
+                            {item.name}</Text>
                   </View>
                   <View style={styles.imageWrapper}>
                     {/* Image component */}

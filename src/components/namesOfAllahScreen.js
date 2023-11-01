@@ -37,7 +37,6 @@ const NamesOfAllahScreen = ({ navigation }) => {
         },
         button: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         buttonText: {
             color: "#000",
@@ -56,14 +55,12 @@ const NamesOfAllahScreen = ({ navigation }) => {
         },
         searchBarInputContainer: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         searchBarInput: {
             backgroundColor: "#fefffe",
             color: "#dddddd",
         },
         buttonGrid: {
-            shadowColor: "white",
         },
         squareButton: {
             backgroundColor: "#fefffe",
@@ -90,7 +87,6 @@ const NamesOfAllahScreen = ({ navigation }) => {
         },
         button: {
             backgroundColor: "#262626",
-            shadowColor: "black",
         },
         buttonText: {
             color: "#fff",
@@ -109,14 +105,12 @@ const NamesOfAllahScreen = ({ navigation }) => {
         },
         searchBarInputContainer: {
             backgroundColor: "#262626",
-            shadowColor: "black",
         },
         searchBarInput: {
             backgroundColor: "#262626",
             color: "#dddddd",
         },
         buttonGrid: {
-            shadowColor: "black",
         },
         squareButton: {
             backgroundColor: "#262626",

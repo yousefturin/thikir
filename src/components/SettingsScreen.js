@@ -1,9 +1,17 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList,Switch } from 'react-native';
+import React, { useEffect } from 'react';
+import {  View,
+          Text, 
+          TouchableOpacity,
+          StyleSheet,
+          FlatList,
+          Switch, 
+          ScrollView,
+} from 'react-native';
 import { useTheme } from '../context/ThemContex';
 import { useFont } from '../context/FontContext';
 import { useColor } from '../context/ColorContext';
-import {useNumberContext } from '../context/NumberContext'
+import { useNumberContext } from '../context/NumberContext';
+import { useLanguage } from '../context/LanguageContext';
 import * as Haptics from 'expo-haptics';
 import { SettingStyles } from '../context/commonStyles';
 import Svg, { Path } from "react-native-svg";
@@ -11,10 +19,17 @@ import { Appearance } from 'react-native';
 
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
-  const { selectedFont, setFont } = useFont();
-  const { selectedColor, setColor } = useColor();
-  const { state, dispatch, convertToEasternArabicNumerals } = useNumberContext(); // Get the context values
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
+
+  const {selectedLanguage, setLanguage} = useLanguage();
+
+  const { selectedFont, setFont } = useFont();
+
+  const { selectedColor, setColor } = useColor();
+
+  const { state, dispatch, convertToEasternArabicNumerals } = useNumberContext(); // Get the context values
+
+
   const toggleSwitch = () => {
     // Dispatch the action to toggle the numbers
     dispatch({ type: 'TOGGLE_NUMBERS' });
@@ -22,6 +37,9 @@ const SettingScreen = ({ navigation }) => {
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
+    pageContainer: {
+      backgroundColor: "#f2f2f6",
+    },
     container: {
       backgroundColor: "#f2f2f6",
     },
@@ -30,16 +48,21 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     horizontalLine: {
       borderColor: "#f2f2f6",
     },  
+    textColorToggle:{
+      color:"#000",
+    }
   });
   //#endregion
 
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
+    pageContainer: {
+      backgroundColor: "#151515",
+    },
     container: {
       backgroundColor: "#151515",
     },
@@ -48,11 +71,13 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
-      shadowColor: "black",
     },
     horizontalLine: {
       borderColor: "#151515",
     },
+    textColorToggle:{
+      color:"#fff",
+    }
   });
   //#endregion
   
@@ -64,16 +89,63 @@ const SettingScreen = ({ navigation }) => {
     ? darkTheme
     : lightTheme;
 
+  //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
+    themeOption: {
+      flexDirection:"row",
+    },
+    togglePadding:{
+      marginLeft:10,
+    },
+    toggleContainer:{
+      flexDirection: "row-reverse",
+    },
+    textColorToggle:{
+      paddingRight:22
+    },
+    textColor: {},
+  });
+  //#endregion
+
+  //#region EnglishLanguage
+  const EnglishLanguage = StyleSheet.create({
+    themeOption: {
+      flexDirection:"row-reverse",
+    },
+    togglePadding:{
+      marginRight:10,
+    },
+    toggleContainer:{
+      flexDirection: "row",
+    },
+    textColorToggle:{
+      paddingLeft:22
+    },
+    textColor: {
+      fontFamily:"Montserrat"
+    },
+  });
+  //#endregion
+
+
+
   //#region StylesMapping
   const styles = {
     ...SettingStyles,
+    pageContainer: {
+      ...SettingStyles.pageContainer,
+      ...(selectedTheme === "dark"
+        ? themeStyles.pageContainer
+        : themeStyles.pageContainer),
+    },
     container: {
       ...SettingStyles.container,
       ...selectedTheme  === 'dark'? themeStyles.container : themeStyles.container, 
     },
     textColor: {
       ...SettingStyles.textColor,
-      ...selectedTheme  === 'dark'? themeStyles.textColor : themeStyles.textColor, 
+      ...selectedTheme  === 'dark'? themeStyles.textColor : themeStyles.textColor,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.textColor : ArabicLanguage.textColor ) 
     },
     rectangle: {
       ...SettingStyles.rectangle, 
@@ -83,14 +155,35 @@ const SettingScreen = ({ navigation }) => {
       ...SettingStyles.horizontalLine, 
       ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine, 
     },
+    themeOption:{
+      ...SettingStyles.themeOption, 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.themeOption : ArabicLanguage.themeOption ),
+    },
+    togglePadding:{
+      ...SettingStyles.togglePadding, 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.togglePadding : ArabicLanguage.togglePadding ),
+    },
+    toggleContainer:{
+      ...SettingStyles.toggleContainer, 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.toggleContainer : ArabicLanguage.toggleContainer ),
+    },
+    textColorToggle:{
+      ...SettingStyles.textColorToggle, 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.textColorToggle : ArabicLanguage.textColorToggle ),
+      ...selectedTheme  === 'dark'? themeStyles.textColorToggle : themeStyles.textColorToggle,
+    },
   };
   //#endregion
-
+  
+  
+  const AutoSystemTheme = selectedLanguage != "Arabic" ? "System Theme" : "تلقائي";
+  const LightSystemTheme = selectedLanguage != "Arabic" ? "Light Theme" : "فاتح";
+  const DarkSystemTheme = selectedLanguage != "Arabic" ? "Dark Theme" : "داكن";
   //#region redering ThemItem
   const themes = [
-    { label: 'تلقائي', value: 'system' },
-    { label: 'فاتح', value: 'light' },
-    { label: 'داكن', value: 'dark' },
+    { label: AutoSystemTheme, value: 'system' },
+    { label: LightSystemTheme, value: 'light' },
+    { label: DarkSystemTheme, value: 'dark' },
   ];
 
   const renderThemeItem = ({ item, index }) => (
@@ -150,11 +243,53 @@ const SettingScreen = ({ navigation }) => {
     </TouchableOpacity>
   );
 
+  const systemFontLabel = selectedLanguage != "Arabic" ? "System Font" : "خط النظام";
+  const QuranFontLabel = selectedLanguage != "Arabic" ? "Times Font" : "خط القران";
+  const HafsFontLabel = selectedLanguage != "Arabic" ? "lexend Font" : "خط حفص";
+
+  // useEffect(() => {
+    // if (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") {
+    //   selectedFont="Montserrat";
+    // }else if (selectedLanguage === "English" && selectedFont === "MeQuran") {
+    //   selectedFont="TimesRoman";
+    // } else if (selectedLanguage === "English" && selectedFont === "Hafs") {
+    //   selectedFont="lexend";
+    // }else{
+    //   selectedFont;
+    // }
+
+
+  //   } if (selectedLanguage === "Arabic" && selectedFont === "Montserrat") {
+  //     setFont("ScheherazadeNew");
+  //   } else if (selectedFont === "TimesRoman") {
+  //     setFont("MeQuran");
+  //   } else if (selectedFont === "lexend"){
+  //     setFont("Hafs");
+  //   }
+
+  //   if (selectedLanguage === "Arabic" && selectedFont === "ScheherazadeNew") {
+  //     setFont("ScheherazadeNew");
+  //   } else if (selectedFont === "MeQuran") {
+  //     setFont("MeQuran");
+  //   } else if (selectedFont === "lexHafsend"){
+  //     setFont("Hafs");
+  //   }
+
+  //   if (selectedLanguage === "English" && selectedFont === "Montserrat") {
+  //     setFont("Montserrat");
+  //   }else if (selectedFont === "TimesRoman") {
+  //     setFont("TimesRoman");
+  //   }else if (selectedFont === "lexend") {
+  //     setFont("lexend");
+  //   }
+  // }, [selectedLanguage]);
+
+
   //#region renderingFontitem
   const fontOptions = [
-    { label: 'خط النظام', value: 'ScheherazadeNew' },
-    { label: 'خط القران', value: 'MeQuran' },
-    { label: 'خط حفص ', value: 'Hafs' },
+    { label: systemFontLabel, value: "ScheherazadeNew" },
+    { label: QuranFontLabel, value: "MeQuran" },
+    { label: HafsFontLabel, value: "Hafs" },
   ];
 
   const renderFontItem = ({ item, index }) => (
@@ -178,76 +313,125 @@ const SettingScreen = ({ navigation }) => {
     </View>
   );
   //#endregion
+
+
+    //#region renderLanguageItem
+    const LanguageOptions = [
+      { label: 'العربية', value: 'Arabic' },
+      { label: 'English', value: 'English' },
+    ];
+    const renderLanguageItem = ({ item, index }) => (
+      <View>
+        <TouchableOpacity
+          style={styles.themeOption}
+          onPress={() => {
+          setLanguage(item.value);
+          selectedLanguage != "Arabic" ? navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }], 
+          })  
+          :navigation.reset({
+          index: 0,
+          routes: [{ name: 'الأذكار' }], 
+          });
+        }}
+          activeOpacity={0.7}
+          
+        >
+          <View style={[styles.themeCircle,{borderColor:selectedColor}]}>
+            {selectedLanguage === item.value && (
+              <View style={[styles.selectedCircle,{backgroundColor:selectedColor}]}></View>
+            )}
+          </View>
+          <Text style={styles.textColor}>{item.label}</Text>
+        </TouchableOpacity>
+        {index !== LanguageOptions.length - 1 && <View style={styles.horizontalLine}></View>}
+      </View>
+    );
+    //#endregion
   
   return (
-    <View style={[styles.container]}>
-      <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
-      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
-      <Text style={styles.HeadertextColor}>المظهر</Text>
-      </View>
+    <View style={styles.pageContainer}>  
+      <ScrollView 
+      contentContainerStyle={styles.container}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
+        <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Theme" : "المظهر"}</Text>
+        </View>
+        <View style={styles.rectangle}>
+          <View style={styles.themeOptionsContainer}>
+            <FlatList
+              data={themes}
+              renderItem={renderThemeItem}
+              keyExtractor={(item) => item.value}
+              extraData={selectedTheme}
+              scrollEnabled={false} // Set scrollEnabled to false to make it not scrollable
+            />
+          </View>
+        </View>
+        <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Font" : "خط العرض"}</Text>
+        </View>
+        <View style={styles.rectangle}>
+          <View style={styles.fontOptionsContainer}>
+            <FlatList
+              data={fontOptions}
+              renderItem={renderFontItem}
+              keyExtractor={(item) => item.value}
+              extraData={selectedFont}
+              scrollEnabled={false} 
+            />
+          </View>
+        </View>
+        <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Language" : "لغة العرض"}</Text>
+        </View>
+        <View style={styles.rectangle}>
+          <View style={styles.fontOptionsContainer}>
+            <FlatList
+              data={LanguageOptions}
+              renderItem={renderLanguageItem}
+              keyExtractor={(item) => item.value}
+              extraData={selectedFont}
+              scrollEnabled={false} 
+            />
+          </View>
+        </View>
+        <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Color" : "لون التطبيق"}</Text>
+        </View>
       <View style={styles.rectangle}>
-        <View style={styles.themeOptionsContainer}>
+        <View style={styles.colorOptionsContainer}>
           <FlatList
-            data={themes}
-            renderItem={renderThemeItem}
+            data={colorOptions}
+            renderItem={renderColorItem}
             keyExtractor={(item) => item.value}
-            extraData={selectedTheme}
-            scrollEnabled={false} // Set scrollEnabled to false to make it not scrollable
+            horizontal={true} // Display colors in a horizontal row
+            scrollEnabled={false}
           />
         </View>
       </View>
-      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
-      <Text style={styles.HeadertextColor}>خط العرض</Text>
+      <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
+      <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Numbers Style" : "نظام الارقام"}</Text>
       </View>
-      <View style={styles.rectangle}>
-        <View style={styles.fontOptionsContainer}>
-          <FlatList
-            data={fontOptions}
-            renderItem={renderFontItem}
-            keyExtractor={(item) => item.value}
-            extraData={selectedFont}
-            scrollEnabled={false} 
-          />
+        <View style={styles.rectangle}>
+          <View style={styles.toggleContainer}>
+            <Text style={[styles.textColorToggle]}>
+              {
+                convertToEasternArabicNumerals('0123456789') 
+                }
+            </Text>
+            <Switch
+            style={styles.togglePadding}
+              value={state.isArabicNumbers}
+              onValueChange={toggleSwitch}
+              thumbColor={state.isArabicNumbers ? '#fefffe' : '#fefffe'}
+              trackColor={{ true: selectedColor, false: '#454545' }}
+            />
+          </View>
         </View>
-      </View>
-      <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
-      <Text style={styles.HeadertextColor}>لون التطبيق</Text>
-      </View>
-    <View style={styles.rectangle}>
-      <View style={styles.colorOptionsContainer}>
-        <FlatList
-          data={colorOptions}
-          renderItem={renderColorItem}
-          keyExtractor={(item) => item.value}
-          horizontal={true} // Display colors in a horizontal row
-          scrollEnabled={false}
-        />
-      </View>
-    </View>
-    <View style={[styles.wrapHeaderText,{ alignItems:"flex-end",}]}>
-    <Text style={styles.HeadertextColor}>نظام الارقام</Text>
-    </View>
-      <View style={styles.rectangle}>
-        <View style={[{     
-                  flexDirection: "row-reverse",
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginVertical: 5,
-                  height:50}]}>
-          <Text style={[styles.textColor,{paddingRight:22}]}>
-            {
-               convertToEasternArabicNumerals('0123456789') 
-              }
-          </Text>
-          <Switch
-          style={[{marginLeft:10}]}
-            value={state.isArabicNumbers}
-            onValueChange={toggleSwitch}
-            thumbColor={state.isArabicNumbers ? '#fefffe' : '#fefffe'}
-            trackColor={{ true: selectedColor, false: '#454545' }}
-          />
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

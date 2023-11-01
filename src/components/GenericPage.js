@@ -14,7 +14,8 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
-import {useNumberContext } from '../context/NumberContext'
+import { useNumberContext } from '../context/NumberContext'
+import { useLanguage } from "../context/LanguageContext";
 import { GenericStyles } from "../context/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,28 +24,11 @@ import { Appearance } from 'react-native';
 const GenericPage = ({ route }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
-    const { selectedColor, setColor } = useColor();
+    const { selectedColor} = useColor();
     const systemTheme = selectedTheme === 'system';
     const { state, convertToEasternArabicNumerals } = useNumberContext(); 
-    
+    const { selectedLanguage } = useLanguage();
 
-    //#region selectedFont
-    const HafsFont = StyleSheet.create({
-        title:{
-            fontFamily:"Hafs",
-        }
-    });
-    const ScheherazadeNewFont = StyleSheet.create({
-        title:{
-            fontFamily:"ScheherazadeNew",
-        }
-    });
-    const MeQuranFont = StyleSheet.create({
-        title:{
-            fontFamily:"MeQuran",
-        }
-    });
-    //#endregion
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -68,7 +52,6 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#fefffe",
-            shadowColor: "white",
         },
         title: {
             color: "#000",
@@ -83,7 +66,6 @@ const GenericPage = ({ route }) => {
             color: "#f2b784",
         },
         ControlPaneBackground: {
-            shadowColor: "white",
         },
         horizontalLine: {
             borderColor: "#f2f2f6",
@@ -113,7 +95,6 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#262626",
-            shadowColor: "black",
         },
         title: {
             color: "white",
@@ -128,7 +109,6 @@ const GenericPage = ({ route }) => {
             color: "#f2b784",
         },
         ControlPaneBackground: {
-            shadowColor: "black",
         },
         horizontalLine: {
             borderColor: "#151515",
@@ -175,7 +155,6 @@ const GenericPage = ({ route }) => {
         title: {
             ...GenericStyles.title,
             ...(selectedTheme  === 'dark'? themeStyles.title : themeStyles.title),
-            ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
         },
         description: {
             ...GenericStyles.description,
@@ -212,6 +191,7 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
+
     const ControlPaneBackgroundImage = systemTheme
     ? Appearance.getColorScheme() === 'dark'
     ? require("../../assets/HeaderBackground.jpg")
@@ -233,8 +213,8 @@ const GenericPage = ({ route }) => {
         const subItemName = item.subItems[currentIndex].subItemDescription;
         const subItemDescription = item.subItems[currentIndex].subItemName;
         // Remove non-printable characters and control characters
-        const sanitizedDescription = subItemDescription.replace(/[-~]+/g, "");
-        const sanitizedName = subItemName.replace(/[-~]+/g, "");
+        const sanitizedDescription = selectedLanguage != "Arabic" ? subItemDescription :  subItemDescription.replace(/[-~]+/g, "")
+        const sanitizedName = selectedLanguage != "Arabic" ? subItemName : subItemName.replace(/[-~]+/g, "")
         console.log(
             "sanitized subItemDescription length is:",
             sanitizedDescription.length
@@ -428,23 +408,75 @@ const GenericPage = ({ route }) => {
                         showsVerticalScrollIndicator={false}
                     >
                     <TouchableOpacity activeOpacity={1}>
-                        <Text style={[styles.title, { fontSize: MaxFontSizeDescription }]}>
+                        <Text style={[styles.title, { fontSize: MaxFontSizeDescription,
+                        fontFamily: (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") ? "Montserrat" :
+                                    (selectedLanguage === "English" && selectedFont === "MeQuran") ? "TimesRoman" :
+                                    (selectedLanguage === "English" && selectedFont === "Hafs") ? "lexend" :
+                                    selectedFont,
+                        textAlign:  selectedLanguage != "Arabic"? "left":"center"}]}>
                         {subItemNameToDisplay = state.isArabicNumbers
                                 ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemName.toString())
                                 : item.subItems[currentIndex].subItemName.toString()}
                         </Text>
                         </TouchableOpacity>
-                    </ScrollView>
-                    
-
+                        </ScrollView>
+                        {selectedLanguage != "Arabic" ? (
+                            <View style={styles.horizontalLine} />
+                        ) : (
+                            null
+                        )}
+                        {selectedLanguage != "Arabic" ? (
+                            <Text style={[styles.TranslationDescription,{fontSize:14,}]}>Translation:</Text>
+                        ) : (
+                            null
+                        )}
+                        {selectedLanguage != "Arabic" ? (
+                        <ScrollView
+                            contentContainerStyle={styles.scrollContainer}
+                            showsVerticalScrollIndicator={false}
+                        >
+                        <TouchableOpacity activeOpacity={1}>
+                            
+                        <Text style={[styles.description,{fontSize:14,textAlign:selectedLanguage != "arabic"?  "left" : "center",
+                        fontFamily: (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") ? "Montserrat" :
+                                    (selectedLanguage === "English" && selectedFont === "MeQuran") ? "TimesRoman" :
+                                    (selectedLanguage === "English" && selectedFont === "Hafs") ? "lexend" :
+                                    selectedFont}]}>
+                            {subItemDescriptionToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemTranslation.toString())
+                                : item.subItems[currentIndex].subItemTranslation.toString()}
+                        </Text>
+                        </TouchableOpacity>
+                        </ScrollView>
+                        ) : (
+                            null
+                        )}
                         <View style={styles.horizontalLine} />
+
                         <Text allowFontScaling={false} style={styles.description}>
                             {subItemDescriptionToDisplay = state.isArabicNumbers
                                 ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemDescription.toString())
                                 : item.subItems[currentIndex].subItemDescription.toString()}
                         </Text>
-                        <Text 
+                        {selectedLanguage != "Arabic" ? (
+                            <Text 
                         allowFontScaling={false} style={styles.InfoReptTimeIndex}>
+                            No:{" "}
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
+                                {indexToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals((currentIndex + 1).toString())
+                                : (currentIndex + 1).toString()}
+                            </Text>{"  "}
+                            Of:{" "}
+                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
+                                {totalItemsToDisplay = state.isArabicNumbers
+                                ? convertToEasternArabicNumerals(item.subItems.length.toString())
+                                : item.subItems.length.toString()}
+                            </Text>
+                        </Text>
+                        ) : (
+                            <Text 
+                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{}]}>
                             الذكر{" "}
                             <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
                                 {indexToDisplay = state.isArabicNumbers
@@ -458,6 +490,7 @@ const GenericPage = ({ route }) => {
                                 : item.subItems.length.toString()}
                             </Text>
                         </Text>
+                        )}
                         <Text allowFontScaling={false} style={[styles.InfoReptTime,{color:selectedColor}]}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
@@ -498,17 +531,28 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                             <View style={[styles.button,{borderColor:selectedColor}]}>
+                             <View style={[styles.button,{borderColor:selectedColor,position:"relative"}]}>
                                 {/*next button here button here*/}
                                 <FontAwesomeIcon
                                     name="angle-left"
                                     size={24}
                                     color="#454545"
-                                    style={styles.icon}
+                                    style={[styles.icon,{position:"absolute",left: selectedLanguage!="Arabic"?10:15,top:"45%"}]}
                                 />
-                                <Text allowFontScaling={false} style={styles.textcount}>
-                                    الذكر التالي
+                                {selectedLanguage != "Arabic" ? (
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
+                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
+                                        (selectedFont === "Hafs") ? "lexend" :
+                                        selectedFont}]}>
+                                    Next Thikir
                                 </Text>
+                                ) : (
+                                    <Text allowFontScaling={false} style={styles.textcount}>
+                                            الذكر التالي
+                                        </Text>
+                                )}
+
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -535,14 +579,25 @@ const GenericPage = ({ route }) => {
                         >
                             <View style={[styles.button,{borderColor:selectedColor}]}>
                                 {/*back button here*/}
-                                <Text allowFontScaling={false} style={styles.textcount}>
+                                {selectedLanguage != "Arabic" ? (
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
+                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
+                                        (selectedFont === "Hafs") ? "lexend" :
+                                        selectedFont}]}>
+                                    Back Thikir
+                                </Text>
+                                ) : (
+                                    <Text allowFontScaling={false} style={styles.textcount}>
                                     الذكر السابق
                                 </Text>
+                                )}
+
                                 <FontAwesomeIcon
                                     name="angle-right"
                                     size={24}
                                     color="#454545"
-                                    style={styles.icon}
+                                    style={[styles.icon,{position:"absolute",right: selectedLanguage!="Arabic"?10:15,top:"45%"}]}
                                 />
                             </View>
                         </TouchableWithoutFeedback>

@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Switch, StyleSheet, Platform  } from "react-native";
+
+  import { View, Text, TouchableOpacity, Switch, StyleSheet, Platform, Dimensions,} from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { ThikirAlarmStyles } from '../context/commonStyles';
-import {useNumberContext } from '../context/NumberContext';
+import { useNumberContext } from '../context/NumberContext';
+import { useLanguage } from "../context/LanguageContext";
 import { Appearance } from 'react-native';
-
+const {width} = Dimensions.get("window");
 
 const ThikirAlarmScreen = () => {
   const { selectedTheme } = useTheme();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
+  const { selectedLanguage } = useLanguage();
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system'; 
   //#region LightTheme
@@ -24,7 +26,6 @@ const ThikirAlarmScreen = () => {
     },
     notificationContainer: {
       backgroundColor: "#fefffe",
-      shadowColor: "white",
     },
     title: {
       color: "#000",
@@ -42,7 +43,6 @@ const ThikirAlarmScreen = () => {
     },
     notificationContainer: {
       backgroundColor: "#262626",
-      shadowColor: "#262626",
     },
     title: {
       color: "#dddddd",
@@ -59,7 +59,58 @@ const ThikirAlarmScreen = () => {
     : selectedTheme === 'dark'
     ? darkTheme
     : lightTheme;
-
+    //#region ArabicLanguage
+    const ArabicLanguage = StyleSheet.create({
+      notificationContainer: {
+        flexDirection: "row-reverse",
+      },
+      horizontalLineWrapper: {
+        marginLeft: width > 600 ? 610 : 350,
+      },
+      leftContent: {
+        alignItems: "flex-end",
+      },
+      rightContent: {
+        alignItems: "flex-start",
+        paddingLeft: 10,
+      },
+      title: {
+        textAlign: "right",
+        marginRight: 10,
+      },
+      time: {
+        marginRight: 10,
+        textAlign: "right",
+      },
+    });
+    //#endregion
+  
+    //#region EnglishLanguage
+    const EnglishLanguage = StyleSheet.create({
+      notificationContainer: {
+        flexDirection: "row",
+      },
+      horizontalLineWrapper: {
+        marginRight: width > 600 ? 610 : 350,
+      },
+      leftContent: {
+        alignItems: "flex-start",
+      },
+      rightContent: {
+        alignItems: "flex-end",
+        paddingRight: 10,
+      },
+      title: {
+        textAlign: "left",
+        marginLeft: 10,
+      },
+      time: {
+        marginLeft: 10,
+        textAlign: "left",
+      },
+    });
+    //#endregion
+  
   //#region StyleMapping
   const styles = {
     ...ThikirAlarmStyles,
@@ -70,43 +121,71 @@ const ThikirAlarmScreen = () => {
     notificationContainer: {
       ...ThikirAlarmStyles.notificationContainer,
       ...selectedTheme  === 'dark'? themeStyles.notificationContainer : themeStyles.notificationContainer,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.notificationContainer : ArabicLanguage.notificationContainer )
     },
     title: {
       ...ThikirAlarmStyles.title,
       ...selectedTheme  === 'dark'? themeStyles.title : themeStyles.title,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.title : ArabicLanguage.title )
     },
     horizontalLineWrapper: {
       ...ThikirAlarmStyles.horizontalLineWrapper,
       ...selectedTheme  === 'dark'? themeStyles.horizontalLineWrapper : themeStyles.horizontalLineWrapper,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLineWrapper : ArabicLanguage.horizontalLineWrapper )
+    },
+    leftContent:{
+      ...ThikirAlarmStyles.leftContent,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.leftContent : ArabicLanguage.leftContent )
+    },
+    rightContent:{
+      ...ThikirAlarmStyles.rightContent,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.rightContent : ArabicLanguage.rightContent )
+    },
+    time:{
+      ...ThikirAlarmStyles.time,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.time : ArabicLanguage.time )
     },
   };
   //#endregion
-  
+  const thikirSleepTranslationTitle = selectedLanguage != "Arabic" ? "Sleeping Remembrance" : "أذكار النوم";
+  const thikirWakeupTranslationTitle = selectedLanguage != "Arabic" ? "Waking up Remembrance" :  "أذكار الاستيقاظ من النوم";
+  const thikirMorningTranslationTitle = selectedLanguage != "Arabic" ? "Morning Remembrance" :"أذكار الصباح";
+  const thikirEveningTranslationTitle = selectedLanguage != "Arabic" ? "Evening Remembrance" : "أذكار المساء";
+
+
+  const thikirSleepTranslationBody = selectedLanguage != "Arabic" ? "In Your name my Lord, I lie down and in Your name I rise, so if You should take my soul then have mercy upon it, and if You should return my soul then protect it in the manner You do so with Your righteous servants." :
+    "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِن أَمْسَكْتَ نَفْسِي فارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا، بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ";
+  const thikirWakeupTranslationBody = selectedLanguage != "Arabic" ? "All praise is for Allah who gave us life after having taken it from us and unto Him is the resurrection." :
+    "الْحَمْدُ للَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ";
+  const thikirMorningTranslationBody = selectedLanguage != "Arabic" ? "O Allah, by your leave we have reached the morning and by Your leave we have reached the evening, by Your leave we live and die and unto You is our resurrection." :
+    "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا ، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ";
+  const thikirEveningTranslationBody = selectedLanguage != "Arabic" ? "O Allah, what blessing I or any of Your creation have risen upon, is from You alone, without partner, so for You is all praise and unto You all thanks." :
+    "اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير";
   //#region notification structure
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState([
     {
-      title: "أذكار النوم",
-      body: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِن أَمْسَكْتَ نَفْسِي فارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا، بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ",
+      title: thikirSleepTranslationTitle,
+      body: thikirSleepTranslationBody,
       id: "thikir_sleep",
       isActive: true,
     },
     {
-      title: "أذكار الاستيقاظ من النوم",
-      body: "الْحَمْدُ للَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ",
+      title: thikirWakeupTranslationTitle,
+      body: thikirWakeupTranslationBody ,
       id: "thikir_wakeup",
       isActive: true,
     },
     {
-      title: "أذكار الصباح",
-      body: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا ، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+      title: thikirMorningTranslationTitle,
+      body: thikirMorningTranslationBody ,
       id: "thikir_morning",
       isActive: true,
     },
     {
-      title: "أذكار المساء",
-      body: "اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير",
+      title: thikirEveningTranslationTitle,
+      body: thikirEveningTranslationBody,
       id: "thikir_evening",
       isActive: true,
     },
@@ -314,7 +393,9 @@ const ThikirAlarmScreen = () => {
           >
             <View style={[styles.notificationContainer, renderBorderRadius(index),]}>
               <View style={styles.leftContent}>
-                <Text allowFontScaling={false} style={styles.title}>{notification.title}</Text>
+                <Text   numberOfLines={1}
+                        ellipsizeMode="tail" 
+                        allowFontScaling={false} style={[styles.title,{fontFamily: selectedLanguage!= "Arabic" ? "Montserrat" : "ScheherazadeNewBold"}]}>{notification.title}</Text>
                 <Text allowFontScaling={false} style={styles.time}>
                     {TimeToDisplay = state.isArabicNumbers
                     ? convertToEasternArabicNumerals(notification.date
@@ -325,7 +406,7 @@ const ThikirAlarmScreen = () => {
                     : formatTime(getDefaultTime(notification.id)).toString()}
                 </Text>
               </View>
-              <View style={styles.middleContent}></View>
+              {/* <View style={styles.middleContent}></View> */}
               <View style={styles.rightContent}>
                 <Switch
                   value={notification.isActive}
