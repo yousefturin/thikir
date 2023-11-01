@@ -218,7 +218,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Favorite Supplications"): navigation.navigate("الأذكار المفضلة")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Favorite"): navigation.navigate("الأذكار المفضلة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
