@@ -44,6 +44,8 @@ const App = () => {
         Hafs: require("./assets/fonts/Hafs.ttf"),
         MeQuran: require("./assets/fonts/MeQuran.ttf"),
         Montserrat: require("./assets/fonts/Montserrat-Regular.ttf"),
+        TimesRoman: require("./assets/fonts/TimesRoman-Regular.ttf"),
+        lexend: require("./assets/fonts/Lexend-Regular.ttf")
       });
       setFontLoaded(true);
     }
