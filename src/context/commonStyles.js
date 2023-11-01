@@ -21,8 +21,6 @@ export const MainStyles = StyleSheet.create({
     backgroundColor: "#454545",
     borderRadius: 10,
     padding: 5,
-    marginRight: 5,
-    
   },
   nameWrapper: {
     width: "70%",
@@ -39,8 +37,6 @@ export const MainStyles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
-    textAlign: "right",
-    marginRight: 20,
     fontFamily: "ScheherazadeNewBold",
   },
   image: {
@@ -48,10 +44,8 @@ export const MainStyles = StyleSheet.create({
     height: 55,
   },
   icon: {
-    marginLeft: 20,
     opacity: 0.5
   },
-  iconleft: {},
   specialIconleft: {
     width: 24,
     height: 24,
@@ -60,7 +54,6 @@ export const MainStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#262626",
     width: 60,
-    marginLeft: 313,
   },
 });
 //#endregion
@@ -345,16 +338,13 @@ export const HomeStyles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#262626",
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
   buttonText: {
     color: "#dddddd",
     fontSize: 18,
-    textAlign: "right",
-    marginLeft: 30,
-    fontFamily: "ScheherazadeNew",
+
   },
   emptyMessage: {
     flex: 1,
@@ -372,13 +362,11 @@ export const HomeStyles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   icon: {
-    marginLeft: 20,
     opacity: 0.5
   },
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: width > 600 ? 610 : 350,
   },
   buttonGrid: {
     paddingTop: 10,
@@ -388,12 +376,12 @@ export const HomeStyles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
+    position:"relative",
   },
   squareButton: {
     width: "48%",
     height: 100,
     backgroundColor: "#262626",
-    alignItems: "flex-end",
     justifyContent: "flex-end",
     paddingBottom: 10,
     marginBottom: 20,
@@ -401,22 +389,18 @@ export const HomeStyles = StyleSheet.create({
   },
   buttonTextTop: {
     color: "#dddddd",
-    fontSize: 18,
-    textAlign: "right",
-    marginRight: 10,
     fontFamily: "ScheherazadeNew",
   },
   iconWrapperTop: {
     alignItems: "flex-end",
-    marginRight: 10,
     marginBottom: 5,
+    position:"absolute",
+    top:10
   },
   TextMidWrapper: {
     flex: 1,
     width: "100%",
     justifyContent: "space-around",
-    alignItems: "flex-end",
-    marginRight: width > 600 ? 60 : 35,
   },
   TextMid: {
     color: "white",
@@ -439,7 +423,6 @@ export const ThikirAlarmStyles = StyleSheet.create({
     alignItems: "center",
   },
   notificationContainer: {
-    flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-evenly",
     backgroundColor: "#262626",
@@ -450,33 +433,24 @@ export const ThikirAlarmStyles = StyleSheet.create({
   leftContent: {
     flexDirection: "column",
     flex: 2,
-    alignItems: "flex-end",
   },
   middleContent: {
     flex: 1,
   },
   rightContent: {
     flex: 1,
-    alignItems: "flex-start",
-    paddingLeft: 10,
   },
   title: {
     color: "#dddddd",
-    textAlign: "right",
     fontSize: 15,
-    marginRight: 10,
-    fontFamily: "ScheherazadeNewBold",
   },
   time: {
     color: "#777",
-    marginRight: 10,
-    textAlign: "right",
     fontSize: 12,
   },
   horizontalLineWrapper: {
     borderBottomWidth: 1,
     borderColor: "#262626",
-    marginLeft: width > 600 ? 610 : 350,
   },
 });
 //#endregion
@@ -516,8 +490,7 @@ export const GenericStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.9,
     borderColor: "#151515",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignContent: "center",
   },
   textcount: {
@@ -553,6 +526,7 @@ export const GenericStyles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontFamily: "ScheherazadeNew",
+
   },
   description: {
     fontSize: 9,
@@ -561,6 +535,16 @@ export const GenericStyles = StyleSheet.create({
     fontFamily: "AmiriFont",
     paddingVertical: 30,
     paddingBottom: 40,
+  },
+  TranslationDescription: {
+    fontSize: 9,
+    textAlign: "center",
+    color: "#767676",
+    fontFamily: "AmiriFont",
+    paddingVertical: 5,
+    paddingBottom: 5,
+    textAlign:"left",
+    width:"100%"
   },
   InfoReptTimeIndex: {
     fontSize: 11,
@@ -621,12 +605,16 @@ export const GenericStyles = StyleSheet.create({
 
 //#region settingStyles
 export const SettingStyles = StyleSheet.create({
+  pageContainer: {
+    flex: 1,
+    backgroundColor: "#151515",
+  },
   container: {
     flexGrow: 1,
     backgroundColor: "#151515",
     justifyContent: "flex-start",
-    paddingTop: 20,
     alignItems: "center",
+    paddingBottom: 80,
   },
   themeOptionsContainer: {
     flexDirection: "row-reverse",
@@ -635,10 +623,9 @@ export const SettingStyles = StyleSheet.create({
     marginVertical: 5,
   },
   themeOption: {
-    
     padding: 14,
     marginBottom: 10,
-    flexDirection: 'row',
+    flexDirection:"row",
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: 4
@@ -690,6 +677,7 @@ export const SettingStyles = StyleSheet.create({
   textColor: {
     paddingRight: 6
   },
+  textColorToggle:{},
   colorOption: {
     margin: 10,
   },
@@ -710,6 +698,15 @@ export const SettingStyles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 3,
+  },
+  togglePadding:{},
+
+  toggleContainer:{
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+    height:50
   },
   checkIcon: {
     position: 'absolute',
