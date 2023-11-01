@@ -16,7 +16,7 @@ const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
