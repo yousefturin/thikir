@@ -167,7 +167,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderRadius: 10, marginBottom: 30, marginTop: 30 },
         ]}
-        onPress={() => navigation.navigate("التذكيرات")}
+        onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Notifications") : navigation.navigate("التذكيرات")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -194,7 +194,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
         ]}
-        onPress={() => navigation.navigate("سبحة")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Glorification"): navigation.navigate("سبحة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -218,7 +218,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("الأذكار المفضلة")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Favorite Supplications"): navigation.navigate("الأذكار المفضلة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
