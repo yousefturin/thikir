@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
@@ -242,7 +241,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("أسماء الله الحسنى")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Names Of Allah"): navigation.navigate("أسماء الله الحسنى")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -318,7 +317,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("القبلة")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Direction of Prayer") : navigation.navigate("القبلة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -347,7 +346,7 @@ const Menu = ({ navigation }) => {
           styles.button,
           { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
         ]}
-        onPress={() => navigation.navigate("دعاء")}
+        onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Invocational") : navigation.navigate("دعاء")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
