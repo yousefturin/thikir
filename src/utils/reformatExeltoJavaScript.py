@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the Excel file into a DataFrame
-df = pd.read_excel('C:/my_file/thikir/assets/dbRAW/testAthkar_db.xlsx')
+df = pd.read_excel('C:/my_file/thikir/assets/testAthkar_db_En.xlsx')
 
 # Initialize variables
 data = []
@@ -24,6 +24,7 @@ for index, row in df.iterrows():
         'repTime': row['repTime'],
         'count': int(row['count']),
         'subItemName': row['subItemName'],
+        # 'subItemTranslation': row['subItemTranslation'] if not pd.isna(row['subItemTranslation']) else '',
         'subItemDescription': row['subItemDescription'] if not pd.isna(row['subItemDescription']) else ''
     }
     current_subitems.append(sub_item)
@@ -47,7 +48,7 @@ for item in data:
 js_code = 'const items = ' + str(combined_data)
 
 # Write the JavaScript code to a .js file
-with open('output_data.js', mode='w', encoding='utf-8') as js_file:
+with open('output_data_en.js', mode='w', encoding='utf-8') as js_file:
     js_file.write(js_code)
 
-print("JavaScript data has been written to 'output_data.js'")
+print("JavaScript data has been written to 'output_data_en.js'")
