@@ -267,7 +267,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("آية")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Verse of Quran") : navigation.navigate("آية")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -292,7 +292,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("حديث")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Hadith") : navigation.navigate("حديث")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
