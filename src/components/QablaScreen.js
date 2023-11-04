@@ -7,6 +7,7 @@ import { Image,
 import { Magnetometer } from "expo-sensors";
 import * as Location from 'expo-location';
 import { useTheme } from "../context/ThemContex";
+import { useLanguage } from "../context/LanguageContext";
 import { QablaScreenStyle } from "../context/commonStyles";
 import { Appearance } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,6 +24,7 @@ const QiblaScreen = () => {
 
 
   const { selectedTheme } = useTheme();
+  const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
 
   const CompassTheme = systemTheme
@@ -113,6 +115,7 @@ const QiblaScreen = () => {
   
       const { coords } = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = coords;
+
   
       // Check if the stored location is equal to the new one
       const storedLocation = await AsyncStorage.getItem('storedLocation');
@@ -280,9 +283,11 @@ const QiblaScreen = () => {
   return (
     <View style={styles.container}>
       {qiblaDirection !== null ? (
-        <Text style={styles.textDirection}> اتجاه القبلة : {Math.round(qiblaDirection)}°</Text>
+        <Text style={[styles.textDirection,{
+          fontFamily:selectedLanguage!="Arabic"?"Montserrat":"AmiriFont"
+        }]}> {selectedLanguage != "Arabic"?"Direction of Qibla:":"اتجاه القبلة :"} {Math.round(qiblaDirection)}°</Text>
       ) : (
-        <Text style={styles.textDirection}>جاري التحميل{loadingDots}</Text>
+        <Text style={styles.textDirection}>  {selectedLanguage != "Arabic"?"Loading":"جاري التحميل"}{loadingDots}</Text>
       )}
       <View style={styles.degreeContainer}>
         <Image

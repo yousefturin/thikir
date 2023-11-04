@@ -6,28 +6,43 @@ const fetchRandomVerse = async () => {
 
     const apiUrlVerse = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForVerse}`;
     const response = await fetch(apiUrlVerse);
-    const editionForTafser = 'ar.muyassar';
-    const apiUrlTafser = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForTafser}`;
-    const responseTafser = await fetch(apiUrlTafser);
 
-    if (!response.ok && !responseTafser.ok) {
+
+    const editionForTafserAR = 'ar.muyassar';
+    const apiUrlTafserAR = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForTafserAR}`;
+    const responseTafserAR = await fetch(apiUrlTafserAR);
+
+
+    const editionForTafserEn = 'en.sahih';
+    const apiUrlTafserEN = `https://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForTafserEn}`
+    const responseTafserEN = await fetch(apiUrlTafserEN);
+
+
+
+    if (!response.ok && !responseTafserAR.ok && !responseTafserEN.ok) {
       throw new Error('Failed to fetch data for Verse');
     }
 
-    const tafsirResponse = await responseTafser.json(); 
     const data = await response.json();
+    const tafsirResponseAR = await responseTafserAR.json(); 
+    const tafsirResponseEN = await responseTafserEN.json(); 
 
-    if (data?.data?.text && tafsirResponse?.data?.text) {
+
+    if (data?.data?.text && tafsirResponseAR?.data?.text && tafsirResponseEN?.data?.text) {
       // Extract the surah name and ayah number from the response
       const surahName = data.data.surah.name;
+      const surahNameEn = data.data.surah.englishName;
       const ayahNumber = data.data.numberInSurah;
       const verseText = data.data.text;
-      const tafsirText = tafsirResponse.data.text; 
+      const tafsirTextAR = tafsirResponseAR.data.text; 
+      const tafsirTextEN = tafsirResponseEN.data.text; 
       return {
         surahName,
+        surahNameEn,
         ayahNumber,
         verseText,
-        tafsirText, 
+        tafsirTextAR, 
+        tafsirTextEN,
       };
     } else {
       throw new Error('Invalid response data structure');
@@ -36,9 +51,11 @@ const fetchRandomVerse = async () => {
     console.error('Error fetching Quranic verse:', error);
     return {
       surahName: 'Error',
+      surahNameEn: 'Error',
       ayahNumber: 'Error',
       verseText: 'Error fetching Quranic verse.',
-      tafsirText: 'Error fetching a Tafsir verse',
+      tafsirTextAR: 'Error fetching a Tafsir verse',
+      tafsirTextEN:'Error fetching a English Tafsir verse'
     };
   }
 };

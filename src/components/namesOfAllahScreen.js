@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
@@ -6,21 +6,30 @@ import {
     StyleSheet,
     Image,
     ScrollView,
-    StatusBar,
+    Dimensions,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
+import { useLanguage } from "../context/LanguageContext";
 import { HomeStyles } from "../context/commonStyles";
 import { Appearance } from "react-native";
-
+const {width} = Dimensions.get("window");
 
 const NamesOfAllahScreen = ({ navigation }) => {
-    const jsonContent = require('../db/db_namesOfAllah.json');
-    const items = jsonContent
-
+    
+    const [items, setItems] = useState([]);
+    useEffect(() => {
+      if (selectedLanguage !== "Arabic") {
+        setItems(require('../db/db_namesOfAllahEn.json'));
+      } else {
+        setItems(require('../db/db_namesOfAllah.json'));
+      }
+    }, [selectedLanguage]);
+    
     const { selectedTheme } = useTheme();
-    const { selectedColor, setColor } = useColor();
+    const { selectedColor } = useColor();
+    const { selectedLanguage } = useLanguage();
     const systemTheme = selectedTheme === "system";
 
 
@@ -132,95 +141,193 @@ const NamesOfAllahScreen = ({ navigation }) => {
             ? darkTheme
             : lightTheme;
 
+    //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
+    button: {
+      flexDirection: "row",
+      fontFamily: "ScheherazadeNew",
+    },
+    buttonText: {
+      textAlign: "right",
+      marginLeft: 30,
+      fontFamily: "ScheherazadeNew",
+    },
+    squareButton: {
+      alignItems: "flex-end",
+    },
+    icon: {
+      transform: [{ rotate: 0  + "deg" }],
+      marginLeft: 20,
+    },
+    buttonTextTop: {
+      textAlign: "right",
+      marginRight: 10,
+      fontFamily: "ScheherazadeNew",
+      fontSize: 18,
+    },
+    iconWrapperTop: {
+      right: 10,
+    },
+    TextMidWrapper: {
+      alignItems: "flex-end",
+      marginRight: width > 600 ? 60 : 35,
+    },
+    horizontalLine: {
+      marginLeft: width > 600 ? 610 : 350,
+    },
+    TextMid: {
+      fontFamily:"ScheherazadeNewBold",
+    },
+  });
+  //#endregion
+
+    //#region EnglishLanguage
+   const EnglishLanguage = StyleSheet.create({
+    button: {
+      flexDirection:"row-reverse",
+    },
+    buttonText: {
+      textAlign: "left",
+      marginRight: 30,
+      fontFamily: "Montserrat",
+    },
+    squareButton: {
+      alignItems: "flex-start",
+    },
+    icon: {
+      transform: [{ rotate: 180  + "deg" }],
+      marginRight: 20,
+    },
+    buttonTextTop: {
+      textAlign: "left",
+      marginLeft: 10,
+      fontFamily: "Montserrat",
+      fontSize: 16,
+    },
+    iconWrapperTop: {
+      left: 10,
+    },
+    TextMidWrapper: {
+      alignItems: "flex-start",
+      marginLeft: width > 600 ? 60 : 35,
+    },
+    horizontalLine: {
+      marginRight: width > 600 ? 610 : 350,
+    },
+    TextMid: {
+      fontFamily:"Montserrat",
+    },
+  });
+  //#endregion
+
+
     //#region StylesMapping
-    const styles = {
-        ...HomeStyles,
-        pageContainer: {
-            ...HomeStyles.pageContainer,
-            ...(selectedTheme === "dark"
-                ? themeStyles.pageContainer
-                : themeStyles.pageContainer),
-        },
-        container: {
-            ...HomeStyles.container,
-            ...(selectedTheme === "dark"
-                ? themeStyles.container
-                : themeStyles.container),
-        },
-        TextMid: {
-            ...HomeStyles.TextMid,
-            ...(selectedTheme === "dark" ? themeStyles.TextMid : themeStyles.TextMid),
-        },
-        buttonText: {
-            ...HomeStyles.buttonText,
-            ...(selectedTheme === "dark"
-                ? themeStyles.buttonText
-                : themeStyles.buttonText), // Override button background color
-        },
-        button: {
-            ...HomeStyles.button,
-            ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button), // Override button background color
-        },
-        iconWrapper: {
-            ...HomeStyles.iconWrapper,
-            ...(selectedTheme === "dark"
-                ? themeStyles.iconWrapper
-                : themeStyles.iconWrapper), // Override button background color
-        },
-        horizontalLine: {
-            ...HomeStyles.horizontalLine,
-            ...(selectedTheme === "dark"
-                ? themeStyles.horizontalLine
-                : themeStyles.horizontalLine), // Override button background color
-        },
-        containerSearchMode: {
-            ...HomeStyles.containerSearchMode,
-            ...(selectedTheme === "dark"
-                ? themeStyles.containerSearchMode
-                : themeStyles.containerSearchMode), // Override button background color
-        },
-        searchBarContainer: {
-            ...HomeStyles.searchBarContainer,
-            ...(selectedTheme === "dark"
-                ? themeStyles.searchBarContainer
-                : themeStyles.searchBarContainer), // Override button background color
-        },
-        searchBarInputContainer: {
-            ...HomeStyles.searchBarInputContainer,
-            ...(selectedTheme === "dark"
-                ? themeStyles.searchBarInputContainer
-                : themeStyles.searchBarInputContainer), // Override button background color
-        },
-        searchBarInput: {
-            ...HomeStyles.searchBarInput,
-            ...(selectedTheme === "dark"
-                ? themeStyles.searchBarInput
-                : themeStyles.searchBarInput), // Override button background color
-        },
-        buttonGrid: {
-            ...HomeStyles.buttonGrid,
-            ...(selectedTheme === "dark"
-                ? themeStyles.buttonGrid
-                : themeStyles.buttonGrid), // Override button background color
-        },
-        squareButton: {
-            ...HomeStyles.squareButton,
-            ...(selectedTheme === "dark"
-                ? themeStyles.squareButton
-                : themeStyles.squareButton), // Override button background color
-        },
-        buttonTextTop: {
-            ...HomeStyles.buttonTextTop,
-            ...(selectedTheme === "dark"
-                ? themeStyles.buttonTextTop
-                : themeStyles.buttonTextTop), // Override button background color
-        },
-        iconTop: {
-            ...HomeStyles.iconTop,
-            ...(selectedTheme === "dark" ? themeStyles.iconTop : themeStyles.iconTop), // Override button background color
-        },
-    };
-    //#endregion
+  const styles = {
+    ...HomeStyles,
+    pageContainer: {
+      ...HomeStyles.pageContainer,
+      ...(selectedTheme === "dark"
+        ? themeStyles.pageContainer
+        : themeStyles.pageContainer),
+    },
+    container: {
+      ...HomeStyles.container,
+      ...(selectedTheme === "dark"
+        ? themeStyles.container
+        : themeStyles.container),
+    },
+    TextMid: {
+      ...HomeStyles.TextMid,
+      ...(selectedTheme === "dark" ? themeStyles.TextMid : themeStyles.TextMid),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMid : ArabicLanguage.TextMid )
+    },
+    buttonText: {
+      ...HomeStyles.buttonText,
+      ...(selectedTheme === "dark"
+        ? themeStyles.buttonText
+        : themeStyles.buttonText),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText )
+    },
+    button: {
+      ...HomeStyles.button,
+      ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button), 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button )
+    },
+    iconWrapper: {
+      ...HomeStyles.iconWrapper,
+      ...(selectedTheme === "dark"
+        ? themeStyles.iconWrapper
+        : themeStyles.iconWrapper), 
+    },
+    horizontalLine: {
+      ...HomeStyles.horizontalLine,
+      ...(selectedTheme === "dark"
+        ? themeStyles.horizontalLine
+        : themeStyles.horizontalLine), 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
+    },
+    containerSearchMode: {
+      ...HomeStyles.containerSearchMode,
+      ...(selectedTheme === "dark"
+        ? themeStyles.containerSearchMode
+        : themeStyles.containerSearchMode), 
+    },
+    searchBarContainer: {
+      ...HomeStyles.searchBarContainer,
+      ...(selectedTheme === "dark"
+        ? themeStyles.searchBarContainer
+        : themeStyles.searchBarContainer), 
+    },
+    searchBarInputContainer: {
+      ...HomeStyles.searchBarInputContainer,
+      ...(selectedTheme === "dark"
+        ? themeStyles.searchBarInputContainer
+        : themeStyles.searchBarInputContainer), 
+    },
+    searchBarInput: {
+      ...HomeStyles.searchBarInput,
+      ...(selectedTheme === "dark"
+        ? themeStyles.searchBarInput
+        : themeStyles.searchBarInput), 
+    },
+    buttonGrid: {
+      ...HomeStyles.buttonGrid,
+      ...(selectedTheme === "dark"
+        ? themeStyles.buttonGrid
+        : themeStyles.buttonGrid), 
+    },
+    squareButton: {
+      ...HomeStyles.squareButton,
+      ...(selectedTheme === "dark"
+        ? themeStyles.squareButton
+        : themeStyles.squareButton), 
+        ...(selectedLanguage != "Arabic" ? EnglishLanguage.squareButton : ArabicLanguage.squareButton )
+    },
+    buttonTextTop: {
+      ...HomeStyles.buttonTextTop,
+      ...(selectedTheme === "dark"
+        ? themeStyles.buttonTextTop
+        : themeStyles.buttonTextTop), 
+        ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonTextTop : ArabicLanguage.buttonTextTop )
+    },
+    iconTop: {
+      ...HomeStyles.iconTop,
+      ...(selectedTheme === "dark" ? themeStyles.iconTop : themeStyles.iconTop), 
+    },
+    icon:{
+      ...HomeStyles.icon,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
+    },
+    iconWrapperTop:{
+      ...HomeStyles.iconWrapperTop,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapperTop : ArabicLanguage.iconWrapperTop )
+    },
+    TextMidWrapper:{
+      ...HomeStyles.TextMidWrapper,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMidWrapper : ArabicLanguage.TextMidWrapper )
+    },
+  };
+  //#endregion
 
     //#region Style baed on index
     const renderBorderRadius = (index) => {
@@ -264,7 +371,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
                             style={[styles.button, renderBorderRadius(index),]}
                             onPress={() =>
                                 navigation.navigate("namesOfAllahGenericPage", {
-                                    name: item.name,
+                                    name:selectedLanguage!="Arabic"?item.subItemName_1:item.name,
                                     item: item,
                                     itemIndex: index,
                                 })
@@ -280,7 +387,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
                                 />
                             </View>
                             <View style={styles.nameWrapper}>
-                                <Text style={[styles.buttonText]}>{item.name}</Text>
+                                <Text style={[styles.buttonText]}>{selectedLanguage != "Arabic" ? item.subItemName_1 : item.name}</Text>
                             </View>
                             <View style={styles.imageWrapper}>
                                 {/* Image component */}

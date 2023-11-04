@@ -449,7 +449,7 @@ const TasbihScreen = () => {
                 </TouchableOpacity>
             );
         } else {
-            // Return null for iOS as you mentioned you want to do nothing
+            // Return null for iOS 
             return null;
         }
     };

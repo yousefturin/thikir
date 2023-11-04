@@ -28,7 +28,7 @@ const GenericPage = ({ route }) => {
     const systemTheme = selectedTheme === 'system';
     const { state, convertToEasternArabicNumerals } = useNumberContext(); 
     const { selectedLanguage } = useLanguage();
-
+    console.log(selectedFont);
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -460,7 +460,7 @@ const GenericPage = ({ route }) => {
                         </Text>
                         {selectedLanguage != "Arabic" ? (
                             <Text 
-                        allowFontScaling={false} style={styles.InfoReptTimeIndex}>
+                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{fontFamily: "Montserrat",}]}>
                             No:{" "}
                             <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
                                 {indexToDisplay = state.isArabicNumbers
@@ -476,7 +476,7 @@ const GenericPage = ({ route }) => {
                         </Text>
                         ) : (
                             <Text 
-                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{}]}>
+                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{fontFamily: "AmiriFont",}]}>
                             الذكر{" "}
                             <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
                                 {indexToDisplay = state.isArabicNumbers
@@ -491,7 +491,8 @@ const GenericPage = ({ route }) => {
                             </Text>
                         </Text>
                         )}
-                        <Text allowFontScaling={false} style={[styles.InfoReptTime,{color:selectedColor}]}>
+                        <Text allowFontScaling={false} style={[styles.InfoReptTime,{color:selectedColor,
+                        fontFamily:selectedLanguage!="Arabic"? "Montserrat":"AmiriFont", }]}>
                             {item.subItems[currentIndex].repTime}
                         </Text>
                         <TouchableOpacity
@@ -564,10 +565,10 @@ const GenericPage = ({ route }) => {
                             }
                         >
                             <View style={[styles.circularButton,{ borderColor:selectedColor}]}>
-                                <Text style={styles.textcount}>{countDisplay = state.isArabicNumbers
+                                <Text style={[styles.textcount,{fontFamily:selectedLanguage!="Arabic"? "Montserrat":"ScheherazadeNew",}]}>
+                                {countDisplay = state.isArabicNumbers
                                 ? convertToEasternArabicNumerals(count.toString())
                                 : count.toString()}</Text>
-
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback

@@ -1,23 +1,21 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
-import { useColor } from '../context/ColorContext';
+import { useColor } from "../context/ColorContext";
+import { useLanguage } from "../context/LanguageContext";
 import { handleShare } from "../utils/shareUtils";
-import { useNumberContext } from '../context/NumberContext'
+import { useNumberContext } from "../context/NumberContext";
 import { namesOfAllahGenericPageScreenStyle } from "../context/commonStyles";
 import { Appearance } from "react-native";
-const NamesOfAllahGenericPage = ({ route }) => {
 
+const NamesOfAllahGenericPage = ({ route }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor } = useColor();
-  const systemTheme = selectedTheme === 'system';
+  const { selectedLanguage } = useLanguage();
+
+  const systemTheme = selectedTheme === "system";
   const { state, convertToEasternArabicNumerals } = useNumberContext();
   const { item } = route.params;
   const viewRef = React.useRef();
@@ -27,127 +25,203 @@ const NamesOfAllahGenericPage = ({ route }) => {
   };
   //#endregion
 
-      //#region LightTheme
-      const lightTheme = StyleSheet.create({
-        container: {
-            backgroundColor: "#f2f2f6",
-        },
-        rectangle: {
-            backgroundColor: "#fefffe",
-        },
-        textDescription:{
-          color: "#000",
-        },
-        textDescriptionMain:{
-          color: "#000",
-        },
-        horizontalLine:{
-          borderColor: "#f2f2f6",
-        },
-    });
-    //#endregion
+  //#region LightTheme
+  const lightTheme = StyleSheet.create({
+    container: {
+      backgroundColor: "#f2f2f6",
+    },
+    rectangle: {
+      backgroundColor: "#fefffe",
+    },
+    textDescription: {
+      color: "#000",
+    },
+    textDescriptionMain: {
+      color: "#000",
+    },
+    horizontalLine: {
+      borderColor: "#f2f2f6",
+    },
+  });
+  //#endregion
 
-    //#region DarkTheme
-    const darkTheme = StyleSheet.create({
-      container: {
-          backgroundColor: "#151515",
-      },
-      rectangle: {
-        backgroundColor: "#262626",
+  //#region DarkTheme
+  const darkTheme = StyleSheet.create({
+    container: {
+      backgroundColor: "#151515",
     },
-    textDescription:{
+    rectangle: {
+      backgroundColor: "#262626",
+    },
+    textDescription: {
       color: "#fff",
     },
-    textDescriptionMain:{
+    textDescriptionMain: {
       color: "#fff",
     },
-    horizontalLine:{
+    horizontalLine: {
       borderColor: "#151515",
     },
   });
   //#endregion
 
   const themeStyles = systemTheme
-      ? Appearance.getColorScheme() === "dark"
-          ? darkTheme
-          : lightTheme
-      : selectedTheme === "dark"
-          ? darkTheme
-          : lightTheme;
+    ? Appearance.getColorScheme() === "dark"
+      ? darkTheme
+      : lightTheme
+    : selectedTheme === "dark"
+    ? darkTheme
+    : lightTheme;
 
-
-          //#region StyleMapping
-          const styles = {
-            ...namesOfAllahGenericPageScreenStyle,
-            container: {
-                ...namesOfAllahGenericPageScreenStyle.container,
-                ...(selectedTheme === "dark"
-                    ? themeStyles.container
-                    : themeStyles.container),
-            },
-            rectangle: {
-                ...namesOfAllahGenericPageScreenStyle.rectangle,
-                ...(selectedTheme === "dark" 
-                ? themeStyles.rectangle 
-                : themeStyles.rectangle),
-            },
-            textDescription: {
-                ...namesOfAllahGenericPageScreenStyle.textDescription,
-                ...(selectedTheme === "dark"
-                    ? themeStyles.textDescription
-                    : themeStyles.textDescription), 
-            },
-            textDescriptionMain: {
-                ...namesOfAllahGenericPageScreenStyle.textDescriptionMain,
-                ...(selectedTheme === "dark" ? themeStyles.textDescriptionMain : themeStyles.textDescriptionMain), 
-            },
-            horizontalLine: {
-                ...namesOfAllahGenericPageScreenStyle.horizontalLine,
-                ...(selectedTheme === "dark"
-                    ? themeStyles.horizontalLine
-                    : themeStyles.horizontalLine), 
-            },
-        };
-        //#endregion
-    
-
+  //#region StyleMapping
+  const styles = {
+    ...namesOfAllahGenericPageScreenStyle,
+    container: {
+      ...namesOfAllahGenericPageScreenStyle.container,
+      ...(selectedTheme === "dark"
+        ? themeStyles.container
+        : themeStyles.container),
+    },
+    rectangle: {
+      ...namesOfAllahGenericPageScreenStyle.rectangle,
+      ...(selectedTheme === "dark"
+        ? themeStyles.rectangle
+        : themeStyles.rectangle),
+    },
+    textDescription: {
+      ...namesOfAllahGenericPageScreenStyle.textDescription,
+      ...(selectedTheme === "dark"
+        ? themeStyles.textDescription
+        : themeStyles.textDescription),
+    },
+    textDescriptionMain: {
+      ...namesOfAllahGenericPageScreenStyle.textDescriptionMain,
+      ...(selectedTheme === "dark"
+        ? themeStyles.textDescriptionMain
+        : themeStyles.textDescriptionMain),
+    },
+    horizontalLine: {
+      ...namesOfAllahGenericPageScreenStyle.horizontalLine,
+      ...(selectedTheme === "dark"
+        ? themeStyles.horizontalLine
+        : themeStyles.horizontalLine),
+    },
+  };
+  //#endregion
 
   return (
     <View style={styles.container}>
       <View style={styles.rectangle}>
-        <Text style={[styles.nameDisplay,{ color: selectedColor}]}>
+        <Text style={[styles.nameDisplay, { color: selectedColor,
+            paddingBottom: selectedLanguage!="Arabic"? 0: 20 }]}>
           {item.name}
         </Text>
-        <Text style={[styles.textDescriptionMain,{ fontFamily: selectedFont}]}>
-          {firstDiscription = state.isArabicNumbers
-          ? convertToEasternArabicNumerals(item.subItemName_1.toString())
-                                : item.subItemName_1.toString()}
+        <Text
+          style={[
+            styles.textDescriptionMain,
+            {
+              fontFamily:
+                selectedLanguage === "English" &&
+                selectedFont === "ScheherazadeNew"
+                  ? "Montserrat"
+                  : selectedLanguage === "English" && selectedFont === "MeQuran"
+                  ? "TimesRoman"
+                  : selectedLanguage === "English" && selectedFont === "Hafs"
+                  ? "lexend"
+                  : selectedFont,
+              textAlign: selectedLanguage != "Arabic" ? "left" : "center",
+            },
+          ]}
+        >
+        [ {
+            (firstDiscription = state.isArabicNumbers
+              ? convertToEasternArabicNumerals(item.subItemName_1.toString())
+              : item.subItemName_1.toString())
+          } ]
         </Text>
-        <Text style={[styles.textDescription,{ fontFamily: selectedFont}]}>
-        {secondDiscription = state.isArabicNumbers
-          ? convertToEasternArabicNumerals(item.subItemDescriptionAR.toString())
-                                : item.subItemDescriptionAR.toString()}
+        <Text
+          style={[
+            styles.textDescription,
+            {
+              fontFamily:
+                selectedLanguage === "English" &&
+                selectedFont === "ScheherazadeNew"
+                  ? "MontserratBold"
+                  : selectedLanguage === "English" && selectedFont === "MeQuran"
+                  ? "TimesRoman"
+                  : selectedLanguage === "English" && selectedFont === "Hafs"
+                  ? "lexend"
+                  : selectedFont,
+              textAlign: selectedLanguage != "Arabic" ? "left" : "center",
+              paddingBottom: selectedLanguage != "Arabic" ? 60 : 20,
+            },
+          ]}
+        >
+          {
+            (secondDiscription = state.isArabicNumbers
+              ? convertToEasternArabicNumerals(
+                  item.subItemDescriptionAR.toString()
+                )
+              : item.subItemDescriptionAR.toString())
+          }
         </Text>
+        {selectedLanguage != "Arabic" ? (
+          <Text
+            style={[
+              styles.textDescription,
+              {
+                fontFamily:
+                  selectedLanguage === "English" &&
+                  selectedFont === "ScheherazadeNew"
+                    ? "Montserrat"
+                    : selectedLanguage === "English" &&
+                      selectedFont === "MeQuran"
+                    ? "TimesRoman"
+                    : selectedLanguage === "English" && selectedFont === "Hafs"
+                    ? "lexend"
+                    : selectedFont,
+                textAlign: selectedLanguage != "Arabic" ? "left" : "center",
+              },
+            ]}
+          >
+            {
+              (secondDiscription = state.isArabicNumbers
+                ? convertToEasternArabicNumerals(
+                    item.subItemDescriptionEN.toString()
+                  )
+                : item.subItemDescriptionEN.toString())
+            }
+          </Text>
+        ) : null}
         <View style={styles.horizontalLine} />
-        <Text style={styles.suraNameNumber}>
-        
-            {item.AyaNumber !== null ? `${item.SuraName} ` : `[${item.SuraName}]`} 
-            {AyaNumberToBeDisplayed = state.isArabicNumbers
-              ? (item.AyaNumber !== null ? `﴿${convertToEasternArabicNumerals(item.AyaNumber.toString())}﴾` : null)
-              : (item.AyaNumber !== null ? `﴿${item.AyaNumber.toString()}﴾` : null)}
-        </Text>
+        {selectedLanguage != "Arabic" ? null : (
+          <Text style={styles.suraNameNumber}>
+            {item.AyaNumber !== null
+              ? `${item.SuraName} `
+              : `[${item.SuraName}]`}
+            {
+              (AyaNumberToBeDisplayed = state.isArabicNumbers
+                ? item.AyaNumber !== null
+                  ? `﴿${convertToEasternArabicNumerals(
+                      item.AyaNumber.toString()
+                    )}﴾`
+                  : null
+                : item.AyaNumber !== null
+                ? `﴿${item.AyaNumber.toString()}﴾`
+                : null)
+            }
+          </Text>
+        )}
+
         <TouchableOpacity onPress={Share} style={styles.shareButton}>
           <View style={styles.dotContainer}>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
           </View>
         </TouchableOpacity>
       </View>
     </View>
   );
-
-
-
 };
 export default NamesOfAllahGenericPage;

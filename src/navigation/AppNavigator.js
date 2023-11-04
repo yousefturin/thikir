@@ -137,21 +137,21 @@ const AppNavigator = () => {
     />
     
       <Stack.Screen
-        name="آية"
+        name={selectedLanguage != "Arabic" ?  "Verse of Quran": "آية"}
         component={QuranVerseScreen}
         options={{
           headerStyle: headerStyle,
         }}
       />
       <Stack.Screen
-        name="حديث"
+        name={selectedLanguage != "Arabic" ?  "Hadith": "حديث"}
         component={HadithScreen}
         options={{
           headerStyle: headerStyle,
         }}
       />
       <Stack.Screen
-        name="دعاء"
+        name={selectedLanguage != "Arabic" ?  "Invocational": "دعاء" }
         component={DUAVerseScreen}
         options={{
           headerStyle: headerStyle,
@@ -180,7 +180,7 @@ const AppNavigator = () => {
         })}
       />
       <Stack.Screen
-        name="أسماء الله الحسنى"
+        name={selectedLanguage != "Arabic" ?  "Names Of Allah": "أسماء الله الحسنى" }
         component={namesOfAllahScreen}
         options={{
           headerStyle: headerStyle,
@@ -195,7 +195,7 @@ const AppNavigator = () => {
               style={{
                 color: barColor,
                 fontSize: 18,
-                fontFamily: "ScheherazadeNewBold",
+                fontFamily: selectedLanguage!="Arabic"?"Montserrat":"ScheherazadeNewBold",
               }}
             >
               {route.params?.name || "Default Page Title"}
@@ -212,7 +212,7 @@ const AppNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="القبلة"
+        name={selectedLanguage != "Arabic" ?  "Direction of Prayer": "القبلة"}
         component={QablaScreen}
         options={{
           headerStyle: headerStyle,

@@ -160,7 +160,7 @@ export const DuaVerseStyles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     color: "#767676",
-    fontFamily: "AmiriFont",
+    fontFamily: "Montserrat",
   },
   description: {
     fontSize: 11,
@@ -251,7 +251,6 @@ export const QuranVerseStyles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     color: "#767676",
-    fontFamily: "AmiriFont",
     paddingTop: 20,
     marginBottom: 20,
   },
@@ -496,7 +495,6 @@ export const GenericStyles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 17,
-    fontFamily: "ScheherazadeNew",
     justifyContent: "center",
   },
   icon: {
@@ -539,7 +537,7 @@ export const GenericStyles = StyleSheet.create({
     fontSize: 9,
     textAlign: "center",
     color: "#767676",
-    fontFamily: "AmiriFont",
+    fontFamily: "Montserrat",
     paddingVertical: 5,
     paddingBottom: 5,
     textAlign:"left",
@@ -549,7 +547,6 @@ export const GenericStyles = StyleSheet.create({
     fontSize: 11,
     textAlign: "center",
     color: "#767676",
-    fontFamily: "AmiriFont",
     position: "absolute",
     left: 0,
     bottom: 0,
@@ -559,7 +556,6 @@ export const GenericStyles = StyleSheet.create({
     fontSize: 11,
     textAlign: "center",
     color: "#f2b784",
-    fontFamily: "AmiriFont",
     position: "absolute",
     right: 0,
     bottom: 0,
@@ -783,10 +779,10 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     position: "relative",
     paddingHorizontal: 20,
     paddingVertical: 40,
+    textAlign: "center",
   },
   nameDisplay:{
     fontSize: 42, 
-    paddingBottom: 30,
     fontFamily: "ScheherazadeNew",
     color: "#fff",
   },
@@ -797,7 +793,7 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     paddingBottom: 30
   },
   textDescriptionMain:{
-    fontFamily: "ScheherazadeNew",
+    //fontFamily: "ScheherazadeNew",
     color: "#fff",
     textAlign: "right",
     paddingBottom:20
@@ -1000,7 +996,6 @@ export const QablaScreenStyle  = StyleSheet.create({
     color:"#656565",
     position:"absolute",
     top:"10%",
-    fontFamily:"AmiriFont",
     fontSize:30
   },
   degreeContainer: {
