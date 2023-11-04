@@ -6,8 +6,9 @@ import { handleShare } from "../utils/shareUtils";
 import { useTheme } from '../context/ThemContex'; 
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
+import { useLanguage } from "../context/LanguageContext";
 import { QuranVerseStyles } from '../context/commonStyles';
-import {useNumberContext } from '../context/NumberContext';
+import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 
 const CACHE_KEY = "randomVerseCache";
@@ -17,6 +18,7 @@ const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor } = useColor();
+  const { selectedLanguage } = useLanguage();
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
@@ -105,8 +107,10 @@ const QuranVerseScreen = ({ navigation }) => {
   //#region
   const [verseText, setVerse] = useState("");
   const [surahName, setSurahName] = useState("");
+  const [surahNameEn, setSurahNameEn] = useState("");
   const [ayahNumber, setAyahNumber] = useState("");
   const [tafsir, setTafsir] = useState("");
+  const [EnTafsir, setEnTafsir] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
@@ -130,8 +134,10 @@ const QuranVerseScreen = ({ navigation }) => {
           const {
             verseText: cachedVerse,
             surahName: cachedSurahName,
+            surahNameEn: cachedSurahNameEn,
             ayahNumber: cachedAyahNumber,
-            tafsirText: cachedTafsir,
+            tafsirTextAR: cachedTafsir,
+            tafsirTextEN: cachedEnTafsir,
             timestamp,
           } = parsedData;
           const currentTime = new Date().getTime();
@@ -139,8 +145,10 @@ const QuranVerseScreen = ({ navigation }) => {
             // Use the cached verse if it's not expired
             setVerse(cachedVerse);
             setSurahName(cachedSurahName);
+            setSurahNameEn(cachedSurahNameEn);
             setAyahNumber(cachedAyahNumber);
             setTafsir(cachedTafsir);
+            setEnTafsir(cachedEnTafsir);
             // Calculate the length of the cached verse text and control styles
             const length = cachedVerse.length;
             setVerseTextLength(length);
@@ -166,12 +174,15 @@ const QuranVerseScreen = ({ navigation }) => {
       const {
         verseText: fetchedVerse,
         surahName: fetchedSurahName,
+        surahNameEn: fetchedSurahNameEn,
         ayahNumber: fetchedAyahNumber,
-        tafsirText: fetchedTafsir,
+        tafsirTextAR: fetchedTafsir,
+        tafsirTextEN: fetchedEnTafsir,
       } = await fetchRandomVerse();
       // Set the fetched verse and related information in the component state
       setVerse(fetchedVerse);
       setSurahName(fetchedSurahName);
+      setSurahNameEn(fetchedSurahNameEn);
       setAyahNumber(fetchedAyahNumber);
       setTafsir(fetchedTafsir);
       // Calculate the length of the fetched verse text and control styles
@@ -183,8 +194,10 @@ const QuranVerseScreen = ({ navigation }) => {
       const dataToCache = JSON.stringify({
         verseText: fetchedVerse,
         surahName: fetchedSurahName,
+        surahNameEn: fetchedSurahNameEn,
         ayahNumber: fetchedAyahNumber,
-        tafsirText: fetchedTafsir,
+        tafsirTextAR: fetchedTafsir,
+        tafsirTextEN: fetchedEnTafsir,
         timestamp: currentTime,
       });
       await AsyncStorage.setItem(CACHE_KEY, dataToCache);
@@ -237,8 +250,14 @@ const QuranVerseScreen = ({ navigation }) => {
           : ayahNumber.toString()}﴾
         </Text>
         <View style={styles.horizontalLine} />
-        <Text style={styles.tafsirStyle}>{tafsir}</Text>
-        <Text style={styles.description}>{surahName}</Text>
+        <Text style={[styles.tafsirStyle,
+        {fontFamily:selectedLanguage!="Arabic"? "Montserrat":"AmiriFont",
+        textAlign:selectedLanguage!="Arabic"? "left": "center",
+        }]}>
+        {selectedLanguage!="Arabic"?EnTafsir:tafsir}</Text>
+
+        <Text style={styles.description}>
+        [ {selectedLanguage!= "Arabic"?surahNameEn:surahName} ]</Text>
         </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}
