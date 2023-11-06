@@ -71,7 +71,6 @@ export const AboutStyles = StyleSheet.create({
   appNameText: {
     color: "#fff",
     fontSize: 28,
-    fontFamily: "ScheherazadeNewBold",
     marginTop: 10,
   },
   appVersionText: {
@@ -351,7 +350,6 @@ export const HomeStyles = StyleSheet.create({
     opacity: 0.3
   },
   emptyMessageText: {
-    fontFamily: "ScheherazadeNew",
   },
   image: {
     width: 44,
@@ -685,14 +683,6 @@ export const SettingStyles = StyleSheet.create({
   },
   selectedColorCircle: {
     borderColor: '#EBEAEA',
-    shadowColor: "white",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
   },
   togglePadding:{},
 
