@@ -20,7 +20,6 @@ import { Appearance } from 'react-native';
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
-
   const {selectedLanguage, setLanguage} = useLanguage();
 
   const { selectedFont, setFont } = useFont();
@@ -54,7 +53,10 @@ const SettingScreen = ({ navigation }) => {
     },  
     textColorToggle:{
       color:"#000",
-    }
+    },
+    selectedColorCircle: {
+      borderColor: '#5c5b5b',
+    },
   });
   //#endregion
 
@@ -77,7 +79,10 @@ const SettingScreen = ({ navigation }) => {
     },
     textColorToggle:{
       color:"#fff",
-    }
+    },
+    selectedColorCircle: {
+      borderColor: '#EBEAEA',
+    },
   });
   //#endregion
   
@@ -172,6 +177,10 @@ const SettingScreen = ({ navigation }) => {
       ...(selectedLanguage != "Arabic" ? EnglishLanguage.textColorToggle : ArabicLanguage.textColorToggle ),
       ...selectedTheme  === 'dark'? themeStyles.textColorToggle : themeStyles.textColorToggle,
     },
+    selectedColorCircle:{
+      ...SettingStyles.selectedColorCircle, 
+      ...selectedTheme  === 'dark'? themeStyles.selectedColorCircle : themeStyles.selectedColorCircle, 
+    }
   };
   //#endregion
   
@@ -191,8 +200,10 @@ const SettingScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.themeOption}
         onPress={() => {
-        toggleTheme(item.value);
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+          if (selectedTheme !== item.value) {
+            toggleTheme(item.value);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+        }
       }}
       activeOpacity={0.7}
       >
@@ -212,7 +223,7 @@ const SettingScreen = ({ navigation }) => {
     { label: '#8d5b3c', value: '#8d5b3c' },//Oragish Color
     { label: '#AA767C', value: '#AA767C' },//Pinkish Color
     { label: '#9AB06B', value: '#9AB06B' },//Greenish Color
-    { label: '#495064', value: '#495064' },//Blueish Color
+    { label: '#6081b5', value: '#6081b5' },//Blueish Color
     { label: '#f2b784', value: '#f2b784' },//System Orang Color
   ];
   
@@ -220,8 +231,10 @@ const SettingScreen = ({ navigation }) => {
     <TouchableOpacity
       style={styles.colorOption}
       onPress={() => {
-        setColor(item.value);
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+        if (selectedColor !== item.value) {
+          setColor(item.value);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+        }
       }}
       activeOpacity={0.7}
     >
@@ -297,8 +310,11 @@ const SettingScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.themeOption}
         onPress={() => {
-        setFont(item.value);
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+          if (selectedFont !== item.value) {
+            setFont(item.value);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
+        }
+
       }}
         activeOpacity={0.7}
       >
@@ -325,7 +341,9 @@ const SettingScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.themeOption}
           onPress={() => {
+          if (selectedLanguage !== item.value) {
           setLanguage(item.value);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // Trigger haptic feedback
           selectedLanguage != "Arabic" ? navigation.reset({
           index: 0,
           routes: [{ name: 'Home' }], 
@@ -335,6 +353,7 @@ const SettingScreen = ({ navigation }) => {
           routes: [{ name: 'الأذكار' }], 
           });
         }}
+      }
           activeOpacity={0.7}
           
         >
