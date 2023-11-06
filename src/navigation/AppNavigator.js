@@ -226,7 +226,7 @@ const AppNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="عن البرنامج"
+        name={selectedLanguage != "Arabic" ?  "About us": "عن البرنامج" }
         component={AboutScreen}
         options={{
           headerStyle: headerStyle,
