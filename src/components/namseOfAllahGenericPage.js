@@ -110,7 +110,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
   //#endregion
 
   return (
-    <View style={styles.container}>
+    <View  ref={viewRef} style={styles.container}>
       <View style={styles.rectangle}>
         <Text style={[styles.nameDisplay, { color: selectedColor,
             paddingBottom: selectedLanguage!="Arabic"? 0: 20 }]}>
