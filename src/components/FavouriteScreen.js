@@ -32,9 +32,6 @@ const FavouriteScreen = ({ navigation }) => {
     container: {
       backgroundColor: "#f2f2f6",
     },
-    TextMid: {
-      color: "#000",
-    },
     button: {
       backgroundColor: "#fefffe",
     },
@@ -47,33 +44,9 @@ const FavouriteScreen = ({ navigation }) => {
     horizontalLine: {
       borderColor: "#fefffe",
     },
-    containerSearchMode: {
-      backgroundColor: "#f2f2f6",
-    },
-    searchBarContainer: {
-      backgroundColor: "#f2f2f6",
-    },
-    searchBarInputContainer: {
-      backgroundColor: "#fefffe",
-    },
-    searchBarInput: {
-      backgroundColor: "#fefffe",
-      color: "#dddddd",
-    },
-    buttonGrid: {
-    },
-    squareButton: {
-      backgroundColor: "#fefffe",
-    },
-    buttonTextTop: {
-      color: "#000",
-    },
-    iconTop: {
-      color: "#f2b784",
-    },
     emptyMessageText:{
       color: "#000",
-    }
+    },
   });
   //#endregion
   
@@ -84,9 +57,6 @@ const FavouriteScreen = ({ navigation }) => {
     },
     container: {
       backgroundColor: "#151515",
-    },
-    TextMid: {
-      color: "#fff",
     },
     button: {
       backgroundColor: "#262626",
@@ -99,30 +69,6 @@ const FavouriteScreen = ({ navigation }) => {
     },
     horizontalLine: {
       borderColor: "#262626",
-    },
-    containerSearchMode: {
-      backgroundColor: "#151515",
-    },
-    searchBarContainer: {
-      backgroundColor: "#151515",
-    },
-    searchBarInputContainer: {
-      backgroundColor: "#262626",
-    },
-    searchBarInput: {
-      backgroundColor: "#262626",
-      color: "#dddddd",
-    },
-    buttonGrid: {
-    },
-    squareButton: {
-      backgroundColor: "#262626",
-    },
-    buttonTextTop: {
-      color: "#dddddd",
-    },
-    iconTop: {
-      color: "#f2b784",
     },
     emptyMessageText:{
       color: "#fff",
@@ -148,32 +94,16 @@ const FavouriteScreen = ({ navigation }) => {
       marginLeft: 30,
       fontFamily: "ScheherazadeNew",
     },
-    squareButton: {
-      alignItems: "flex-end",
-    },
     icon: {
       transform: [{ rotate: 0  + "deg" }],
       marginLeft: 20,
     },
-    buttonTextTop: {
-      textAlign: "right",
-      marginRight: 10,
-      fontFamily: "ScheherazadeNew",
-      fontSize: 18,
-    },
-    iconWrapperTop: {
-      right: 10,
-    },
-    TextMidWrapper: {
-      alignItems: "flex-end",
-      marginRight: width > 600 ? 60 : 35,
-    },
     horizontalLine: {
       marginLeft: width > 600 ? 610 : 350,
     },
-    TextMid: {
-      fontFamily:"ScheherazadeNewBold",
-    },
+    emptyMessageText:{
+      fontFamily: "ScheherazadeNew",
+    }
   });
   //#endregion
 
@@ -187,32 +117,16 @@ const FavouriteScreen = ({ navigation }) => {
       marginRight: 30,
       fontFamily: "Montserrat",
     },
-    squareButton: {
-      alignItems: "flex-start",
-    },
     icon: {
       transform: [{ rotate: 180  + "deg" }],
       marginRight: 20,
     },
-    buttonTextTop: {
-      textAlign: "left",
-      marginLeft: 10,
-      fontFamily: "Montserrat",
-      fontSize: 16,
-    },
-    iconWrapperTop: {
-      left: 10,
-    },
-    TextMidWrapper: {
-      alignItems: "flex-start",
-      marginLeft: width > 600 ? 60 : 35,
-    },
     horizontalLine: {
       marginRight: width > 600 ? 610 : 350,
     },
-    TextMid: {
-      fontFamily:"Montserrat",
-    },
+    emptyMessageText:{
+      fontFamily: "Montserrat",
+    }
   });
   //#endregion
 
@@ -228,11 +142,6 @@ const FavouriteScreen = ({ navigation }) => {
     container: {
       ...HomeStyles.container,
       ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container), 
-    },
-    TextMid: {
-      ...HomeStyles.TextMid,
-      ...(selectedTheme  === 'dark'? themeStyles.TextMid : themeStyles.TextMid), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMid : ArabicLanguage.TextMid )
     },
     buttonText: {
       ...HomeStyles.buttonText, 
@@ -253,57 +162,14 @@ const FavouriteScreen = ({ navigation }) => {
       ...(selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine), 
       ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
     },
-    containerSearchMode: {
-      ...HomeStyles.containerSearchMode, 
-      ...(selectedTheme === 'dark'
-        ? themeStyles.containerSearchMode
-        : themeStyles.containerSearchMode), 
-    },
-    searchBarContainer: {
-      ...HomeStyles.horizonsearchBarContainertalLine, 
-      ...(selectedTheme === 'dark'
-        ? themeStyles.searchBarContainer
-        : themeStyles.searchBarContainer), 
-    },
-    searchBarInputContainer: {
-      ...HomeStyles.searchBarInputContainer, 
-      ...(selectedTheme === 'dark'
-        ? themeStyles.searchBarInputContainer
-        : themeStyles.searchBarInputContainer), 
-    },
-    searchBarInput: {
-      ...HomeStyles.searchBarInput, 
-      ...(selectedTheme === 'dark' ? themeStyles.searchBarInput : themeStyles.searchBarInput), 
-    },
-    buttonGrid: {
-      ...HomeStyles.buttonGrid, 
-      ...(selectedTheme === 'dark' ? themeStyles.buttonGrid : themeStyles.buttonGrid), 
-    },
-    squareButton: {
-      ...HomeStyles.squareButton, 
-      ...(selectedTheme === 'dark' ? themeStyles.squareButton : themeStyles.squareButton),
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.squareButton : ArabicLanguage.squareButton ) 
-    },
-    buttonTextTop: {
-      ...HomeStyles.buttonTextTop, 
-      ...(selectedTheme  === 'dark'? themeStyles.buttonTextTop : themeStyles.buttonTextTop), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonTextTop : ArabicLanguage.buttonTextTop )
-    },
-    iconTop: {
-      ...HomeStyles.iconTop, 
-      ...(selectedTheme  === 'dark'? themeStyles.iconTop : themeStyles.iconTop), 
-    },
     icon:{
       ...HomeStyles.icon,
       ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
     },
-    iconWrapperTop:{
-      ...HomeStyles.iconWrapperTop,
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapperTop : ArabicLanguage.iconWrapperTop )
-    },
-    TextMidWrapper:{
-      ...HomeStyles.TextMidWrapper,
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMidWrapper : ArabicLanguage.TextMidWrapper )
+    emptyMessageText:{
+      ...HomeStyles.emptyMessageText,
+      ...(selectedTheme  === 'dark'? themeStyles.emptyMessageText : themeStyles.emptyMessageText), 
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.emptyMessageText : ArabicLanguage.emptyMessageText )
     },
   };
   //#endregion
@@ -375,7 +241,7 @@ const renderBorderRadius = (index) => {
       >
         {clickedIndexes.length === 0 ? ( // Check if clickedIndexes is empty
           <View style={styles.emptyMessage}>
-            <Text  allowFontScaling={false}  style={styles.emptyMessageText}>أضف عناصر إلى قائمة المفضلة</Text>
+            <Text  allowFontScaling={false}  style={styles.emptyMessageText}>{selectedLanguage!="Arabic"?"Add Remembrance to Favourites":"أضف عناصر إلى قائمة المفضلة"}</Text>
           </View>
         ) : (
           clickedIndexes.map((index) => (
