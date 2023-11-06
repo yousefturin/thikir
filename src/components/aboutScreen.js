@@ -2,12 +2,14 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
+import { useLanguage } from "../context/LanguageContext";
 import { AboutStyles } from '../context/commonStyles';
 import { Appearance } from 'react-native';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
-  const { selectedColor, setColor } = useColor();
+  const { selectedColor } = useColor();
+  const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
   
   //#region LightTheme
@@ -92,8 +94,8 @@ const AboutScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("Menu")}
       ></TouchableOpacity>
       <Image source={appIconImage} style={styles.appLogoIcon}></Image>
-      <Text style={styles.appNameText}>المفردون</Text>
-      <Text style={styles.appVersionText}>اﻹصدار: {pkg.version}</Text>
+      <Text style={[styles.appNameText, {fontFamily:selectedLanguage!="Arabic"?"MontserratBold": "ScheherazadeNewBold"}]}>{selectedLanguage!="Arabic"?"AL Mufrdun":"المفردون"}</Text>
+      <Text style={styles.appVersionText}>{selectedLanguage!="Arabic"? "Version:":"اﻹصدار:"} {pkg.version}</Text>
       <View
         style={[
           styles.rectangleWrapper]}
@@ -103,14 +105,31 @@ const AboutScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           >
         <View>
-          <Text style={styles.rectangleText}>
-            اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق
-            <Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
-            قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
-            قال: «<Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
+        {selectedLanguage!="Arabic"? (
 
-            {'\n'}  <Text style={{ fontSize: 16, fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
+          <Text style={[styles.rectangleText,{textAlign:"left",fontSize:16,fontFamily:"Montserrat"}]}>
+
+              The Name is Inspired from Abu Huraira where he reported that Allah's Messenger ﷺ was travelling along the path leading to Mecca that he happened to pass by a mountain called Jumdan. He said:
+              Proceed on, it is Jumdan, 
+              <Text style={{ color: selectedColor, fontFamily: "MontserratBold", }}> Mufarradun </Text>
+              have gone ahead. They (the Companions of the Holy Prophet) said: Allah's Messenger ﷺ, who are Mufarradun? He said: 
+              «<Text style={{ color: selectedColor, fontFamily: "MontserratBold", }}>They are those who remember Allah much</Text>».
+
+              {'\n\n'}  <Text style={{ fontSize: 13, fontFamily: "Montserrat"}}> - ( Sahih Muslim [4/2062] No: [2676])</Text>
+              </Text>
+
+
+          ):(
+            <Text style={styles.rectangleText}>
+
+          اسم التطبيق مستوحى من حديث أبي هريرة رضي الله عنه قال: "كان رسول ﷺ يسير في طريقه إلى مكة، فمرَّ على جبل يقال له جمدان" فقال: «سيروا هذا جمدان، سبق
+          <Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> المُفَرِّدُونَ</Text>».
+          قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
+          قال: «<Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
+
+          {'\n'}  <Text style={{ fontSize: 16, fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
           </Text>
+          )}
         </View>
       </ScrollView>
       </View>
