@@ -28,7 +28,7 @@ const GenericPage = ({ route }) => {
     const systemTheme = selectedTheme === 'system';
     const { state, convertToEasternArabicNumerals } = useNumberContext(); 
     const { selectedLanguage } = useLanguage();
-    console.log(selectedFont);
+
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -115,7 +115,7 @@ const GenericPage = ({ route }) => {
         },
     });
     //#endregion
-  
+
     const themeStyles = systemTheme
     ? Appearance.getColorScheme() === 'dark'
       ? darkTheme
@@ -542,14 +542,12 @@ const GenericPage = ({ route }) => {
                                 />
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
-                                        (selectedFont === "Hafs") ? "lexend" :
-                                        selectedFont}]}>
+                                    fontFamily:  "Montserrat" }]}>
                                     Next Thikir
                                 </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={styles.textcount}>
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily:  "AmiriFont" }]}>
                                             الذكر التالي
                                         </Text>
                                 )}
@@ -582,14 +580,12 @@ const GenericPage = ({ route }) => {
                                 {/*back button here*/}
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
-                                        (selectedFont === "Hafs") ? "lexend" :
-                                        selectedFont}]}>
+                                    fontFamily: "Montserrat" }]}>
                                     Back Thikir
                                 </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={styles.textcount}>
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily: "AmiriFont" }]}>
                                     الذكر السابق
                                 </Text>
                                 )}
