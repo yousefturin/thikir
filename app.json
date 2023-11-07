@@ -18,7 +18,6 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "icon": "./assets/icon.png",
       "infoPlist": {
         "UIBackgroundModes": [
           "remote-notification"
@@ -27,7 +26,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage":  "./assets/splashEntro.png",
         "backgroundColor": "#151515"
       },
       "permissions": ["android.permission.NOTIFICATION"]
