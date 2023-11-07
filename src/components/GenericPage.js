@@ -9,14 +9,14 @@ import {
     ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { useNumberContext } from '../context/NumberContext'
 import { useLanguage } from "../context/LanguageContext";
-import { GenericStyles } from "../context/commonStyles";
+import { GenericStyles } from "../Styles/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Appearance } from 'react-native';
@@ -194,11 +194,11 @@ const GenericPage = ({ route }) => {
 
     const ControlPaneBackgroundImage = systemTheme
     ? Appearance.getColorScheme() === 'dark'
-    ? require("../../assets/HeaderBackground.jpg")
-    : require("../../assets/HeaderBackgroundLight.jpg")
+    ? require("../../assets/Images/HeaderBackground.jpg")
+    : require("../../assets/Images/HeaderBackgroundLight.jpg")
     :selectedTheme === 'dark'
-    ? require("../../assets/HeaderBackground.jpg")
-    : require("../../assets/HeaderBackgroundLight.jpg");
+    ? require("../../assets/Images/HeaderBackground.jpg")
+    : require("../../assets/Images/HeaderBackgroundLight.jpg");
 
     const viewRef = React.useRef();
     //#endregion

@@ -11,7 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getItems } from "../db/GetData";
 import { getEnItems } from "../db/GetDataEn";
-import { HomeStyles } from "../context/commonStyles";
+import { HomeStyles } from "../Styles/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useLanguage } from "../context/LanguageContext";
 import { useColor } from '../context/ColorContext';

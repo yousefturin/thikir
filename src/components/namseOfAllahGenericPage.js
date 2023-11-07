@@ -4,9 +4,9 @@ import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import { useNumberContext } from "../context/NumberContext";
-import { namesOfAllahGenericPageScreenStyle } from "../context/commonStyles";
+import { namesOfAllahGenericPageScreenStyle } from "../Styles/commonStyles";
 import { Appearance } from "react-native";
 
 const NamesOfAllahGenericPage = ({ route }) => {

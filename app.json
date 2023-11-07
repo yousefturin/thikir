@@ -6,10 +6,10 @@
     "description": "Islamic application.",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Images/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splashEntro.png",
+      "image": "./assets/Images/splashEntro.png",
       "resizeMode": "contain",
       "backgroundColor": "#151515"
     },
@@ -26,13 +26,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage":  "./assets/splashEntro.png",
+        "foregroundImage":  "./assets/Images/splashEntro.png",
         "backgroundColor": "#151515"
       },
       "permissions": ["android.permission.NOTIFICATION"]
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/Images/icon.png"
     },
     "extra": {
       "eas": {

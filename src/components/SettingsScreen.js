@@ -13,7 +13,7 @@ import { useColor } from '../context/ColorContext';
 import { useNumberContext } from '../context/NumberContext';
 import { useLanguage } from '../context/LanguageContext';
 import * as Haptics from 'expo-haptics';
-import { SettingStyles } from '../context/commonStyles';
+import { SettingStyles } from '../Styles/commonStyles';
 import Svg, { Path } from "react-native-svg";
 import { Appearance } from 'react-native';
 

@@ -10,9 +10,9 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
-import { MainStyles } from "../context/commonStyles";
+import { MainStyles } from "../Styles/commonStyles";
 import { Appearance } from "react-native";
-import SvgComponent from "../../assets/svgComponents";
+import SvgComponent from "../../assets/Svg/svgComponents";
 
 const Menu = ({ navigation }) => {
   const { selectedTheme } = useTheme();

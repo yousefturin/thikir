@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "reac
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
 import { useLanguage } from "../context/LanguageContext";
-import { AboutStyles } from '../context/commonStyles';
+import { AboutStyles } from '../Styles/commonStyles';
 import { Appearance } from 'react-native';
 var pkg = require('../../package.json');
 const AboutScreen = ({ navigation }) => {
@@ -86,7 +86,7 @@ const AboutScreen = ({ navigation }) => {
   };
   //#endregion
   
-  const appIconImage = require("../../assets/icon.png");
+  const appIconImage = require("../../assets/Images/icon.png");
 
   return (
     <View style={styles.container}>

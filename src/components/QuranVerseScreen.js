@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import { useTheme } from '../context/ThemContex'; 
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { useLanguage } from "../context/LanguageContext";
-import { QuranVerseStyles } from '../context/commonStyles';
+import { QuranVerseStyles } from '../Styles/commonStyles';
 import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 import { useRandomVerse } from "../Service/QuranVerseService";
@@ -160,7 +160,7 @@ const QuranVerseScreen = ({ navigation }) => {
         <View style={styles.horizontalLine} />
         <Text style={[styles.tafsirStyle,
         {fontFamily:selectedLanguage!="Arabic"? "Montserrat":"AmiriFont",
-        textAlign:selectedLanguage!="Arabic"? "left": "center",
+        textAlign:selectedLanguage!="Arabic"? "left": "right",
         }]}>
         {selectedLanguage!="Arabic"?verseData.EnTafsir:verseData.tafsir}</Text>
 

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoadingIndicator from '../utils/loading';
 import { View, ActivityIndicator, Image} from 'react-native';
 
 
@@ -28,7 +27,7 @@ export function LanguageProvider({ children }) {
 
         fetchLanguage();
     }, []);
-    const appIconImage = require("../../assets/splashEntro.png");
+    const appIconImage = require("../../assets/Images/splashEntro.png");
     // Set the selected font
     const setLanguage = (Language) => {
         setSelectedLanguage(Language);

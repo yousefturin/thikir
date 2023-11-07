@@ -8,11 +8,11 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import { useTheme } from '../context/ThemContex'; 
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
-import { QuranVerseStyles } from '../context/commonStyles';
+import { QuranVerseStyles } from '../Styles/commonStyles';
 import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
 
