@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  ScrollView,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
