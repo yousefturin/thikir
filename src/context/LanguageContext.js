@@ -20,7 +20,9 @@ export function LanguageProvider({ children }) {
             } catch (error) {
                 console.error("Error fetching Language:", error);
             }finally {
+                setTimeout(() => {
                 setLoading(false); // Mark loading as complete
+            }, 300); 
             }
         }
 
@@ -48,7 +50,7 @@ export function LanguageProvider({ children }) {
             <View style={{ flex: 1, justifyContent:"flex-start", alignItems: 'center'  }}>
                 <Image
                 source={appIconImage}
-                style={{resizeMode: "cover", width: 400, height: 400 }}
+                style={{resizeMode: "cover", width: 420, height: 420 }}
                 />
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
