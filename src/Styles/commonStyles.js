@@ -71,7 +71,6 @@ export const AboutStyles = StyleSheet.create({
   appNameText: {
     color: "#fff",
     fontSize: 28,
-    fontFamily: "ScheherazadeNewBold",
     marginTop: 10,
   },
   appVersionText: {
@@ -351,7 +350,6 @@ export const HomeStyles = StyleSheet.create({
     opacity: 0.3
   },
   emptyMessageText: {
-    fontFamily: "ScheherazadeNew",
   },
   image: {
     width: 44,
@@ -514,24 +512,33 @@ export const GenericStyles = StyleSheet.create({
   scrollContainer: {
     justifyContent: 'center',
     paddingBottom: 20,
-    paddingTop: 10,
+    paddingTop: 0,
     paddingHorizontal: 10,
     minHeight: 170,
     maxHeight: 2070,
+  },
+  scrollContainerDescription: {
+    justifyContent: 'center',
+    paddingTop: 0,
+    paddingHorizontal: 10,
+    minHeight: 70,
+    maxHeight: 2070,
+    justifyContent:"center",
+    alignItems:"center",
   },
   title: {
     textAlign: "center",
     color: "white",
     fontFamily: "ScheherazadeNew",
-
+    paddingBottom:30
   },
   description: {
     fontSize: 9,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
-    paddingVertical: 30,
-    paddingBottom: 40,
+    paddingBottom:30,
+
   },
   TranslationDescription: {
     fontSize: 9,
@@ -539,9 +546,8 @@ export const GenericStyles = StyleSheet.create({
     color: "#767676",
     fontFamily: "Montserrat",
     paddingVertical: 5,
-    paddingBottom: 5,
     textAlign:"left",
-    width:"100%"
+    width:"100%",
   },
   InfoReptTimeIndex: {
     fontSize: 11,
@@ -685,14 +691,6 @@ export const SettingStyles = StyleSheet.create({
   },
   selectedColorCircle: {
     borderColor: '#EBEAEA',
-    shadowColor: "white",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
   },
   togglePadding:{},
 
@@ -723,6 +721,39 @@ export const ReportProblemStyles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#151515",
+  },
+  cameraContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  cameraView: {
+    justifyContent: 'flex-start',
+    height: 200,
+    width: 300,
+    borderRadius: 10,
+  },
+  inputField: {
+    textAlign:"left",
+    width:300,
+    backgroundColor: 'white',
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+  barcodeDataText: {
+    color: 'white',
+  },
+  barcodeInfoContainer: {
+    paddingTop:30
+  },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#262626",
+    width: '100%',
+  },
+  textBarcode:{
+    fontSize:20
   },
   heading: {
     fontSize: 24,

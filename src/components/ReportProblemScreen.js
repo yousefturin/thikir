@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import * as MailComposer from 'expo-mail-composer';
 import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '../context/ThemContex';
-import { ReportProblemStyles } from '../context/commonStyles';
+import { ReportProblemStyles } from '../Styles/commonStyles';
 import { Appearance } from 'react-native';
 
 const ReportProblemScreen = () => {

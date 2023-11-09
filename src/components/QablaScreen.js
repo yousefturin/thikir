@@ -8,7 +8,7 @@ import { Magnetometer } from "expo-sensors";
 import * as Location from 'expo-location';
 import { useTheme } from "../context/ThemContex";
 import { useLanguage } from "../context/LanguageContext";
-import { QablaScreenStyle } from "../context/commonStyles";
+import { QablaScreenStyle } from "../Styles/commonStyles";
 import { Appearance } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -29,19 +29,19 @@ const QiblaScreen = () => {
 
   const CompassTheme = systemTheme
     ? Appearance.getColorScheme() === 'dark'
-      ? require("../../assets/compass.png")
-      : require("../../assets/compassLightTheme.png")
+      ? require("../../assets/Images/compass.png")
+      : require("../../assets/Images/compassLightTheme.png")
     : selectedTheme === 'dark'
-      ? require("../../assets/compass.png")
-      : require("../../assets/compassLightTheme.png");
+      ? require("../../assets/Images/compass.png")
+      : require("../../assets/Images/compassLightTheme.png");
 
   const CompassPointerTheme = systemTheme
     ? Appearance.getColorScheme() === 'dark'
-      ? require("../../assets/compassQablePointerDark.png")
-      : require("../../assets/compassQablePointerLight.png")
+      ? require("../../assets/Images/compassQablePointerDark.png")
+      : require("../../assets/Images/compassQablePointerLight.png")
     : selectedTheme === 'dark'
-      ? require("../../assets/compassQablePointerDark.png")
-      : require("../../assets/compassQablePointerLight.png");
+      ? require("../../assets/Images/compassQablePointerDark.png")
+      : require("../../assets/Images/compassQablePointerLight.png");
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({

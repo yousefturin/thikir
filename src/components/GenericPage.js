@@ -9,14 +9,14 @@ import {
     ScrollView,
 } from "react-native";
 import * as Haptics from "expo-haptics";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { useNumberContext } from '../context/NumberContext'
 import { useLanguage } from "../context/LanguageContext";
-import { GenericStyles } from "../context/commonStyles";
+import { GenericStyles } from "../Styles/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Appearance } from 'react-native';
@@ -28,7 +28,7 @@ const GenericPage = ({ route }) => {
     const systemTheme = selectedTheme === 'system';
     const { state, convertToEasternArabicNumerals } = useNumberContext(); 
     const { selectedLanguage } = useLanguage();
-    console.log(selectedFont);
+
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -115,7 +115,7 @@ const GenericPage = ({ route }) => {
         },
     });
     //#endregion
-  
+
     const themeStyles = systemTheme
     ? Appearance.getColorScheme() === 'dark'
       ? darkTheme
@@ -194,11 +194,11 @@ const GenericPage = ({ route }) => {
 
     const ControlPaneBackgroundImage = systemTheme
     ? Appearance.getColorScheme() === 'dark'
-    ? require("../../assets/HeaderBackground.jpg")
-    : require("../../assets/HeaderBackgroundLight.jpg")
+    ? require("../../assets/Images/HeaderBackground.jpg")
+    : require("../../assets/Images/HeaderBackgroundLight.jpg")
     :selectedTheme === 'dark'
-    ? require("../../assets/HeaderBackground.jpg")
-    : require("../../assets/HeaderBackgroundLight.jpg");
+    ? require("../../assets/Images/HeaderBackground.jpg")
+    : require("../../assets/Images/HeaderBackgroundLight.jpg");
 
     const viewRef = React.useRef();
     //#endregion
@@ -421,7 +421,7 @@ const GenericPage = ({ route }) => {
                         </TouchableOpacity>
                         </ScrollView>
                         {selectedLanguage != "Arabic" ? (
-                            <View style={styles.horizontalLine} />
+                            <View style={[styles.horizontalLine,{paddingTop:5}]} />
                         ) : (
                             null
                         )}
@@ -432,7 +432,7 @@ const GenericPage = ({ route }) => {
                         )}
                         {selectedLanguage != "Arabic" ? (
                         <ScrollView
-                            contentContainerStyle={styles.scrollContainer}
+                            contentContainerStyle={styles.scrollContainerDescription}
                             showsVerticalScrollIndicator={false}
                         >
                         <TouchableOpacity activeOpacity={1}>
@@ -451,9 +451,9 @@ const GenericPage = ({ route }) => {
                         ) : (
                             null
                         )}
-                        <View style={styles.horizontalLine} />
+                        <View style={[styles.horizontalLine,{paddingTop:5}]} />
 
-                        <Text allowFontScaling={false} style={styles.description}>
+                        <Text allowFontScaling={false} style={[styles.description,{ paddingBottom:50,paddingTop:10}]}>
                             {subItemDescriptionToDisplay = state.isArabicNumbers
                                 ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemDescription.toString())
                                 : item.subItems[currentIndex].subItemDescription.toString()}
@@ -542,14 +542,12 @@ const GenericPage = ({ route }) => {
                                 />
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
-                                        (selectedFont === "Hafs") ? "lexend" :
-                                        selectedFont}]}>
+                                    fontFamily:  "Montserrat" }]}>
                                     Next Thikir
                                 </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={styles.textcount}>
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily:  "AmiriFont" }]}>
                                             الذكر التالي
                                         </Text>
                                 )}
@@ -582,14 +580,12 @@ const GenericPage = ({ route }) => {
                                 {/*back button here*/}
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: (selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                        ( selectedFont === "MeQuran") ? "TimesRoman" :
-                                        (selectedFont === "Hafs") ? "lexend" :
-                                        selectedFont}]}>
+                                    fontFamily: "Montserrat" }]}>
                                     Back Thikir
                                 </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={styles.textcount}>
+                                    <Text allowFontScaling={false} style={[styles.textcount,{
+                                    fontFamily: "AmiriFont" }]}>
                                     الذكر السابق
                                 </Text>
                                 )}

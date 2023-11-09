@@ -7,7 +7,7 @@ import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from '../context/ThemContex';
 import { useColor } from '../context/ColorContext';
-import { ThikirAlarmStyles } from '../context/commonStyles';
+import { ThikirAlarmStyles } from '../Styles/commonStyles';
 import { useNumberContext } from '../context/NumberContext';
 import { useLanguage } from "../context/LanguageContext";
 import { Appearance } from 'react-native';

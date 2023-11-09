@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchRandomVerse } from "../API/GETAyahofQuran";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import { useTheme } from '../context/ThemContex'; 
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { useLanguage } from "../context/LanguageContext";
-import { QuranVerseStyles } from '../context/commonStyles';
+import { QuranVerseStyles } from '../Styles/commonStyles';
 import { useNumberContext } from '../context/NumberContext';
 import { Appearance } from 'react-native';
-
-const CACHE_KEY = "randomVerseCache";
-const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
+import { useRandomVerse } from "../Service/QuranVerseService";
 
 const QuranVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
@@ -22,6 +18,7 @@ const QuranVerseScreen = ({ navigation }) => {
   const { state, convertToEasternArabicNumerals } = useNumberContext(); 
   const systemTheme = selectedTheme === 'system';
 
+  const verseData = useRandomVerse();
 
   //#region selectedFont
   const HafsFont = StyleSheet.create({
@@ -103,139 +100,50 @@ const QuranVerseScreen = ({ navigation }) => {
   },
   };
   //#endregion
-  
-  //#region
-  const [verseText, setVerse] = useState("");
-  const [surahName, setSurahName] = useState("");
-  const [surahNameEn, setSurahNameEn] = useState("");
-  const [ayahNumber, setAyahNumber] = useState("");
-  const [tafsir, setTafsir] = useState("");
-  const [EnTafsir, setEnTafsir] = useState("");
-  const [verseTextLength, setVerseTextLength] = useState(0);
+
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
-
+  const [textLength, setTextLength] = useState(verseData.verseTextLength);
   const viewRef = React.useRef();
   //#endregion
   
-  const Share = async () => {
-    await handleShare(viewRef.current);
-  };
-
-  //#region getCachedVerse
   useEffect(() => {
-    // Check if cached verse exists and if it's not expired
-    async function getCachedVerse() {
-      try {
-        const cachedData = await AsyncStorage.getItem(CACHE_KEY);
-        if (cachedData) {
-          const parsedData = JSON.parse(cachedData);
-          const {
-            verseText: cachedVerse,
-            surahName: cachedSurahName,
-            surahNameEn: cachedSurahNameEn,
-            ayahNumber: cachedAyahNumber,
-            tafsirTextAR: cachedTafsir,
-            tafsirTextEN: cachedEnTafsir,
-            timestamp,
-          } = parsedData;
-          const currentTime = new Date().getTime();
-          if (currentTime - timestamp <= CACHE_EXPIRATION_TIME) {
-            // Use the cached verse if it's not expired
-            setVerse(cachedVerse);
-            setSurahName(cachedSurahName);
-            setSurahNameEn(cachedSurahNameEn);
-            setAyahNumber(cachedAyahNumber);
-            setTafsir(cachedTafsir);
-            setEnTafsir(cachedEnTafsir);
-            // Calculate the length of the cached verse text and control styles
-            const length = cachedVerse.length;
-            setVerseTextLength(length);
-            controlStyle(length);
-            return;
-          }
-        }
-        // Fetch a new random verse if no cached verse or it's expired
-        getRandomVerse();
-      } catch (error) {
-        console.error("Error getting cached verse:", error);
-        // Fetch a new random verse if there's an error with AsyncStorage
-        getRandomVerse();
-      }
-    }
-    getCachedVerse();
-  }, []);
-  //#endregion
-
-  //#region getRandomVerse
-  const getRandomVerse = async () => {
-    try {
-      const {
-        verseText: fetchedVerse,
-        surahName: fetchedSurahName,
-        surahNameEn: fetchedSurahNameEn,
-        ayahNumber: fetchedAyahNumber,
-        tafsirTextAR: fetchedTafsir,
-        tafsirTextEN: fetchedEnTafsir,
-      } = await fetchRandomVerse();
-      // Set the fetched verse and related information in the component state
-      setVerse(fetchedVerse);
-      setSurahName(fetchedSurahName);
-      setSurahNameEn(fetchedSurahNameEn);
-      setAyahNumber(fetchedAyahNumber);
-      setTafsir(fetchedTafsir);
-      // Calculate the length of the fetched verse text and control styles
-      const length = fetchedVerse.length;
-      setVerseTextLength(length);
-      controlStyle(length);
-      // Cache the fetched verse and related information along with the current timestamp
-      const currentTime = new Date().getTime();
-      const dataToCache = JSON.stringify({
-        verseText: fetchedVerse,
-        surahName: fetchedSurahName,
-        surahNameEn: fetchedSurahNameEn,
-        ayahNumber: fetchedAyahNumber,
-        tafsirTextAR: fetchedTafsir,
-        tafsirTextEN: fetchedEnTafsir,
-        timestamp: currentTime,
-      });
-      await AsyncStorage.setItem(CACHE_KEY, dataToCache);
-    } catch (error) {
-      // Handle any errors that may occur during the API call
-      console.error("Error fetching random verse:", error);
-    }
-  };
-  //#endregion
-
-  //#region DisplayViewStyle base on character length
-  const controlStyle = (verseTextLength) => {
     let MaxFontSize = 20;
     let maxPadding = 30;
     let maxpaddingHorizontal = 20;
 
-    if (verseTextLength > 1200) {
+    if (textLength > 1200) {
       MaxFontSize = 16;
       maxPadding = 20;
       maxpaddingHorizontal = 10;
-    } else if (verseTextLength < 100) {
+    } else if (textLength < 100) {
       MaxFontSize = 27;
       maxPadding = 20;
       maxpaddingHorizontal = 20;
     }
+
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
     setMaxpaddingHorizontal(maxpaddingHorizontal);
+  }, [textLength]);
+  
+    const textStyle = {
+      fontSize: maxFontSizeDescription,
+      padding: maxPadding,
+      paddingHorizontal: maxpaddingHorizontal,
+    };
+    //#endregion
+
+
+  const Share = async () => {
+    await handleShare(viewRef.current);
   };
 
-  const textStyle = {
-    fontSize: maxFontSizeDescription,
-    padding: maxPadding,
-    paddingHorizontal: maxpaddingHorizontal,
-  };
-  //#endregion
+
   
   return (
+
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
       <ScrollView
@@ -243,21 +151,21 @@ const QuranVerseScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           >
         <Text style={[styles.title, textStyle]}>
-          {verseText} 
+          {verseData.verseText} 
           ﴿ 
           {ayahNumberToDisplay = state.isArabicNumbers
-          ? convertToEasternArabicNumerals(ayahNumber.toString())
-          : ayahNumber.toString()}﴾
+          ? convertToEasternArabicNumerals(verseData.ayahNumber.toString())
+          : verseData.ayahNumber.toString()}﴾
         </Text>
         <View style={styles.horizontalLine} />
         <Text style={[styles.tafsirStyle,
         {fontFamily:selectedLanguage!="Arabic"? "Montserrat":"AmiriFont",
-        textAlign:selectedLanguage!="Arabic"? "left": "center",
+        textAlign:selectedLanguage!="Arabic"? "left": "right",
         }]}>
-        {selectedLanguage!="Arabic"?EnTafsir:tafsir}</Text>
+        {selectedLanguage!="Arabic"?verseData.EnTafsir:verseData.tafsir}</Text>
 
         <Text style={styles.description}>
-        [ {selectedLanguage!= "Arabic"?surahNameEn:surahName} ]</Text>
+        [ {selectedLanguage!= "Arabic"?verseData.surahNameEn:verseData.surahName} ]</Text>
         </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}

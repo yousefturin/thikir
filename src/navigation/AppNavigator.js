@@ -20,6 +20,7 @@ import NamesOfAllahGenericPage from "../components/namseOfAllahGenericPage"
 import namesOfAllahScreen from "../components/namesOfAllahScreen"
 import DUAVerseScreen from "../components/DuaScreen";
 import ReportProblemScreen from "../components/ReportProblemScreen";
+// import BarCodeScreen from "../components/BarCodeScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 import TasbihScreen from "../components/tasbihScreen";
 import QablaScreen from "../components/QablaScreen";
@@ -226,7 +227,7 @@ const AppNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="عن البرنامج"
+        name={selectedLanguage != "Arabic" ?  "About us": "عن البرنامج" }
         component={AboutScreen}
         options={{
           headerStyle: headerStyle,
@@ -239,6 +240,13 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
         }}
       />
+      {/* <Stack.Screen
+        name="ScanBarCode"
+        component={BarCodeScreen}
+        options={{
+          headerStyle: headerStyle,
+        }}
+      /> */}
       <Stack.Screen
         name= {selectedLanguage != "Arabic" ?  "Menu": "القائمة" }
         component={Menu}

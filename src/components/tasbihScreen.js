@@ -20,7 +20,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Svg, Path, Circle } from "react-native-svg";
 import * as Animatable from "react-native-animatable";
-import { TasbehScreenStyle } from "../context/commonStyles";
+import { TasbehScreenStyle } from "../Styles/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
