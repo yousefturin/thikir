@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoadingIndicator from '../utils/loading';
 import { View, ActivityIndicator, Image} from 'react-native';
 
 
@@ -20,13 +19,15 @@ export function LanguageProvider({ children }) {
             } catch (error) {
                 console.error("Error fetching Language:", error);
             }finally {
+                setTimeout(() => {
                 setLoading(false); // Mark loading as complete
+            }, 300); 
             }
         }
 
         fetchLanguage();
     }, []);
-    const appIconImage = require("../../assets/splashEntro.png");
+    const appIconImage = require("../../assets/Images/splashEntro.png");
     // Set the selected font
     const setLanguage = (Language) => {
         setSelectedLanguage(Language);
@@ -48,7 +49,7 @@ export function LanguageProvider({ children }) {
             <View style={{ flex: 1, justifyContent:"flex-start", alignItems: 'center'  }}>
                 <Image
                 source={appIconImage}
-                style={{resizeMode: "cover", width: 400, height: 400 }}
+                style={{resizeMode: "cover", width: 420, height: 420 }}
                 />
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

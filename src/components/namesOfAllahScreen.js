@@ -12,7 +12,7 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
-import { HomeStyles } from "../context/commonStyles";
+import { HomeStyles } from "../Styles/commonStyles";
 import { Appearance } from "react-native";
 const {width} = Dimensions.get("window");
 

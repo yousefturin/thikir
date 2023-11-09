@@ -1,0 +1,2616 @@
+{
+    "code": 200,
+    "status": "OK",
+    "data": [
+        {
+            "timings": {
+                "Fajr": "06:17 (+03)",
+                "Sunrise": "07:34 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:38 (+03)",
+                "Sunset": "18:00 (+03)",
+                "Maghrib": "18:00 (+03)",
+                "Isha": "19:17 (+03)",
+                "Imsak": "06:07 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:32 (+03)",
+                "Lastthird": "03:03 (+03)"
+            },
+            "date": {
+                "readable": "01 Nov 2023",
+                "timestamp": "1698818461",
+                "gregorian": {
+                    "date": "01-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "01",
+                    "weekday": {
+                        "en": "Wednesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "17-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "17",
+                    "weekday": {
+                        "en": "Al Arba'a",
+                        "ar": "\u0627\u0644\u0627\u0631\u0628\u0639\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:18 (+03)",
+                "Sunrise": "07:36 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:37 (+03)",
+                "Sunset": "17:59 (+03)",
+                "Maghrib": "17:59 (+03)",
+                "Isha": "19:16 (+03)",
+                "Imsak": "06:08 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:31 (+03)",
+                "Lastthird": "03:03 (+03)"
+            },
+            "date": {
+                "readable": "02 Nov 2023",
+                "timestamp": "1698904861",
+                "gregorian": {
+                    "date": "02-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "02",
+                    "weekday": {
+                        "en": "Thursday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "18-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "18",
+                    "weekday": {
+                        "en": "Al Khamees",
+                        "ar": "\u0627\u0644\u062e\u0645\u064a\u0633"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:19 (+03)",
+                "Sunrise": "07:37 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:36 (+03)",
+                "Sunset": "17:58 (+03)",
+                "Maghrib": "17:58 (+03)",
+                "Isha": "19:15 (+03)",
+                "Imsak": "06:09 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:31 (+03)",
+                "Lastthird": "03:04 (+03)"
+            },
+            "date": {
+                "readable": "03 Nov 2023",
+                "timestamp": "1698991261",
+                "gregorian": {
+                    "date": "03-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "03",
+                    "weekday": {
+                        "en": "Friday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "19-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "19",
+                    "weekday": {
+                        "en": "Al Juma'a",
+                        "ar": "\u0627\u0644\u062c\u0645\u0639\u0629"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:20 (+03)",
+                "Sunrise": "07:38 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:35 (+03)",
+                "Sunset": "17:57 (+03)",
+                "Maghrib": "17:57 (+03)",
+                "Isha": "19:14 (+03)",
+                "Imsak": "06:10 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:31 (+03)",
+                "Lastthird": "03:04 (+03)"
+            },
+            "date": {
+                "readable": "04 Nov 2023",
+                "timestamp": "1699077661",
+                "gregorian": {
+                    "date": "04-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "04",
+                    "weekday": {
+                        "en": "Saturday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "20-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "20",
+                    "weekday": {
+                        "en": "Al Sabt",
+                        "ar": "\u0627\u0644\u0633\u0628\u062a"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:22 (+03)",
+                "Sunrise": "07:39 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:34 (+03)",
+                "Sunset": "17:56 (+03)",
+                "Maghrib": "17:56 (+03)",
+                "Isha": "19:13 (+03)",
+                "Imsak": "06:12 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:30 (+03)",
+                "Lastthird": "03:05 (+03)"
+            },
+            "date": {
+                "readable": "05 Nov 2023",
+                "timestamp": "1699164061",
+                "gregorian": {
+                    "date": "05-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "05",
+                    "weekday": {
+                        "en": "Sunday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "21-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "21",
+                    "weekday": {
+                        "en": "Al Ahad",
+                        "ar": "\u0627\u0644\u0627\u062d\u062f"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:23 (+03)",
+                "Sunrise": "07:40 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:34 (+03)",
+                "Sunset": "17:55 (+03)",
+                "Maghrib": "17:55 (+03)",
+                "Isha": "19:12 (+03)",
+                "Imsak": "06:13 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:30 (+03)",
+                "Lastthird": "03:05 (+03)"
+            },
+            "date": {
+                "readable": "06 Nov 2023",
+                "timestamp": "1699250461",
+                "gregorian": {
+                    "date": "06-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "06",
+                    "weekday": {
+                        "en": "Monday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "22-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "22",
+                    "weekday": {
+                        "en": "Al Athnayn",
+                        "ar": "\u0627\u0644\u0627\u062b\u0646\u064a\u0646"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:24 (+03)",
+                "Sunrise": "07:41 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:33 (+03)",
+                "Sunset": "17:53 (+03)",
+                "Maghrib": "17:53 (+03)",
+                "Isha": "19:11 (+03)",
+                "Imsak": "06:14 (+03)",
+                "Midnight": "00:47 (+03)",
+                "Firstthird": "22:29 (+03)",
+                "Lastthird": "03:05 (+03)"
+            },
+            "date": {
+                "readable": "07 Nov 2023",
+                "timestamp": "1699336861",
+                "gregorian": {
+                    "date": "07-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "07",
+                    "weekday": {
+                        "en": "Tuesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "23-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "23",
+                    "weekday": {
+                        "en": "Al Thalaata",
+                        "ar": "\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:25 (+03)",
+                "Sunrise": "07:43 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:32 (+03)",
+                "Sunset": "17:52 (+03)",
+                "Maghrib": "17:52 (+03)",
+                "Isha": "19:10 (+03)",
+                "Imsak": "06:15 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:29 (+03)",
+                "Lastthird": "03:06 (+03)"
+            },
+            "date": {
+                "readable": "08 Nov 2023",
+                "timestamp": "1699423261",
+                "gregorian": {
+                    "date": "08-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "08",
+                    "weekday": {
+                        "en": "Wednesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "24-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "24",
+                    "weekday": {
+                        "en": "Al Arba'a",
+                        "ar": "\u0627\u0644\u0627\u0631\u0628\u0639\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:26 (+03)",
+                "Sunrise": "07:44 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:31 (+03)",
+                "Sunset": "17:51 (+03)",
+                "Maghrib": "17:51 (+03)",
+                "Isha": "19:10 (+03)",
+                "Imsak": "06:16 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:29 (+03)",
+                "Lastthird": "03:06 (+03)"
+            },
+            "date": {
+                "readable": "09 Nov 2023",
+                "timestamp": "1699509661",
+                "gregorian": {
+                    "date": "09-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "09",
+                    "weekday": {
+                        "en": "Thursday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "25-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "25",
+                    "weekday": {
+                        "en": "Al Khamees",
+                        "ar": "\u0627\u0644\u062e\u0645\u064a\u0633"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:27 (+03)",
+                "Sunrise": "07:45 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:30 (+03)",
+                "Sunset": "17:50 (+03)",
+                "Maghrib": "17:50 (+03)",
+                "Isha": "19:09 (+03)",
+                "Imsak": "06:17 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:29 (+03)",
+                "Lastthird": "03:07 (+03)"
+            },
+            "date": {
+                "readable": "10 Nov 2023",
+                "timestamp": "1699596061",
+                "gregorian": {
+                    "date": "10-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "10",
+                    "weekday": {
+                        "en": "Friday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "26-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "26",
+                    "weekday": {
+                        "en": "Al Juma'a",
+                        "ar": "\u0627\u0644\u062c\u0645\u0639\u0629"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:28 (+03)",
+                "Sunrise": "07:46 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:30 (+03)",
+                "Sunset": "17:49 (+03)",
+                "Maghrib": "17:49 (+03)",
+                "Isha": "19:08 (+03)",
+                "Imsak": "06:18 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:28 (+03)",
+                "Lastthird": "03:07 (+03)"
+            },
+            "date": {
+                "readable": "11 Nov 2023",
+                "timestamp": "1699682461",
+                "gregorian": {
+                    "date": "11-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "11",
+                    "weekday": {
+                        "en": "Saturday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "27-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "27",
+                    "weekday": {
+                        "en": "Al Sabt",
+                        "ar": "\u0627\u0644\u0633\u0628\u062a"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:29 (+03)",
+                "Sunrise": "07:47 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:29 (+03)",
+                "Sunset": "17:48 (+03)",
+                "Maghrib": "17:48 (+03)",
+                "Isha": "19:07 (+03)",
+                "Imsak": "06:19 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:28 (+03)",
+                "Lastthird": "03:08 (+03)"
+            },
+            "date": {
+                "readable": "12 Nov 2023",
+                "timestamp": "1699768861",
+                "gregorian": {
+                    "date": "12-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "12",
+                    "weekday": {
+                        "en": "Sunday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "28-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "28",
+                    "weekday": {
+                        "en": "Al Ahad",
+                        "ar": "\u0627\u0644\u0627\u062d\u062f"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:30 (+03)",
+                "Sunrise": "07:49 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:28 (+03)",
+                "Sunset": "17:48 (+03)",
+                "Maghrib": "17:48 (+03)",
+                "Isha": "19:06 (+03)",
+                "Imsak": "06:20 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:28 (+03)",
+                "Lastthird": "03:08 (+03)"
+            },
+            "date": {
+                "readable": "13 Nov 2023",
+                "timestamp": "1699855261",
+                "gregorian": {
+                    "date": "13-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "13",
+                    "weekday": {
+                        "en": "Monday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "29-04-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "29",
+                    "weekday": {
+                        "en": "Al Athnayn",
+                        "ar": "\u0627\u0644\u0627\u062b\u0646\u064a\u0646"
+                    },
+                    "month": {
+                        "number": 4,
+                        "en": "Rab\u012b\u02bf al-th\u0101n\u012b",
+                        "ar": "\u0631\u064e\u0628\u064a\u0639 \u0627\u0644\u062b\u0627\u0646\u064a"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:31 (+03)",
+                "Sunrise": "07:50 (+03)",
+                "Dhuhr": "12:48 (+03)",
+                "Asr": "15:27 (+03)",
+                "Sunset": "17:47 (+03)",
+                "Maghrib": "17:47 (+03)",
+                "Isha": "19:06 (+03)",
+                "Imsak": "06:21 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:28 (+03)",
+                "Lastthird": "03:09 (+03)"
+            },
+            "date": {
+                "readable": "14 Nov 2023",
+                "timestamp": "1699941661",
+                "gregorian": {
+                    "date": "14-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "14",
+                    "weekday": {
+                        "en": "Tuesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "01-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "01",
+                    "weekday": {
+                        "en": "Al Thalaata",
+                        "ar": "\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:32 (+03)",
+                "Sunrise": "07:51 (+03)",
+                "Dhuhr": "12:49 (+03)",
+                "Asr": "15:27 (+03)",
+                "Sunset": "17:46 (+03)",
+                "Maghrib": "17:46 (+03)",
+                "Isha": "19:05 (+03)",
+                "Imsak": "06:22 (+03)",
+                "Midnight": "00:48 (+03)",
+                "Firstthird": "22:28 (+03)",
+                "Lastthird": "03:09 (+03)"
+            },
+            "date": {
+                "readable": "15 Nov 2023",
+                "timestamp": "1700028061",
+                "gregorian": {
+                    "date": "15-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "15",
+                    "weekday": {
+                        "en": "Wednesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "02-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "02",
+                    "weekday": {
+                        "en": "Al Arba'a",
+                        "ar": "\u0627\u0644\u0627\u0631\u0628\u0639\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:33 (+03)",
+                "Sunrise": "07:52 (+03)",
+                "Dhuhr": "12:49 (+03)",
+                "Asr": "15:26 (+03)",
+                "Sunset": "17:45 (+03)",
+                "Maghrib": "17:45 (+03)",
+                "Isha": "19:04 (+03)",
+                "Imsak": "06:23 (+03)",
+                "Midnight": "00:49 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:10 (+03)"
+            },
+            "date": {
+                "readable": "16 Nov 2023",
+                "timestamp": "1700114461",
+                "gregorian": {
+                    "date": "16-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "16",
+                    "weekday": {
+                        "en": "Thursday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "03-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "03",
+                    "weekday": {
+                        "en": "Al Khamees",
+                        "ar": "\u0627\u0644\u062e\u0645\u064a\u0633"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:34 (+03)",
+                "Sunrise": "07:53 (+03)",
+                "Dhuhr": "12:49 (+03)",
+                "Asr": "15:26 (+03)",
+                "Sunset": "17:44 (+03)",
+                "Maghrib": "17:44 (+03)",
+                "Isha": "19:03 (+03)",
+                "Imsak": "06:24 (+03)",
+                "Midnight": "00:49 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:10 (+03)"
+            },
+            "date": {
+                "readable": "17 Nov 2023",
+                "timestamp": "1700200861",
+                "gregorian": {
+                    "date": "17-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "17",
+                    "weekday": {
+                        "en": "Friday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "04-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "04",
+                    "weekday": {
+                        "en": "Al Juma'a",
+                        "ar": "\u0627\u0644\u062c\u0645\u0639\u0629"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:35 (+03)",
+                "Sunrise": "07:55 (+03)",
+                "Dhuhr": "12:49 (+03)",
+                "Asr": "15:25 (+03)",
+                "Sunset": "17:43 (+03)",
+                "Maghrib": "17:43 (+03)",
+                "Isha": "19:03 (+03)",
+                "Imsak": "06:25 (+03)",
+                "Midnight": "00:49 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:11 (+03)"
+            },
+            "date": {
+                "readable": "18 Nov 2023",
+                "timestamp": "1700287261",
+                "gregorian": {
+                    "date": "18-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "18",
+                    "weekday": {
+                        "en": "Saturday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "05-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "05",
+                    "weekday": {
+                        "en": "Al Sabt",
+                        "ar": "\u0627\u0644\u0633\u0628\u062a"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:36 (+03)",
+                "Sunrise": "07:56 (+03)",
+                "Dhuhr": "12:49 (+03)",
+                "Asr": "15:24 (+03)",
+                "Sunset": "17:43 (+03)",
+                "Maghrib": "17:43 (+03)",
+                "Isha": "19:02 (+03)",
+                "Imsak": "06:26 (+03)",
+                "Midnight": "00:49 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:11 (+03)"
+            },
+            "date": {
+                "readable": "19 Nov 2023",
+                "timestamp": "1700373661",
+                "gregorian": {
+                    "date": "19-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "19",
+                    "weekday": {
+                        "en": "Sunday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "06-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "06",
+                    "weekday": {
+                        "en": "Al Ahad",
+                        "ar": "\u0627\u0644\u0627\u062d\u062f"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:37 (+03)",
+                "Sunrise": "07:57 (+03)",
+                "Dhuhr": "12:50 (+03)",
+                "Asr": "15:24 (+03)",
+                "Sunset": "17:42 (+03)",
+                "Maghrib": "17:42 (+03)",
+                "Isha": "19:02 (+03)",
+                "Imsak": "06:27 (+03)",
+                "Midnight": "00:49 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:12 (+03)"
+            },
+            "date": {
+                "readable": "20 Nov 2023",
+                "timestamp": "1700460061",
+                "gregorian": {
+                    "date": "20-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "20",
+                    "weekday": {
+                        "en": "Monday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "07-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "07",
+                    "weekday": {
+                        "en": "Al Athnayn",
+                        "ar": "\u0627\u0644\u0627\u062b\u0646\u064a\u0646"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:38 (+03)",
+                "Sunrise": "07:58 (+03)",
+                "Dhuhr": "12:50 (+03)",
+                "Asr": "15:23 (+03)",
+                "Sunset": "17:41 (+03)",
+                "Maghrib": "17:41 (+03)",
+                "Isha": "19:01 (+03)",
+                "Imsak": "06:28 (+03)",
+                "Midnight": "00:50 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:12 (+03)"
+            },
+            "date": {
+                "readable": "21 Nov 2023",
+                "timestamp": "1700546461",
+                "gregorian": {
+                    "date": "21-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "21",
+                    "weekday": {
+                        "en": "Tuesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "08-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "08",
+                    "weekday": {
+                        "en": "Al Thalaata",
+                        "ar": "\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:39 (+03)",
+                "Sunrise": "07:59 (+03)",
+                "Dhuhr": "12:50 (+03)",
+                "Asr": "15:23 (+03)",
+                "Sunset": "17:41 (+03)",
+                "Maghrib": "17:41 (+03)",
+                "Isha": "19:01 (+03)",
+                "Imsak": "06:29 (+03)",
+                "Midnight": "00:50 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:13 (+03)"
+            },
+            "date": {
+                "readable": "22 Nov 2023",
+                "timestamp": "1700632861",
+                "gregorian": {
+                    "date": "22-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "22",
+                    "weekday": {
+                        "en": "Wednesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "09-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "09",
+                    "weekday": {
+                        "en": "Al Arba'a",
+                        "ar": "\u0627\u0644\u0627\u0631\u0628\u0639\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:40 (+03)",
+                "Sunrise": "08:00 (+03)",
+                "Dhuhr": "12:50 (+03)",
+                "Asr": "15:22 (+03)",
+                "Sunset": "17:40 (+03)",
+                "Maghrib": "17:40 (+03)",
+                "Isha": "19:00 (+03)",
+                "Imsak": "06:30 (+03)",
+                "Midnight": "00:50 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:14 (+03)"
+            },
+            "date": {
+                "readable": "23 Nov 2023",
+                "timestamp": "1700719261",
+                "gregorian": {
+                    "date": "23-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "23",
+                    "weekday": {
+                        "en": "Thursday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "10-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "10",
+                    "weekday": {
+                        "en": "Al Khamees",
+                        "ar": "\u0627\u0644\u062e\u0645\u064a\u0633"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:41 (+03)",
+                "Sunrise": "08:01 (+03)",
+                "Dhuhr": "12:51 (+03)",
+                "Asr": "15:22 (+03)",
+                "Sunset": "17:40 (+03)",
+                "Maghrib": "17:40 (+03)",
+                "Isha": "19:00 (+03)",
+                "Imsak": "06:31 (+03)",
+                "Midnight": "00:50 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:14 (+03)"
+            },
+            "date": {
+                "readable": "24 Nov 2023",
+                "timestamp": "1700805661",
+                "gregorian": {
+                    "date": "24-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "24",
+                    "weekday": {
+                        "en": "Friday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "11-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "11",
+                    "weekday": {
+                        "en": "Al Juma'a",
+                        "ar": "\u0627\u0644\u062c\u0645\u0639\u0629"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:42 (+03)",
+                "Sunrise": "08:03 (+03)",
+                "Dhuhr": "12:51 (+03)",
+                "Asr": "15:22 (+03)",
+                "Sunset": "17:39 (+03)",
+                "Maghrib": "17:39 (+03)",
+                "Isha": "19:00 (+03)",
+                "Imsak": "06:32 (+03)",
+                "Midnight": "00:51 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:15 (+03)"
+            },
+            "date": {
+                "readable": "25 Nov 2023",
+                "timestamp": "1700892061",
+                "gregorian": {
+                    "date": "25-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "25",
+                    "weekday": {
+                        "en": "Saturday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "12-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "12",
+                    "weekday": {
+                        "en": "Al Sabt",
+                        "ar": "\u0627\u0644\u0633\u0628\u062a"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:43 (+03)",
+                "Sunrise": "08:04 (+03)",
+                "Dhuhr": "12:51 (+03)",
+                "Asr": "15:21 (+03)",
+                "Sunset": "17:39 (+03)",
+                "Maghrib": "17:39 (+03)",
+                "Isha": "18:59 (+03)",
+                "Imsak": "06:33 (+03)",
+                "Midnight": "00:51 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:15 (+03)"
+            },
+            "date": {
+                "readable": "26 Nov 2023",
+                "timestamp": "1700978461",
+                "gregorian": {
+                    "date": "26-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "26",
+                    "weekday": {
+                        "en": "Sunday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "13-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "13",
+                    "weekday": {
+                        "en": "Al Ahad",
+                        "ar": "\u0627\u0644\u0627\u062d\u062f"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:44 (+03)",
+                "Sunrise": "08:05 (+03)",
+                "Dhuhr": "12:52 (+03)",
+                "Asr": "15:21 (+03)",
+                "Sunset": "17:38 (+03)",
+                "Maghrib": "17:38 (+03)",
+                "Isha": "18:59 (+03)",
+                "Imsak": "06:34 (+03)",
+                "Midnight": "00:51 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:16 (+03)"
+            },
+            "date": {
+                "readable": "27 Nov 2023",
+                "timestamp": "1701064861",
+                "gregorian": {
+                    "date": "27-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "27",
+                    "weekday": {
+                        "en": "Monday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "14-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "14",
+                    "weekday": {
+                        "en": "Al Athnayn",
+                        "ar": "\u0627\u0644\u0627\u062b\u0646\u064a\u0646"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:45 (+03)",
+                "Sunrise": "08:06 (+03)",
+                "Dhuhr": "12:52 (+03)",
+                "Asr": "15:21 (+03)",
+                "Sunset": "17:38 (+03)",
+                "Maghrib": "17:38 (+03)",
+                "Isha": "18:59 (+03)",
+                "Imsak": "06:35 (+03)",
+                "Midnight": "00:52 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:16 (+03)"
+            },
+            "date": {
+                "readable": "28 Nov 2023",
+                "timestamp": "1701151261",
+                "gregorian": {
+                    "date": "28-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "28",
+                    "weekday": {
+                        "en": "Tuesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "15-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "15",
+                    "weekday": {
+                        "en": "Al Thalaata",
+                        "ar": "\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:46 (+03)",
+                "Sunrise": "08:07 (+03)",
+                "Dhuhr": "12:52 (+03)",
+                "Asr": "15:20 (+03)",
+                "Sunset": "17:37 (+03)",
+                "Maghrib": "17:37 (+03)",
+                "Isha": "18:58 (+03)",
+                "Imsak": "06:36 (+03)",
+                "Midnight": "00:52 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:17 (+03)"
+            },
+            "date": {
+                "readable": "29 Nov 2023",
+                "timestamp": "1701237661",
+                "gregorian": {
+                    "date": "29-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "29",
+                    "weekday": {
+                        "en": "Wednesday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "16-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "16",
+                    "weekday": {
+                        "en": "Al Arba'a",
+                        "ar": "\u0627\u0644\u0627\u0631\u0628\u0639\u0627\u0621"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        },
+        {
+            "timings": {
+                "Fajr": "06:47 (+03)",
+                "Sunrise": "08:08 (+03)",
+                "Dhuhr": "12:53 (+03)",
+                "Asr": "15:20 (+03)",
+                "Sunset": "17:37 (+03)",
+                "Maghrib": "17:37 (+03)",
+                "Isha": "18:58 (+03)",
+                "Imsak": "06:37 (+03)",
+                "Midnight": "00:52 (+03)",
+                "Firstthird": "22:27 (+03)",
+                "Lastthird": "03:18 (+03)"
+            },
+            "date": {
+                "readable": "30 Nov 2023",
+                "timestamp": "1701324061",
+                "gregorian": {
+                    "date": "30-11-2023",
+                    "format": "DD-MM-YYYY",
+                    "day": "30",
+                    "weekday": {
+                        "en": "Thursday"
+                    },
+                    "month": {
+                        "number": 11,
+                        "en": "November"
+                    },
+                    "year": "2023",
+                    "designation": {
+                        "abbreviated": "AD",
+                        "expanded": "Anno Domini"
+                    }
+                },
+                "hijri": {
+                    "date": "17-05-1445",
+                    "format": "DD-MM-YYYY",
+                    "day": "17",
+                    "weekday": {
+                        "en": "Al Khamees",
+                        "ar": "\u0627\u0644\u062e\u0645\u064a\u0633"
+                    },
+                    "month": {
+                        "number": 5,
+                        "en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+                        "ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+                    },
+                    "year": "1445",
+                    "designation": {
+                        "abbreviated": "AH",
+                        "expanded": "Anno Hegirae"
+                    },
+                    "holidays": []
+                }
+            },
+            "meta": {
+                "latitude": 41.007107,
+                "longitude": 28.972182,
+                "timezone": "Europe\/Istanbul",
+                "method": {
+                    "id": 2,
+                    "name": "Islamic Society of North America (ISNA)",
+                    "params": {
+                        "Fajr": 15,
+                        "Isha": 15
+                    },
+                    "location": {
+                        "latitude": 39.70421229999999,
+                        "longitude": -86.39943869999999
+                    }
+                },
+                "latitudeAdjustmentMethod": "ANGLE_BASED",
+                "midnightMode": "STANDARD",
+                "school": "STANDARD",
+                "offset": {
+                    "Imsak": 0,
+                    "Fajr": 0,
+                    "Sunrise": 0,
+                    "Dhuhr": 0,
+                    "Asr": 0,
+                    "Maghrib": 0,
+                    "Sunset": 0,
+                    "Isha": 0,
+                    "Midnight": 0
+                }
+            }
+        }
+    ]
+}

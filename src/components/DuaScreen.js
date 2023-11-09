@@ -8,11 +8,11 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
-import { handleShare } from "../utils/shareUtils";
+import { handleShare } from "../Service/ShareService";
 import { useTheme } from "../context/ThemContex";
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
-import { DuaVerseStyles } from "../context/commonStyles";
+import { DuaVerseStyles } from "../Styles/commonStyles";
 import { Appearance } from 'react-native';
 
 const CACHE_KEY = "randomDuaCache";

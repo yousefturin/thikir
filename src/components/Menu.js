@@ -5,15 +5,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  ScrollView,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
-import { MainStyles } from "../context/commonStyles";
+import { MainStyles } from "../Styles/commonStyles";
 import { Appearance } from "react-native";
-import SvgComponent from "../../assets/svgComponents";
+import SvgComponent from "../../assets/Svg/svgComponents";
 
 const Menu = ({ navigation }) => {
   const { selectedTheme } = useTheme();
@@ -398,7 +397,7 @@ const Menu = ({ navigation }) => {
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => navigation.navigate("عن البرنامج")}
+        onPress={() =>selectedLanguage != "Arabic" ? navigation.navigate("About us") :  navigation.navigate("عن البرنامج")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -437,7 +436,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Report a Problem" : "الابلاغ عن مشكلة"}</Text>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Report a Problem" : "الابلاغ عن مشكلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="ReportProblemSVG" style={styles.iconleft} />
@@ -446,6 +445,33 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+      {/* <View style={styles.horizontalLine} />
+      <TouchableOpacity
+        style={[
+          styles.button,
+          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+        ]}
+        onPress={() => navigation.navigate("ScanBarCode")}
+        activeOpacity={0.7}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color={selectedColor}
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Scan Product" : "امسح المنتج"}</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <SvgComponent svgKey="ReportProblemSVG" style={styles.iconleft} />
+        </View>
+        <View style={styles.imageWrapper}>
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity> */}
       <Text
         style={[
           {

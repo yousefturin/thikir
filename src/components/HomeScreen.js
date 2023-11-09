@@ -13,7 +13,7 @@ import { SearchBar } from "react-native-elements";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getItems } from "../db/GetData";
 import { getEnItems } from "../db/GetDataEn";
-import { HomeStyles } from "../context/commonStyles";
+import { HomeStyles } from "../Styles/commonStyles";
 import { useTheme } from "../context/ThemContex";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
