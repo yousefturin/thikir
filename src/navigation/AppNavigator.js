@@ -19,7 +19,7 @@ import GenericPage from "../components/GenericPage";
 import NamesOfAllahGenericPage from "../components/namseOfAllahGenericPage"
 import namesOfAllahScreen from "../components/namesOfAllahScreen"
 import DUAVerseScreen from "../components/DuaScreen";
-import ReportProblemScreen from "../components/ReportProblemScreen";
+// import ReportProblemScreen from "../components/ReportProblemScreen";
 // import BarCodeScreen from "../components/BarCodeScreen";
 import ThikirAlarmScreen from "../components/ThikirAlarmScreen";
 import TasbihScreen from "../components/tasbihScreen";
@@ -27,6 +27,7 @@ import QablaScreen from "../components/QablaScreen";
 import { useTheme } from '../context/ThemContex';
 import { useLanguage } from '../context/LanguageContext';
 import { Appearance } from 'react-native';
+import AzanScreen from "../components/azanScreen";
 
 const Stack = createStackNavigator();
 const customCardStyleInterpolator = ({ current, next, layouts }) => {
@@ -233,20 +234,20 @@ const AppNavigator = () => {
           headerStyle: headerStyle,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="الابلاغ عن مشكلة"
         component={ReportProblemScreen}
         options={{
           headerStyle: headerStyle,
         }}
-      />
-      {/* <Stack.Screen
-        name="ScanBarCode"
-        component={BarCodeScreen}
+      /> */}
+      <Stack.Screen
+        name={selectedLanguage != "Arabic" ?  "Azan": "أذان" }
+        component={AzanScreen}
         options={{
           headerStyle: headerStyle,
         }}
-      /> */}
+      />
       <Stack.Screen
         name= {selectedLanguage != "Arabic" ?  "Menu": "القائمة" }
         component={Menu}
