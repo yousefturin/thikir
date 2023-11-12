@@ -213,6 +213,33 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+
+      <View style={styles.horizontalLine} />
+
+      <TouchableOpacity
+        style={[styles.button]}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Azan"): navigation.navigate("أذان")}
+        activeOpacity={0.7}
+      >
+        <View style={styles.iconWrapperLeft}>
+          <FontAwesomeIcon
+            name="angle-left"
+            size={24}
+            color={selectedColor}
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.nameWrapper}>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Azan" : "أذان"}</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <SvgComponent svgKey="AzanSVG" style={styles.iconleft} />
+        </View>
+        <View style={styles.imageWrapper}>
+          <Image style={styles.image} />
+        </View>
+      </TouchableOpacity>
+
       <View style={styles.horizontalLine} />
       <TouchableOpacity
         style={[styles.button]}
@@ -396,7 +423,8 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.horizontalLine} />
       <TouchableOpacity
-        style={[styles.button]}
+        style={[styles.button,       
+        { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },]}
         onPress={() =>selectedLanguage != "Arabic" ? navigation.navigate("About us") :  navigation.navigate("عن البرنامج")}
         activeOpacity={0.7}
       >
@@ -418,8 +446,7 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[
           styles.button,
           { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
@@ -444,45 +471,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
         </View>
-      </TouchableOpacity>
-      {/* <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[
-          styles.button,
-          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
-        ]}
-        onPress={() => navigation.navigate("ScanBarCode")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={24}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Scan Product" : "امسح المنتج"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="ReportProblemSVG" style={styles.iconleft} />
-        </View>
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
       </TouchableOpacity> */}
-      <Text
-        style={[
-          {
-            height: 200,
-            width: "50%",
-            textAlign: "center",
-            color: "#f2b784",
-            fontFamily: "ScheherazadeNew",
-          },
-        ]}
-      ></Text>
     </View>
   );
 };
