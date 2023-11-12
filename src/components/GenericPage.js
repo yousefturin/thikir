@@ -526,7 +526,7 @@ const GenericPage = ({ route }) => {
                         style={styles.ControlPaneBackground}
                     >
                         <TouchableWithoutFeedback
-                            onPress={nextSubItem}
+                            onPress={selectedLanguage != "Arabic" ? prevSubItem :nextSubItem}
                             disabled={
                                 currentIndex === item.subItems.length - 1 &&
                                 count >= item.subItems[currentIndex].count
@@ -543,7 +543,7 @@ const GenericPage = ({ route }) => {
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
                                     fontFamily:  "Montserrat" }]}>
-                                    Next Thikir
+                                    Back Thikir
                                 </Text>
                                 ) : (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
@@ -570,7 +570,7 @@ const GenericPage = ({ route }) => {
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
-                            onPress={prevSubItem}
+                            onPress={selectedLanguage != "Arabic" ? nextSubItem : prevSubItem}
                             disabled={
                                 currentIndex === item.subItems.length + 1 &&
                                 count >= item.subItems[currentIndex].count
@@ -581,7 +581,7 @@ const GenericPage = ({ route }) => {
                                 {selectedLanguage != "Arabic" ? (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
                                     fontFamily: "Montserrat" }]}>
-                                    Back Thikir
+                                    Next Thikir
                                 </Text>
                                 ) : (
                                     <Text allowFontScaling={false} style={[styles.textcount,{
