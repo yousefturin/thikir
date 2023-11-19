@@ -60,6 +60,27 @@ const TasbihScreen = () => {
             ? "dark"
             : "light";
 
+
+    //#region ArabicLanguage
+    const ArabicLanguage = StyleSheet.create({
+        CloseBtnModePage: {
+            position: "absolute",
+            bottom: 45,
+            left: 25,
+        },
+    });
+    //#endregion
+
+    //#region EnglishLanguage
+    const EnglishLanguage = StyleSheet.create({
+        CloseBtnModePage: {
+            position: "absolute",
+            bottom: 45,
+            right: 25,
+    },
+    });
+    //#endregion
+
     //#region LightTheme
     const lightTheme = StyleSheet.create({
         container: {
@@ -239,6 +260,10 @@ const TasbihScreen = () => {
                 ? themeStyles.itemText
                 : themeStyles.itemText),
         },
+        CloseBtnModePage:{
+            ...TasbehScreenStyle.CloseBtnModePage,
+            ...(selectedLanguage != "Arabic" ? EnglishLanguage.CloseBtnModePage : ArabicLanguage.CloseBtnModePage )
+        }
     };
     //#endregion
 
@@ -418,12 +443,10 @@ const TasbihScreen = () => {
             return (
                 <TouchableOpacity
                     onPress={handleButtonPress}
-                    style={{
-                        position: "absolute",
-                        bottom: 45,
-                        left: 25,
-                    }}
+                    style={
+                        styles.CloseBtnModePage}
                 >
+                
                     <View
                         style={{
                             flexDirection: "row-reverse",
@@ -432,7 +455,8 @@ const TasbihScreen = () => {
                         }}
                     >
                         <Text allowFontScaling={false} style={styles.ThikirNewText}>
-                            أغلاق
+                            {selectedLanguage != "Arabic"?"Close":"أغلاق"}
+                            
                         </Text>
                         <Svg
                             width="24"

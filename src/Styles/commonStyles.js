@@ -1010,6 +1010,9 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "#6682C3",
     paddingLeft: 20,
   },
+  CloseBtnModePage:{
+
+  },
 });
 //#endregion
 
