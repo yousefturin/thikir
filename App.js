@@ -4,7 +4,7 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import * as Font from "expo-font";
 import { Platform } from 'react-native';
 import * as Notifications from "expo-notifications";
-import { ThemeProvider } from "./src/context/ThemContex";
+import { ThemeProvider } from "./src/context/ThemeContext";
 import { FontProvider } from "./src/context/FontContext";
 import { ColorProvider  } from "./src/context/ColorContext";
 import { NumberProvider } from './src/context/NumberContext';
