@@ -418,6 +418,18 @@ export const ThikirAlarmStyles = StyleSheet.create({
     paddingTop: 40,
     alignItems: "center",
   },
+  wrapHeaderText: {
+    width: '90%',
+    justifyContent: 'center',
+    textAlign: 'right',
+    paddingRight:10
+  },
+  HeadertextColor: {
+    color: '#767676',
+    paddingTop: 15,
+    //paddingLeft: width > 600 ? 560 : 300,
+    paddingBottom:10,
+  },
   notificationContainer: {
     alignItems: "center",
     justifyContent: "space-evenly",
@@ -1070,5 +1082,213 @@ export const QablaScreenStyle  = StyleSheet.create({
     borderBottomColor: '#dd3131',
   },
   
+});
+//#endregion
+
+//#region AzanScreenStyle
+export const AzanScreenStyle  = StyleSheet.create({
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#151515",
+    width: "100%",
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 40,
+    justifyContent: "center",
+  },
+  nextPrayerContainer: {
+    flex: 0.25,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginVertical: 20,
+  },
+  time: {
+    fontFamily: "MontserratBold",
+    fontSize: 82,
+    color: "#f2f2f6",
+    marginTop: 15,
+  },
+  nextPrayerText: {
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: "#666",
+    marginTop: 5,
+    textAlign: "left",
+  },
+  dateContainer: {
+    flex: 0.1,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  dateContainerWrapper: {
+    flex: 0.48,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black",  
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  date: {
+    fontFamily: "Montserrat",
+    fontSize: 18,
+    color: "#666",
+    margin: 5,
+  },
+  prayerContainer: {
+    flex: 0.65,
+    justifyContent: "center",
+    padding: 10,
+    marginVertical: 20,
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  prayerItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+  prayerName: {
+    fontFamily: "Montserrat",
+    fontSize: 25,
+    color: "#f2f2f6",
+    marginBottom: 18,
+    paddingTop: 18,
+  },
+  prayerTime: {
+    fontFamily: "Montserrat",
+    fontSize: 21,
+    color: "#666",
+    marginBottom: 15,
+    paddingTop: 15,
+  },
+  boldPrayer: {
+    fontFamily: "MontserratBold",
+    fontSize: 25,
+    color: "#f2f2f6",
+  },
+  boldTime: {
+    fontFamily: "MontserratBold",
+    fontSize: 21,
+    color: "#f2f2f6",
+  },
+  prayerDecorator: {
+    backgroundColor: "#151515",
+    borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  noTimings: {
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: "#666",
+    textAlign: "center",
+  },
+  pikerContainerWrapper:{
+    flex: 1,
+    justifyContent: "flex-end",
+    padding: 10,
+  },
+  pikerContainer:{
+    backgroundColor: "#151515",
+    borderRadius: 10,
+  
+  },
+  pickerConfirmBtn:{
+    justifyContent: "space-between",
+    marginBottom: 10,
+    marginTop:10,
+  },
+  pickerCancelBtn:{
+    marginTop: 10,
+    backgroundColor: "#151515",
+    borderRadius: 10,
+    justifyContent: "center",
+    padding: 10,
+    marginBottom: 25,
+  },
+
+
+
+  skeletonNextPrayerText: {
+    marginTop: 5,
+    width:"80%",
+    height:"15%", 
+
+    borderRadius:3,
+  },
+  skeletonTime: {
+    marginTop: 15,
+    width:"60%",
+    height:"60%",
+
+    borderRadius:5
+  },
+  skeletonDate:{
+    margin: 5,
+    width:"82%",
+    height:"60%", 
+
+    borderRadius:4
+  },
+  skeletonPrayerItem:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    alignContent:"center"
+  },
+  skeletonPrayerName:{
+    paddingTop: 18,
+    marginBottom:10,
+    marginTop:10,
+    padding:25,
+    width:"40%",
+
+    borderRadius:5
+  },
+  skeletonPrayerTime:{
+    paddingTop: 15,
+    marginBottom:10,
+    marginTop:10,
+    padding:25,
+    width:"30%",
+
+    borderRadius:5
+  },
+
 });
 //#endregion
