@@ -163,7 +163,7 @@ const AzanScreen = () => {
       color: "#666",
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor:  "#151515",
     },
     pikerContainer: {
       backgroundColor: "#151515",
