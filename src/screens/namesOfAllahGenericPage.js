@@ -32,6 +32,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     textDescription: {
       color: "#000",
@@ -52,6 +53,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     textDescription: {
       color: "#fff",
