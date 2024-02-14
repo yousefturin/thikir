@@ -22,6 +22,7 @@ const OffsetSingleton = {
                 return;
             } else {
                 // Return the offset data if found in AsyncStorage
+                console.log("Offset data found in AsyncStorage");
                 return JSON.parse(status);
             }
         } catch (error) {

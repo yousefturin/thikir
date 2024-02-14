@@ -44,6 +44,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     buttonText: {
       color: "#000",
@@ -93,6 +94,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     buttonText: {
       color: "#fff",

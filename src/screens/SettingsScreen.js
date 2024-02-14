@@ -47,6 +47,7 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     horizontalLine: {
       borderColor: "#f2f2f6",
@@ -73,6 +74,7 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     horizontalLine: {
       borderColor: "#151515",

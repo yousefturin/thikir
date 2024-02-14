@@ -89,18 +89,21 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         countValue: {
             color: "#000",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         pickThikirText: {
             color: "#000",
         },
         ModalTopNotch: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         addNewThikirModalContainer: {
             backgroundColor: "#f2f2f6",
@@ -114,6 +117,7 @@ const TasbihScreen = () => {
         inputTextContainerInModa: {
             color: "#000",
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         rectangle: {
             backgroundColor: "#f2f2f6",
@@ -124,6 +128,9 @@ const TasbihScreen = () => {
         itemText: {
             color: "#000",
         },
+        modaldisplay: {
+            shadowColor: "gray", 
+        }
     });
     //#endregion
 
@@ -134,20 +141,21 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#262626",
-
+            shadowColor: "black", 
         },
         countValue: {
             color: "#fff",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#262626",
-
+            shadowColor: "black", 
         },
         pickThikirText: {
             color: "#fff",
         },
         ModalTopNotch: {
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         addNewThikirModalContainer: {
             backgroundColor: "#151515",
@@ -161,6 +169,7 @@ const TasbihScreen = () => {
         inputTextContainerInModa: {
             color: "#fff",
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         rectangle: {
             backgroundColor: "#151515",
@@ -171,6 +180,9 @@ const TasbihScreen = () => {
         itemText: {
             color: "#fff",
         },
+        modaldisplay: {
+            shadowColor: "black", 
+        }
     });
     //#endregion
 
@@ -259,7 +271,11 @@ const TasbihScreen = () => {
         CloseBtnModePage:{
             ...TasbehScreenStyle.CloseBtnModePage,
             ...(selectedLanguage != "Arabic" ? EnglishLanguage.CloseBtnModePage : ArabicLanguage.CloseBtnModePage )
-        }
+        },
+        modaldisplay:{
+            ...TasbehScreenStyle.modaldisplay,
+            ...(selectedLanguage != "Arabic" ? EnglishLanguage.modaldisplay : ArabicLanguage.modaldisplay )
+        },
     };
     //#endregion
 

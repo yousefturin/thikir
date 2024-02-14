@@ -7,8 +7,10 @@ import {
   Modal,
   Button,
   Animated,
+  Platform,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import * as Localization from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import locationSingleton from "../Service/LocationSingletonService";
@@ -19,14 +21,14 @@ import { useLanguage } from "../context/LanguageContext";
 import { AzanScreenStyle } from "../Styles/commonStyles";
 import { useNumberContext } from "../context/NumberContext";
 import { getColorForTheme } from "../utils/themeUtils";
-import  AzanComponents  from "../components/AzanComponents";
+import AzanComponents from "../components/AzanComponents";
 
 const AzanScreen = () => {
   const { selectedTheme } = useTheme();
   // const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
-  const { state, convertToEasternArabicNumerals } = useNumberContext(); 
+  const { state, convertToEasternArabicNumerals } = useNumberContext();
 
   const NumberPickerTheme = getColorForTheme(
     { dark: "#fff", light: "#000" },
@@ -55,6 +57,8 @@ const AzanScreen = () => {
   const [timeLeft, setTimeLeft] = useState(null);
 
   const [currentTime, setCurrentTime] = useState(new Date());
+
+  const [timeFormatCheck, setTimeFormatCheck] = useState(null);
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -168,53 +172,6 @@ const AzanScreen = () => {
       backgroundColor: "#151515",
     },
   });
-  //#endregion
-
-  //#region ArabicLanguage
-  // const ArabicLanguage = StyleSheet.create({
-  //   button: {
-  //     flexDirection: "row",
-  //     fontFamily: "ScheherazadeNew",
-  //   },
-  //   buttonText: {
-  //     textAlign: "right",
-  //     marginLeft: 30,
-  //     fontFamily: "ScheherazadeNew",
-  //   },
-  //   icon: {
-  //     transform: [{ rotate: 0  + "deg" }],
-  //     marginLeft: 20,
-  //   },
-  //   horizontalLine: {
-  //     marginLeft: width > 600 ? 610 : 350,
-  //   },
-  //   emptyMessageText:{
-  //     fontFamily: "ScheherazadeNew",
-  //   }
-  // });
-  //#endregion
-
-  //#region EnglishLanguage
-  // const EnglishLanguage = StyleSheet.create({
-  //   button: {
-  //     flexDirection:"row-reverse",
-  //   },
-  //   buttonText: {
-  //     textAlign: "left",
-  //     marginRight: 30,
-  //     fontFamily: "Montserrat",
-  //   },
-  //   icon: {
-  //     transform: [{ rotate: 180  + "deg" }],
-  //     marginRight: 20,
-  //   },
-  //   horizontalLine: {
-  //     marginRight: width > 600 ? 610 : 350,
-  //   },
-  //   emptyMessageText:{
-  //     fontFamily: "Montserrat",
-  //   }
-  // });
   //#endregion
 
   const themeStyles = getColorForTheme(
@@ -354,6 +311,11 @@ const AzanScreen = () => {
 
     const currentYear = date.getFullYear();
 
+    setDay(currentDay);
+    setMonthText(currentMonthText);
+    setMonth(currentMonth);
+    setYear(currentYear);
+
     return {
       currentDay: currentDay,
       currentMonthText: currentMonthText,
@@ -388,6 +350,10 @@ const AzanScreen = () => {
     const hijriDateString = LanguageStateMonthDisplay.format(date);
 
     const [hijriDay, hijriMonth, hijriYear] = hijriDateString.split(" ");
+
+    setHijriDay(hijriDay);
+    setHijriMonth(hijriMonth);
+    setHijriYear(hijriYear);
 
     return {
       hijriDay: hijriDay,
@@ -442,73 +408,113 @@ const AzanScreen = () => {
         const storedPrayerOffset = await AsyncStorage.getItem(
           "offset_time_prayer"
         );
-        if (storedPrayerTimes && storedPrayerOffset) {
+        // Data exist and is being Fetch from Async
+        // Only will work after first install
+        if (
+          storedPrayerTimes &&
+          storedPrayerOffset &&
+          timeFormatCheck === false
+        ) {
+          // This part of code is not and will not be refactored,
+          //  because the way react deals with useEffect, it will make the data on render blemish
+          setStoredTimings(
+            timeConvertFrom24To12(
+              updatePrayerTimings(
+                removeUnwantedTimes(JSON.parse(storedPrayerTimes)),
+                JSON.parse(storedPrayerOffset)
+              )
+            )
+          );
+        }
+        if (
+          storedPrayerTimes &&
+          storedPrayerOffset &&
+          timeFormatCheck === true
+        ) {
           setStoredTimings(
             updatePrayerTimings(
               removeUnwantedTimes(JSON.parse(storedPrayerTimes)),
               JSON.parse(storedPrayerOffset)
             )
           );
-        } else {
-          setStoredTimings(removeUnwantedTimes(JSON.parse(storedPrayerTimes)));
         }
 
         const currentDate = new Date();
         const dateInfo = getDateInfo(currentDate);
-        const { currentDay, currentMonthText, currentMonth, currentYear } =
-          dateInfo;
-        setDay(currentDay);
-        setMonthText(currentMonthText);
-        setMonth(currentMonth);
-        setYear(currentYear);
+        const { currentDay, currentMonth, currentYear } = dateInfo;
 
-        const hijriDateInfo = getHijriDateInfo(currentDate);
-        const { hijriDay, hijriMonth, hijriYear } = hijriDateInfo;
-        setHijriDay(hijriDay);
-        setHijriMonth(hijriMonth);
-        setHijriYear(hijriYear);
+        try {
+          getHijriDateInfo(currentDate);
+        } catch (error) {
+          console.error("Error getting hijri data:", error);
+        }
 
+        try {
+          await OffsetSingleton.getOffsetStatus();
+        } catch (error) {
+          console.error("Error getting offset data:", error);
+        }
         // Fetch current Offset data
-        await OffsetSingleton.getOffsetStatus();
+        try {
+          const location = await locationSingleton.getLocation();
+          if (location) {
+            const { latitude, longitude } = location;
+            // Fetch prayer times using current location
+            const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
+              latitude,
+              longitude,
+              currentDay,
+              currentMonth,
+              currentYear
+            );
 
-        // Fetch current location
-        const location = await locationSingleton.getLocation();
-        if (location) {
-          const { latitude, longitude } = location;
-          // Fetch prayer times using current location
-          const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
-            latitude,
-            longitude,
-            currentDay,
-            currentMonth,
-            currentYear
-          );
-          const cleanedPrayerTimes = removeUnwantedTimes(prayerTimes);
-          if (storedPrayerTimes && storedPrayerOffset) {
-            setStoredTimings(
-              updatePrayerTimings(
+            const cleanedPrayerTimes = removeUnwantedTimes(prayerTimes);
+
+            if (storedPrayerTimes && storedPrayerOffset) {
+              let updatedTimings = updatePrayerTimings(
                 cleanedPrayerTimes,
                 JSON.parse(storedPrayerOffset)
-              )
-            );
+              );
+
+              if (timeFormatCheck === false) {
+                updatedTimings = timeConvertFrom24To12(updatedTimings);
+                setStoredTimings(updatedTimings);
+              }
+            } else {
+              let cleanedPrayerTimesUpdate = cleanedPrayerTimes;
+              if (timeFormatCheck === false) {
+                cleanedPrayerTimesUpdate = timeConvertFrom24To12(
+                  cleanedPrayerTimesUpdate
+                );
+                setStoredTimings(cleanedPrayerTimesUpdate);
+              }
+            }
+            try {
+              // Store updated prayer times
+              await AsyncStorage.setItem(
+                "prayer_times_of_day",
+                JSON.stringify(cleanedPrayerTimes)
+              );
+            } catch (error) {
+              console.error("Error storing prayer data:", error);
+            }
           } else {
-            setStoredTimings(cleanedPrayerTimes);
+            console.log("Location permission not granted");
           }
-          // Store updated prayer times
-          await AsyncStorage.setItem(
-            "prayer_times_of_day",
-            JSON.stringify(cleanedPrayerTimes)
-          );
-        } else {
-          console.log("Location permission not granted");
+        } catch (error) {
+          console.error("Error getting location data:", error);
         }
+        // Fetch current location
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
+    const localProperties = Localization.getCalendars()[0];
+    setTimeFormatCheck(localProperties.uses24hourClock);
+
     fetchData();
-  }, []);
+  }, [timeFormatCheck]);
   //#endregion
 
   //#region Calculate Time Left and next Prayer
@@ -518,14 +524,26 @@ const AzanScreen = () => {
       let nextPrayerTime = null;
       let minTimeDiff = Infinity;
       for (const [prayer, time] of Object.entries(storedTimings)) {
-        const [hours, minutes] = time.split(":").map(Number);
+        let [hoursStr, minutesStr, period] = time.split(/:| /);
+        let hours = parseInt(hoursStr);
+        let minutes = parseInt(minutesStr);
+
         const prayerTime = new Date(currentTime);
+
+        if (!timeFormatCheck) {
+          // 12-hour system
+          if (period === "PM" && hours !== 12) {
+            hours += 12;
+          } else if (period && period === "AM" && hours === 12) {
+            hours = 0;
+          }
+        }
         prayerTime.setHours(hours, minutes, 0, 0);
-        let  timeDiff = prayerTime - currentTime;
-       
+        let timeDiff = prayerTime - currentTime;
+
         if (timeDiff < 0) {
           timeDiff += 24 * 60 * 60 * 1000; // Add time for a full day
-        } 
+        }
 
         if (timeDiff > 0 && timeDiff < minTimeDiff) {
           nextPrayer = prayer;
@@ -533,12 +551,34 @@ const AzanScreen = () => {
           nextPrayerTime = time;
         }
       }
-      // console.log(nextPrayer,formatTime(minTimeDiff),nextPrayerTime)
       setNextPrayer(nextPrayer);
       setNextPrayerTime(nextPrayerTime);
       setTimeLeft(formatTime(minTimeDiff));
     }
-  }, [storedTimings,currentTime]);
+  }, [storedTimings, currentTime]);
+  //#endregion
+
+  //#region  convert Time from 24 Base to 12 Base
+  const timeConvertFrom24To12 = (timingToBeStored) => {
+    for (const [prayer, time] of Object.entries(timingToBeStored)) {
+      let [hours, minutes] = time.split(":").map(Number);
+      let period = "AM"; // Default period is AM
+
+      if (hours === 0 || hours === 12) {
+        period = "AM";
+        hours = 12; // 12 AM in 12-hour format
+      } else if (hours > 12) {
+        period = "PM";
+        hours %= 12; // Convert hour to 12-hour format
+      } else {
+        period = "AM"; // For hours between 1 AM and 11 AM
+      }
+      hours = (hours % 12 || 12).toString().padStart(2, "0"); // Adding leading zero if necessary
+      minutes = minutes.toString().padStart(2, "0");
+      timingToBeStored[prayer] = `${hours}:${minutes} ${period}`;
+    }
+    return timingToBeStored;
+  };
   //#endregion
 
   //#region adding offset timings to stored timings
@@ -560,8 +600,8 @@ const AzanScreen = () => {
       updatedHours += Math.floor(updatedMinutes / 60);
       updatedMinutes = (updatedMinutes + 1440) % 60; // Adding 1440 to handle negative values and ensuring positive minutes
 
-      // Adjust hours if they exceed 24 or are negative
-      updatedHours = (updatedHours + 24) % 24; // Adding 24 to handle negative values and ensuring positive hours
+      // Adjust hours if they exceed (24||12) or are negative
+      updatedHours = (updatedHours + 24) % 24;
 
       // Format the updated time
       const updatedTime = `${String(updatedHours).padStart(2, "0")}:${String(
@@ -598,23 +638,22 @@ const AzanScreen = () => {
   }, []);
   //#endregion
 
-  //#region changing minutes change state
   const [storedTimingsUpdated, setStoredTimingsUpdated] = useState(false);
 
   //#region update stored timings and trigger re-render
   const updateStoredTimings = (storedPrayerTimes, existingData) => {
     // Fetch stored prayer times
-    console.log("offset data :", existingData);
-    const updatedTimings = updatePrayerTimings(
+
+    let updatedTimings = updatePrayerTimings(
       removeUnwantedTimes(JSON.parse(storedPrayerTimes)),
       JSON.parse(existingData)
     );
-    console.log("Updated Timings:", updatedTimings); // Log the updated timings
-
+    if (timeFormatCheck === false) {
+      updatedTimings = timeConvertFrom24To12(updatedTimings);
+    }
     // Update stored timings state
     setStoredTimings(updatedTimings);
     setStoredTimingsUpdated(true);
-    console.log("Stored Timings Updated:", updatedTimings);
   };
   //#endregion
 
@@ -664,28 +703,18 @@ const AzanScreen = () => {
           // If prayer exists, update its value with the newer data
           parsedData[prayer] = selectedTime;
           newData = JSON.stringify(parsedData);
-          console.log(
-            `${newData}. Existing data exists, updated the prayer data.`
-          );
         } else {
           // If prayer doesn't exist, add it to the existing data
           parsedData[prayer] = selectedTime;
           newData = JSON.stringify(parsedData);
-          console.log(
-            `${newData}. Existing data exists, added the prayer data.`
-          );
         }
       } else {
         // If no existing data, set newData to the new data only
         newData = JSON.stringify(dataToStore);
-        console.log(
-          `${newData}. No existing data, set newData to the new data only.`
-        );
       }
 
       // Save the updated data to AsyncStorage
       await AsyncStorage.setItem("offset_time_prayer", newData);
-      console.log("Data saved to AsyncStorage successfully.");
 
       const newDataFetch = await AsyncStorage.getItem("offset_time_prayer");
       const storedPrayerTimes = await AsyncStorage.getItem(
@@ -704,13 +733,13 @@ const AzanScreen = () => {
   //#region animation
   const [animatedValue] = useState(new Animated.Value(0));
   const AnimationBackgroundTheme = getColorForTheme(
-      {
-        dark:  ["hsl(0, 0%, 29.8%)", "hsl(0, 0%, 17.8%)"],
-        light: ["hsl(0, 0%, 94.9%)", "hsl(0, 0%, 90.2%)"],
-      },
-      selectedTheme,
-      systemTheme
-    );
+    {
+      dark: ["hsl(0, 0%, 29.8%)", "hsl(0, 0%, 17.8%)"],
+      light: ["hsl(0, 0%, 94.9%)", "hsl(0, 0%, 90.2%)"],
+    },
+    selectedTheme,
+    systemTheme
+  );
   useEffect(() => {
     startAnimation();
   }, []);
@@ -750,13 +779,18 @@ const AzanScreen = () => {
               selectedLanguage={selectedLanguage}
             />
           ) : (
-            <AzanComponents.NextPrayerInfoArabic nextPrayer={nextPrayer} timeLeft={timeLeft} selectedLanguage={selectedLanguage}/>
+            <AzanComponents.NextPrayerInfoArabic
+              nextPrayer={nextPrayer}
+              timeLeft={timeLeft}
+              selectedLanguage={selectedLanguage}
+            />
           )}
 
           <Text style={styles.time}>
-          {state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(nextPrayerTime)
-                                : nextPrayerTime}</Text>
+            {state.isArabicNumbers
+              ? convertToEasternArabicNumerals(nextPrayerTime)
+              : nextPrayerTime}
+          </Text>
         </View>
       ) : (
         <View style={styles.nextPrayerContainer}>
@@ -780,9 +814,17 @@ const AzanScreen = () => {
           {day && monthText && year ? (
             <>
               {selectedLanguage != "Arabic" ? (
-                <AzanComponents.DateInfoEnglish monthText={monthText} day={day} year={year} />
+                <AzanComponents.DateInfoEnglish
+                  monthText={monthText}
+                  day={day}
+                  year={year}
+                />
               ) : (
-                <AzanComponents.DateInfoArabic monthText={monthText} day={day} year={year} />
+                <AzanComponents.DateInfoArabic
+                  monthText={monthText}
+                  day={day}
+                  year={year}
+                />
               )}
             </>
           ) : (
@@ -798,9 +840,17 @@ const AzanScreen = () => {
           {dayHijri && monthHijri && yearTextHijri ? (
             <>
               {selectedLanguage != "Arabic" ? (
-                <AzanComponents.DateHijriInfoEnglish dayHijri={dayHijri} monthHijri={monthHijri} yearTextHijri={yearTextHijri} />
+                <AzanComponents.DateHijriInfoEnglish
+                  dayHijri={dayHijri}
+                  monthHijri={monthHijri}
+                  yearTextHijri={yearTextHijri}
+                />
               ) : (
-                <AzanComponents.DateHijriInfoArabic dayHijri={dayHijri} monthHijri={monthHijri} yearTextHijri={yearTextHijri} />
+                <AzanComponents.DateHijriInfoArabic
+                  dayHijri={dayHijri}
+                  monthHijri={monthHijri}
+                  yearTextHijri={yearTextHijri}
+                />
               )}
             </>
           ) : (
@@ -820,82 +870,208 @@ const AzanScreen = () => {
               ([prayer, time], index, array) => (
                 <View key={prayer}>
                   <TouchableOpacity
+                  activeOpacity={0.7}
                     onPress={() => {
                       setActivePicker(prayer);
                     }}
                   >
                     {/* Background */}
-                    <Modal
-                      visible={activePicker === prayer}
-                      animationType="fade"
-                      transparent={true}
-                    >
-                      <View
-                        style={[
-                          {
-                            flex: 1,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                          },
-                        ]}
-                      ></View>
-                      <Modal
-                        visible={activePicker === prayer}
-                        animationType="slide"
-                        transparent={true}
-                      >
-                        <View style={styles.pikerContainerWrapper}>
-                          <TouchableOpacity
-                            style={{ flex: 1 }}
-                            onPress={handleCloseModal}
-                          />
-                          <View style={styles.pikerContainer}>
-                          <Text style={[{color:"#666",fontFamily:"Montserrat",margin:5,paddingTop:10,paddingLeft:10}]}>{prayer} Precaution</Text>
-                            <Picker
-                              selectedValue={selectedMinutes[prayer]}
-                              onValueChange={(minutes) =>
-                                handleMinutesChange(prayer, minutes)
-                              }
-                              mode="dropdown"
-                            >
-                              {Array.from(
-                                { length: 61 },
-                                (_, index) => index - 30
-                              ).map((minute) => (
-                                <Picker.Item
-                                  key={minute}
-                                  label={minute}
-                                  value={minute}
-                                  color={NumberPickerTheme}
-                                />
-                              ))}
-                            </Picker>
-                            <View
-                              style={[
-                                styles.horizontalLine,
-                                { borderColor: horizontalLineTheme },
-                              ]}
+                    {Platform.OS === "android" ? (
+                      <>
+                        <Modal
+                          visible={activePicker === prayer}
+                          animationType="fade"
+                          transparent={true}
+                          style={{
+                            zIndex: 1000, // Higher zIndex for parent modal
+                          }}
+                        >
+                          <View
+                            style={[
+                              {
+                                flex: 1,
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              },
+                            ]}
+                          ></View>
+                        </Modal>
+                        <Modal
+                          visible={activePicker === prayer}
+                          animationType="slide"
+                          transparent={true}
+                          style={[
+                            {
+                              flex: 1,
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              zIndex: 2000,
+                            },
+                          ]}
+                        >
+                          <View style={styles.pikerContainerWrapper}>
+                            <TouchableOpacity
+                              style={{ flex: 1 }}
+                              onPress={handleCloseModal}
                             />
-                            <View style={styles.pickerConfirmBtn}>
+                            <View style={styles.pikerContainer}>
+                              <Text
+                                style={[
+                                  {
+                                    color: "#666",
+                                    fontFamily: "Montserrat",
+                                    margin: 5,
+                                    paddingTop: 10,
+                                    paddingLeft: 10,
+                                  },
+                                ]}
+                              >
+                                {prayer} Precaution
+                              </Text>
+                              <Picker
+                                selectedValue={selectedMinutes[prayer]}
+                                onValueChange={(minutes) =>
+                                  handleMinutesChange(prayer, minutes)
+                                }
+                                mode="dialog"
+                              >
+                                {Array.from(
+                                  { length: 61 },
+                                  (_, index) => index - 30
+                                ).map((minute) => (
+                                  <Picker.Item
+                                    key={minute}
+                                    label={minute}
+                                    value={minute}
+                                    color={NumberPickerTheme}
+                                    style={{
+                                      color: "#252525",
+                                      fontSize: 28,
+                                    }}
+                                  />
+                                ))}
+                              </Picker>
+                              <View
+                                style={[
+                                  styles.horizontalLine,
+                                  { borderColor: horizontalLineTheme },
+                                ]}
+                              />
+                              <View style={styles.pickerConfirmBtn}>
+                                <Button
+                                  title="Confirm"
+                                  onPress={() => handleConfirm(prayer)}
+                                />
+                              </View>
+                            </View>
+                            <View style={styles.pickerCancelBtn}>
                               <Button
-                                title="Confirm"
-                                onPress={() => handleConfirm(prayer)}
+                                title="Cancel"
+                                onPress={handleCloseModal}
                               />
                             </View>
                           </View>
-                          <View style={styles.pickerCancelBtn}>
-                            <Button title="Cancel" onPress={handleCloseModal} />
-                          </View>
-                        </View>
-                      </Modal>
-                    </Modal>
+                        </Modal>
+                      </>
+                    ) : (
+                      <>
+                        <Modal
+                          visible={activePicker === prayer}
+                          animationType="fade"
+                          transparent={true}
+                        >
+                          <View
+                            style={[
+                              {
+                                flex: 1,
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              },
+                            ]}
+                          ></View>
 
+                          <Modal
+                            visible={activePicker === prayer}
+                            animationType="slide"
+                            transparent={true}
+                            style={[
+                              {
+                                flex: 1,
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                              },
+                            ]}
+                          >
+                            <View style={styles.pikerContainerWrapper}>
+                              <TouchableOpacity
+                                style={{ flex: 1 }}
+                                onPress={handleCloseModal}
+                              />
+                              <View style={styles.pikerContainer}>
+                                <Text
+                                  style={[
+                                    {
+                                      color: "#666",
+                                      fontFamily: "Montserrat",
+                                      margin: 5,
+                                      paddingTop: 10,
+                                      paddingLeft: 10,
+                                    },
+                                  ]}
+                                >
+                                  {prayer} Precaution
+                                </Text>
+                                <Picker
+                                  selectedValue={selectedMinutes[prayer]}
+                                  onValueChange={(minutes) =>
+                                    handleMinutesChange(prayer, minutes)
+                                  }
+                                  mode="dialog"
+                                >
+                                  {Array.from(
+                                    { length: 61 },
+                                    (_, index) => index - 30
+                                  ).map((minute) => (
+                                    <Picker.Item
+                                      key={minute}
+                                      label={minute}
+                                      value={minute}
+                                      color={NumberPickerTheme}
+                                      style={{
+                                        color: "#252525",
+                                        fontSize: 28,
+                                      }}
+                                    />
+                                  ))}
+                                </Picker>
+                                <View
+                                  style={[
+                                    styles.horizontalLine,
+                                    { borderColor: horizontalLineTheme },
+                                  ]}
+                                />
+                                <View style={styles.pickerConfirmBtn}>
+                                  <Button
+                                    title="Confirm"
+                                    onPress={() => handleConfirm(prayer)}
+                                  />
+                                </View>
+                              </View>
+                              <View style={styles.pickerCancelBtn}>
+                                <Button
+                                  title="Cancel"
+                                  onPress={handleCloseModal}
+                                />
+                              </View>
+                            </View>
+                          </Modal>
+                        </Modal>
+                      </>
+                    )}
                     {/* Prayer Item */}
                     <View
                       style={[
                         styles.prayerItem,
                         prayer === nextPrayer ? styles.prayerDecorator : null,
                         selectedLanguage !== "Arabic"
-                        ?{flexDirection:"row"}:{flexDirection:"row-reverse"}
+                          ? { flexDirection: "row" }
+                          : { flexDirection: "row-reverse" },
                       ]}
                     >
                       <Text
@@ -907,7 +1083,6 @@ const AzanScreen = () => {
                         {selectedLanguage !== "Arabic"
                           ? prayer // Display English prayer name
                           : AzanComponents.mapPrayerNameToArabic(prayer)}
-                        
                       </Text>
                       <Text
                         style={[
@@ -915,10 +1090,9 @@ const AzanScreen = () => {
                           prayer === nextPrayer ? styles.boldTime : null,
                         ]}
                       >
-                                {state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(time.toString())
-                                : time.toString()}
-        
+                        {state.isArabicNumbers
+                          ? convertToEasternArabicNumerals(time.toString())
+                          : time.toString()}
                       </Text>
                     </View>
                     {index !== array.length - 1 && (
@@ -954,4 +1128,3 @@ const AzanScreen = () => {
 };
 
 export default AzanScreen;
-

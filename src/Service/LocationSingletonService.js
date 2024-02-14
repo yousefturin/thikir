@@ -5,7 +5,7 @@ const locationSingleton = {
     location: null,
     async getLocation() {
         console.log("=============================================")
-        console.log("I am starting the Singleton case");
+        console.log("I am starting the Singleton case for Location");
         if (!this.location) {
             try {
                 const { status } = await Location.requestForegroundPermissionsAsync();
@@ -13,9 +13,9 @@ const locationSingleton = {
                     console.log("Permission to access location was denied");
                     return null; // Return null if permission is not granted
                 }
+                console.log("Exiting Singleton case for Location ");
                 const { coords } = await Location.getCurrentPositionAsync({});
                 this.location = coords;
-                console.log("I am starting the Singleton case but leaving");
             } catch (error) {
                 console.error("Error getting location", error);
                 return null; // Return null if there's an error

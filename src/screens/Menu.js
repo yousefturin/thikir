@@ -27,13 +27,14 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray",
     },
     buttonText: {
       color: "#000",
     },
     iconWrapper: {
       backgroundColor: "#e9e9ea",
-      shadowColor: "white",
+      shadowColor: "gray",
     },
     horizontalLine: {
       borderColor: "#fefffe",
@@ -48,6 +49,7 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
+      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",

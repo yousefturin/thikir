@@ -21,6 +21,13 @@ export const MainStyles = StyleSheet.create({
     backgroundColor: "#454545",
     borderRadius: 10,
     padding: 5,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   nameWrapper: {
     width: "70%",
@@ -33,6 +40,13 @@ export const MainStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#fff",
@@ -86,7 +100,14 @@ export const AboutStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
-    paddingVertical: 20
+    paddingVertical: 20,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -138,6 +159,13 @@ export const DuaVerseStyles = StyleSheet.create({
     marginTop: 20,
     width: "90%",
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -221,6 +249,13 @@ export const QuranVerseStyles = StyleSheet.create({
     marginTop: 20,
     width: "90%",
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -315,6 +350,13 @@ export const HomeStyles = StyleSheet.create({
   },
   searchBarInputContainer: {
     backgroundColor: "#262626",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   searchBarInput: {
     backgroundColor: "#262626",
@@ -338,6 +380,13 @@ export const HomeStyles = StyleSheet.create({
     backgroundColor: "#262626",
     alignItems: "center",
     justifyContent: "space-evenly",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#dddddd",
@@ -382,6 +431,13 @@ export const HomeStyles = StyleSheet.create({
     paddingBottom: 10,
     marginBottom: 20,
     borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonTextTop: {
     color: "#dddddd",
@@ -437,6 +493,13 @@ export const ThikirAlarmStyles = StyleSheet.create({
     width: "91%",
     height: 60,
     paddingHorizontal: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   leftContent: {
     flexDirection: "column",
@@ -489,6 +552,13 @@ export const GenericStyles = StyleSheet.create({
     backgroundColor: "#262626",
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   button: {
     height: "50%",
@@ -500,6 +570,13 @@ export const GenericStyles = StyleSheet.create({
     borderColor: "#151515",
     justifyContent: "center",
     alignContent: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   textcount: {
     textAlign: "center",
@@ -519,6 +596,13 @@ export const GenericStyles = StyleSheet.create({
     padding: 50,
     marginTop: 20,
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
 
   },
   scrollContainer: {
@@ -671,6 +755,13 @@ export const SettingStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     width: "90%",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   wrapHeaderText: {
     width: '90%',
@@ -823,6 +914,13 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 40,
     textAlign: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   nameDisplay:{
     fontSize: 42, 
@@ -907,6 +1005,13 @@ export const TasbehScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#262626',
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   duplica: {
     width: 200, 
@@ -928,13 +1033,20 @@ export const TasbehScreenStyle = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#262626",
     overflow: "hidden",
-
+    shadowColor: "black", 
+    shadowOffset: {
+      width: -2,
+      height: 2.2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   thikirNameDispaly: {
     textAlign: "center",
     fontFamily:"ScheherazadeNewBold",
     fontSize: 18,
     paddingHorizontal:10,
+    
   },
   pickThikirText: {
     textAlign: "center",
@@ -950,6 +1062,13 @@ export const TasbehScreenStyle = StyleSheet.create({
     position: "absolute",
     top: 7,
     left: "50%",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
   },
   ThikirNewText: {
     color: "#007AFF",
@@ -988,12 +1107,26 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "white",
     backgroundColor: "#262626",
     borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   modaldisplay: {
     flexDirection: "row-reverse",
     alignItems: "flex-start",
     justifyContent: "space-between",
     marginVertical: 5,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   rectangle: {
     backgroundColor: "#151515",
@@ -1106,13 +1239,13 @@ export const AzanScreenStyle  = StyleSheet.create({
     padding: 10,
     backgroundColor: "#262626",
     borderRadius: 10,
-    shadowColor: "black",
+    shadowColor: "black", 
     shadowOffset: {
-      width: -2,
-      height: 4,
+      width: 0,
+      height: 2.2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
     marginVertical: 20,
   },
   time: {
@@ -1141,13 +1274,13 @@ export const AzanScreenStyle  = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#262626",
     borderRadius: 10,
-    shadowColor: "black",  
+    shadowColor: "black", 
     shadowOffset: {
-      width: -2,
-      height: 4,
+      width: 0,
+      height: 2.2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   date: {
     fontFamily: "Montserrat",
@@ -1162,13 +1295,13 @@ export const AzanScreenStyle  = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: "#262626",
     borderRadius: 10,
-    shadowColor: "black",
+    shadowColor: "black", 
     shadowOffset: {
-      width: -2,
-      height: 4,
+      width: 0,
+      height: 2.2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   prayerItem: {
     flexDirection: "row",
@@ -1205,11 +1338,11 @@ export const AzanScreenStyle  = StyleSheet.create({
     borderRadius: 10,
     shadowColor: "black", 
     shadowOffset: {
-      width: -2,
-      height: 4,
+      width: 0,
+      height: 2.2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   noTimings: {
     fontFamily: "Montserrat",
