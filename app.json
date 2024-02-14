@@ -26,10 +26,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage":  "./assets/Images/splashEntro.png",
+        "foregroundImage": "./assets/Images/splashEntro.png",
         "backgroundColor": "#151515"
       },
-      "permissions": ["android.permission.NOTIFICATION"]
+      "permissions": [
+        "android.permission.NOTIFICATION"
+      ]
     },
     "web": {
       "favicon": "./assets/Images/icon.png"
@@ -44,6 +46,9 @@
     },
     "updates": {
       "url": "https://u.expo.dev/82006e3a-5c19-4949-9631-069673d77d93"
-    }
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }
