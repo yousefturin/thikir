@@ -41,10 +41,12 @@ const GenericPage = ({ route }) => {
         circularButton: {
             borderColor: "#151515",
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         button: {
             backgroundColor: "#fefffe",
             borderColor: "#151515",
+            shadowColor: "gray", 
         },
         textcount: {
             textAlign: "center",
@@ -52,6 +54,7 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         title: {
             color: "#000",
@@ -84,10 +87,12 @@ const GenericPage = ({ route }) => {
         circularButton: {
             borderColor: "#151515",
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         button: {
             backgroundColor: "#262626",
             borderColor: "#151515",
+            shadowColor: "black", 
         },
         textcount: {
             textAlign: "center",
@@ -95,6 +100,7 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         title: {
             color: "white",
