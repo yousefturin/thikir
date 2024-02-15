@@ -13,22 +13,22 @@ import { handleShare } from "../Service/ShareService";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemeContext";
 import { useFont } from "../context/FontContext";
-import { useColor } from '../context/ColorContext';
-import { useNumberContext } from '../context/NumberContext'
+import { useColor } from "../context/ColorContext";
+import { useNumberContext } from "../context/NumberContext";
 import { useLanguage } from "../context/LanguageContext";
 import { GenericStyles } from "../Styles/commonStyles";
 import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getColorForTheme } from "../utils/themeUtils";
+import SvgComponent from "../../assets/Svg/svgComponents";
 
 const GenericPage = ({ route }) => {
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
-    const { selectedColor} = useColor();
-    const systemTheme = selectedTheme === 'system';
-    const { state, convertToEasternArabicNumerals } = useNumberContext(); 
+    const { selectedColor } = useColor();
+    const systemTheme = selectedTheme === "system";
+    const { state, convertToEasternArabicNumerals } = useNumberContext();
     const { selectedLanguage } = useLanguage();
-
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -41,12 +41,12 @@ const GenericPage = ({ route }) => {
         circularButton: {
             borderColor: "#151515",
             backgroundColor: "#fefffe",
-            shadowColor: "gray", 
+            shadowColor: "gray",
         },
         button: {
             backgroundColor: "#fefffe",
             borderColor: "#151515",
-            shadowColor: "gray", 
+            shadowColor: "gray",
         },
         textcount: {
             textAlign: "center",
@@ -54,7 +54,7 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#fefffe",
-            shadowColor: "gray", 
+            shadowColor: "gray",
         },
         title: {
             color: "#000",
@@ -68,8 +68,7 @@ const GenericPage = ({ route }) => {
         InfoReptTime: {
             color: "#f2b784",
         },
-        ControlPaneBackground: {
-        },
+        ControlPaneBackground: {},
         horizontalLine: {
             borderColor: "#f2f2f6",
         },
@@ -87,12 +86,12 @@ const GenericPage = ({ route }) => {
         circularButton: {
             borderColor: "#151515",
             backgroundColor: "#262626",
-            shadowColor: "black", 
+            shadowColor: "black",
         },
         button: {
             backgroundColor: "#262626",
             borderColor: "#151515",
-            shadowColor: "black", 
+            shadowColor: "black",
         },
         textcount: {
             textAlign: "center",
@@ -100,7 +99,7 @@ const GenericPage = ({ route }) => {
         },
         rectangle: {
             backgroundColor: "#262626",
-            shadowColor: "black", 
+            shadowColor: "black",
         },
         title: {
             color: "white",
@@ -114,8 +113,7 @@ const GenericPage = ({ route }) => {
         InfoReptTime: {
             color: "#f2b784",
         },
-        ControlPaneBackground: {
-        },
+        ControlPaneBackground: {},
         horizontalLine: {
             borderColor: "#151515",
         },
@@ -126,63 +124,77 @@ const GenericPage = ({ route }) => {
         { dark: darkTheme, light: lightTheme },
         selectedTheme,
         systemTheme
-      );
+    );
     //#region StyleMapping
     const styles = {
         ...GenericStyles,
         container: {
             ...GenericStyles.container,
-            ...(selectedTheme  === 'dark'? themeStyles.container : themeStyles.container),
+            ...(selectedTheme === "dark"
+                ? themeStyles.container
+                : themeStyles.container),
         },
         containerforshare: {
             ...GenericStyles.containerforshare,
-            ...(selectedTheme === 'dark'
+            ...(selectedTheme === "dark"
                 ? themeStyles.containerforshare
                 : themeStyles.containerforshare),
         },
         circularButton: {
             ...GenericStyles.circularButton,
-            ...(selectedTheme  === 'dark'? themeStyles.circularButton : themeStyles.circularButton),
+            ...(selectedTheme === "dark"
+                ? themeStyles.circularButton
+                : themeStyles.circularButton),
         },
         button: {
             ...GenericStyles.button,
-            ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button),
+            ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button),
         },
         textcount: {
             ...GenericStyles.textcount,
-            ...(selectedTheme === 'dark' ? themeStyles.textcount : themeStyles.textcount),
+            ...(selectedTheme === "dark"
+                ? themeStyles.textcount
+                : themeStyles.textcount),
         },
         rectangle: {
             ...GenericStyles.rectangle,
-            ...(selectedTheme === 'dark' ? themeStyles.rectangle : themeStyles.rectangle),
+            ...(selectedTheme === "dark"
+                ? themeStyles.rectangle
+                : themeStyles.rectangle),
         },
         title: {
             ...GenericStyles.title,
-            ...(selectedTheme  === 'dark'? themeStyles.title : themeStyles.title),
+            ...(selectedTheme === "dark" ? themeStyles.title : themeStyles.title),
         },
         description: {
             ...GenericStyles.description,
-            ...(selectedTheme  === 'dark'? themeStyles.description : themeStyles.description),
+            ...(selectedTheme === "dark"
+                ? themeStyles.description
+                : themeStyles.description),
         },
         InfoReptTimeIndex: {
             ...GenericStyles.InfoReptTimeIndex,
-            ...(selectedTheme === 'dark'
+            ...(selectedTheme === "dark"
                 ? themeStyles.InfoReptTimeIndex
                 : themeStyles.InfoReptTimeIndex),
         },
         InfoReptTime: {
             ...GenericStyles.InfoReptTime,
-            ...(selectedTheme === 'dark' ? themeStyles.InfoReptTime : themeStyles.InfoReptTime),
+            ...(selectedTheme === "dark"
+                ? themeStyles.InfoReptTime
+                : themeStyles.InfoReptTime),
         },
         ControlPaneBackground: {
             ...GenericStyles.ControlPaneBackground,
-            ...(selectedTheme === 'dark'
+            ...(selectedTheme === "dark"
                 ? themeStyles.ControlPaneBackground
                 : themeStyles.ControlPaneBackground),
         },
         horizontalLine: {
             ...GenericStyles.horizontalLine,
-            ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
+            ...(selectedTheme === "dark"
+                ? themeStyles.horizontalLine
+                : themeStyles.horizontalLine),
         },
     };
     //#endregion
@@ -195,15 +207,19 @@ const GenericPage = ({ route }) => {
     const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
     const [maxPadding, setMaxPadding] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
+    const [isTranslation, setIsTranslation] = useState(false);
 
+    const handleButtonPressTranslation = () => {
+        setIsTranslation(!isTranslation);
+    };
     const ControlPaneBackgroundImage = getColorForTheme(
         {
-          dark: require("../../assets/Images/HeaderBackground.jpg"),
-          light: require("../../assets/Images/HeaderBackgroundLight.jpg"),
+            dark: require("../../assets/Images/HeaderBackground.jpg"),
+            light: require("../../assets/Images/HeaderBackgroundLight.jpg"),
         },
         selectedTheme,
         systemTheme
-      );
+    );
     const viewRef = React.useRef();
     //#endregion
 
@@ -217,8 +233,14 @@ const GenericPage = ({ route }) => {
         const subItemName = item.subItems[currentIndex].subItemDescription;
         const subItemDescription = item.subItems[currentIndex].subItemName;
         // Remove non-printable characters and control characters
-        const sanitizedDescription = selectedLanguage != "Arabic" ? subItemDescription :  subItemDescription.replace(/[-~]+/g, "")
-        const sanitizedName = selectedLanguage != "Arabic" ? subItemName : subItemName.replace(/[-~]+/g, "")
+        const sanitizedDescription =
+            selectedLanguage != "Arabic"
+                ? subItemDescription
+                : subItemDescription.replace(/[-~]+/g, "");
+        const sanitizedName =
+            selectedLanguage != "Arabic"
+                ? subItemName
+                : subItemName.replace(/[-~]+/g, "");
         console.log(
             "sanitized subItemDescription length is:",
             sanitizedDescription.length
@@ -237,7 +259,6 @@ const GenericPage = ({ route }) => {
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         } else if (sanitizedDescription.length > 600) {
-
             MaxFontSize = 17;
             maxPadding = 30;
             maxpaddingHorizontal = 10;
@@ -252,7 +273,6 @@ const GenericPage = ({ route }) => {
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 290) {
-
             maxpaddingHorizontal = 10;
             maxPadding = 30;
         } else if (sanitizedDescription.length > 200) {
@@ -263,7 +283,7 @@ const GenericPage = ({ route }) => {
             maxPadding = 30;
             maxpaddingHorizontal = 10;
         }
-        console.log( MaxFontSize, maxPadding, maxpaddingHorizontal);
+        console.log(MaxFontSize, maxPadding, maxpaddingHorizontal);
         setMaxFontSizeDescription(MaxFontSize);
         setMaxPadding(maxPadding);
         setMaxpaddingHorizontal(maxpaddingHorizontal);
@@ -340,7 +360,7 @@ const GenericPage = ({ route }) => {
         isSwiping = true;
     };
     //#endregion
-    
+
     const [isFilled, setIsFilled] = useState(false);
 
     //#region buttonToFavController
@@ -402,101 +422,213 @@ const GenericPage = ({ route }) => {
                         style={[
                             styles.rectangle,
                             {
-                                padding: maxPadding,
-                                paddingHorizontal: maxpaddingHorizontal,
+                                // padding: maxPadding,
+                                paddingHorizontal: 10,
                             },
                         ]}
                     >
-                    <ScrollView
-                        contentContainerStyle={styles.scrollContainer}
-                        showsVerticalScrollIndicator={false}
-                    >
-                    <TouchableOpacity activeOpacity={1}>
-                        <Text style={[styles.title, { fontSize: MaxFontSizeDescription,
-                        fontFamily: (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                    (selectedLanguage === "English" && selectedFont === "MeQuran") ? "TimesRoman" :
-                                    (selectedLanguage === "English" && selectedFont === "Hafs") ? "lexend" :
-                                    selectedFont,
-                        textAlign:  selectedLanguage != "Arabic"? "left":"center"}]}>
-                        {subItemNameToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemName.toString())
-                                : item.subItems[currentIndex].subItemName.toString()}
-                        </Text>
-                        </TouchableOpacity>
-                        </ScrollView>
-                        {selectedLanguage != "Arabic" ? (
-                            <View style={[styles.horizontalLine,{paddingTop:5}]} />
-                        ) : (
-                            null
-                        )}
-                        {selectedLanguage != "Arabic" ? (
-                            <Text style={[styles.TranslationDescription,{fontSize:14,}]}>Translation:</Text>
-                        ) : (
-                            null
-                        )}
-                        {selectedLanguage != "Arabic" ? (
                         <ScrollView
-                            contentContainerStyle={styles.scrollContainerDescription}
+                            contentContainerStyle={styles.scrollContainer}
                             showsVerticalScrollIndicator={false}
                         >
-                        <TouchableOpacity activeOpacity={1}>
-                            
-                        <Text style={[styles.description,{fontSize:14,textAlign:selectedLanguage != "arabic"?  "left" : "center",
-                        fontFamily: (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") ? "Montserrat" :
-                                    (selectedLanguage === "English" && selectedFont === "MeQuran") ? "TimesRoman" :
-                                    (selectedLanguage === "English" && selectedFont === "Hafs") ? "lexend" :
-                                    selectedFont}]}>
-                            {subItemDescriptionToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemTranslation.toString())
-                                : item.subItems[currentIndex].subItemTranslation.toString()}
-                        </Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity activeOpacity={1}>
+                                <Text
+                                    style={[
+                                        styles.title,
+                                        {
+                                            fontSize: MaxFontSizeDescription,
+                                            fontFamily:
+                                                selectedLanguage === "English" &&
+                                                    selectedFont === "ScheherazadeNew"
+                                                    ? "Montserrat"
+                                                    : selectedLanguage === "English" &&
+                                                        selectedFont === "MeQuran"
+                                                        ? "TimesRoman"
+                                                        : selectedLanguage === "English" &&
+                                                            selectedFont === "Hafs"
+                                                            ? "lexend"
+                                                            : selectedFont,
+                                            textAlign:
+                                                selectedLanguage != "Arabic" ? "left" : "center",
+                                        },
+                                    ]}
+                                >
+                                    {
+                                        (subItemNameToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(
+                                                item.subItems[currentIndex].subItemName.toString()
+                                            )
+                                            : item.subItems[currentIndex].subItemName.toString())
+                                    }
+                                </Text>
+                            </TouchableOpacity>
                         </ScrollView>
-                        ) : (
-                            null
-                        )}
-                        <View style={[styles.horizontalLine,{paddingTop:5}]} />
+                        {selectedLanguage != "Arabic" ? (
+                            <View style={[styles.horizontalLine, { paddingTop: 5,marginBottom:5 }]} />
+                        ) : null}
+                        {selectedLanguage != "Arabic" ? (
+                            
+                                <TouchableOpacity
+                                    activeOpacity={1}
+                                    style={{
+                                        paddingVertical: 5,
+                                        alignItems:"center",
+                                        flexDirection: "row", 
+                                        width:"100%",
+                                        justifyContent:"flex-start"
+                                    }}
+                                    onPress={handleButtonPressTranslation}
+                                    >
+                                    <View style={{ width:"5%"}}>
+                                    <SvgComponent svgKey="TranslationSVG" />    
+                                    </View>
+                                    <Text
+                                        style={[styles.TranslationDescription, { fontSize: 14 ,textAlign:"left",}]}
+                                    >
+                                        Translation
+                                    </Text>
+                                </TouchableOpacity>
+                           
+                        ) : null}
+                        {selectedLanguage != "Arabic" ? (
+                            <ScrollView
+                                contentContainerStyle={[
+                                    styles.scrollContainerDescription,
+                                    { display: isTranslation ? "flex" : "none" },
+                                ]}
+                                showsVerticalScrollIndicator={false}
+                            >
+                                <TouchableOpacity activeOpacity={1}>
+                                    <Text
+                                        style={[
+                                            styles.description,
+                                            {
+                                                fontSize: 14,
+                                                textAlign:
+                                                    selectedLanguage != "arabic" ? "left" : "center",
+                                                fontFamily:
+                                                    selectedLanguage === "English" &&
+                                                        selectedFont === "ScheherazadeNew"
+                                                        ? "Montserrat"
+                                                        : selectedLanguage === "English" &&
+                                                            selectedFont === "MeQuran"
+                                                            ? "TimesRoman"
+                                                            : selectedLanguage === "English" &&
+                                                                selectedFont === "Hafs"
+                                                                ? "lexend"
+                                                                : selectedFont,
+                                            },
+                                        ]}
+                                    >
+                                        {
+                                            (subItemDescriptionToDisplay = state.isArabicNumbers
+                                                ? convertToEasternArabicNumerals(
+                                                    item.subItems[
+                                                        currentIndex
+                                                    ].subItemTranslation.toString()
+                                                )
+                                                : item.subItems[
+                                                    currentIndex
+                                                ].subItemTranslation.toString())
+                                        }
+                                    </Text>
+                                </TouchableOpacity>
+                            </ScrollView>
+                        ) : null}
+                        <View style={[styles.horizontalLine, { paddingTop: 5 }]} />
 
-                        <Text allowFontScaling={false} style={[styles.description,{ paddingBottom:50,paddingTop:10}]}>
-                            {subItemDescriptionToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(item.subItems[currentIndex].subItemDescription.toString())
-                                : item.subItems[currentIndex].subItemDescription.toString()}
+                        <Text
+                            allowFontScaling={false}
+                            style={[
+                                styles.description,
+                                { paddingBottom: 50, paddingTop: 10 },
+                            ]}
+                        >
+                            {
+                                (subItemDescriptionToDisplay = state.isArabicNumbers
+                                    ? convertToEasternArabicNumerals(
+                                        item.subItems[currentIndex].subItemDescription.toString()
+                                    )
+                                    : item.subItems[currentIndex].subItemDescription.toString())
+                            }
                         </Text>
                         {selectedLanguage != "Arabic" ? (
-                            <Text 
-                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{fontFamily: "Montserrat",}]}>
-                            No:{" "}
-                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {indexToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals((currentIndex + 1).toString())
-                                : (currentIndex + 1).toString()}
-                            </Text>{"  "}
-                            Of:{" "}
-                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {totalItemsToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(item.subItems.length.toString())
-                                : item.subItems.length.toString()}
+                            <Text
+                                allowFontScaling={false}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "Montserrat" }]}
+                            >
+                                No:{" "}
+                                <Text
+                                    allowFontScaling={false}
+                                    style={[{ color: selectedColor }]}
+                                >
+                                    {
+                                        (indexToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(
+                                                (currentIndex + 1).toString()
+                                            )
+                                            : (currentIndex + 1).toString())
+                                    }
+                                </Text>
+                                {"  "}
+                                Of:{" "}
+                                <Text
+                                    allowFontScaling={false}
+                                    style={[{ color: selectedColor }]}
+                                >
+                                    {
+                                        (totalItemsToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(
+                                                item.subItems.length.toString()
+                                            )
+                                            : item.subItems.length.toString())
+                                    }
+                                </Text>
                             </Text>
-                        </Text>
                         ) : (
-                            <Text 
-                        allowFontScaling={false} style={[styles.InfoReptTimeIndex,{fontFamily: "AmiriFont",}]}>
-                            الذكر{" "}
-                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {indexToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals((currentIndex + 1).toString())
-                                : (currentIndex + 1).toString()}
-                            </Text>{" "}
-                            من{" "}
-                            <Text allowFontScaling={false} style={[{ color: selectedColor }]}>
-                                {totalItemsToDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(item.subItems.length.toString())
-                                : item.subItems.length.toString()}
+                            <Text
+                                allowFontScaling={false}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "AmiriFont" }]}
+                            >
+                                الذكر{" "}
+                                <Text
+                                    allowFontScaling={false}
+                                    style={[{ color: selectedColor }]}
+                                >
+                                    {
+                                        (indexToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(
+                                                (currentIndex + 1).toString()
+                                            )
+                                            : (currentIndex + 1).toString())
+                                    }
+                                </Text>{" "}
+                                من{" "}
+                                <Text
+                                    allowFontScaling={false}
+                                    style={[{ color: selectedColor }]}
+                                >
+                                    {
+                                        (totalItemsToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(
+                                                item.subItems.length.toString()
+                                            )
+                                            : item.subItems.length.toString())
+                                    }
+                                </Text>
                             </Text>
-                        </Text>
                         )}
-                        <Text allowFontScaling={false} style={[styles.InfoReptTime,{color:selectedColor,
-                        fontFamily:selectedLanguage!="Arabic"? "Montserrat":"AmiriFont", }]}>
+                        <Text
+                            allowFontScaling={false}
+                            style={[
+                                styles.InfoReptTime,
+                                {
+                                    color: selectedColor,
+                                    fontFamily:
+                                        selectedLanguage != "Arabic" ? "Montserrat" : "AmiriFont",
+                                },
+                            ]}
+                        >
                             {item.subItems[currentIndex].repTime}
                         </Text>
                         <TouchableOpacity
@@ -514,14 +646,23 @@ const GenericPage = ({ route }) => {
                                 />
                             </Svg>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={Share} style={styles.shareButton} activeOpacity={1}>
+                        <TouchableOpacity
+                            onPress={Share}
+                            style={styles.shareButton}
+                            activeOpacity={1}
+                        >
                             <View style={styles.dotContainer}>
-                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-                                <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                    &#8226;
+                                </Text>
+                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                    &#8226;
+                                </Text>
+                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                    &#8226;
+                                </Text>
                             </View>
                         </TouchableOpacity>
-
                     </View>
                 </View>
                 <View style={styles.controlPan}>
@@ -530,32 +671,60 @@ const GenericPage = ({ route }) => {
                         style={styles.ControlPaneBackground}
                     >
                         <TouchableWithoutFeedback
-                            onPress={selectedLanguage != "Arabic" ? prevSubItem :nextSubItem}
+                            onPress={selectedLanguage != "Arabic" ? prevSubItem : nextSubItem}
                             disabled={
-                                currentIndex === item.subItems.length - 1 &&
-                                count >= item.subItems[currentIndex].count
+                                selectedLanguage != "Arabic"
+                                    ? currentIndex === item.subItems.length + 1 &&
+                                    count >= item.subItems[currentIndex].count
+                                    : currentIndex === item.subItems.length - 1 &&
+                                    count >= item.subItems[currentIndex].count
                             }
                         >
-                             <View style={[styles.button,{borderColor:selectedColor,position:"relative"}]}>
+                            <View
+                                style={[
+                                    styles.button,
+                                    { borderColor: selectedColor, position: "relative" },
+                                ]}
+                            >
                                 {/*next button here button here*/}
                                 <FontAwesomeIcon
                                     name="angle-left"
                                     size={24}
                                     color="#454545"
-                                    style={[styles.icon,{position:"absolute",left: selectedLanguage!="Arabic"?10:15,top:"45%"}]}
+                                    style={[
+                                        styles.icon,
+                                        {
+                                            position: "absolute",
+                                            left: selectedLanguage != "Arabic" ? 10 : 15,
+                                            top: "45%",
+                                        },
+                                    ]}
                                 />
                                 {selectedLanguage != "Arabic" ? (
-                                    <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily:  "Montserrat" }]}>
-                                    Back Thikir
-                                </Text>
+                                    <Text
+                                        allowFontScaling={false}
+                                        style={[
+                                            styles.textcount,
+                                            {
+                                                fontFamily: "Montserrat",
+                                            },
+                                        ]}
+                                    >
+                                        Back Thikir
+                                    </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily:  "AmiriFont" }]}>
-                                            الذكر التالي
-                                        </Text>
+                                    <Text
+                                        allowFontScaling={false}
+                                        style={[
+                                            styles.textcount,
+                                            {
+                                                fontFamily: "AmiriFont",
+                                            },
+                                        ]}
+                                    >
+                                        الذكر التالي
+                                    </Text>
                                 )}
-
                             </View>
                         </TouchableWithoutFeedback>
                         {/* Display the circular count */}
@@ -566,11 +735,26 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={[styles.circularButton,{ borderColor:selectedColor}]}>
-                                <Text style={[styles.textcount,{fontFamily:selectedLanguage!="Arabic"? "Montserrat":"ScheherazadeNew",}]}>
-                                {countDisplay = state.isArabicNumbers
-                                ? convertToEasternArabicNumerals(count.toString())
-                                : count.toString()}</Text>
+                            <View
+                                style={[styles.circularButton, { borderColor: selectedColor }]}
+                            >
+                                <Text
+                                    style={[
+                                        styles.textcount,
+                                        {
+                                            fontFamily:
+                                                selectedLanguage != "Arabic"
+                                                    ? "Montserrat"
+                                                    : "ScheherazadeNew",
+                                        },
+                                    ]}
+                                >
+                                    {
+                                        (countDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(count.toString())
+                                            : count.toString())
+                                    }
+                                </Text>
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback
@@ -580,35 +764,53 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={[styles.button,{borderColor:selectedColor}]}>
+                            <View style={[styles.button, { borderColor: selectedColor }]}>
                                 {/*back button here*/}
                                 {selectedLanguage != "Arabic" ? (
-                                    <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: "Montserrat" }]}>
-                                    Next Thikir
-                                </Text>
+                                    <Text
+                                        allowFontScaling={false}
+                                        style={[
+                                            styles.textcount,
+                                            {
+                                                fontFamily: "Montserrat",
+                                            },
+                                        ]}
+                                    >
+                                        Next Thikir
+                                    </Text>
                                 ) : (
-                                    <Text allowFontScaling={false} style={[styles.textcount,{
-                                    fontFamily: "AmiriFont" }]}>
-                                    الذكر السابق
-                                </Text>
+                                    <Text
+                                        allowFontScaling={false}
+                                        style={[
+                                            styles.textcount,
+                                            {
+                                                fontFamily: "AmiriFont",
+                                            },
+                                        ]}
+                                    >
+                                        الذكر السابق
+                                    </Text>
                                 )}
 
                                 <FontAwesomeIcon
                                     name="angle-right"
                                     size={24}
                                     color="#454545"
-                                    style={[styles.icon,{position:"absolute",right: selectedLanguage!="Arabic"?10:15,top:"45%"}]}
+                                    style={[
+                                        styles.icon,
+                                        {
+                                            position: "absolute",
+                                            right: selectedLanguage != "Arabic" ? 10 : 15,
+                                            top: "45%",
+                                        },
+                                    ]}
                                 />
                             </View>
                         </TouchableWithoutFeedback>
                     </ImageBackground>
                 </View>
             </View>
-</TouchableWithoutFeedback>
-
-
-
+        </TouchableWithoutFeedback>
     );
 };
 
