@@ -483,6 +483,11 @@ const svgData = {
     0 0 -0.3775,0.7813 l 0,13.9 -13.27,0 0,-13.9 a 1.0001,1.0001 0 0 0 -0.37656,-0.7819 l 2.81438,-2.2119 a 1.0001,1.0001
     0 0 0 3e-4,-3e-4 l 4.20125,-3.3034 z" 
     fill="#fff" fill-opacity="1" fill-rule="evenodd" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"/></svg>`,
+  TranslationSVG: `
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="1 0 2 11">
+  <path fill="#767676" d="M9.57,4.75h1.24l2.94,8.11H12.54l-.84-2.43H8.52l-.88,2.43H6.52Zm1.82,4.79L10.14,6,8.84,9.54Z" transform="translate(-0.25 -1.14)"/>
+  <path fill="#767676" d="M8.41,10.4A11.79,11.79,0,0,1,5,8.2H5a29.26,29.26,0,0,1-3.14,2L1.19,9.3a25,25,0,0,0,3-2,8.55,8.55,0,0,1-2-3H3.39A6.63,6.63,0,0,0,5,6.48a4.13,4.13,0,0,0,1.57-3H7.78A6.49,6.49,0,0,1,5.9,7.26h0a8.89,8.89,0,0,0,3,2ZM.25,3.5H9V2.24H5.43V1.14H4v1.1H.25Z" transform="translate(-0.25 -1.14)"/></svg>
+   `,
 };
 
 export default svgData;
