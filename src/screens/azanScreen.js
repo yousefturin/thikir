@@ -488,6 +488,7 @@ const AzanScreen = () => {
                 );
                 setStoredTimings(cleanedPrayerTimesUpdate);
               }
+              setStoredTimings(cleanedPrayerTimesUpdate);
             }
             try {
               // Store updated prayer times
