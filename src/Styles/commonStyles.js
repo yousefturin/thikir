@@ -638,12 +638,8 @@ export const GenericStyles = StyleSheet.create({
   },
   TranslationDescription: {
     fontSize: 9,
-    textAlign: "center",
     color: "#767676",
     fontFamily: "Montserrat",
-    paddingVertical: 5,
-    textAlign:"left",
-    width:"100%",
   },
   InfoReptTimeIndex: {
     fontSize: 11,
