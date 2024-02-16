@@ -17,6 +17,7 @@ import locationSingleton from "../Service/LocationSingletonService";
 import OffsetSingleton from "../Service/OffsetDataSingletonService";
 import AzanService from "../Service/AzanService";
 import { useTheme } from "../context/ThemeContext";
+import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { AzanScreenStyle } from "../Styles/commonStyles";
 import { useNumberContext } from "../context/NumberContext";
@@ -25,7 +26,7 @@ import AzanComponents from "../components/AzanComponents";
 
 const AzanScreen = () => {
   const { selectedTheme } = useTheme();
-  // const { selectedColor } = useColor();
+  const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
   const { state, convertToEasternArabicNumerals } = useNumberContext();
@@ -99,7 +100,7 @@ const AzanScreen = () => {
       color: "#000",
     },
     prayerDecorator: {
-      backgroundColor: "#f2f2f6",
+      backgroundColor:selectedColor,
       shadowColor: "gray",
     },
     noTimings: {
@@ -156,7 +157,7 @@ const AzanScreen = () => {
       color: "#f2f2f6",
     },
     prayerDecorator: {
-      backgroundColor: "#151515",
+      backgroundColor:selectedColor,
       shadowColor: "black",
     },
     noTimings: {
