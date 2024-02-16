@@ -316,7 +316,29 @@ export const QuranVerseStyles = StyleSheet.create({
     width: "100%",
     marginBottom: 5,
   },
-
+  skeletonTitle:{
+    width: "100%",
+    height: "35%",
+    borderRadius: 3,
+  },
+  skeletonTafsirStyle:{
+    width: "100%",
+    height: "15%",
+    borderRadius: 3,
+  },
+  skeletonDescription:{
+    width: "25%",
+    height: "5%",
+    borderRadius: 3,
+  },
+  skeletonDotPlace:{
+    position: "absolute",
+    top: 7,
+    left: 7,
+    width: 40,
+    height: 10,
+    borderRadius: 3,
+  },
 });
 //#endregion
 
@@ -1376,7 +1398,6 @@ export const AzanScreenStyle  = StyleSheet.create({
     marginTop: 5,
     width:"80%",
     height:"15%", 
-
     borderRadius:3,
   },
   skeletonTime: {
