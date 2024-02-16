@@ -9,10 +9,11 @@ import { FontProvider } from "./src/context/FontContext";
 import { ColorProvider  } from "./src/context/ColorContext";
 import { NumberProvider } from './src/context/NumberContext';
 import { LanguageProvider } from "./src/context/LanguageContext";
+import { useColorScheme } from 'react-native';
 
 const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
-
+  const theme = useColorScheme();
   const DarkThemeNavigator = {
     colors: {
       primary: 'rgb(10, 132, 255)',
@@ -96,7 +97,7 @@ const App = () => {
 
 
   return (
-    <NavigationContainer  theme={DarkThemeNavigator}>
+    <NavigationContainer   theme={theme === 'dark' ? DarkThemeNavigator : LightThemeNavigator}>
     <ThemeProvider>
       <FontProvider> 
         <ColorProvider>
