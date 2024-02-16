@@ -10,7 +10,6 @@ class AzanComponents extends React.Component {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
       <Text style={AzanScreenStyle.nextPrayerText}>
-        Next prayer:{" "}
         <Text style={[{ fontFamily: "MontserratBold" }]}>{nextPrayer}</Text> in{" "}
         {timeLeft.hours !== 0 && (
           <>
