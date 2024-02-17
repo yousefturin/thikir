@@ -21,8 +21,8 @@ Curious to see Mufarradun in action? Here are some snapshots of the application:
     <img src="[image1.png](https://github.com/yousefturin/thikir/assets/94796673/fbf5609f-0cab-4334-b338-00a6eba0473c)" alt="Screenshot 1" style="width: 100%; height: auto;">
     <img src="image2.png" alt="Screenshot 2" style="width: 100%; height: auto;">
 </div>
-![IMG_9378-portrait](https://github.com/yousefturin/thikir/assets/94796673/fbf5609f-0cab-4334-b338-00a6eba0473c)
-![IMG_9377-portrait](https://github.com/yousefturin/thikir/assets/94796673/da7072df-0aed-4829-9b18-75b0dae3550d)
+![IMG_9378-portrait]
+![IMG_9377-portrait]
 ![IMG_9376-portrait](https://github.com/yousefturin/thikir/assets/94796673/db31ae05-aa63-4bf5-b65d-f7d0fd57eb8a)
 ![IMG_9381-portrait](https://github.com/yousefturin/thikir/assets/94796673/ca63e08b-07f7-4ffc-98b7-aa072571cf40)
 ![IMG_9380-portrait](https://github.com/yousefturin/thikir/assets/94796673/2136a869-e80f-4fdf-8d16-8d80b33a45c3)
