@@ -24,7 +24,7 @@ Curious to see Mufarradun in action? Here are some snapshots of the application:
 
 ## Testing Version
 
-If you're interested in exploring Mufarradun and providing feedback during its development phase, I welcome you to access the application through our testing platform. Please note that Mufarradun is currently in the development and testing phase and is not yet available on the app store. Your input and suggestions are highly valued as we work towards refining and perfecting the user experience. You can access the testing version of Mufarradun [here](exp://https://lnkd.in/ddpx9Gm6). Thank you for your interest and support!
+If you're interested in exploring Mufarradun and providing feedback during its development phase, I welcome you to access the application through our testing platform. Please note that Mufarradun is currently in the development and testing phase and is not yet available on the app store. Your input and suggestions are highly valued as we work towards refining and perfecting the user experience. You can access the testing version of Mufarradun [here](exp://u.expo.dev/update/db8dfd4a-9cd7-4fda-90ef-b245ee5b72ff). Thank you for your interest and support!
 
 ---
 
