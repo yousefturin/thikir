@@ -17,10 +17,8 @@ But Mufarradun isn't just about functionality – it's about customization and u
 ## Screenshots
 
 Curious to see Mufarradun in action? Here are some snapshots of the application:
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-    <img src="(https://github.com/yousefturin/thikir/assets/94796673/fbf5609f-0cab-4334-b338-00a6eba0473c)" alt="Screenshot 1" style="width: 100%; height: auto;">
-    <img src="image2.png" alt="Screenshot 2" style="width: 100%; height: auto;">
-</div>
+
+![IMG_9376-portrait](https://github.com/yousefturin/thikir/assets/94796673/2643be84-1ea6-456b-b9f5-7b2af6035b00)
 
 
 
