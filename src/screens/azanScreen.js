@@ -560,64 +560,7 @@ const AzanScreen = () => {
   }, [storedTimings, currentTime]);
   //#endregion
 
-  //#region  convert Time from 24 Base to 12 Base
-  const timeConvertFrom24To12 = (timingToBeStored) => {
-    for (const [prayer, time] of Object.entries(timingToBeStored)) {
-      let [hours, minutes] = time.split(":").map(Number);
-      let period = "AM"; // Default period is AM
-
-      if (hours === 0 || hours === 12) {
-        period = "AM";
-        hours = 12; // 12 AM in 12-hour format
-      } else if (hours > 12) {
-        period = "PM";
-        hours %= 12; // Convert hour to 12-hour format
-      } else {
-        period = "AM"; // For hours between 1 AM and 11 AM
-      }
-      hours = (hours % 12 || 12).toString().padStart(2, "0"); // Adding leading zero if necessary
-      minutes = minutes.toString().padStart(2, "0");
-      timingToBeStored[prayer] = `${hours}:${minutes} ${period}`;
-    }
-    return timingToBeStored;
-  };
-  //#endregion
-
-  //#region adding offset timings to stored timings
-  const updatePrayerTimings = (storedTimings, storedPrayerOffset) => {
-    const updatedTimings = {}; // Initialize an object to store the updated timings
-    for (const [prayer, time] of Object.entries(storedTimings)) {
-      // Get the offset for the current prayer in minutes
-      const offsetString = storedPrayerOffset[prayer];
-      const offset = parseInt(offsetString, 10) || 0;
-
-      // Split the time into hours and minutes
-      const [hours, minutes] = time.split(":").map(Number);
-
-      // Calculate the updated time
-      let updatedHours = hours;
-      let updatedMinutes = minutes + offset;
-
-      // Adjust hours and minutes if minutes exceed 60 or are negative
-      updatedHours += Math.floor(updatedMinutes / 60);
-      updatedMinutes = (updatedMinutes + 1440) % 60; // Adding 1440 to handle negative values and ensuring positive minutes
-
-      // Adjust hours if they exceed (24||12) or are negative
-      updatedHours = (updatedHours + 24) % 24;
-
-      // Format the updated time
-      const updatedTime = `${String(updatedHours).padStart(2, "0")}:${String(
-        updatedMinutes
-      ).padStart(2, "0")}`;
-      // Store the updated time for the current prayer
-      updatedTimings[prayer] = updatedTime;
-    }
-
-    // Merge the original timings with the updated timings
-    const mergedTimings = { ...storedTimings, ...updatedTimings };
-    return mergedTimings;
-  };
-  //#endregion
+  
 
   //#region Offset Timings change state
   const [activePicker, setActivePicker] = useState(null);
@@ -1130,3 +1073,63 @@ const AzanScreen = () => {
 };
 
 export default AzanScreen;
+
+
+//#region  convert Time from 24 Base to 12 Base
+export const timeConvertFrom24To12 = (timingToBeStored) => {
+  for (const [prayer, time] of Object.entries(timingToBeStored)) {
+    let [hours, minutes] = time.split(":").map(Number);
+    let period = "AM"; // Default period is AM
+
+    if (hours === 0 || hours === 12) {
+      period = "AM";
+      hours = 12; // 12 AM in 12-hour format
+    } else if (hours > 12) {
+      period = "PM";
+      hours %= 12; // Convert hour to 12-hour format
+    } else {
+      period = "AM"; // For hours between 1 AM and 11 AM
+    }
+    hours = (hours % 12 || 12).toString().padStart(2, "0"); // Adding leading zero if necessary
+    minutes = minutes.toString().padStart(2, "0");
+    timingToBeStored[prayer] = `${hours}:${minutes} ${period}`;
+  }
+  return timingToBeStored;
+};
+//#endregion
+
+//#region adding offset timings to stored timings
+export const updatePrayerTimings = (storedTimings, storedPrayerOffset) => {
+  const updatedTimings = {}; // Initialize an object to store the updated timings
+  for (const [prayer, time] of Object.entries(storedTimings)) {
+    // Get the offset for the current prayer in minutes
+    const offsetString = storedPrayerOffset[prayer];
+    const offset = parseInt(offsetString, 10) || 0;
+
+    // Split the time into hours and minutes
+    const [hours, minutes] = time.split(":").map(Number);
+
+    // Calculate the updated time
+    let updatedHours = hours;
+    let updatedMinutes = minutes + offset;
+
+    // Adjust hours and minutes if minutes exceed 60 or are negative
+    updatedHours += Math.floor(updatedMinutes / 60);
+    updatedMinutes = (updatedMinutes + 1440) % 60; // Adding 1440 to handle negative values and ensuring positive minutes
+
+    // Adjust hours if they exceed (24||12) or are negative
+    updatedHours = (updatedHours + 24) % 24;
+
+    // Format the updated time
+    const updatedTime = `${String(updatedHours).padStart(2, "0")}:${String(
+      updatedMinutes
+    ).padStart(2, "0")}`;
+    // Store the updated time for the current prayer
+    updatedTimings[prayer] = updatedTime;
+  }
+
+  // Merge the original timings with the updated timings
+  const mergedTimings = { ...storedTimings, ...updatedTimings };
+  return mergedTimings;
+};
+//#endregion
