@@ -21,6 +21,13 @@ export const MainStyles = StyleSheet.create({
     backgroundColor: "#454545",
     borderRadius: 10,
     padding: 5,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   nameWrapper: {
     width: "70%",
@@ -33,6 +40,13 @@ export const MainStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#fff",
@@ -86,7 +100,14 @@ export const AboutStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
-    paddingVertical: 20
+    paddingVertical: 20,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -138,6 +159,13 @@ export const DuaVerseStyles = StyleSheet.create({
     marginTop: 20,
     width: "90%",
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -221,6 +249,13 @@ export const QuranVerseStyles = StyleSheet.create({
     marginTop: 20,
     width: "90%",
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   scrollContainer: {
     justifyContent: 'center',
@@ -281,7 +316,29 @@ export const QuranVerseStyles = StyleSheet.create({
     width: "100%",
     marginBottom: 5,
   },
-
+  skeletonTitle:{
+    width: "100%",
+    height: "35%",
+    borderRadius: 3,
+  },
+  skeletonTafsirStyle:{
+    width: "100%",
+    height: "15%",
+    borderRadius: 3,
+  },
+  skeletonDescription:{
+    width: "25%",
+    height: "5%",
+    borderRadius: 3,
+  },
+  skeletonDotPlace:{
+    position: "absolute",
+    top: 7,
+    left: 7,
+    width: 40,
+    height: 10,
+    borderRadius: 3,
+  },
 });
 //#endregion
 
@@ -315,6 +372,13 @@ export const HomeStyles = StyleSheet.create({
   },
   searchBarInputContainer: {
     backgroundColor: "#262626",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   searchBarInput: {
     backgroundColor: "#262626",
@@ -338,6 +402,13 @@ export const HomeStyles = StyleSheet.create({
     backgroundColor: "#262626",
     alignItems: "center",
     justifyContent: "space-evenly",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonText: {
     color: "#dddddd",
@@ -382,6 +453,13 @@ export const HomeStyles = StyleSheet.create({
     paddingBottom: 10,
     marginBottom: 20,
     borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   buttonTextTop: {
     color: "#dddddd",
@@ -418,6 +496,18 @@ export const ThikirAlarmStyles = StyleSheet.create({
     paddingTop: 40,
     alignItems: "center",
   },
+  wrapHeaderText: {
+    width: '90%',
+    justifyContent: 'center',
+    textAlign: 'right',
+    paddingRight:10
+  },
+  HeadertextColor: {
+    color: '#767676',
+    paddingTop: 15,
+    //paddingLeft: width > 600 ? 560 : 300,
+    paddingBottom:10,
+  },
   notificationContainer: {
     alignItems: "center",
     justifyContent: "space-evenly",
@@ -425,6 +515,13 @@ export const ThikirAlarmStyles = StyleSheet.create({
     width: "91%",
     height: 60,
     paddingHorizontal: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   leftContent: {
     flexDirection: "column",
@@ -477,6 +574,13 @@ export const GenericStyles = StyleSheet.create({
     backgroundColor: "#262626",
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   button: {
     height: "50%",
@@ -488,6 +592,13 @@ export const GenericStyles = StyleSheet.create({
     borderColor: "#151515",
     justifyContent: "center",
     alignContent: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   textcount: {
     textAlign: "center",
@@ -507,6 +618,13 @@ export const GenericStyles = StyleSheet.create({
     padding: 50,
     marginTop: 20,
     position: "relative",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
 
   },
   scrollContainer: {
@@ -542,12 +660,8 @@ export const GenericStyles = StyleSheet.create({
   },
   TranslationDescription: {
     fontSize: 9,
-    textAlign: "center",
     color: "#767676",
     fontFamily: "Montserrat",
-    paddingVertical: 5,
-    textAlign:"left",
-    width:"100%",
   },
   InfoReptTimeIndex: {
     fontSize: 11,
@@ -659,6 +773,13 @@ export const SettingStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     width: "90%",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   wrapHeaderText: {
     width: '90%',
@@ -811,6 +932,13 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 40,
     textAlign: "center",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   nameDisplay:{
     fontSize: 42, 
@@ -895,6 +1023,13 @@ export const TasbehScreenStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#262626',
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   duplica: {
     width: 200, 
@@ -916,13 +1051,20 @@ export const TasbehScreenStyle = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#262626",
     overflow: "hidden",
-
+    shadowColor: "black", 
+    shadowOffset: {
+      width: -2,
+      height: 2.2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   thikirNameDispaly: {
     textAlign: "center",
     fontFamily:"ScheherazadeNewBold",
     fontSize: 18,
     paddingHorizontal:10,
+    
   },
   pickThikirText: {
     textAlign: "center",
@@ -938,6 +1080,13 @@ export const TasbehScreenStyle = StyleSheet.create({
     position: "absolute",
     top: 7,
     left: "50%",
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
   },
   ThikirNewText: {
     color: "#007AFF",
@@ -976,12 +1125,26 @@ export const TasbehScreenStyle = StyleSheet.create({
     color: "white",
     backgroundColor: "#262626",
     borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   modaldisplay: {
     flexDirection: "row-reverse",
     alignItems: "flex-start",
     justifyContent: "space-between",
     marginVertical: 5,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   rectangle: {
     backgroundColor: "#151515",
@@ -1009,6 +1172,9 @@ export const TasbehScreenStyle = StyleSheet.create({
     fontSize: 20,
     color: "#6682C3",
     paddingLeft: 20,
+  },
+  CloseBtnModePage:{
+
   },
 });
 //#endregion
@@ -1067,5 +1233,212 @@ export const QablaScreenStyle  = StyleSheet.create({
     borderBottomColor: '#dd3131',
   },
   
+});
+//#endregion
+
+//#region AzanScreenStyle
+export const AzanScreenStyle  = StyleSheet.create({
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#151515",
+    width: "100%",
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 40,
+    justifyContent: "center",
+  },
+  nextPrayerContainer: {
+    flex: 0.25,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    marginVertical: 20,
+  },
+  time: {
+    fontFamily: "MontserratBold",
+    fontSize: 82,
+    color: "#f2f2f6",
+    marginTop: 15,
+  },
+  nextPrayerText: {
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: "#666",
+    marginTop: 5,
+    textAlign: "left",
+  },
+  dateContainer: {
+    flex: 0.1,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  dateContainerWrapper: {
+    flex: 0.48,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  date: {
+    fontFamily: "Montserrat",
+    fontSize: 18,
+    color: "#666",
+    margin: 5,
+  },
+  prayerContainer: {
+    flex: 0.65,
+    justifyContent: "center",
+    padding: 10,
+    marginVertical: 20,
+    backgroundColor: "#262626",
+    borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  prayerItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+  prayerName: {
+    fontFamily: "Montserrat",
+    fontSize: 25,
+    color: "#f2f2f6",
+    marginBottom: 18,
+    paddingTop: 18,
+  },
+  prayerTime: {
+    fontFamily: "Montserrat",
+    fontSize: 21,
+    color: "#666",
+    marginBottom: 15,
+    paddingTop: 15,
+  },
+  boldPrayer: {
+    fontFamily: "MontserratBold",
+    fontSize: 25,
+    color: "#f2f2f6",
+  },
+  boldTime: {
+    fontFamily: "MontserratBold",
+    fontSize: 21,
+    color: "#f2f2f6",
+  },
+  prayerDecorator: {
+    backgroundColor: "#151515",
+    borderRadius: 10,
+    shadowColor: "black", 
+    shadowOffset: {
+      width: 0,
+      height: 2.2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  noTimings: {
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    color: "#666",
+    textAlign: "center",
+  },
+  pikerContainerWrapper:{
+    flex: 1,
+    justifyContent: "flex-end",
+    padding: 10,
+  },
+  pikerContainer:{
+    backgroundColor: "#151515",
+    borderRadius: 10,
+  
+  },
+  pickerConfirmBtn:{
+    justifyContent: "space-between",
+    marginBottom: 10,
+    marginTop:10,
+  },
+  pickerCancelBtn:{
+    marginTop: 10,
+    backgroundColor: "#151515",
+    borderRadius: 10,
+    justifyContent: "center",
+    padding: 10,
+    marginBottom: 25,
+  },
+
+
+
+  skeletonNextPrayerText: {
+    marginTop: 5,
+    width:"80%",
+    height:"15%", 
+    borderRadius:3,
+  },
+  skeletonTime: {
+    marginTop: 15,
+    width:"60%",
+    height:"60%",
+
+    borderRadius:5
+  },
+  skeletonDate:{
+    margin: 5,
+    width:"82%",
+    height:"60%", 
+
+    borderRadius:4
+  },
+  skeletonPrayerItem:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    alignContent:"center"
+  },
+  skeletonPrayerName:{
+    paddingTop: 18,
+    marginBottom:10,
+    marginTop:10,
+    padding:25,
+    width:"40%",
+
+    borderRadius:5
+  },
+  skeletonPrayerTime:{
+    paddingTop: 15,
+    marginBottom:10,
+    marginTop:10,
+    padding:25,
+    width:"30%",
+
+    borderRadius:5
+  },
+
 });
 //#endregion

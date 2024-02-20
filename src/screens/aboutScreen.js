@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
-import { useTheme } from '../context/ThemContex';
+import { useTheme } from '../context/ThemeContext';
 import { useColor } from '../context/ColorContext';
 import { useLanguage } from "../context/LanguageContext";
 import { AboutStyles } from '../Styles/commonStyles';
-import { Appearance } from 'react-native';
+import { getColorForTheme } from "../utils/themeUtils";
 var pkg = require('../../package.json');
+
 const AboutScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
@@ -25,6 +26,7 @@ const AboutScreen = ({ navigation }) => {
     },  
     rectangleWrapper: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     rectangleText: {
       color: "#000",
@@ -45,6 +47,7 @@ const AboutScreen = ({ navigation }) => {
     }, 
     rectangleWrapper: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     rectangleText: {
       color: "#fff",
@@ -52,13 +55,11 @@ const AboutScreen = ({ navigation }) => {
   });
   //#endregion
   
-  const themeStyles = systemTheme
-  ? Appearance.getColorScheme() === 'dark'
-    ? darkTheme
-    : lightTheme
-  : selectedTheme === 'dark'
-  ? darkTheme
-  : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
 
   //#region StyleMapping
   const styles = {

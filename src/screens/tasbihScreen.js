@@ -21,11 +21,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Svg, Path, Circle } from "react-native-svg";
 import * as Animatable from "react-native-animatable";
 import { TasbehScreenStyle } from "../Styles/commonStyles";
-import { useTheme } from "../context/ThemContex";
+import { useTheme } from "../context/ThemeContext";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { Appearance } from "react-native";
 import { useNumberContext } from "../context/NumberContext";
+import { getColorForTheme } from "../utils/themeUtils"
 
 const defaultNames = [
     { name: "سبحان الله وبحمده", count: 0, thikir: [] },
@@ -52,13 +53,34 @@ const TasbihScreen = () => {
     const { selectedColor } = useColor();
     const { selectedLanguage } = useLanguage();
     const systemTheme = selectedTheme === "system";
-    const keyboardTheme = systemTheme
-        ? Appearance.getColorScheme() === "dark"
-            ? "dark"
-            : "light"
-        : selectedTheme === "dark"
-            ? "dark"
-            : "light";
+    
+    const keyboardTheme = getColorForTheme({ dark: "dark", light: "light" }, selectedTheme, systemTheme);
+    const backgroundSwapDisplay = getColorForTheme(
+        { dark: "#262626", light: "#fefffe" },
+        selectedTheme,
+        systemTheme
+      );
+
+
+    //#region ArabicLanguage
+    const ArabicLanguage = StyleSheet.create({
+        CloseBtnModePage: {
+            position: "absolute",
+            bottom: 45,
+            left: 25,
+        },
+    });
+    //#endregion
+
+    //#region EnglishLanguage
+    const EnglishLanguage = StyleSheet.create({
+        CloseBtnModePage: {
+            position: "absolute",
+            bottom: 45,
+            right: 25,
+    },
+    });
+    //#endregion
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -67,18 +89,21 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         countValue: {
             color: "#000",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         pickThikirText: {
             color: "#000",
         },
         ModalTopNotch: {
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         addNewThikirModalContainer: {
             backgroundColor: "#f2f2f6",
@@ -92,6 +117,7 @@ const TasbihScreen = () => {
         inputTextContainerInModa: {
             color: "#000",
             backgroundColor: "#fefffe",
+            shadowColor: "gray", 
         },
         rectangle: {
             backgroundColor: "#f2f2f6",
@@ -102,6 +128,9 @@ const TasbihScreen = () => {
         itemText: {
             color: "#000",
         },
+        modaldisplay: {
+            shadowColor: "gray", 
+        }
     });
     //#endregion
 
@@ -112,20 +141,21 @@ const TasbihScreen = () => {
         },
         circle: {
             backgroundColor: "#262626",
-
+            shadowColor: "black", 
         },
         countValue: {
             color: "#fff",
         },
         thikirNameDispalyBtn: {
             backgroundColor: "#262626",
-
+            shadowColor: "black", 
         },
         pickThikirText: {
             color: "#fff",
         },
         ModalTopNotch: {
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         addNewThikirModalContainer: {
             backgroundColor: "#151515",
@@ -139,6 +169,7 @@ const TasbihScreen = () => {
         inputTextContainerInModa: {
             color: "#fff",
             backgroundColor: "#262626",
+            shadowColor: "black", 
         },
         rectangle: {
             backgroundColor: "#151515",
@@ -149,16 +180,14 @@ const TasbihScreen = () => {
         itemText: {
             color: "#fff",
         },
+        modaldisplay: {
+            shadowColor: "black", 
+        }
     });
     //#endregion
 
-    const themeStyles = systemTheme
-        ? Appearance.getColorScheme() === "dark"
-            ? darkTheme
-            : lightTheme
-        : selectedTheme === "dark"
-            ? darkTheme
-            : lightTheme;
+
+    const themeStyles = getColorForTheme({ dark: darkTheme, light: lightTheme },selectedTheme,systemTheme);
 
     //#region StyleMapping
     const styles = {
@@ -238,6 +267,14 @@ const TasbihScreen = () => {
             ...(selectedTheme === "dark"
                 ? themeStyles.itemText
                 : themeStyles.itemText),
+        },
+        CloseBtnModePage:{
+            ...TasbehScreenStyle.CloseBtnModePage,
+            ...(selectedLanguage != "Arabic" ? EnglishLanguage.CloseBtnModePage : ArabicLanguage.CloseBtnModePage )
+        },
+        modaldisplay:{
+            ...TasbehScreenStyle.modaldisplay,
+            ...(selectedLanguage != "Arabic" ? EnglishLanguage.modaldisplay : ArabicLanguage.modaldisplay )
         },
     };
     //#endregion
@@ -418,12 +455,10 @@ const TasbihScreen = () => {
             return (
                 <TouchableOpacity
                     onPress={handleButtonPress}
-                    style={{
-                        position: "absolute",
-                        bottom: 45,
-                        left: 25,
-                    }}
+                    style={
+                        styles.CloseBtnModePage}
                 >
+                
                     <View
                         style={{
                             flexDirection: "row-reverse",
@@ -432,7 +467,8 @@ const TasbihScreen = () => {
                         }}
                     >
                         <Text allowFontScaling={false} style={styles.ThikirNewText}>
-                            أغلاق
+                            {selectedLanguage != "Arabic"?"Close":"أغلاق"}
+                            
                         </Text>
                         <Svg
                             width="24"
@@ -744,13 +780,7 @@ const TasbihScreen = () => {
                                                         />
                                                     ) : null
                                                 }
-                                                containerStyle={[renderBorderRadius(index),{ backgroundColor:backgroundSwipDisplay = systemTheme
-                                                                            ? Appearance.getColorScheme() === 'dark'
-                                                                            ? "#262626"
-                                                                            : "#fefffe"
-                                                                            : selectedTheme === 'dark'
-                                                                            ? "#262626"
-                                                                            : "#fefffe"}]}
+                                                containerStyle={[renderBorderRadius(index),{ backgroundColor:backgroundSwapDisplay}]}
                                                 overshootRight={false}
                                                 onSwipeableWillOpen={() => {
                                                     Haptics.notificationAsync(

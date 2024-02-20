@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from "react";
 // import { View, Text, Button, StyleSheet, TextInput } from "react-native";
 // import { BarCodeScanner } from "expo-barcode-scanner";
-// import { useTheme } from "../context/ThemContex";
+// import { useTheme } from "../context/ThemeContext";
 // import { ReportProblemStyles } from "../Styles/commonStyles";
 // import { Appearance } from "react-native";
 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Appearance } from 'react-native';
+import { Appearance, AppState } from 'react-native';
 
 // Define Themes
 const lightTheme = {
@@ -60,6 +60,21 @@ export function ThemeProvider({ children }) {
       AsyncStorage.setItem('@selectedTheme', selectedTheme);
     }
   }, [selectedTheme]);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState) => {
+      if (nextAppState === 'active') {
+        const appearance = Appearance.getColorScheme();
+        setSystemAppearance(appearance);
+      }
+    };
+
+    AppState.addEventListener('change', handleAppStateChange);
+
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange);
+    };
+  }, []);
 
   if (isLoading) {
     // Return null while the theme is loading

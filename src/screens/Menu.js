@@ -7,11 +7,11 @@ import {
   Image,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { useTheme } from "../context/ThemContex";
+import { useTheme } from "../context/ThemeContext";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { MainStyles } from "../Styles/commonStyles";
-import { Appearance } from "react-native";
+import { getColorForTheme } from "../utils/themeUtils";
 import SvgComponent from "../../assets/Svg/svgComponents";
 
 const Menu = ({ navigation }) => {
@@ -19,6 +19,7 @@ const Menu = ({ navigation }) => {
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
+  
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
@@ -26,13 +27,14 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray",
     },
     buttonText: {
       color: "#000",
     },
     iconWrapper: {
       backgroundColor: "#e9e9ea",
-      shadowColor: "white",
+      shadowColor: "gray",
     },
     horizontalLine: {
       borderColor: "#fefffe",
@@ -47,6 +49,7 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
+      shadowColor: "black",
     },
     buttonText: {
       color: "#fff",
@@ -60,13 +63,13 @@ const Menu = ({ navigation }) => {
     },
   });
   //#endregion
-  const themeStyles = systemTheme
-    ? Appearance.getColorScheme() === "dark"
-      ? darkTheme
-      : lightTheme
-    : selectedTheme === "dark"
-    ? darkTheme
-    : lightTheme;
+  
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
+
 
 
   //#region ArabicLanguage
@@ -218,7 +221,7 @@ const Menu = ({ navigation }) => {
 
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Azan"): navigation.navigate("أذان")}
+        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Prayer Times"): navigation.navigate("مواعيد الصلاة")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -230,7 +233,7 @@ const Menu = ({ navigation }) => {
           />
         </View>
         <View style={styles.nameWrapper}>
-        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Azan" : "أذان"}</Text>
+        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Prayer Times" : "مواعيد الصلاة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
           <SvgComponent svgKey="AzanSVG" style={styles.iconleft} />

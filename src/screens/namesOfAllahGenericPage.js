@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useTheme } from "../context/ThemContex";
+import { useTheme } from "../context/ThemeContext";
 import { useFont } from "../context/FontContext";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { handleShare } from "../Service/ShareService";
 import { useNumberContext } from "../context/NumberContext";
 import { namesOfAllahGenericPageScreenStyle } from "../Styles/commonStyles";
-import { Appearance } from "react-native";
+import { getColorForTheme } from "../utils/themeUtils";
 
 const NamesOfAllahGenericPage = ({ route }) => {
   const { selectedTheme } = useTheme();
@@ -32,6 +32,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     textDescription: {
       color: "#000",
@@ -52,6 +53,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     textDescription: {
       color: "#fff",
@@ -65,13 +67,11 @@ const NamesOfAllahGenericPage = ({ route }) => {
   });
   //#endregion
 
-  const themeStyles = systemTheme
-    ? Appearance.getColorScheme() === "dark"
-      ? darkTheme
-      : lightTheme
-    : selectedTheme === "dark"
-    ? darkTheme
-    : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
 
   //#region StyleMapping
   const styles = {

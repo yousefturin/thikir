@@ -7,7 +7,7 @@ import {  View,
           Switch, 
           ScrollView,
 } from 'react-native';
-import { useTheme } from '../context/ThemContex';
+import { useTheme } from '../context/ThemeContext';
 import { useFont } from '../context/FontContext';
 import { useColor } from '../context/ColorContext';
 import { useNumberContext } from '../context/NumberContext';
@@ -15,7 +15,7 @@ import { useLanguage } from '../context/LanguageContext';
 import * as Haptics from 'expo-haptics';
 import { SettingStyles } from '../Styles/commonStyles';
 import Svg, { Path } from "react-native-svg";
-import { Appearance } from 'react-native';
+import { getColorForTheme } from "../utils/themeUtils";
 
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
@@ -47,6 +47,7 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     horizontalLine: {
       borderColor: "#f2f2f6",
@@ -73,6 +74,7 @@ const SettingScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     horizontalLine: {
       borderColor: "#151515",
@@ -86,13 +88,12 @@ const SettingScreen = ({ navigation }) => {
   });
   //#endregion
   
-  const themeStyles = systemTheme
-    ? Appearance.getColorScheme() === 'dark'
-      ? darkTheme
-      : lightTheme
-    : selectedTheme === 'dark'
-    ? darkTheme
-    : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
+
 
   //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({

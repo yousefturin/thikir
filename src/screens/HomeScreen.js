@@ -14,11 +14,11 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getItems } from "../db/GetData";
 import { getEnItems } from "../db/GetDataEn";
 import { HomeStyles } from "../Styles/commonStyles";
-import { useTheme } from "../context/ThemContex";
+import { useTheme } from "../context/ThemeContext";
 import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { Svg, Path, Circle } from "react-native-svg";
-import { Appearance } from "react-native";
+import { getColorForTheme } from "../utils/themeUtils";
 const {width} = Dimensions.get("window");
 
 const HomeScreen = ({ navigation }) => {
@@ -36,21 +36,20 @@ const HomeScreen = ({ navigation }) => {
   const { selectedColor } = useColor();
   const systemTheme = selectedTheme === "system";
 
-  const StatusBarColor = systemTheme
-    ? Appearance.getColorScheme() === "dark"
-      ? "light-content"
-      : "dark-content"
-    : selectedTheme === "dark"
-      ? "light-content"
-      : "dark-content";
+    const StatusBarColor = getColorForTheme(
+        {
+          dark: "light-content",
+          light: "dark-content",
+        },
+        selectedTheme,
+        systemTheme
+      );
 
-  const keyboardTheme = systemTheme
-    ? Appearance.getColorScheme() === "dark"
-      ? "dark"
-      : "light"
-    : selectedTheme === "dark"
-      ? "dark"
-      : "light";
+    const keyboardTheme = getColorForTheme(
+        { dark: "dark", light: "light" },
+        selectedTheme,
+        systemTheme
+      );
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -65,6 +64,7 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     buttonText: {
       color: "#000",
@@ -83,6 +83,7 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     searchBarInput: {
       backgroundColor: "#fefffe",
@@ -92,6 +93,7 @@ const HomeScreen = ({ navigation }) => {
     },
     squareButton: {
       backgroundColor: "#fefffe",
+      shadowColor: "gray", 
     },
     buttonTextTop: {
       color: "#000",
@@ -115,6 +117,7 @@ const HomeScreen = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     buttonText: {
       color: "#fff",
@@ -133,6 +136,7 @@ const HomeScreen = ({ navigation }) => {
     },
     searchBarInputContainer: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     searchBarInput: {
       backgroundColor: "#262626",
@@ -142,6 +146,7 @@ const HomeScreen = ({ navigation }) => {
     },
     squareButton: {
       backgroundColor: "#262626",
+      shadowColor: "black", 
     },
     buttonTextTop: {
       color: "#dddddd",
@@ -152,13 +157,12 @@ const HomeScreen = ({ navigation }) => {
   });
   //#endregion
   
-  const themeStyles = systemTheme
-    ? Appearance.getColorScheme() === "dark"
-      ? darkTheme
-      : lightTheme
-    : selectedTheme === "dark"
-      ? darkTheme
-      : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
+
 
     //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({

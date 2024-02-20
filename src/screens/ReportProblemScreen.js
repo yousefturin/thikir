@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import * as MailComposer from 'expo-mail-composer';
 import * as ImagePicker from 'expo-image-picker';
-import { useTheme } from '../context/ThemContex';
+import { useTheme } from '../context/ThemeContext';
 import { ReportProblemStyles } from '../Styles/commonStyles';
-import { Appearance } from 'react-native';
+import { getColorForTheme } from "../utils/themeUtils";
 
 const ReportProblemScreen = () => {
   const { selectedTheme } = useTheme();
@@ -46,13 +46,12 @@ const ReportProblemScreen = () => {
     },
   });
   //#endregion
-  const themeStyles = systemTheme
-  ? Appearance.getColorScheme() === 'dark'
-    ? darkTheme
-    : lightTheme
-  : selectedTheme === 'dark'
-  ? darkTheme
-  : lightTheme;
+
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
   //#region StyleMapping
   const styles = {
     ...ReportProblemStyles,

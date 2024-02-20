@@ -12,14 +12,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getItems } from "../db/GetData";
 import { getEnItems } from "../db/GetDataEn";
 import { HomeStyles } from "../Styles/commonStyles";
-import { useTheme } from "../context/ThemContex";
+import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import { useColor } from '../context/ColorContext';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { Appearance } from 'react-native';
+import { getColorForTheme } from "../utils/themeUtils";
 const {width} = Dimensions.get("window");
 
-const FavouriteScreen = ({ navigation }) => {
+const FavoriteScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === 'system';
@@ -75,13 +75,11 @@ const FavouriteScreen = ({ navigation }) => {
     }
   });
   //#endregion
-  const themeStyles = systemTheme
-  ? Appearance.getColorScheme() === 'dark'
-    ? darkTheme
-    : lightTheme
-  : selectedTheme === 'dark'
-  ? darkTheme
-  : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
 
    //#region ArabicLanguage
    const ArabicLanguage = StyleSheet.create({
@@ -285,4 +283,4 @@ const renderBorderRadius = (index) => {
   
 };
 
-export default FavouriteScreen;
+export default FavoriteScreen;

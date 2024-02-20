@@ -9,12 +9,12 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../Service/ShareService";
-import { useTheme } from '../context/ThemContex'; 
+import { useTheme } from '../context/ThemeContext'; 
 import { useFont } from "../context/FontContext";
 import { useColor } from '../context/ColorContext';
 import { QuranVerseStyles } from '../Styles/commonStyles';
 import { useNumberContext } from '../context/NumberContext';
-import { Appearance } from 'react-native';
+import { getColorForTheme } from "../utils/themeUtils";
 
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -77,13 +77,12 @@ const HADITHVerseScreen = ({ navigation }) => {
   },
   });
   //#endregion
-  const themeStyles = systemTheme
-    ? Appearance.getColorScheme() === 'dark'
-      ? darkTheme
-      : lightTheme
-    : selectedTheme === 'dark'
-    ? darkTheme
-    : lightTheme;
+  const themeStyles = getColorForTheme(
+    { dark: darkTheme, light: lightTheme },
+    selectedTheme,
+    systemTheme
+  );
+
   //#region StyleMapping
   const styles = {
     ...QuranVerseStyles,
