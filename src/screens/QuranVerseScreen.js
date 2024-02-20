@@ -66,17 +66,17 @@ const QuranVerseScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     rectangle: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     title: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "#111111",
     },
   });
   //#endregion

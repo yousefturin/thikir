@@ -64,20 +64,20 @@ const SettingScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     textColor:{
       color:"#fff",
     },
     rectangle: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black", 
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "#111111",
     },
     textColorToggle:{
       color:"#fff",

@@ -52,17 +52,17 @@ const ThikirAlarmScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     notificationContainer: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     title: {
       color: "#dddddd",
     },
     horizontalLineWrapper: {
-      borderColor: "#262626",
+      borderColor: "#242424",
     },
   });
   //#endregion

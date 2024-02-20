@@ -56,7 +56,7 @@ const TasbihScreen = () => {
     
     const keyboardTheme = getColorForTheme({ dark: "dark", light: "light" }, selectedTheme, systemTheme);
     const backgroundSwapDisplay = getColorForTheme(
-        { dark: "#262626", light: "#fefffe" },
+        { dark: "#242424", light: "#fefffe" },
         selectedTheme,
         systemTheme
       );
@@ -137,45 +137,45 @@ const TasbihScreen = () => {
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#151515",
+            backgroundColor: "#111111",
         },
         circle: {
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
             shadowColor: "black", 
         },
         countValue: {
             color: "#fff",
         },
         thikirNameDispalyBtn: {
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
             shadowColor: "black", 
         },
         pickThikirText: {
             color: "#fff",
         },
         ModalTopNotch: {
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
             shadowColor: "black", 
         },
         addNewThikirModalContainer: {
-            backgroundColor: "#151515",
+            backgroundColor: "#111111",
         },
         buttonThikirDisplayInModal: {
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
         },
         newThikirTextInModal: {
             color: "#fff",
         },
         inputTextContainerInModa: {
             color: "#fff",
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
             shadowColor: "black", 
         },
         rectangle: {
-            backgroundColor: "#151515",
+            backgroundColor: "#111111",
         },
         separator: {
-            borderColor: "#151515",
+            borderColor: "#111111",
         },
         itemText: {
             color: "#fff",

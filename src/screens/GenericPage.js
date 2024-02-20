@@ -39,13 +39,13 @@ const GenericPage = ({ route }) => {
             backgroundColor: "#f2f2f6",
         },
         circularButton: {
-            borderColor: "#151515",
+            borderColor: "#111111",
             backgroundColor: "#fefffe",
             shadowColor: "gray",
         },
         button: {
             backgroundColor: "#fefffe",
-            borderColor: "#151515",
+            borderColor: "#111111",
             shadowColor: "gray",
         },
         textcount: {
@@ -78,19 +78,19 @@ const GenericPage = ({ route }) => {
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#151515",
+            backgroundColor: "#111111",
         },
         containerforshare: {
-            backgroundColor: "#151515",
+            backgroundColor: "#111111",
         },
         circularButton: {
-            borderColor: "#151515",
-            backgroundColor: "#262626",
+            borderColor: "#111111",
+            backgroundColor: "#242424",
             shadowColor: "black",
         },
         button: {
-            backgroundColor: "#262626",
-            borderColor: "#151515",
+            backgroundColor: "#242424",
+            borderColor: "#111111",
             shadowColor: "black",
         },
         textcount: {
@@ -98,7 +98,7 @@ const GenericPage = ({ route }) => {
             color: "white",
         },
         rectangle: {
-            backgroundColor: "#262626",
+            backgroundColor: "#242424",
             shadowColor: "black",
         },
         title: {
@@ -115,7 +115,7 @@ const GenericPage = ({ route }) => {
         },
         ControlPaneBackground: {},
         horizontalLine: {
-            borderColor: "#151515",
+            borderColor: "#111111",
         },
     });
     //#endregion

@@ -107,16 +107,16 @@ const HomeScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     TextMid: {
       color: "#fff",
     },
     button: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black", 
     },
     buttonText: {
@@ -126,26 +126,26 @@ const HomeScreen = ({ navigation }) => {
       shadowColor: "black",
     },
     horizontalLine: {
-      borderColor: "#262626",
+      borderColor: "#242424",
     },
     containerSearchMode: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     searchBarContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     searchBarInputContainer: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black", 
     },
     searchBarInput: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       color: "#dddddd",
     },
     buttonGrid: {
     },
     squareButton: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black", 
     },
     buttonTextTop: {

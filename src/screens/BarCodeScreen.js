@@ -31,18 +31,18 @@
 //     //#region DarkTheme
 //     const darkTheme = StyleSheet.create({
 //         container: {
-//             backgroundColor: "#151515",
+//             backgroundColor: "#111111",
 //         },
 //         heading: {
 //             color: "#fff",
 //         },
 //         input: {
 //             color: "#fff",
-//             backgroundColor: "#262626",
+//             backgroundColor: "#242424",
 //         },
 //         inputScreenshot: {
 //             color: "#fff",
-//             backgroundColor: "#262626",
+//             backgroundColor: "#242424",
 //         },
 //     });
 //     //#endregion

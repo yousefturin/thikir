@@ -37,7 +37,7 @@ const AzanScreen = () => {
     systemTheme
   );
   const horizontalLineTheme = getColorForTheme(
-    { dark: "#262626", light: "#f2f2f6" },
+    { dark: "#242424", light: "#f2f2f6" },
     selectedTheme,
     systemTheme
   );
@@ -121,10 +121,10 @@ const AzanScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     nextPrayerContainer: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     time: {
@@ -134,14 +134,14 @@ const AzanScreen = () => {
       color: "#666",
     },
     dateContainerWrapper: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     date: {
       color: "#666",
     },
     prayerContainer: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     prayerName: {
@@ -164,13 +164,13 @@ const AzanScreen = () => {
       color: "#666",
     },
     horizontalLine: {
-      borderColor:  "#151515",
+      borderColor:  "#111111",
     },
     pikerContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     pickerCancelBtn: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
   });
   //#endregion
