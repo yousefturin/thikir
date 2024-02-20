@@ -167,6 +167,7 @@ const QuranVerseScreen = ({ navigation }) => {
     systemTheme
   );
   useEffect(() => {
+    console.log(verseData)
     startAnimation();
   }, []);
 
@@ -258,7 +259,7 @@ const QuranVerseScreen = ({ navigation }) => {
             {
               padding: 20,
               paddingHorizontal: 20,
-              justifyContent: "space-around",
+              justifyContent:"space-evenly",
             },
           ]}
         >
@@ -268,6 +269,7 @@ const QuranVerseScreen = ({ navigation }) => {
               { backgroundColor: backgroundColorInterpolation },
             ]}
           />
+          
           <View style={[styles.horizontalLine]} />
           <Animated.View
             style={[
