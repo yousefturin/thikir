@@ -76,7 +76,7 @@ export const MainStyles = StyleSheet.create({
 export const AboutStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: 80,
@@ -146,7 +146,7 @@ export const AboutStyles = StyleSheet.create({
 export const DuaVerseStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 120,
@@ -224,7 +224,7 @@ export const DuaVerseStyles = StyleSheet.create({
   },
   horizontalLine: {
     borderBottomWidth: 1,
-    borderColor: "#111111",
+    borderColor: "#151515",
     width: "100%",
     marginBottom: 5,
   },
@@ -236,7 +236,7 @@ export const QuranVerseStyles = StyleSheet.create({
   // this is a common between VERSE and HADITH!
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 120,
@@ -311,7 +311,7 @@ export const QuranVerseStyles = StyleSheet.create({
   },
   horizontalLine: {
     borderBottomWidth: 1,
-    borderColor: "#111111",
+    borderColor: "#151515",
     width: "100%",
     marginBottom: 5,
   },
@@ -345,18 +345,18 @@ export const QuranVerseStyles = StyleSheet.create({
 export const HomeStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
   },
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 80,
   },
   containerSearchMode: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: 300,
@@ -365,7 +365,7 @@ export const HomeStyles = StyleSheet.create({
   searchBarContainer: {
 
     paddingHorizontal: 10,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     borderBottomColor: "transparent",
     borderTopColor: "transparent",
   },
@@ -491,7 +491,7 @@ export const HomeStyles = StyleSheet.create({
 export const ThikirAlarmStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     paddingTop: 40,
     alignItems: "center",
   },
@@ -551,11 +551,11 @@ export const ThikirAlarmStyles = StyleSheet.create({
 export const GenericStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     padding: 20,
   },
   containerforshare: {
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     height: 500,
   },
   controlPan: {
@@ -569,7 +569,7 @@ export const GenericStyles = StyleSheet.create({
     height: 70,
     borderRadius: 25,
     borderWidth: 2,
-    borderColor: "#111111",
+    borderColor: "#151515",
     backgroundColor: "#242424",
     alignItems: "center",
     justifyContent: "center",
@@ -588,7 +588,7 @@ export const GenericStyles = StyleSheet.create({
     backgroundColor: "#242424",
     borderRadius: 10,
     borderWidth: 0.9,
-    borderColor: "#111111",
+    borderColor: "#151515",
     justifyContent: "center",
     alignContent: "center",
     shadowColor: "black", 
@@ -711,7 +711,7 @@ export const GenericStyles = StyleSheet.create({
   },
   horizontalLine: {
     borderBottomWidth: 1,
-    borderColor: "#111111",
+    borderColor: "#151515",
     width: "100%",
   },
 });
@@ -721,11 +721,11 @@ export const GenericStyles = StyleSheet.create({
 export const SettingStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
   },
   container: {
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: 80,
@@ -840,7 +840,7 @@ export const ReportProblemStyles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
   },
   cameraContainer: {
     flex: 1,
@@ -915,7 +915,7 @@ export const ReportProblemStyles = StyleSheet.create({
 export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
   container:{
     flexGrow: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 120,
@@ -958,7 +958,7 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
   },
   horizontalLine:{
     borderBottomWidth: 1,
-    borderColor: "#111111",
+    borderColor: "#151515",
     width: "100%",
   },
   suraNameNumber:{
@@ -993,7 +993,7 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
 export const TasbehScreenStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     padding: 20,
     paddingTop: 40,
     justifyContent: "flex-start",
@@ -1093,7 +1093,7 @@ export const TasbehScreenStyle = StyleSheet.create({
     paddingRight: 5,
     },
   addNewThikirModalContainer: {
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     width: 350,
     height: 130,
     borderRadius: 10,
@@ -1146,7 +1146,7 @@ export const TasbehScreenStyle = StyleSheet.create({
     shadowRadius: 2,
   },
   rectangle: {
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     borderRadius: 10,
     marginTop: 10,
     width: "100%",
@@ -1239,7 +1239,7 @@ export const QablaScreenStyle  = StyleSheet.create({
 export const AzanScreenStyle  = StyleSheet.create({
   horizontalLine: {
     borderBottomWidth: 1,
-    borderColor: "#111111",
+    borderColor: "#151515",
     width: "100%",
   },
   container: {
@@ -1351,7 +1351,7 @@ export const AzanScreenStyle  = StyleSheet.create({
     color: "#f2f2f6",
   },
   prayerDecorator: {
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     borderRadius: 10,
     shadowColor: "black", 
     shadowOffset: {
@@ -1373,7 +1373,7 @@ export const AzanScreenStyle  = StyleSheet.create({
     padding: 10,
   },
   pikerContainer:{
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     borderRadius: 10,
   
   },
@@ -1384,7 +1384,7 @@ export const AzanScreenStyle  = StyleSheet.create({
   },
   pickerCancelBtn:{
     marginTop: 10,
-    backgroundColor: "#111111",
+    backgroundColor: "#151515",
     borderRadius: 10,
     justifyContent: "center",
     padding: 10,

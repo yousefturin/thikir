@@ -10,7 +10,6 @@ import {
   Dimensions,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-// import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from "../context/ThemeContext";
@@ -52,7 +51,7 @@ const ThikirAlarmScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     notificationContainer: {
       backgroundColor: "#242424",

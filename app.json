@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/Images/splashEntro.png",
       "resizeMode": "contain",
-      "backgroundColor": "#111111"
+      "backgroundColor": "#151515"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -27,11 +27,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/Images/splashEntro.png",
-        "backgroundColor": "#111111"
+        "backgroundColor": "#151515"
       },
       "permissions": [
-        "android.permission.NOTIFICATION"
-      ]
+        "android.permission.NOTIFICATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "package": "com.yusefturin.almufrdun"
     },
     "web": {
       "favicon": "./assets/Images/icon.png"

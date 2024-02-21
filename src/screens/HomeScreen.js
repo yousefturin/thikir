@@ -107,10 +107,10 @@ const HomeScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     TextMid: {
       color: "#fff",
@@ -129,10 +129,10 @@ const HomeScreen = ({ navigation }) => {
       borderColor: "#242424",
     },
     containerSearchMode: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     searchBarContainer: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     searchBarInputContainer: {
       backgroundColor: "#242424",

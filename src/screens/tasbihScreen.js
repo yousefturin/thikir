@@ -137,7 +137,7 @@ const TasbihScreen = () => {
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#111111",
+            backgroundColor: "#151515",
         },
         circle: {
             backgroundColor: "#242424",
@@ -158,7 +158,7 @@ const TasbihScreen = () => {
             shadowColor: "black", 
         },
         addNewThikirModalContainer: {
-            backgroundColor: "#111111",
+            backgroundColor: "#151515",
         },
         buttonThikirDisplayInModal: {
             backgroundColor: "#242424",
@@ -172,10 +172,10 @@ const TasbihScreen = () => {
             shadowColor: "black", 
         },
         rectangle: {
-            backgroundColor: "#111111",
+            backgroundColor: "#151515",
         },
         separator: {
-            borderColor: "#111111",
+            borderColor: "#151515",
         },
         itemText: {
             color: "#fff",

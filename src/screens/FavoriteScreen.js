@@ -53,10 +53,10 @@ const FavoriteScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#111111", 
+      backgroundColor: "#151515", 
     },
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     button: {
       backgroundColor: "#242424",

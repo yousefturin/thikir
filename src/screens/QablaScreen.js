@@ -52,7 +52,7 @@ const QiblaScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     degreeText: {
       color: "#fff",

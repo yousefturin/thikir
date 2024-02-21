@@ -71,7 +71,7 @@ const AppNavigator = () => {
     systemTheme
   );
   const backgroundBarColor = getColorForTheme(
-    { dark: "#111111", light: "#f2f2f6" },
+    { dark: "#151515", light: "#f2f2f6" },
     selectedTheme,
     systemTheme
   );

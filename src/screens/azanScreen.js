@@ -121,7 +121,7 @@ const AzanScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     nextPrayerContainer: {
       backgroundColor: "#242424",
@@ -164,13 +164,13 @@ const AzanScreen = () => {
       color: "#666",
     },
     horizontalLine: {
-      borderColor:  "#111111",
+      borderColor:  "#151515",
     },
     pikerContainer: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     pickerCancelBtn: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
   });
   //#endregion

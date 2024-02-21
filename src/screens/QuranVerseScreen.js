@@ -66,7 +66,7 @@ const QuranVerseScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     rectangle: {
       backgroundColor: "#242424",
@@ -76,7 +76,7 @@ const QuranVerseScreen = ({ navigation }) => {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#111111",
+      borderColor: "#151515",
     },
   });
   //#endregion

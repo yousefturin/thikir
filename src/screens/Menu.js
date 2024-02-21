@@ -45,7 +45,7 @@ const Menu = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#111111",
+      backgroundColor: "#151515",
     },
     button: {
       backgroundColor: "#242424",
