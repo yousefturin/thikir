@@ -95,7 +95,7 @@ const AboutScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("Menu")}
       ></TouchableOpacity>
       <Image source={appIconImage} style={styles.appLogoIcon}></Image>
-      <Text style={[styles.appNameText, {fontFamily:selectedLanguage!="Arabic"?"MontserratBold": "ScheherazadeNewBold"}]}>{selectedLanguage!="Arabic"?"AL Mufrdun":"المفردون"}</Text>
+      <Text style={[styles.appNameText, {fontFamily:selectedLanguage!="Arabic"?"MontserratBold": "ScheherazadeNewBold"}]}>{selectedLanguage!="Arabic"?"Mufradun":"المفردون"}</Text>
       <Text style={styles.appVersionText}>{selectedLanguage!="Arabic"? "Version:":"اﻹصدار:"} {pkg.version}</Text>
       <View
         style={[

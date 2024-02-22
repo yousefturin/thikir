@@ -731,7 +731,8 @@ const AzanScreen = () => {
             />
           )}
 
-          <Text style={styles.time}>
+          <Text style={styles.time}
+          allowFontScaling={false} >
             {state.isArabicNumbers
               ? convertToEasternArabicNumerals(nextPrayerTime)
               : nextPrayerTime}
@@ -859,6 +860,7 @@ const AzanScreen = () => {
                             />
                             <View style={styles.pikerContainer}>
                               <Text
+                              allowFontScaling={false} 
                                 style={[
                                   {
                                     color: "#666",
@@ -950,6 +952,7 @@ const AzanScreen = () => {
                               />
                               <View style={styles.pikerContainer}>
                                 <Text
+                                allowFontScaling={false} 
                                   style={[
                                     {
                                       color: "#666",
@@ -1020,6 +1023,7 @@ const AzanScreen = () => {
                       ]}
                     >
                       <Text
+                      allowFontScaling={false} 
                         style={[
                           styles.prayerName,
                           prayer === nextPrayer ? styles.boldPrayer : null,
@@ -1030,6 +1034,7 @@ const AzanScreen = () => {
                           : AzanComponents.mapPrayerNameToArabic(prayer)}
                       </Text>
                       <Text
+                      allowFontScaling={false} 
                         style={[
                           styles.prayerTime,
                           prayer === nextPrayer ? styles.boldTime : null,

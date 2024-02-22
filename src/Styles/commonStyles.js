@@ -1267,7 +1267,7 @@ export const AzanScreenStyle  = StyleSheet.create({
   },
   time: {
     fontFamily: "MontserratBold",
-    fontSize: 82,
+    fontSize: 62,
     color: "#f2f2f6",
     marginTop: 15,
   },
@@ -1301,7 +1301,7 @@ export const AzanScreenStyle  = StyleSheet.create({
   },
   date: {
     fontFamily: "Montserrat",
-    fontSize: 18,
+    fontSize: 14,
     color: "#666",
     margin: 5,
   },
@@ -1328,26 +1328,26 @@ export const AzanScreenStyle  = StyleSheet.create({
   },
   prayerName: {
     fontFamily: "Montserrat",
-    fontSize: 25,
+    fontSize: 20,
     color: "#f2f2f6",
     marginBottom: 18,
     paddingTop: 18,
   },
   prayerTime: {
     fontFamily: "Montserrat",
-    fontSize: 21,
+    fontSize: 20,
     color: "#666",
     marginBottom: 15,
     paddingTop: 15,
   },
   boldPrayer: {
     fontFamily: "MontserratBold",
-    fontSize: 25,
+    fontSize: 20,
     color: "#f2f2f6",
   },
   boldTime: {
     fontFamily: "MontserratBold",
-    fontSize: 21,
+    fontSize: 20,
     color: "#f2f2f6",
   },
   prayerDecorator: {

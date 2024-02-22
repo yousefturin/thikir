@@ -9,27 +9,27 @@ class AzanComponents extends React.Component {
   NextPrayerInfoEnglish = ({ nextPrayer, timeLeft }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.nextPrayerText}>
-        <Text style={[{ fontFamily: "MontserratBold" }]}>{nextPrayer}</Text> in{" "}
+      <Text allowFontScaling={false} style={AzanScreenStyle.nextPrayerText}>
+        <Text allowFontScaling={false} style={[{ fontFamily: "MontserratBold",fontSize:20 }]}>{nextPrayer}</Text> in{" "}
         {timeLeft.hours !== 0 && (
           <>
-            <Text style={[{ fontFamily: "MontserratBold" }]}>
+            <Text allowFontScaling={false}  style={[{ fontFamily: "MontserratBold",fontSize:20 }]}>
               {state.isArabicNumbers
                 ? convertToEasternArabicNumerals(timeLeft.hours.toString())
                 : timeLeft.hours.toString()}
             </Text>
-            <Text> hours</Text>
-            <Text>, </Text>
+            <Text allowFontScaling={false}  style={[{ fontSize:20 }]}> hours</Text>
+            <Text allowFontScaling={false} style={[{ fontSize:20 }]}>, </Text>
           </>
         )}
         {timeLeft.minutes !== 0 && (
           <>
-            <Text style={[{ fontFamily: "MontserratBold" }]}>
+            <Text  allowFontScaling={false} style={[{ fontFamily: "MontserratBold",fontSize:20  }]}>
               {state.isArabicNumbers
                 ? convertToEasternArabicNumerals(timeLeft.minutes.toString())
                 : timeLeft.minutes.toString()}
             </Text>
-            <Text> minutes</Text>
+            <Text allowFontScaling={false} style={[{ fontSize:20 }]} > minutes</Text>
           </>
         )}
       </Text>
@@ -39,9 +39,9 @@ class AzanComponents extends React.Component {
   NextPrayerInfoArabic = ({ nextPrayer, timeLeft, selectedLanguage }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.nextPrayerText}>
+      <Text allowFontScaling={false}  style={AzanScreenStyle.nextPrayerText}>
         أذان{" "}
-        <Text style={[{ fontFamily: "MontserratBold" }]}>
+        <Text  allowFontScaling={false} style={[{ fontFamily: "MontserratBold",fontSize:20  }]}>
           {selectedLanguage !== "Arabic"
             ? { nextPrayer } // Display English prayer name
             : this.mapPrayerNameToArabic(nextPrayer)}
@@ -49,29 +49,29 @@ class AzanComponents extends React.Component {
         بعد{" "}
         {timeLeft.hours !== 0 && (
           <>
-            <Text style={[{ fontFamily: "MontserratBold" }]}>
+            <Text allowFontScaling={false}   style={[{ fontFamily: "MontserratBold",fontSize:20  }]}>
               {state.isArabicNumbers
                 ? convertToEasternArabicNumerals(timeLeft.hours.toString())
                 : timeLeft.hours.toString()}
             </Text>
             {timeLeft.hours === 1 ? (
-              <Text> ساعة </Text>
+              <Text allowFontScaling={false} style={[{ fontSize:20 }]} > ساعة </Text>
             ) : timeLeft.hours === 2 ? (
-              <Text> ساعتان </Text>
+              <Text allowFontScaling={false} style={[{ fontSize:20 }]} > ساعتان </Text>
             ) : (
-              <Text> ساعات </Text>
+              <Text allowFontScaling={false} style={[{ fontSize:20 }]} > ساعات </Text>
             )}
           </>
         )}
         {timeLeft.minutes !== 0 && (
           <>
-            <Text>,</Text>
-            <Text style={[{ fontFamily: "MontserratBold" }]}>
+            <Text allowFontScaling={false} style={[{ fontSize:20 }]} >,</Text>
+            <Text allowFontScaling={false}  style={[{ fontFamily: "MontserratBold",fontSize:20 }]}>
               {state.isArabicNumbers
                 ? convertToEasternArabicNumerals(timeLeft.minutes.toString())
                 : timeLeft.minutes.toString()}
             </Text>
-            <Text> دقيقة</Text>
+            <Text allowFontScaling={false}  style={[{ fontSize:20 }]}> دقيقة</Text>
           </>
         )}
       </Text>
@@ -81,7 +81,7 @@ class AzanComponents extends React.Component {
   DateInfoArabic = ({ monthText, day, year }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.date}>
+      <Text  allowFontScaling={false} style={AzanScreenStyle.date}>
         {state.isArabicNumbers
           ? convertToEasternArabicNumerals(day.toString())
           : day.toString()}{" "}
@@ -96,7 +96,7 @@ class AzanComponents extends React.Component {
   DateInfoEnglish = ({ monthText, day, year }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.date}>
+      <Text  allowFontScaling={false} style={AzanScreenStyle.date}>
         {" "}
         {monthText}{" "}
         {state.isArabicNumbers
@@ -113,7 +113,7 @@ class AzanComponents extends React.Component {
   DateHijriInfoArabic = ({ dayHijri, monthHijri, yearTextHijri }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.date}>
+      <Text  allowFontScaling={false} style={AzanScreenStyle.date}>
         {state.isArabicNumbers
             ? convertToEasternArabicNumerals(dayHijri.toString())
             : dayHijri.toString()}{" "}
@@ -129,7 +129,7 @@ class AzanComponents extends React.Component {
   DateHijriInfoEnglish = ({ dayHijri, monthHijri, yearTextHijri }) => {
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     return (
-      <Text style={AzanScreenStyle.date}>
+      <Text  allowFontScaling={false} style={AzanScreenStyle.date}>
         {state.isArabicNumbers
             ? convertToEasternArabicNumerals(dayHijri.toString())
             : dayHijri.toString()}{" "}
