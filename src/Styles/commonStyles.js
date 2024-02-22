@@ -262,7 +262,7 @@ export const QuranVerseStyles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 20,
     paddingHorizontal: 10,
-    minHeight: 170,
+    minHeight: 190,
     maxHeight: 2070,
   },
   title: {
@@ -277,7 +277,7 @@ export const QuranVerseStyles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: -5,
+    bottom: 0,
     alignItems: 'center', // Horizontal centering
   },
   tafsirStyle: {
