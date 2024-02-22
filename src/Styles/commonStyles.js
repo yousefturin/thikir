@@ -276,6 +276,7 @@ export const QuranVerseStyles = StyleSheet.create({
     textAlign: "center",
     color: "#767676",
     position: "absolute",
+    fontFamily: "AmiriFont",
     left: 0,
     right: 0,
     bottom: 0,
