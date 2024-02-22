@@ -1267,7 +1267,7 @@ export const AzanScreenStyle  = StyleSheet.create({
   },
   time: {
     fontFamily: "MontserratBold",
-    fontSize: 62,
+    fontSize: 72,
     color: "#f2f2f6",
     marginTop: 15,
   },
@@ -1381,6 +1381,7 @@ export const AzanScreenStyle  = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
     marginTop:10,
+    paddingHorizontal:10
   },
   pickerCancelBtn:{
     marginTop: 10,
