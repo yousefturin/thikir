@@ -41,6 +41,11 @@ const AzanScreen = () => {
     selectedTheme,
     systemTheme
   );
+  const backgroundColorTheme = getColorForTheme(
+    { dark: "#151515", light: "#fefffe" },
+    selectedTheme,
+    systemTheme
+  );
 
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
@@ -459,65 +464,65 @@ const AzanScreen = () => {
         try {
           const { offsetSuccess } = await OffsetSingleton.getOffsetStatus();
           if (offsetSuccess) {
-          try {
-            const {locationSuccess, location} = await locationSingleton.getLocation();
+            try {
+              const { locationSuccess, location } = await locationSingleton.getLocation();
 
-            if (locationSuccess && location ) {
-              const { latitude, longitude } = location;
+              if (locationSuccess && location) {
+                const { latitude, longitude } = location;
 
-              // Fetch prayer times using current location
-              const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
-                latitude,
-                longitude,
-                currentDay,
-                currentMonth,
-                currentYear
-              );
-
-              const cleanedPrayerTimes = removeUnwantedTimes(prayerTimes);
-
-              if (storedPrayerTimes && storedPrayerOffset) {
-                let updatedTimings = updatePrayerTimings(
-                  cleanedPrayerTimes,
-                  JSON.parse(storedPrayerOffset)
+                // Fetch prayer times using current location
+                const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
+                  latitude,
+                  longitude,
+                  currentDay,
+                  currentMonth,
+                  currentYear
                 );
 
-                if (timeFormatCheck === false) {
-                  updatedTimings = timeConvertFrom24To12(updatedTimings);
-                  setStoredTimings(updatedTimings);
-                }
-              } else {
-                let cleanedPrayerTimesUpdate = cleanedPrayerTimes;
+                const cleanedPrayerTimes = removeUnwantedTimes(prayerTimes);
 
-                if (timeFormatCheck === false) {
-                  cleanedPrayerTimesUpdate = timeConvertFrom24To12(
-                    cleanedPrayerTimesUpdate
+                if (storedPrayerTimes && storedPrayerOffset) {
+                  let updatedTimings = updatePrayerTimings(
+                    cleanedPrayerTimes,
+                    JSON.parse(storedPrayerOffset)
                   );
+
+                  if (timeFormatCheck === false) {
+                    updatedTimings = timeConvertFrom24To12(updatedTimings);
+                    setStoredTimings(updatedTimings);
+                  }
+                } else {
+                  let cleanedPrayerTimesUpdate = cleanedPrayerTimes;
+
+                  if (timeFormatCheck === false) {
+                    cleanedPrayerTimesUpdate = timeConvertFrom24To12(
+                      cleanedPrayerTimesUpdate
+                    );
+                    setStoredTimings(cleanedPrayerTimesUpdate);
+                  }
                   setStoredTimings(cleanedPrayerTimesUpdate);
                 }
-                setStoredTimings(cleanedPrayerTimesUpdate);
+                try {
+                  // Store updated prayer times
+                  await AsyncStorage.setItem(
+                    "prayer_times_of_day",
+                    JSON.stringify(cleanedPrayerTimes)
+                  );
+                } catch (error) {
+                  console.error("Error storing prayer data:", error);
+                }
+              } else {
+                console.log("Location permission not granted");
               }
-              try {
-                // Store updated prayer times
-                await AsyncStorage.setItem(
-                  "prayer_times_of_day",
-                  JSON.stringify(cleanedPrayerTimes)
-                );
-              } catch (error) {
-                console.error("Error storing prayer data:", error);
-              }
-            } else {
-              console.log("Location permission not granted");
+
+
+
+
+            } catch (error) {
+              console.error("Error getting location data:", error);
             }
 
-
-
-
-          } catch (error) {
-            console.error("Error getting location data:", error);
           }
-
-        }
 
         } catch (error) {
           console.error("Error getting offset data:", error);
@@ -889,29 +894,34 @@ const AzanScreen = () => {
                             >
                               {prayer} Precaution
                             </Text>
+
                             <Picker
                               selectedValue={selectedMinutes[prayer]}
                               onValueChange={(minutes) =>
                                 handleMinutesChange(prayer, minutes)
                               }
-                              mode="dialog"
+                              mode="dropdown"
+                              dropdownIconColor={horizontalLineTheme}
                             >
                               {Array.from(
                                 { length: 61 },
                                 (_, index) => index - 30
                               ).map((minute) => (
+                               
                                 <Picker.Item
                                   key={minute}
                                   label={minute}
                                   value={minute}
                                   color={NumberPickerTheme}
                                   style={{
-                                    color: "#252525",
                                     fontSize: 28,
+                                    backgroundColor:backgroundColorTheme,
                                   }}
                                 />
+                               
                               ))}
                             </Picker>
+        
                             <View
                               style={[
                                 styles.horizontalLine,
@@ -981,29 +991,30 @@ const AzanScreen = () => {
                               >
                                 {prayer} Precaution
                               </Text>
-                              <Picker
-                                selectedValue={selectedMinutes[prayer]}
-                                onValueChange={(minutes) =>
-                                  handleMinutesChange(prayer, minutes)
-                                }
-                                mode="dialog"
-                              >
-                                {Array.from(
-                                  { length: 61 },
-                                  (_, index) => index - 30
-                                ).map((minute) => (
-                                  <Picker.Item
-                                    key={minute}
-                                    label={minute}
-                                    value={minute}
-                                    color={NumberPickerTheme}
-                                    style={{
-                                      color: "#252525",
-                                      fontSize: 28,
-                                    }}
-                                  />
-                                ))}
-                              </Picker>
+
+                                <Picker
+                                  selectedValue={selectedMinutes[prayer]}
+                                  onValueChange={(minutes) =>
+                                    handleMinutesChange(prayer, minutes)
+                                  }
+                                  mode="dropdown"
+                                >
+                                  {Array.from(
+                                    { length: 61 },
+                                    (_, index) => index - 30
+                                  ).map((minute) => (
+                                    <Picker.Item
+                                      key={minute}
+                                      label={minute}
+                                      value={minute}
+                                      color={NumberPickerTheme}
+                                      style={{
+                                        color: "#252525",
+                                        fontSize: 28,
+                                      }}
+                                    />
+                                  ))}
+                                </Picker>
                               <View
                                 style={[
                                   styles.horizontalLine,
