@@ -92,6 +92,7 @@ const AppNavigator = () => {
           fontFamily:
             selectedLanguage != "Arabic" ? "Montserrat" : "ScheherazadeNewBold",
           fontSize: 22,
+          
         },
         cardStyleInterpolator: customCardStyleInterpolator, // Custom animation
       }}
@@ -101,6 +102,7 @@ const AppNavigator = () => {
         component={HomeScreen}
         options={({ navigation }) => ({
           headerTitle: null,
+          headerTitleAlign:"center",
           headerLeft: () => (
             <View style={styles.iconContainer}>
               <TouchableOpacity
@@ -115,7 +117,7 @@ const AppNavigator = () => {
                   size={24}
                   style={[
                     {
-                      paddingRight: 190,
+                      paddingRight: 15,
                       marginBottom: 10,
                       paddingTop: 10,
                       color: barColor,
