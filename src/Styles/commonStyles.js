@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const {width, height} = Dimensions.get("window");
 
+
 //#region MainStyles
 export const MainStyles = StyleSheet.create({
   container: {
@@ -1211,10 +1212,10 @@ export const QablaScreenStyle  = StyleSheet.create({
   },
   compassImageRed: {
     position: "absolute",
-    height: width - 80,
+    height: width + 80,
     resizeMode: 'contain',
-    width:345,
-    height:345,
+    width: (height/1.19) + 20,
+    height: (width/1.1) - 29
   },
   triangleContainer: {
     position: 'absolute',
