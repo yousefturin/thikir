@@ -573,10 +573,11 @@ const TasbihScreen = () => {
             onPressIn={handleContainerPressIn}
             onPressOut={handleContainerPressOut}
             onResponderMove={handleSwipe}
+            disabled={!names[selectedNameIndex]}
         >
             <View style={styles.container}>
                 <View style={styles.resetBtn}>
-                    <TouchableOpacity onPress={handleReset}>
+                    <TouchableOpacity disabled={!names[selectedNameIndex]} onPress={handleReset}>
                         <Svg
                             height="24"
                             viewBox="0 0 21 21"
@@ -679,7 +680,7 @@ const TasbihScreen = () => {
                         setIsNameListVisible(false);
                         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
                     }}
-                >
+                > 
                     <View style={styles.container}>
                         <Text allowFontScaling={false} style={[styles.pickThikirText,{fontFamily:selectedLanguage != "Arabic"?"Montserrat":"ScheherazadeNewBold"}]}>
                             {selectedLanguage != "Arabic"?"Select a Supplication":"اختيار الذكر"}
