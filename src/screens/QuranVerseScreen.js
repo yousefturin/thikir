@@ -167,7 +167,6 @@ const QuranVerseScreen = ({ navigation }) => {
     systemTheme
   );
   useEffect(() => {
-    console.log(verseData)
     startAnimation();
   }, []);
 
