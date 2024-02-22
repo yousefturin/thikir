@@ -4,12 +4,12 @@ const fetchRandomVerse = async () => {
 
     const editionForVerse = 'Ben.asad';
 
-    const apiUrlVerse = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForVerse}`;
+    const apiUrlVerse = `https://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForVerse}`;
     const response = await fetch(apiUrlVerse);
 
 
     const editionForTafserAR = 'ar.muyassar';
-    const apiUrlTafserAR = `http://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForTafserAR}`;
+    const apiUrlTafserAR = `https://api.alquran.cloud/v1/ayah/${randomAyah}/${editionForTafserAR}`;
     const responseTafserAR = await fetch(apiUrlTafserAR);
 
 
