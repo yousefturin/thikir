@@ -3,6 +3,7 @@
 # dependencies
 node_modules/
 data.txt
+emulater.sh
 # Expo
 .expo/
 dist/

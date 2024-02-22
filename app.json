@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Al Mufrdun",
-    "slug": "almufrdun",
+    "name": "Mufradun",
+    "slug": "mufradun",
     "description": "Islamic application.",
-    "version": "1.0.0",
+    "version": "v1.1.1-android-dev",
     "orientation": "portrait",
     "icon": "./assets/Images/icon.png",
     "userInterfaceStyle": "automatic",
