@@ -3,8 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OffsetSingleton = {
     async getOffsetStatus() {
-        // console.log("=============================================")
-        // console.log("I am starting the Singleton case for offsetData");
+
         const offsetData = {
             "Fajr":"0",
             "Sunrise":"0",
@@ -18,12 +17,8 @@ const OffsetSingleton = {
             if (!status) {
                 // Set initial offset data if not found in AsyncStorage
                 await AsyncStorage.setItem("offset_time_prayer", JSON.stringify(offsetData));
-                // console.log("Offset data initialized in AsyncStorage");
-                // Return a flag indicating initialization success
                 return { offsetSuccess: true };
             } else {
-                // Return the offset data if found in AsyncStorage
-                // console.log("Offset data found in AsyncStorage");
                 return { offsetSuccess: true, offsetData: JSON.parse(status) };
             }
         } catch (error) {
