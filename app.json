@@ -2,7 +2,6 @@
   "expo": {
     "name": "Al Mufrdun",
     "slug": "almufrdun",
-    "sdkVersion": "49.0.0",
     "description": "Islamic application.",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,13 +25,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Images/splashEntro.png",
+        "foregroundImage": "./assets/Images/icon.png",
         "backgroundColor": "#151515"
       },
       "permissions": [
         "android.permission.NOTIFICATION",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
       ],
       "package": "com.yusefturin.almufrdun"
     },
