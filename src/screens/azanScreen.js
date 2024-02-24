@@ -466,10 +466,10 @@ const AzanScreen = () => {
           if (offsetSuccess) {
             try {
               const { locationSuccess, location } = await locationSingleton.getLocation();
-
+              
               if (locationSuccess && location) {
                 const { latitude, longitude } = location;
-
+                
                 // Fetch prayer times using current location
                 const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
                   latitude,
@@ -537,7 +537,7 @@ const AzanScreen = () => {
     setTimeFormatCheck(localProperties.uses24hourClock);
 
     fetchData();
-  }, [timeFormatCheck]);
+  }, [storedTimings, timeFormatCheck]);
   //#endregion
 
   //#region Calculate Time Left and next Prayer
