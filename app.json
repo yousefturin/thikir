@@ -1,15 +1,13 @@
 {
   "expo": {
     "name": "Mufradun",
-    "slug": "mufradun",
+    "slug": "almufrdun",
     "description": "Islamic application.",
-    "version": "v1.1.1-android-dev",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/Images/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/Images/splashEntro.png",
-      "resizeMode": "contain",
       "backgroundColor": "#151515"
     },
     "assetBundlePatterns": [
