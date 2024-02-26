@@ -22,7 +22,7 @@ const OffsetSingleton = {
                 return { offsetSuccess: true, offsetData: JSON.parse(status) };
             }
         } catch (error) {
-            console.error("Error getting location", error);
+            console.error("Error getting offset", error);
             return { offsetSuccess: false, error };
         }
     },
