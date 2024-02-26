@@ -51,7 +51,7 @@ const AzanService = {
                         }
 
                     } catch (error) {
-                        console.error("Error reading storedDate:", error);
+                        console.error("Error reading storedPrayingCalender:", error);
                     }
 
                 } catch (error) {
