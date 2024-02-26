@@ -8,6 +8,7 @@ import {
   Button,
   Animated,
   Platform,
+  Dimensions,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import * as Localization from "expo-localization";
@@ -23,8 +24,10 @@ import { AzanScreenStyle } from "../Styles/commonStyles";
 import { useNumberContext } from "../context/NumberContext";
 import { getColorForTheme } from "../utils/themeUtils";
 import AzanComponents from "../components/AzanComponents";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const AzanScreen = () => {
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
@@ -65,6 +68,7 @@ const AzanScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [timeFormatCheck, setTimeFormatCheck] = useState(null);
+
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -402,7 +406,9 @@ const AzanScreen = () => {
     return cleanedPrayerTimes;
   };
   //#endregion
-
+  // Side note if any day performance did dropped the storedTimings needs to be cleaned from the 
+  // useEffect, by that the screen will no longer show momento update on location,
+  // changing the time format, and it will require the user to re open the screen
   //#region Entry Point
   useEffect(() => {
     const fetchData = async () => {
@@ -464,12 +470,11 @@ const AzanScreen = () => {
         try {
           const { offsetSuccess } = await OffsetSingleton.getOffsetStatus();
           if (offsetSuccess) {
-            try {
+            try {             
               const { locationSuccess, location } = await locationSingleton.getLocation();
-              
-              if (locationSuccess && location) {
-                const { latitude, longitude } = location;
                 
+            if (locationSuccess && location ) {
+              const { latitude, longitude } = location;
                 // Fetch prayer times using current location
                 const prayerTimes = await AzanService.checkAndFetchPrayerTimes(
                   latitude,
@@ -511,19 +516,11 @@ const AzanScreen = () => {
                 } catch (error) {
                   console.error("Error storing prayer data:", error);
                 }
-              } else {
-                console.log("Location permission not granted");
               }
-
-
-
-
             } catch (error) {
               console.error("Error getting location data:", error);
             }
-
           }
-
         } catch (error) {
           console.error("Error getting offset data:", error);
         }
@@ -532,13 +529,13 @@ const AzanScreen = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     const localProperties = Localization.getCalendars()[0];
     setTimeFormatCheck(localProperties.uses24hourClock);
 
     fetchData();
-  }, [storedTimings, timeFormatCheck]);
+  }, [storedTimings,timeFormatCheck]);
   //#endregion
+
 
   //#region Calculate Time Left and next Prayer
   useEffect(() => {
@@ -752,7 +749,7 @@ const AzanScreen = () => {
             />
           )}
 
-          <Text style={styles.time}
+          <Text style={[styles.time, { fontSize: moderateScale(68) }]}
             allowFontScaling={false} >
             {state.isArabicNumbers
               ? convertToEasternArabicNumerals(nextPrayerTime)
@@ -907,21 +904,21 @@ const AzanScreen = () => {
                                 { length: 61 },
                                 (_, index) => index - 30
                               ).map((minute) => (
-                               
+
                                 <Picker.Item
                                   key={minute}
                                   label={minute}
                                   value={minute}
                                   color={NumberPickerTheme}
                                   style={{
-                                    fontSize: 28,
-                                    backgroundColor:backgroundColorTheme,
+                                    fontSize: moderateScale(28),
+                                    backgroundColor: backgroundColorTheme,
                                   }}
                                 />
-                               
+
                               ))}
                             </Picker>
-        
+
                             <View
                               style={[
                                 styles.horizontalLine,
@@ -992,29 +989,29 @@ const AzanScreen = () => {
                                 {prayer} Precaution
                               </Text>
 
-                                <Picker
-                                  selectedValue={selectedMinutes[prayer]}
-                                  onValueChange={(minutes) =>
-                                    handleMinutesChange(prayer, minutes)
-                                  }
-                                  mode="dropdown"
-                                >
-                                  {Array.from(
-                                    { length: 61 },
-                                    (_, index) => index - 30
-                                  ).map((minute) => (
-                                    <Picker.Item
-                                      key={minute}
-                                      label={minute}
-                                      value={minute}
-                                      color={NumberPickerTheme}
-                                      style={{
-                                        color: "#252525",
-                                        fontSize: 28,
-                                      }}
-                                    />
-                                  ))}
-                                </Picker>
+                              <Picker
+                                selectedValue={selectedMinutes[prayer]}
+                                onValueChange={(minutes) =>
+                                  handleMinutesChange(prayer, minutes)
+                                }
+                                mode="dropdown"
+                              >
+                                {Array.from(
+                                  { length: 61 },
+                                  (_, index) => index - 30
+                                ).map((minute) => (
+                                  <Picker.Item
+                                    key={minute}
+                                    label={minute}
+                                    value={minute}
+                                    color={NumberPickerTheme}
+                                    style={{
+                                      color: "#252525",
+                                      fontSize: moderateScale(28),
+                                    }}
+                                  />
+                                ))}
+                              </Picker>
                               <View
                                 style={[
                                   styles.horizontalLine,
@@ -1054,6 +1051,7 @@ const AzanScreen = () => {
                       style={[
                         styles.prayerName,
                         prayer === nextPrayer ? styles.boldPrayer : null,
+                        { fontSize: moderateScale(20) }
                       ]}
                     >
                       {selectedLanguage !== "Arabic"
@@ -1065,6 +1063,7 @@ const AzanScreen = () => {
                       style={[
                         styles.prayerTime,
                         prayer === nextPrayer ? styles.boldTime : null,
+                        { fontSize: moderateScale(20) }
                       ]}
                     >
                       {state.isArabicNumbers
