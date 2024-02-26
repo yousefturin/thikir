@@ -7,6 +7,7 @@ import {
     TouchableWithoutFeedback,
     TouchableOpacity,
     ScrollView,
+    Dimensions,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { handleShare } from "../Service/ShareService";
@@ -21,8 +22,10 @@ import Svg, { Path } from "react-native-svg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getColorForTheme } from "../utils/themeUtils";
 import SvgComponent from "../../assets/Svg/svgComponents";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const GenericPage = ({ route }) => {
+    const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
     const { selectedColor } = useColor();
@@ -436,7 +439,7 @@ const GenericPage = ({ route }) => {
                                     style={[
                                         styles.title,
                                         {
-                                            fontSize: MaxFontSizeDescription,
+                                            fontSize: moderateScale(16),
                                             fontFamily:
                                                 selectedLanguage === "English" &&
                                                     selectedFont === "ScheherazadeNew"
@@ -483,7 +486,7 @@ const GenericPage = ({ route }) => {
                                     <SvgComponent svgKey="TranslationSVG" />    
                                     </View>
                                     <Text
-                                        style={[styles.TranslationDescription, { fontSize: 14 ,textAlign:"left",}]}
+                                        style={[styles.TranslationDescription, { fontSize: moderateScale(14) ,textAlign:"left",}]}
                                     >
                                         Translation
                                     </Text>
@@ -503,7 +506,7 @@ const GenericPage = ({ route }) => {
                                         style={[
                                             styles.description,
                                             {
-                                                fontSize: 14,
+                                                fontSize: moderateScale(14),
                                                 textAlign:
                                                     selectedLanguage != "arabic" ? "left" : "center",
                                                 fontFamily:
@@ -541,7 +544,7 @@ const GenericPage = ({ route }) => {
                             allowFontScaling={false}
                             style={[
                                 styles.description,
-                                { paddingBottom: 50, paddingTop: 10 },
+                                { paddingBottom: 50, paddingTop: 10 ,fontSize: moderateScale(9)},
                             ]}
                         >
                             {
@@ -555,12 +558,12 @@ const GenericPage = ({ route }) => {
                         {selectedLanguage != "Arabic" ? (
                             <Text
                                 allowFontScaling={false}
-                                style={[styles.InfoReptTimeIndex, { fontFamily: "Montserrat" }]}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "Montserrat",fontSize: moderateScale(11) }]}
                             >
                                 No:{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor }]}
+                                    style={[{ color: selectedColor ,fontSize: moderateScale(11)}]}
                                 >
                                     {
                                         (indexToDisplay = state.isArabicNumbers
@@ -574,7 +577,7 @@ const GenericPage = ({ route }) => {
                                 Of:{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor }]}
+                                    style={[{ color: selectedColor,fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (totalItemsToDisplay = state.isArabicNumbers
@@ -588,12 +591,12 @@ const GenericPage = ({ route }) => {
                         ) : (
                             <Text
                                 allowFontScaling={false}
-                                style={[styles.InfoReptTimeIndex, { fontFamily: "AmiriFont" }]}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "AmiriFont",fontSize: moderateScale(11) }]}
                             >
                                 الذكر{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor }]}
+                                    style={[{ color: selectedColor,fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (indexToDisplay = state.isArabicNumbers
@@ -606,7 +609,7 @@ const GenericPage = ({ route }) => {
                                 من{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor }]}
+                                    style={[{ color: selectedColor ,fontSize: moderateScale(11)}]}
                                 >
                                     {
                                         (totalItemsToDisplay = state.isArabicNumbers
@@ -626,6 +629,7 @@ const GenericPage = ({ route }) => {
                                     color: selectedColor,
                                     fontFamily:
                                         selectedLanguage != "Arabic" ? "Montserrat" : "AmiriFont",
+                                    fontSize: moderateScale(11)
                                 },
                             ]}
                         >
@@ -652,13 +656,13 @@ const GenericPage = ({ route }) => {
                             activeOpacity={1}
                         >
                             <View style={styles.dotContainer}>
-                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                <Text style={[styles.dot, { color: selectedColor ,fontSize: moderateScale(20)}]}>
                                     &#8226;
                                 </Text>
-                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                <Text style={[styles.dot, { color: selectedColor,fontSize: moderateScale(20) }]}>
                                     &#8226;
                                 </Text>
-                                <Text style={[styles.dot, { color: selectedColor }]}>
+                                <Text style={[styles.dot, { color: selectedColor,fontSize: moderateScale(20) }]}>
                                     &#8226;
                                 </Text>
                             </View>
@@ -683,22 +687,15 @@ const GenericPage = ({ route }) => {
                             <View
                                 style={[
                                     styles.button,
-                                    { borderColor: selectedColor, position: "relative" },
+                                    { borderColor: selectedColor,height:moderateScale(60),width:moderateScale(130),alignItems:"center"},
                                 ]}
                             >
                                 {/*next button here button here*/}
                                 <FontAwesomeIcon
                                     name="angle-left"
-                                    size={24}
+                                    size={moderateScale(24)}
                                     color="#454545"
-                                    style={[
-                                        styles.icon,
-                                        {
-                                            position: "absolute",
-                                            left: selectedLanguage != "Arabic" ? 10 : 15,
-                                            top: "45%",
-                                        },
-                                    ]}
+                                    style={{marginRight:selectedLanguage != "Arabic"? moderateScale(5):moderateScale(20)}}
                                 />
                                 {selectedLanguage != "Arabic" ? (
                                     <Text
@@ -707,6 +704,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "Montserrat",
+                                                fontSize: moderateScale(17)
                                             },
                                         ]}
                                     >
@@ -719,6 +717,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "AmiriFont",
+                                                fontSize: moderateScale(17)
                                             },
                                         ]}
                                     >
@@ -746,6 +745,7 @@ const GenericPage = ({ route }) => {
                                                 selectedLanguage != "Arabic"
                                                     ? "Montserrat"
                                                     : "ScheherazadeNew",
+                                                    fontSize: moderateScale(17)
                                         },
                                     ]}
                                 >
@@ -764,7 +764,12 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                            <View style={[styles.button, { borderColor: selectedColor }]}>
+                         <View
+                                style={[
+                                    styles.button,
+                                    { borderColor: selectedColor,height:moderateScale(60),width:moderateScale(130),alignItems:"center"},
+                                ]}
+                            >
                                 {/*back button here*/}
                                 {selectedLanguage != "Arabic" ? (
                                     <Text
@@ -773,6 +778,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "Montserrat",
+                                                fontSize: moderateScale(17)
                                             },
                                         ]}
                                     >
@@ -785,6 +791,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "AmiriFont",
+                                                fontSize: moderateScale(17)
                                             },
                                         ]}
                                     >
@@ -794,16 +801,9 @@ const GenericPage = ({ route }) => {
 
                                 <FontAwesomeIcon
                                     name="angle-right"
-                                    size={24}
+                                    size={moderateScale(24)}
                                     color="#454545"
-                                    style={[
-                                        styles.icon,
-                                        {
-                                            position: "absolute",
-                                            right: selectedLanguage != "Arabic" ? 10 : 15,
-                                            top: "45%",
-                                        },
-                                    ]}
+                                    style={{marginLeft:selectedLanguage != "Arabic"? moderateScale(5):moderateScale(20)}}
                                 />
                             </View>
                         </TouchableWithoutFeedback>
