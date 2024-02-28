@@ -1,7 +1,8 @@
 import { StyleSheet, Dimensions } from "react-native";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const {width, height} = Dimensions.get("window");
-
+const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
 
 //#region MainStyles
 export const MainStyles = StyleSheet.create({
@@ -16,7 +17,8 @@ export const MainStyles = StyleSheet.create({
     width: "10%",
   },
   iconWrapper: {
-    width: "8%",
+    width: moderateScale(30),
+    height: moderateScale(30),
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#454545",
@@ -51,24 +53,21 @@ export const MainStyles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontFamily: "ScheherazadeNewBold",
   },
   image: {
-    width: 444,
-    height: 55,
+    width: moderateScale(444),
+    height: moderateScale(50),
   },
   icon: {
     opacity: 0.5
   },
-  specialIconleft: {
-    width: 24,
-    height: 24,
-  },
   horizontalLine: {
     borderBottomWidth: 1,
     borderColor: "#242424",
-    width: 60,
+    width: moderateScale(55),
+    marginRight:moderateScale(16,1.5),
   },
 });
 //#endregion
@@ -85,16 +84,16 @@ export const AboutStyles = StyleSheet.create({
   },
   appNameText: {
     color: "#fff",
-    fontSize: 28,
+    fontSize: moderateScale(28),
     marginTop: 10,
   },
   appVersionText: {
     color: "#454545",
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   rectangleWrapper: {
     marginTop: 30,
-    height: 230,
+    height:moderateScale(230),
     borderRadius: 10,
     backgroundColor: "#242424",
     flexDirection: "row",
@@ -113,19 +112,19 @@ export const AboutStyles = StyleSheet.create({
   scrollContainer: {
     justifyContent: 'center',
     paddingHorizontal: 10,
-    minHeight: 170,
+    minHeight: moderateScale(170),
     maxHeight: 2070,
   },
   rectangleText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: moderateScale(18),
     textAlign: "right",
     marginHorizontal: 5,
     fontFamily: "ScheherazadeNew",
   },
   appLogoIcon: {
-    width: 126,
-    height: 126,
+    width: moderateScale(126),
+    height: moderateScale(126),
     borderRadius: 27,
     shadowColor: "black", // For iOS
     shadowOffset: {
@@ -150,7 +149,7 @@ export const DuaVerseStyles = StyleSheet.create({
     backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 120,
+    paddingBottom: moderateScale(120),
   },
   rectangle: {
     backgroundColor: "#242424",
@@ -173,7 +172,7 @@ export const DuaVerseStyles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 20,
     paddingHorizontal: 10,
-    minHeight: 170,
+    minHeight: moderateScale(170),
     maxHeight: 2070,
   },
   title: {
@@ -185,13 +184,13 @@ export const DuaVerseStyles = StyleSheet.create({
   translation: {
     marginTop: 10,
     marginBottom: 30,
-    fontSize: 15,
+    fontSize:  moderateScale(15),
     textAlign: "center",
     color: "#767676",
     fontFamily: "Montserrat",
   },
   description: {
-    fontSize: 11,
+    fontSize: moderateScale(11),
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
@@ -219,7 +218,7 @@ export const DuaVerseStyles = StyleSheet.create({
   },
   dot: {
     color: "#f2b784",
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "700",
     marginHorizontal: 1,
   },
@@ -354,19 +353,18 @@ export const HomeStyles = StyleSheet.create({
     backgroundColor: "#151515",
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 80,
+    paddingBottom: moderateScale(88),
   },
   containerSearchMode: {
     flexGrow: 1,
     backgroundColor: "#151515",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingBottom: 300,
-    paddingTop: 20,
+    paddingBottom: moderateScale(300),
+    paddingTop: moderateScale(20),
   },
   searchBarContainer: {
-
-    paddingHorizontal: 10,
+    paddingHorizontal: moderateScale(10),
     backgroundColor: "#151515",
     borderBottomColor: "transparent",
     borderTopColor: "transparent",
@@ -413,7 +411,7 @@ export const HomeStyles = StyleSheet.create({
   },
   buttonText: {
     color: "#dddddd",
-    fontSize: 18,
+    fontSize: moderateScale(18),
   },
   emptyMessage: {
     flex: 1,
@@ -424,8 +422,8 @@ export const HomeStyles = StyleSheet.create({
   emptyMessageText: {
   },
   image: {
-    width: 44,
-    height: 55,
+    width: moderateScale(44),
+    height: moderateScale(50),
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -448,7 +446,7 @@ export const HomeStyles = StyleSheet.create({
   },
   squareButton: {
     width: "48%",
-    height: 100,
+    height: moderateScale(100),
     backgroundColor: "#242424",
     justifyContent: "flex-end",
     paddingBottom: 10,
@@ -468,9 +466,9 @@ export const HomeStyles = StyleSheet.create({
   },
   iconWrapperTop: {
     alignItems: "flex-end",
-    marginBottom: 5,
+    marginBottom: moderateScale(5),
     position:"absolute",
-    top:10
+    top: moderateScale(10)
   },
   TextMidWrapper: {
     flex: 1,
@@ -479,7 +477,7 @@ export const HomeStyles = StyleSheet.create({
   },
   TextMid: {
     color: "white",
-    fontSize: 22,
+    fontSize: moderateScale(22),
     paddingBottom: 10,
     fontFamily: "ScheherazadeNewBold",
   },
@@ -584,15 +582,15 @@ export const GenericStyles = StyleSheet.create({
     shadowRadius: 2,
   },
   button: {
-    height: "50%",
-    width: "35%",
-    padding: 14,
+    height:"50%",
+    width:"35%",
+    alignItems:"center",
     backgroundColor: "#242424",
     borderRadius: 10,
     borderWidth: 0.9,
     borderColor: "#151515",
     justifyContent: "center",
-    alignContent: "center",
+    flexDirection:"row",
     shadowColor: "black", 
     shadowOffset: {
       width: 0,
@@ -602,14 +600,10 @@ export const GenericStyles = StyleSheet.create({
     shadowRadius: 2,
   },
   textcount: {
-    textAlign: "center",
     color: "white",
     fontSize: 17,
-    justifyContent: "center",
   },
-  icon: {
-    marginTop: 2,
-  },
+
   rectangle: {
     backgroundColor: "#242424",
     borderRadius: 10,
@@ -652,12 +646,10 @@ export const GenericStyles = StyleSheet.create({
     paddingBottom:30
   },
   description: {
-    fontSize: 9,
     textAlign: "center",
     color: "#767676",
     fontFamily: "AmiriFont",
     paddingBottom:30,
-
   },
   TranslationDescription: {
     fontSize: 9,
@@ -665,7 +657,6 @@ export const GenericStyles = StyleSheet.create({
     fontFamily: "Montserrat",
   },
   InfoReptTimeIndex: {
-    fontSize: 11,
     textAlign: "center",
     color: "#767676",
     position: "absolute",
@@ -747,9 +738,9 @@ export const SettingStyles = StyleSheet.create({
     paddingBottom: 4
   },
   themeCircle: {
-    width: 24, // Set the size of the circle container
-    height: 24,
-    borderRadius: 12, // Make it a circle
+    width: moderateScale(22), // Set the size of the circle container
+    height:  moderateScale(22),
+    borderRadius: moderateScale(11), // Make it a circle
     borderWidth: 1, // Add a border
     borderColor: '#f2b784', // Border color
     marginRight: 10, // Spacing between the circle and text
@@ -758,9 +749,9 @@ export const SettingStyles = StyleSheet.create({
     alignContent: 'center',
   },
   selectedCircle: {
-    width: 12, // Set the size of the filled circle
-    height: 12,
-    borderRadius: 6, // Make it a circle
+    width: moderateScale(12), // Set the size of the filled circle
+    height: moderateScale(12),
+    borderRadius: moderateScale(6), // Make it a circle
     backgroundColor: '#f2b784', // Color of the filled circle
   },
   fontOptionsContainer: {
@@ -791,6 +782,7 @@ export const SettingStyles = StyleSheet.create({
   HeadertextColor: {
     color: '#767676',
     paddingTop: 15,
+    fontSize:moderateScale(12)
     //paddingLeft: width > 600 ? 560 : 300,
   },
   horizontalLine: {
@@ -798,16 +790,17 @@ export const SettingStyles = StyleSheet.create({
     marginEnd: 15
   },
   textColor: {
-    paddingRight: 6
+    paddingRight: 6,
+    fontSize:moderateScale(16)
   },
   textColorToggle:{},
   colorOption: {
-    margin: 10,
+    margin: moderateScale(8),
   },
   colorCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 30, // Make it a circle
+    width:  moderateScale(50),
+    height:moderateScale(50),
+    borderRadius: moderateScale(25),// Make it a circle
     borderWidth: 1,
     borderColor: 'transparent', // Default border color
   },
@@ -821,17 +814,16 @@ export const SettingStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginVertical: 5,
-    height:50
+    height: moderateScale(50),
   },
   checkIcon: {
-    position: 'absolute',
-    top: '32%', 
-    left: '32%', 
+    position: 'relative',
+    top:  moderateScale(16),
+    left:  moderateScale(16),
   },
   colorOptionsContainer: {
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
 });
 //#endregion
@@ -930,8 +922,8 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     marginTop: 20,
     width: "90%",
     position: "relative",
-    paddingHorizontal: 20,
-    paddingVertical: 40,
+    paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(40),
     textAlign: "center",
     shadowColor: "black", 
     shadowOffset: {
@@ -942,7 +934,7 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     shadowRadius: 2,
   },
   nameDisplay:{
-    fontSize: 42, 
+    fontSize: moderateScale(42), 
     fontFamily: "ScheherazadeNew",
     color: "#fff",
   },
@@ -950,13 +942,15 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
     fontFamily: "ScheherazadeNew",
     color: "#fff",
     textAlign: "right",
-    paddingBottom: 30
+    paddingBottom: 30,
+    fontSize:moderateScale(17),
   },
   textDescriptionMain:{
     //fontFamily: "ScheherazadeNew",
+    fontSize:moderateScale(15),
     color: "#fff",
     textAlign: "right",
-    paddingBottom:20
+    paddingBottom: 20
   },
   horizontalLine:{
     borderBottomWidth: 1,
@@ -966,7 +960,8 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
   suraNameNumber:{
     fontFamily: "ScheherazadeNew",
     color: "#767676", 
-    paddingTop: 10 
+    paddingTop: 10 ,
+    fontSize:moderateScale(12),
   },
   shareButton: {
     position: "absolute",
@@ -986,7 +981,7 @@ export const namesOfAllahGenericPageScreenStyle = StyleSheet.create({
   },
   dot: {
     color: "#f2b784",
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "700",
     marginHorizontal: 1,
   },
@@ -1148,9 +1143,11 @@ export const TasbehScreenStyle = StyleSheet.create({
     shadowRadius: 2,
   },
   rectangle: {
+    flexGrow:1,
     backgroundColor: "#151515",
     borderRadius: 10,
     marginTop: 10,
+    marginBottom:100,
     width: "100%",
   },
   separator: {
@@ -1194,7 +1191,7 @@ export const QablaScreenStyle  = StyleSheet.create({
     color:"#656565",
     position:"absolute",
     top:"10%",
-    fontSize:30
+    fontSize:moderateScale(30)
   },
   degreeContainer: {
     justifyContent:"center",
@@ -1203,24 +1200,23 @@ export const QablaScreenStyle  = StyleSheet.create({
   },
   degreeText: {
     color: '#fff',
-    fontSize: height / 27,
+    fontSize: moderateScale(27) ,
     textAlign: 'center',
   },
   compassImage: {
     position: "absolute",
-    height: width - 80,
+    height: moderateScale(320, 0.25),
     resizeMode: 'contain',
   },
   compassImageRed: {
     position: "absolute",
-    height: width + 80,
+    height: moderateScale(330, 0.25),
     resizeMode: 'contain',
-    width: (height/1.19) + 20,
-    height: (width/1.1) - 29
+    width: moderateScale(340, 0.25),
   },
   triangleContainer: {
     position: 'absolute',
-    top: "24.4%",
+    top: moderateScale(177),
     left: 0,
     width: width,
     alignItems: 'center',
