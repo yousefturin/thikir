@@ -6,6 +6,7 @@ import {  View,
           FlatList,
           Switch, 
           ScrollView,
+          Dimensions,
 } from 'react-native';
 import { useTheme } from '../context/ThemeContext';
 import { useFont } from '../context/FontContext';
@@ -16,11 +17,13 @@ import * as Haptics from 'expo-haptics';
 import { SettingStyles } from '../Styles/commonStyles';
 import Svg, { Path } from "react-native-svg";
 import { getColorForTheme } from "../utils/themeUtils";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
   const {selectedLanguage, setLanguage} = useLanguage();
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
 
   const { selectedFont, setFont } = useFont();
 
@@ -248,7 +251,7 @@ const SettingScreen = ({ navigation }) => {
       >
         {selectedColor === item.value && (
           <View style={styles.checkIcon}>
-            <Svg width="64" height="64" fill="#767676" viewBox="4 4 32 32">
+            <Svg width={moderateScale(64)} height={moderateScale(64)} fill="#767676" viewBox="4 4 32 32">
               <Path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/> 
             </Svg>
           </View>
