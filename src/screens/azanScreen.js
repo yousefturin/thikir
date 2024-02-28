@@ -27,7 +27,8 @@ import AzanComponents from "../components/AzanComponents";
 import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const AzanScreen = () => {
-  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+
+  const { moderateScale } = initializeScalingUtils(Dimensions);
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
@@ -66,7 +67,6 @@ const AzanScreen = () => {
   const [timeLeft, setTimeLeft] = useState(null);
 
   const [currentTime, setCurrentTime] = useState(new Date());
-
   const [timeFormatCheck, setTimeFormatCheck] = useState(null);
 
 

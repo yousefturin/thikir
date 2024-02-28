@@ -9,7 +9,7 @@ import initializeScalingUtils from "../utils/core/NormalizeSize"
 var pkg = require('../../package.json');
 
 const AboutScreen = ({ navigation }) => {
-  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+  const { moderateScale } = initializeScalingUtils(Dimensions);
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();

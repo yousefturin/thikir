@@ -17,11 +17,12 @@ import SvgComponent from "../../assets/Svg/svgComponents";
 import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const Menu = ({ navigation }) => {
+
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
-  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+  const { moderateScale } = initializeScalingUtils(Dimensions);
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -73,8 +74,6 @@ const Menu = ({ navigation }) => {
     systemTheme
   );
 
-
-
   //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({
     button: {
@@ -121,8 +120,6 @@ const Menu = ({ navigation }) => {
   },
   });
   //#endregion
-
-
 
   //#region StyleMapping
   const styles = {
