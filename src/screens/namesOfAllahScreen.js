@@ -14,10 +14,12 @@ import { useColor } from "../context/ColorContext";
 import { useLanguage } from "../context/LanguageContext";
 import { HomeStyles } from "../Styles/commonStyles";
 import { getColorForTheme } from "../utils/themeUtils";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 const { width } = Dimensions.get("window");
 
 const NamesOfAllahScreen = ({ navigation }) => {
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     if (selectedLanguage !== "Arabic") {
       setItems(require("../db/db_namesOfAllahEn.json"));
@@ -26,6 +28,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
     }
   }, [selectedLanguage]);
 
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
@@ -396,7 +399,7 @@ const NamesOfAllahScreen = ({ navigation }) => {
               <View style={styles.iconWrapper}>
                 <FontAwesomeIcon
                   name="angle-left"
-                  size={24}
+                  size={moderateScale(16)}
                   color={selectedColor}
                   style={styles.icon}
                 />
