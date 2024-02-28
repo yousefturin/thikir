@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
@@ -16,6 +17,7 @@ import { QuranVerseStyles } from "../Styles/commonStyles";
 import { useNumberContext } from "../context/NumberContext";
 import { getColorForTheme } from "../utils/themeUtils";
 import { useLanguage } from "../context/LanguageContext";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
@@ -28,6 +30,7 @@ const HADITHVerseScreen = ({ navigation }) => {
   const { selectedColor } = useColor();
   const { state, convertToEasternArabicNumerals } = useNumberContext();
   const systemTheme = selectedTheme === "system";
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
@@ -104,7 +107,7 @@ const HADITHVerseScreen = ({ navigation }) => {
 
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
-  const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
+  const [maxPaddingHorizontal, setMaxPaddingHorizontal] = useState(20);
 
   const viewRef = React.useRef();
   //#endregion
@@ -204,28 +207,28 @@ const HADITHVerseScreen = ({ navigation }) => {
 
   //#region DisplayViewStyle base on character length
   const controlStyle = (verseTextLength) => {
-    let MaxFontSize = 20;
-    let maxPadding = 30;
-    let maxpaddingHorizontal = 20;
+    let MaxFontSize = moderateScale(20);
+    let maxPadding =  moderateScale(30);
+    let maxPaddingHorizontal =  moderateScale(20);
 
     if (verseTextLength > 1200) {
-      MaxFontSize = 16;
-      maxPadding = 20;
-      maxpaddingHorizontal = 10;
+      MaxFontSize = moderateScale(16);
+      maxPadding =  moderateScale(20);
+      maxPaddingHorizontal =  moderateScale(10);
     } else if (verseTextLength < 100) {
-      MaxFontSize = 27;
-      maxPadding = 20;
-      maxpaddingHorizontal = 20;
+      MaxFontSize = moderateScale(27);
+      maxPadding =  moderateScale(20);
+      maxPaddingHorizontal =  moderateScale(20);
     }
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
-    setMaxpaddingHorizontal(maxpaddingHorizontal);
+    setMaxPaddingHorizontal(maxPaddingHorizontal);
   };
 
   const textStyle = {
     fontSize: maxFontSizeDescription,
     padding: maxPadding,
-    paddingHorizontal: maxpaddingHorizontal,
+    paddingHorizontal: maxPaddingHorizontal,
   };
   //#endregion
 
