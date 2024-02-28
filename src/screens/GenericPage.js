@@ -25,13 +25,32 @@ import SvgComponent from "../../assets/Svg/svgComponents";
 import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const GenericPage = ({ route }) => {
-    const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+    
+    const viewRef = React.useRef();
+    const { moderateScale } = initializeScalingUtils(Dimensions);
     const { selectedTheme } = useTheme();
     const { selectedFont } = useFont();
     const { selectedColor } = useColor();
     const systemTheme = selectedTheme === "system";
     const { state, convertToEasternArabicNumerals } = useNumberContext();
     const { selectedLanguage } = useLanguage();
+
+
+    const { item, itemIndex } = route.params;
+    const [count, setCount] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isLongPress, setIsLongPress] = useState(false);
+    const [isTranslation, setIsTranslation] = useState(false);
+
+
+    const ControlPaneBackgroundImage = getColorForTheme(
+        {
+            dark: require("../../assets/Images/HeaderBackground.jpg"),
+            light: require("../../assets/Images/HeaderBackgroundLight.jpg"),
+        },
+        selectedTheme,
+        systemTheme
+    );
 
     //#region LightTheme
     const lightTheme = StyleSheet.create({
@@ -128,6 +147,7 @@ const GenericPage = ({ route }) => {
         selectedTheme,
         systemTheme
     );
+
     //#region StyleMapping
     const styles = {
         ...GenericStyles,
@@ -202,98 +222,16 @@ const GenericPage = ({ route }) => {
     };
     //#endregion
 
-    //#region
-    const { item, itemIndex } = route.params;
-    const [count, setCount] = useState(0);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [MaxFontSizeDescription, setMaxFontSizeDescription] = useState(0);
-    const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(0);
-    const [maxPadding, setMaxPadding] = useState(0);
-    const [isLongPress, setIsLongPress] = useState(false);
-    const [isTranslation, setIsTranslation] = useState(false);
 
     const handleButtonPressTranslation = () => {
         setIsTranslation(!isTranslation);
     };
-    const ControlPaneBackgroundImage = getColorForTheme(
-        {
-            dark: require("../../assets/Images/HeaderBackground.jpg"),
-            light: require("../../assets/Images/HeaderBackgroundLight.jpg"),
-        },
-        selectedTheme,
-        systemTheme
-    );
-    const viewRef = React.useRef();
-    //#endregion
 
     const Share = async () => {
         await handleShare(viewRef.current);
     };
 
-    //#region DisplayViewStyle base on character length
-    useEffect(() => {
-        // Find the maximum height based on the character length of subItemDescription
-        const subItemName = item.subItems[currentIndex].subItemDescription;
-        const subItemDescription = item.subItems[currentIndex].subItemName;
-        // Remove non-printable characters and control characters
-        const sanitizedDescription =
-            selectedLanguage != "Arabic"
-                ? subItemDescription
-                : subItemDescription.replace(/[-~]+/g, "");
-        const sanitizedName =
-            selectedLanguage != "Arabic"
-                ? subItemName
-                : subItemName.replace(/[-~]+/g, "");
-        console.log(
-            "sanitized subItemDescription length is:",
-            sanitizedDescription.length
-        );
-        console.log("sanitized sanitizedName length is:", sanitizedName.length);
-        let MaxFontSize = 20;
-        let maxPadding = 60;
-        let maxpaddingHorizontal = 20;
-
-        if (sanitizedDescription.length > 1000) {
-            MaxFontSize = 16;
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 700) {
-            MaxFontSize = 17;
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 600) {
-            MaxFontSize = 17;
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 500) {
-            MaxFontSize = 17;
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 400) {
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        } else if (sanitizedDescription.length > 300) {
-            maxpaddingHorizontal = 10;
-            maxPadding = 30;
-        } else if (sanitizedDescription.length > 290) {
-            maxpaddingHorizontal = 10;
-            maxPadding = 30;
-        } else if (sanitizedDescription.length > 200) {
-            maxpaddingHorizontal = 10;
-            maxPadding = 30;
-        } else if (sanitizedName.length > 200) {
-            MaxFontSize = 17;
-            maxPadding = 30;
-            maxpaddingHorizontal = 10;
-        }
-        console.log(MaxFontSize, maxPadding, maxpaddingHorizontal);
-        setMaxFontSizeDescription(MaxFontSize);
-        setMaxPadding(maxPadding);
-        setMaxpaddingHorizontal(maxpaddingHorizontal);
-    }, [item.subItems, currentIndex]);
-    //#endregion
-
-    //#region navigationBetweenSubitems
+    //#region  Counting Disable
     useEffect(() => {
         if (count >= item.subItems[currentIndex].count) {
             if (currentIndex < item.subItems.length - 1) {
@@ -304,7 +242,9 @@ const GenericPage = ({ route }) => {
             }
         }
     }, [count, currentIndex, item.subItems]);
+    //#endregion
 
+    //#region navigationBetweenSubitems
     const nextSubItem = () => {
         if (currentIndex < item.subItems.length - 1) {
             setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -329,12 +269,12 @@ const GenericPage = ({ route }) => {
     };
     //#endregion
 
+    //#region pressControl for long/short
+
     let pressTimeout;
     let startX = 0; // Initial X-coordinate of the touch
     let startY = 0; // Initial Y-coordinate of the touch
-    let isSwiping = false; // Track if a swipe occurred
 
-    //#region pressControl for long/short
     const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
             setIsLongPress(true); // Detect long press
@@ -350,23 +290,19 @@ const GenericPage = ({ route }) => {
         const swipeDistanceX = Math.abs(endX - startX); // Calculate the horizontal distance moved
         const swipeDistanceY = Math.abs(endY - startY); // Calculate the vertical distance moved
 
-        if (!isSwiping && swipeDistanceX < 10 && swipeDistanceY < 10) {
+        if (swipeDistanceX < 10 && swipeDistanceY < 10) {
             // Only increment the count if it's not a swipe (adjust the threshold as needed)
             incrementCount();
         }
 
         setIsLongPress(false); // Reset the long press flag
-        isSwiping = false; // Reset the swipe flag
     };
 
-    const handleSwipe = () => {
-        isSwiping = true;
-    };
     //#endregion
 
+    //#region buttonToFavController
     const [isFilled, setIsFilled] = useState(false);
 
-    //#region buttonToFavController
     useEffect(() => {
         // Load the button state from AsyncStorage when the component mounts
         async function loadButtonState() {
@@ -412,7 +348,6 @@ const GenericPage = ({ route }) => {
         <TouchableWithoutFeedback
             onPressIn={handleContainerPressIn}
             onPressOut={handleContainerPressOut}
-            onResponderMove={handleSwipe}
             disabled={
                 currentIndex === item.subItems.length - 1 &&
                 count >= item.subItems[currentIndex].count
@@ -644,7 +579,7 @@ const GenericPage = ({ route }) => {
                                 <Path
                                     d="M128,216S28,160,28,92A52,52,0,0,1,128,72h0A52,52,0,0,1,228,92C228,160,128,216,128,216Z"
                                     stroke={isFilled ? "#b83f3f" : "#7e2a2a"}
-                                    strokeWidth={2}
+                                    strokeWidth={5}
                                     stroke-linecap="round"
                                     fill={isFilled ? "#b83f3f" : "transparent"}
                                 />
