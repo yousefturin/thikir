@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Dimensions,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "../context/ThemeContext";
@@ -13,13 +14,15 @@ import { useLanguage } from "../context/LanguageContext";
 import { MainStyles } from "../Styles/commonStyles";
 import { getColorForTheme } from "../utils/themeUtils";
 import SvgComponent from "../../assets/Svg/svgComponents";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const Menu = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedColor } = useColor();
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === "system";
-  
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
@@ -89,7 +92,8 @@ const Menu = ({ navigation }) => {
       marginLeft: 20,
     },
     horizontalLine:{
-      marginLeft: 313,
+      alignSelf:"flex-end",
+      marginLeft:moderateScale(16,1.5),
     },
   });
   //#endregion
@@ -112,7 +116,8 @@ const Menu = ({ navigation }) => {
     marginRight: 20,
   },
   horizontalLine:{
-    marginRight: 313,
+    alignSelf:"flex-start",
+    marginLeft:moderateScale(16,1.5),
   },
   });
   //#endregion
@@ -166,7 +171,7 @@ const Menu = ({ navigation }) => {
       <TouchableOpacity
         style={[
           styles.button,
-          { borderRadius: 10, marginBottom: 30, marginTop: 30 },
+          { borderRadius: 10, marginBottom: 30, marginTop:30 },
         ]}
         onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Notifications") : navigation.navigate("التذكيرات")}
         activeOpacity={0.7}
@@ -174,7 +179,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -183,7 +188,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Notification" : "التذكيرات"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="ThikirAlarmSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="ThikirAlarmSVG" width={moderateScale(22)} height={moderateScale(22)} fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
@@ -201,7 +206,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -210,13 +215,12 @@ const Menu = ({ navigation }) => {
         <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Glorification" : "السبحة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="TasbihSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="TasbihSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
-
       <View style={styles.horizontalLine} />
 
       <TouchableOpacity
@@ -227,7 +231,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -236,7 +240,7 @@ const Menu = ({ navigation }) => {
         <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Prayer Times" : "مواعيد الصلاة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="AzanSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="AzanSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
@@ -252,7 +256,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -261,7 +265,7 @@ const Menu = ({ navigation }) => {
         <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Favorite Supplications" : "الأذكار المفضلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="FavThikirSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="FavThikirSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
@@ -276,7 +280,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -285,7 +289,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Names of Allah" : "أسماء الله الحسنى"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="NamesOfAllahSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="NamesOfAllahSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
 
         <View style={styles.imageWrapper}>
@@ -302,7 +306,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -311,7 +315,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Verse of Quran" : "آية"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="AyaSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="AyaSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
 
         <View style={styles.imageWrapper}>
@@ -327,7 +331,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -336,7 +340,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Hadith" : "حديث"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="HadithSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="HadithSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
 
         <View style={styles.imageWrapper}>
@@ -352,7 +356,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -361,7 +365,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Direction of Prayer" : "القبلة"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="QiblaSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="QiblaSVG"  fill={selectedColor} style={styles.iconleft} />
         </View>
 
         <View style={styles.imageWrapper}>
@@ -381,7 +385,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -390,7 +394,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Invocational" : "دعاء"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="DuaaSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="DuaaSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
 
         <View style={styles.imageWrapper}>
@@ -409,7 +413,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -418,7 +422,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Settings" : "الاعدادات"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="SettingSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="SettingSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
@@ -434,7 +438,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
@@ -443,7 +447,7 @@ const Menu = ({ navigation }) => {
           <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "About us" : "عن البرنامج"}</Text>
         </View>
         <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="AboutAppSVG" style={styles.iconleft} />
+          <SvgComponent svgKey="AboutAppSVG" fill={selectedColor} style={styles.iconleft} />
         </View>
         <View style={styles.imageWrapper}>
           <Image style={styles.image} />
@@ -460,7 +464,7 @@ const Menu = ({ navigation }) => {
         <View style={styles.iconWrapperLeft}>
           <FontAwesomeIcon
             name="angle-left"
-            size={24}
+            size={moderateScale(16)}
             color={selectedColor}
             style={styles.icon}
           />
