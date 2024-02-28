@@ -8,6 +8,7 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  Keyboard,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
@@ -23,7 +24,7 @@ import initializeScalingUtils from "../utils/core/NormalizeSize"
 const { width } = Dimensions.get("window");
 
 const HomeScreen = ({ navigation }) => {
-  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+  const { moderateScale } = initializeScalingUtils(Dimensions);
   const { selectedLanguage } = useLanguage();
   const [items, setItems] = useState([]);
   const { selectedTheme } = useTheme();
@@ -420,10 +421,12 @@ const HomeScreen = ({ navigation }) => {
 
   //#endregion
 
-  //#region search in items
+  //#region search Handlers
+
+  const[RightIconContainerStyle,setRightIconContainerStyle] = useState(1)
   const handleSearch = (query) => {
     setSearchQuery(query);
-
+    setRightIconContainerStyle(1)
     const normalizedQuery = query.toLowerCase().replace(/[أإِ]/g, "ا");
 
     // Filter items based on the normalized search query and normalized item names
@@ -439,11 +442,19 @@ const HomeScreen = ({ navigation }) => {
     setSearchMode(true);
   };
 
+  
   const handleCancel = () => {
+    setRightIconContainerStyle(0)
+    Keyboard.dismiss()
     setSearchQuery("");
+    setSearchedItems([]); 
     setSearchMode(false);
-    setSearchedItems([]); // Clear filtered items when cancel button is clicked
   };
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setSearchedItems([]);
+  }
   //#endregion
 
   //#region SVG topItemIcons
@@ -451,7 +462,7 @@ const HomeScreen = ({ navigation }) => {
     {
       viewBox: "0 0 512 512",
       width: moderateScale(40),
-      height:moderateScale(40),
+      height: moderateScale(40),
       paths: [
         {
           d: "M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z",
@@ -507,33 +518,42 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.pageContainer}>
       <ScrollView
+        stickyHeaderIndices={[0]}
         contentContainerStyle={styles.container}
-        contentOffset={{ x: 0, y: 7 }}
+        contentOffset={{ x: 0, y: 65 }}
+        keyboardDismissMode={'on-drag'}
+        keyboardShouldPersistTaps="always"
       >
         <SearchBar
           placeholder={selectedLanguage != "Arabic" ? "Search..." : "بحث..."}
           onChangeText={handleSearch}
+          onPressIn={handleSearchBarClick}
           value={searchQuery}
           platform="ios"
           containerStyle={styles.searchBarContainer}
+
           inputContainerStyle={[
             styles.searchBarInputContainer,
             searchMode && styles.searchBarInputContainerTop, // when searchMode is true
           ]}
+          rightIconContainerStyle={{opacity:RightIconContainerStyle}}
           inputStyle={[
             styles.searchBarInput,
             { textAlign: selectedLanguage != "Arabic" ? "left" : "right" },
           ]}
-          onFocus={handleSearchBarClick}
-          onCancel={handleCancel}
-          showCancel
+          // onCancel={handleCancel}
+        
           clearIcon={{ type: "ionicon", name: "close-circle" }}
-          cancelButtonTitle={selectedLanguage != "Arabic" ? "Cancel" : "الغاء"}
+          onClear={handleClear}
+
           cancelButtonProps={{
-            style: { paddingRight: 10 }, 
+            style: { paddingRight: 10 },
+            onPress:handleCancel,
+            
           }}
           keyboardAppearance={keyboardTheme}
           searchIcon={{ color: selectedColor, type: "ionicon", name: "search" }}
+          cancelButtonTitle={selectedLanguage != "Arabic" ? "Cancel" : "الغاء"}
         />
         {searchMode ? (
           // Display searchMode is true
@@ -560,7 +580,7 @@ const HomeScreen = ({ navigation }) => {
                       <FontAwesomeIcon
                         name="angle-left"
                         size={24}
-                      color={selectedColor}
+                        color={selectedColor}
                         style={styles.icon}
                       />
                     </View>
