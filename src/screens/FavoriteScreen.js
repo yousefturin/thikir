@@ -17,7 +17,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useColor } from '../context/ColorContext';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getColorForTheme } from "../utils/themeUtils";
-const {width} = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const FavoriteScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
@@ -27,7 +27,7 @@ const FavoriteScreen = ({ navigation }) => {
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#f2f2f6", 
+      backgroundColor: "#f2f2f6",
     },
     container: {
       backgroundColor: "#f2f2f6",
@@ -44,16 +44,16 @@ const FavoriteScreen = ({ navigation }) => {
     horizontalLine: {
       borderColor: "#fefffe",
     },
-    emptyMessageText:{
+    emptyMessageText: {
       color: "#000",
     },
   });
   //#endregion
-  
+
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515", 
+      backgroundColor: "#151515",
     },
     container: {
       backgroundColor: "#151515",
@@ -70,7 +70,7 @@ const FavoriteScreen = ({ navigation }) => {
     horizontalLine: {
       borderColor: "#242424",
     },
-    emptyMessageText:{
+    emptyMessageText: {
       color: "#fff",
     }
   });
@@ -81,8 +81,8 @@ const FavoriteScreen = ({ navigation }) => {
     systemTheme
   );
 
-   //#region ArabicLanguage
-   const ArabicLanguage = StyleSheet.create({
+  //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
     button: {
       flexDirection: "row",
       fontFamily: "ScheherazadeNew",
@@ -93,13 +93,13 @@ const FavoriteScreen = ({ navigation }) => {
       fontFamily: "ScheherazadeNew",
     },
     icon: {
-      transform: [{ rotate: 0  + "deg" }],
+      transform: [{ rotate: 0 + "deg" }],
       marginLeft: 20,
     },
     horizontalLine: {
       marginLeft: width > 600 ? 610 : 350,
     },
-    emptyMessageText:{
+    emptyMessageText: {
       fontFamily: "ScheherazadeNew",
     }
   });
@@ -108,7 +108,7 @@ const FavoriteScreen = ({ navigation }) => {
   //#region EnglishLanguage
   const EnglishLanguage = StyleSheet.create({
     button: {
-      flexDirection:"row-reverse",
+      flexDirection: "row-reverse",
     },
     buttonText: {
       textAlign: "left",
@@ -116,13 +116,13 @@ const FavoriteScreen = ({ navigation }) => {
       fontFamily: "Montserrat",
     },
     icon: {
-      transform: [{ rotate: 180  + "deg" }],
+      transform: [{ rotate: 180 + "deg" }],
       marginRight: 20,
     },
     horizontalLine: {
       marginRight: width > 600 ? 610 : 350,
     },
-    emptyMessageText:{
+    emptyMessageText: {
       fontFamily: "Montserrat",
     }
   });
@@ -135,45 +135,46 @@ const FavoriteScreen = ({ navigation }) => {
     ...HomeStyles,
     pageContainer: {
       ...HomeStyles.pageContainer,
-      ...(selectedTheme === 'dark' ? themeStyles.pageContainer : themeStyles.pageContainer), 
+      ...(selectedTheme === 'dark' ? themeStyles.pageContainer : themeStyles.pageContainer),
     },
     container: {
       ...HomeStyles.container,
-      ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container), 
+      ...(selectedTheme === 'dark' ? themeStyles.container : themeStyles.container),
     },
     buttonText: {
-      ...HomeStyles.buttonText, 
-      ...(selectedTheme  === 'dark'? themeStyles.buttonText : themeStyles.buttonText), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText )
+      ...HomeStyles.buttonText,
+      ...(selectedTheme === 'dark' ? themeStyles.buttonText : themeStyles.buttonText),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText)
     },
     button: {
-      ...HomeStyles.button, 
-      ...(selectedTheme  === 'dark'? themeStyles.button : themeStyles.button), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button )
+      ...HomeStyles.button,
+      ...(selectedTheme === 'dark' ? themeStyles.button : themeStyles.button),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button)
     },
     iconWrapper: {
-      ...HomeStyles.iconWrapper, 
-      ...(selectedTheme  === 'dark'? themeStyles.iconWrapper : themeStyles.iconWrapper), 
+      ...HomeStyles.iconWrapper,
+      ...(selectedTheme === 'dark' ? themeStyles.iconWrapper : themeStyles.iconWrapper),
     },
     horizontalLine: {
-      ...HomeStyles.horizontalLine, 
-      ...(selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
+      ...HomeStyles.horizontalLine,
+      ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine)
     },
-    icon:{
+    icon: {
       ...HomeStyles.icon,
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon)
     },
-    emptyMessageText:{
+    emptyMessageText: {
       ...HomeStyles.emptyMessageText,
-      ...(selectedTheme  === 'dark'? themeStyles.emptyMessageText : themeStyles.emptyMessageText), 
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.emptyMessageText : ArabicLanguage.emptyMessageText )
+      ...(selectedTheme === 'dark' ? themeStyles.emptyMessageText : themeStyles.emptyMessageText),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.emptyMessageText : ArabicLanguage.emptyMessageText)
     },
   };
   //#endregion
 
   const [clickedIndexes, setClickedIndexes] = useState([]);
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     if (selectedLanguage !== "Arabic") {
       setItems(getEnItems());
@@ -205,27 +206,28 @@ const FavoriteScreen = ({ navigation }) => {
 
   //#endregion
 
-  //#region Style baed on index
-const renderBorderRadius = (index) => {
-  if (clickedIndexes.length === 1) {
-    return {       
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      borderBottomLeftRadius: 10,
-      borderBottomRightRadius: 10,};
-  } else if (index === clickedIndexes[0]) {
-    return {
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-    };
-  } else if (index === clickedIndexes[clickedIndexes.length - 1]) {
-    return {
-      borderBottomLeftRadius: 10,
-      borderBottomRightRadius: 10,
-    };
-  }
-  return {};
-};
+  //#region Style based on index
+  const renderBorderRadius = (index) => {
+    if (clickedIndexes.length === 1) {
+      return {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+      };
+    } else if (index === clickedIndexes[0]) {
+      return {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+      };
+    } else if (index === clickedIndexes[clickedIndexes.length - 1]) {
+      return {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+      };
+    }
+    return {};
+  };
   //#endregion
 
   return (
@@ -239,7 +241,7 @@ const renderBorderRadius = (index) => {
       >
         {clickedIndexes.length === 0 ? ( // Check if clickedIndexes is empty
           <View style={styles.emptyMessage}>
-            <Text  allowFontScaling={false}  style={styles.emptyMessageText}>{selectedLanguage!="Arabic"?"Add Remembrance to Favourites":"أضف عناصر إلى قائمة المفضلة"}</Text>
+            <Text allowFontScaling={false} style={styles.emptyMessageText}>{selectedLanguage != "Arabic" ? "Add Remembrance to Favourites" : "أضف عناصر إلى قائمة المفضلة"}</Text>
           </View>
         ) : (
           clickedIndexes.map((index) => (
@@ -280,7 +282,7 @@ const renderBorderRadius = (index) => {
       </ScrollView>
     </View>
   );
-  
+
 };
 
 export default FavoriteScreen;
