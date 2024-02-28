@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import { useFont } from "../context/FontContext";
 import { useColor } from "../context/ColorContext";
@@ -8,6 +8,7 @@ import { handleShare } from "../Service/ShareService";
 import { useNumberContext } from "../context/NumberContext";
 import { namesOfAllahGenericPageScreenStyle } from "../Styles/commonStyles";
 import { getColorForTheme } from "../utils/themeUtils";
+import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const NamesOfAllahGenericPage = ({ route }) => {
   const { selectedTheme } = useTheme();
@@ -17,6 +18,7 @@ const NamesOfAllahGenericPage = ({ route }) => {
 
   const systemTheme = selectedTheme === "system";
   const { state, convertToEasternArabicNumerals } = useNumberContext();
+  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
   const { item } = route.params;
   const viewRef = React.useRef();
 
