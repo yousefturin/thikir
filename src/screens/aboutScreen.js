@@ -33,6 +33,10 @@ const AboutScreen = ({ navigation }) => {
     rectangleText: {
       color: "#000",
     },
+    WrapperAppLogoIcon:{
+      backgroundColor: "#fefffe",
+      shadowColor: "gray",
+    }
   });
   //#endregion
 
@@ -54,6 +58,10 @@ const AboutScreen = ({ navigation }) => {
     rectangleText: {
       color: "#fff",
     },
+    WrapperAppLogoIcon:{
+      backgroundColor: "#242424",
+      shadowColor: "black",
+    }
   });
   //#endregion
 
@@ -86,17 +94,24 @@ const AboutScreen = ({ navigation }) => {
       ...AboutStyles.horizontalLine,
       ...selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine,
     },
+    WrapperAppLogoIcon: {
+      ...AboutStyles.WrapperAppLogoIcon,
+      ...selectedTheme === 'dark' ? themeStyles.WrapperAppLogoIcon : themeStyles.WrapperAppLogoIcon,
+    },
   };
   //#endregion
 
-  const appIconImage = require("../../assets/Images/icon.png");
+  const appIconImage = require("../../assets/Images/123.png");
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Menu")}
       ></TouchableOpacity>
+      <View style={styles.WrapperAppLogoIcon}>
       <Image source={appIconImage} style={styles.appLogoIcon}></Image>
+      </View>
+
       <Text style={[styles.appNameText, { fontFamily: selectedLanguage != "Arabic" ? "MontserratBold" : "ScheherazadeNewBold" }]}>{selectedLanguage != "Arabic" ? "Mufradun" : "المفردون"}</Text>
       <Text style={styles.appVersionText}>{selectedLanguage != "Arabic" ? "Version:" : "اﻹصدار:"} {pkg.version}</Text>
       <View
