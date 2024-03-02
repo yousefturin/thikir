@@ -17,6 +17,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useColor } from '../context/ColorContext';
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { getColorForTheme } from "../utils/themeUtils";
+import initializeScalingUtils from "../utils/core/NormalizeSize";
 const { width } = Dimensions.get("window");
 
 const FavoriteScreen = ({ navigation }) => {
@@ -24,6 +25,7 @@ const FavoriteScreen = ({ navigation }) => {
   const { selectedLanguage } = useLanguage();
   const systemTheme = selectedTheme === 'system';
   const { selectedColor } = useColor();
+  const { moderateScale } = initializeScalingUtils(Dimensions);
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     pageContainer: {
@@ -260,7 +262,7 @@ const FavoriteScreen = ({ navigation }) => {
                 <View style={styles.iconWrapper}>
                   <FontAwesomeIcon
                     name="angle-left"
-                    size={24}
+                    size={moderateScale(16)}
                     color={selectedColor}
                     style={styles.icon}
                   />
