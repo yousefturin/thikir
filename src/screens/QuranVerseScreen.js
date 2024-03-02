@@ -17,7 +17,7 @@ import { useNumberContext } from "../context/NumberContext";
 import { getColorForTheme } from "../utils/themeUtils";
 import { useRandomVerse } from "../Service/QuranVerseService";
 
-const QuranVerseScreen = ({ navigation }) => {
+const QuranVerseScreen = () => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
   const { selectedColor } = useColor();
