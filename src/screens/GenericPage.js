@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Dimensions,
+    Animated,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { handleShare } from "../Service/ShareService";
@@ -41,7 +42,7 @@ const GenericPage = ({ route }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLongPress, setIsLongPress] = useState(false);
     const [isTranslation, setIsTranslation] = useState(false);
-
+    const fadeAnim = React.useRef(new Animated.Value(isTranslation ? 0 : 1)).current;
 
     const ControlPaneBackgroundImage = getColorForTheme(
         {
@@ -222,9 +223,27 @@ const GenericPage = ({ route }) => {
     };
     //#endregion
 
-
     const handleButtonPressTranslation = () => {
-        setIsTranslation(!isTranslation);
+        const toValue = isTranslation ? 0 : 1; // Target value of opacity
+        
+        // Start animation
+        Animated.timing(
+            fadeAnim,
+            {
+                toValue: toValue,
+                duration: 300, // Adjust duration as needed
+                useNativeDriver: true,
+            }
+        ).start();
+    
+        // Update state after a short delay
+        setTimeout(() => {
+            setIsTranslation(!isTranslation);
+            // Reset opacity to initial value if hiding text
+            if (toValue === 0) {
+                fadeAnim.setValue(1);
+            }
+        }, 300); // Adjust delay as needed
     };
 
     const Share = async () => {
@@ -402,10 +421,9 @@ const GenericPage = ({ route }) => {
                             </TouchableOpacity>
                         </ScrollView>
                         {selectedLanguage != "Arabic" ? (
-                            <View style={[styles.horizontalLine, { paddingTop: 5,marginBottom:5 }]} />
+                            <View style={[styles.horizontalLine, { paddingTop: 5,marginBottom:5}]} />
                         ) : null}
                         {selectedLanguage != "Arabic" ? (
-                            
                                 <TouchableOpacity
                                     activeOpacity={1}
                                     style={{
@@ -413,7 +431,8 @@ const GenericPage = ({ route }) => {
                                         alignItems:"center",
                                         flexDirection: "row", 
                                         width:"100%",
-                                        justifyContent:"flex-start"
+                                        justifyContent:"flex-start",
+                                        
                                     }}
                                     onPress={handleButtonPressTranslation}
                                     >
@@ -421,12 +440,11 @@ const GenericPage = ({ route }) => {
                                     <SvgComponent svgKey="TranslationSVG" />    
                                     </View>
                                     <Text
-                                        style={[styles.TranslationDescription, { fontSize: moderateScale(14) ,textAlign:"left",}]}
+                                        style={[styles.TranslationDescription, { fontSize: moderateScale(14) ,textAlign:"left", }]}
                                     >
                                         Translation
                                     </Text>
                                 </TouchableOpacity>
-                           
                         ) : null}
                         {selectedLanguage != "Arabic" ? (
                             <ScrollView
@@ -437,7 +455,7 @@ const GenericPage = ({ route }) => {
                                 showsVerticalScrollIndicator={false}
                             >
                                 <TouchableOpacity activeOpacity={1}>
-                                    <Text
+                                    <Animated.Text
                                         style={[
                                             styles.description,
                                             {
@@ -455,6 +473,7 @@ const GenericPage = ({ route }) => {
                                                                 selectedFont === "Hafs"
                                                                 ? "lexend"
                                                                 : selectedFont,
+                                                opacity: fadeAnim
                                             },
                                         ]}
                                     >
@@ -469,17 +488,17 @@ const GenericPage = ({ route }) => {
                                                     currentIndex
                                                 ].subItemTranslation.toString())
                                         }
-                                    </Text>
+                                    </Animated.Text>
                                 </TouchableOpacity>
                             </ScrollView>
                         ) : null}
-                        <View style={[styles.horizontalLine, { paddingTop: 5 }]} />
+                        <View style={[styles.horizontalLine, { paddingTop: 5, }]} />
 
                         <Text
                             allowFontScaling={false}
                             style={[
                                 styles.description,
-                                { paddingBottom: 50, paddingTop: 10 ,fontSize: moderateScale(9)},
+                                { paddingBottom: 50, paddingTop: 10 ,fontSize: moderateScale(9)}
                             ]}
                         >
                             {
