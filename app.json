@@ -7,9 +7,6 @@
     "orientation": "portrait",
     "icon": "./assets/Images/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "backgroundColor": "#151515"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
