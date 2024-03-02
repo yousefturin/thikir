@@ -461,7 +461,7 @@ const HomeScreen = ({ navigation }) => {
   const topItemIcons = [
     {
       viewBox: "0 0 512 512",
-      width: moderateScale(40),
+      width: moderateScale(50),
       height: moderateScale(40),
       paths: [
         {
@@ -518,7 +518,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.pageContainer}>
       <ScrollView
-        stickyHeaderIndices={[0]}
+        // stickyHeaderIndices={[0]}
         contentContainerStyle={styles.container}
         contentOffset={{ x: 0, y: 65 }}
         keyboardDismissMode={'on-drag'}
@@ -579,7 +579,7 @@ const HomeScreen = ({ navigation }) => {
                     <View style={styles.iconWrapper}>
                       <FontAwesomeIcon
                         name="angle-left"
-                        size={24}
+                        size={moderateScale(16)}
                         color={selectedColor}
                         style={styles.icon}
                       />
