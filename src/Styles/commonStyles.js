@@ -125,14 +125,21 @@ export const AboutStyles = StyleSheet.create({
   appLogoIcon: {
     width: moderateScale(126),
     height: moderateScale(126),
+  },
+  WrapperAppLogoIcon: {
+    backgroundColor:"#262626",
+    justifyContent:"center",
+    alignItems:"center",
+    width: moderateScale(126),
+    height: moderateScale(126),
     borderRadius: 27,
-    shadowColor: "black", // For iOS
+    shadowColor: "black", 
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2.2,
     },
-    shadowOpacity: 12,
-    shadowRadius: 6,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   horizontalLine: {
     borderBottomWidth: 1,
