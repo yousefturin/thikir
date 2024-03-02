@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
+  Image
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomDuaFromFile } from "../API/GETDuaArbEn";
@@ -16,7 +17,7 @@ import { useColor } from "../context/ColorContext";
 import { DuaVerseStyles } from "../Styles/commonStyles";
 import { getColorForTheme } from "../utils/themeUtils";
 import initializeScalingUtils from "../utils/core/NormalizeSize"
-
+import { AboutStyles } from '../Styles/commonStyles';
 const CACHE_KEY = "randomDuaCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
@@ -52,7 +53,7 @@ const DUAVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#fefffe",
-      shadowColor: "gray", 
+      shadowColor: "gray",
     },
     title: {
       color: "#000",
@@ -70,7 +71,7 @@ const DUAVerseScreen = ({ navigation }) => {
     },
     rectangle: {
       backgroundColor: "#242424",
-      shadowColor: "black", 
+      shadowColor: "black",
     },
     title: {
       color: "#fff",
@@ -107,8 +108,8 @@ const DUAVerseScreen = ({ navigation }) => {
       ...(selectedFont === "MeQuran"
         ? MeQuranFont.title
         : selectedFont === "ScheherazadeNew"
-        ? ScheherazadeNewFont.title
-        : HafsFont.title),
+          ? ScheherazadeNewFont.title
+          : HafsFont.title),
     },
     horizontalLine: {
       ...DuaVerseStyles.horizontalLine,
@@ -127,7 +128,7 @@ const DUAVerseScreen = ({ navigation }) => {
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxPaddingHorizontal, setMaxPaddingHorizontal] = useState(20);
-  const viewRef = React.useRef();
+  const viewRef= React.useRef();
   //#endregion
 
   const Share = async () => {
@@ -208,17 +209,17 @@ const DUAVerseScreen = ({ navigation }) => {
   //#region DisplayViewStyle base on character length
   const controlStyle = (verseTextLength) => {
     let MaxFontSize = moderateScale(20);
-    let maxPadding =  moderateScale(30);
-    let maxPaddingHorizontal =  moderateScale(20);
+    let maxPadding = moderateScale(30);
+    let maxPaddingHorizontal = moderateScale(20);
 
     if (verseTextLength > 1200) {
       MaxFontSize = moderateScale(16);
-      maxPadding =  moderateScale(20);
-      maxPaddingHorizontal =  moderateScale(10);
+      maxPadding = moderateScale(20);
+      maxPaddingHorizontal = moderateScale(10);
     } else if (verseTextLength < 100) {
       MaxFontSize = moderateScale(27);
-      maxPadding =  moderateScale(20);
-      maxPaddingHorizontal =  moderateScale(20);
+      maxPadding = moderateScale(20);
+      maxPaddingHorizontal = moderateScale(20);
     }
     setMaxFontSizeDescription(MaxFontSize);
     setMaxPadding(maxPadding);
@@ -231,6 +232,7 @@ const DUAVerseScreen = ({ navigation }) => {
     paddingHorizontal: maxPaddingHorizontal,
   };
   //#endregion
+  const appIconImage = require("../../assets/Images/123.png");
 
   return (
     <View ref={viewRef} style={styles.container}>
@@ -244,10 +246,6 @@ const DUAVerseScreen = ({ navigation }) => {
           <Text style={styles.translation}>{TRAN}</Text>
           <Text style={styles.description}>{REF}</Text>
         </ScrollView>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Menu")}
-          style={styles.shareButton}
-        ></TouchableOpacity>
         <TouchableOpacity onPress={Share} style={styles.shareButton}>
           <View style={styles.dotContainer}>
             <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
@@ -256,6 +254,33 @@ const DUAVerseScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
+
+        {/* <View style={{flexDirection: "row", alignItems: "center", gap: 10, position: "absolute", bottom: moderateScale(80), borderRadius: 10, padding: 5 }}>
+        <View style={{
+          backgroundColor: "#2b384f",
+          justifyContent: "center",
+          alignItems: "center",
+          width: moderateScale(30),
+          height: moderateScale(30),
+          borderRadius: 9,
+        }}>
+          <Image source={appIconImage} style={{
+            width: moderateScale(30),
+            height: moderateScale(30),
+          }}></Image>
+        </View>
+        <View style={{ flexDirection: "column", marginBottom: 3 }}>
+          <Text style={{
+            color: "#2b384f",
+            fontSize: moderateScale(20), fontFamily: "MontserratBold"
+          }}>Mufradun</Text>
+          <Text style={{
+            color: "#2b384f",
+            fontSize: moderateScale(10), fontFamily: "Montserrat", letterSpacing: moderateScale(0.30)
+          }} >Islamic Application</Text>
+        </View>
+      </View> */}
+
     </View>
   );
 };
