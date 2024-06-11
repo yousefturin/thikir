@@ -155,7 +155,7 @@ class AzanComponents extends React.Component {
   };
 
   render() {
-    return null; // Or any other render logic if needed
+    return null;
   }
 }
 

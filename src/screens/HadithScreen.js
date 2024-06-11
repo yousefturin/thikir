@@ -1,53 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { 
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet, 
-    ScrollView 
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchRandomVerseFromFile } from "../API/GETHadethArb";
 import { handleShare } from "../Service/ShareService";
-import { useTheme } from '../context/ThemeContext'; 
+import { useTheme } from "../context/ThemeContext";
 import { useFont } from "../context/FontContext";
-import { useColor } from '../context/ColorContext';
-import { QuranVerseStyles } from '../Styles/commonStyles';
-import { useNumberContext } from '../context/NumberContext';
+import { useColor } from "../context/ColorContext";
+import { QuranVerseStyles } from "../Styles/commonStyles";
+import { useNumberContext } from "../context/NumberContext";
 import { getColorForTheme } from "../utils/themeUtils";
+import { useLanguage } from "../context/LanguageContext";
 
 const CACHE_KEY = "randomHadithCache";
 const CACHE_EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
+
 const HADITHVerseScreen = ({ navigation }) => {
   const { selectedTheme } = useTheme();
   const { selectedFont } = useFont();
-  const { selectedColor, setColor } = useColor();
-  const { state, convertToEasternArabicNumerals } = useNumberContext(); 
-  const systemTheme = selectedTheme === 'system';
-  
-  //#region SelectedFont
-  const HafsFont = StyleSheet.create({
-      title:{
-          fontFamily:"Hafs",
-      }
-  });
-  const ScheherazadeNewFont = StyleSheet.create({
-      title:{
-          fontFamily:"ScheherazadeNew",
-      }
-  });
-  const MeQuranFont = StyleSheet.create({
-      title:{
-          fontFamily:"MeQuran",
-      }
-  });
-  //#endregion
+  const { selectedLanguage } = useLanguage();
+  const { selectedColor } = useColor();
+  const { state, convertToEasternArabicNumerals } = useNumberContext();
+  const systemTheme = selectedTheme === "system";
 
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#f2f2f6", 
+      backgroundColor: "#f2f2f6",
     },
     rectangle: {
       backgroundColor: "#fefffe",
@@ -57,24 +42,24 @@ const HADITHVerseScreen = ({ navigation }) => {
     },
     horizontalLine: {
       borderColor: "#f2f2f6",
-  },
+    },
   });
   //#endregion
 
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515", 
+      backgroundColor: "#111111",
     },
     rectangle: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
     },
     title: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#151515",
-  },
+      borderColor: "#111111",
+    },
   });
   //#endregion
   const themeStyles = getColorForTheme(
@@ -83,36 +68,44 @@ const HADITHVerseScreen = ({ navigation }) => {
     systemTheme
   );
 
-  //#region StyleMapping
   const styles = {
     ...QuranVerseStyles,
     container: {
       ...QuranVerseStyles.container,
-      ...selectedTheme === 'dark' ? themeStyles.container : themeStyles.container, 
+      ...(selectedTheme === "dark"
+        ? themeStyles.container
+        : themeStyles.container),
     },
     rectangle: {
-      ...QuranVerseStyles.rectangle, 
-      ...selectedTheme === 'dark' ? themeStyles.rectangle : themeStyles.rectangle, 
+      ...QuranVerseStyles.rectangle,
+      ...(selectedTheme === "dark"
+        ? themeStyles.rectangle
+        : themeStyles.rectangle),
     },
     title: {
-      ...QuranVerseStyles.title, 
-      ...selectedTheme  === 'dark'? themeStyles.title : themeStyles.title, 
-      ...(selectedFont === 'MeQuran' ? MeQuranFont.title : (selectedFont === 'ScheherazadeNew' ? ScheherazadeNewFont.title : HafsFont.title)),
+      ...QuranVerseStyles.title,
+      ...(selectedTheme === "dark" ? themeStyles.title : themeStyles.title),
     },
     horizontalLine: {
       ...QuranVerseStyles.horizontalLine,
-      ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
-  },
+      ...(selectedTheme === "dark"
+        ? themeStyles.horizontalLine
+        : themeStyles.horizontalLine),
+    },
   };
   //#endregion
-  
+
   //#region
   const [HADITH, setHADITH] = useState("");
   const [REF, setREF] = useState("");
+  const [TRANSLATION, setTRANSLATION] = useState("");
+  const [REF_TRANSLATION, setREF_TRANSLATION] = useState("");
   const [verseTextLength, setVerseTextLength] = useState(0);
+
   const [maxFontSizeDescription, setMaxFontSizeDescription] = useState(20);
   const [maxPadding, setMaxPadding] = useState(60);
   const [maxpaddingHorizontal, setMaxpaddingHorizontal] = useState(20);
+
   const viewRef = React.useRef();
   //#endregion
 
@@ -122,6 +115,7 @@ const HADITHVerseScreen = ({ navigation }) => {
 
   //#region getCachedHadith
   useEffect(() => {
+    console.log(selectedFont);
     // Check if cached verse exists and if it's not expired
     async function getCachedVerseHadith() {
       try {
@@ -131,6 +125,8 @@ const HADITHVerseScreen = ({ navigation }) => {
           const {
             HADITH: cachedHADITH,
             REF: cachedREF,
+            TRANSLATION: cachedTRANSLATION,
+            REF_TRANSLATION: cachedREF_TRANSLATION,
             timestamp,
           } = parsedData;
           const currentTime = new Date().getTime();
@@ -138,8 +134,16 @@ const HADITHVerseScreen = ({ navigation }) => {
             // Use the cached verse if it's not expired
             setHADITH(cachedHADITH);
             setREF(cachedREF);
+
+            setTRANSLATION(cachedTRANSLATION);
+            setREF_TRANSLATION(cachedREF_TRANSLATION);
             // Calculate the length of the cached verse text and control styles
-            const length = cachedHADITH.length;
+            let length;
+            if (selectedLanguage != "Arabic") {
+              length = cachedTRANSLATION.length;
+            } else {
+              length = cachedHADITH.length;
+            }
             setVerseTextLength(length);
             controlStyle(length);
             return;
@@ -162,20 +166,32 @@ const HADITHVerseScreen = ({ navigation }) => {
     try {
       const {
         HADITH: fetchedHADITH,
-        REF: cachedREF,
+        REF: fetchedREF,
+        TRANSLATION: fetchedTRANSLATION,
+        REF_TRANSLATION: fetchedREF_TRANSLATION,
       } = await fetchRandomVerseFromFile();
       // Set the fetched verse and related information in the component state
       setHADITH(fetchedHADITH);
-      setREF(cachedREF);
+      setREF(fetchedREF);
+
+      setTRANSLATION(fetchedTRANSLATION);
+      setREF_TRANSLATION(fetchedREF_TRANSLATION);
       // Calculate the length of the fetched verse text and control styles
-      const length = fetchedHADITH.length;
+      let length;
+      if (selectedLanguage != "Arabic") {
+        length = fetchedTRANSLATION.length;
+      } else {
+        length = fetchedHADITH.length;
+      }
       setVerseTextLength(length);
       controlStyle(length);
       // Cache the fetched verse and related information along with the current timestamp
       const currentTime = new Date().getTime();
       const dataToCache = JSON.stringify({
         HADITH: fetchedHADITH,
-        REF: cachedREF,
+        REF: fetchedREF,
+        TRANSLATION: fetchedTRANSLATION,
+        REF_TRANSLATION: fetchedREF_TRANSLATION,
         timestamp: currentTime,
       });
       await AsyncStorage.setItem(CACHE_KEY, dataToCache);
@@ -212,41 +228,66 @@ const HADITHVerseScreen = ({ navigation }) => {
     paddingHorizontal: maxpaddingHorizontal,
   };
   //#endregion
-  
+
   return (
     <View ref={viewRef} style={styles.container}>
       <View style={[styles.rectangle, textStyle]}>
-      <ScrollView
+        <ScrollView
           contentContainerStyle={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
+        >
+          <Text
+            style={[
+              styles.title,
+              textStyle,
+              {
+                textAlign: selectedLanguage != "Arabic" ? "left" : "center",
+                fontFamily:
+                  selectedLanguage === "English" &&
+                  selectedFont === "ScheherazadeNew"
+                    ? "Montserrat"
+                    : selectedLanguage === "English" &&
+                      selectedFont === "MeQuran"
+                    ? "TimesRoman"
+                    : selectedLanguage === "English" && selectedFont === "Hafs"
+                    ? "lexend"
+                    : selectedFont,
+              },
+            ]}
           >
-          <Text style={[styles.title, textStyle]}>
-          {HadithToDisplay = state.isArabicNumbers
-          ? convertToEasternArabicNumerals(HADITH.toString())
-          : HADITH.toString()}
+            {selectedLanguage != "Arabic"
+              ? (HadithToDisplay = state.isArabicNumbers
+                  ? convertToEasternArabicNumerals(TRANSLATION.toString())
+                  : TRANSLATION.toString())
+              : (HadithToDisplay = state.isArabicNumbers
+                  ? convertToEasternArabicNumerals(HADITH.toString())
+                  : HADITH.toString())}
           </Text>
           <View style={styles.horizontalLine} />
-          <Text style={styles.description}>
-          {REFToDisplay = state.isArabicNumbers
-          ? convertToEasternArabicNumerals(REF.toString())
-          : REF.toString()}
+          <Text style={[styles.description]}>
+            {selectedLanguage != "Arabic"
+              ? (REFToDisplay = state.isArabicNumbers
+                  ? convertToEasternArabicNumerals(REF_TRANSLATION.toString())
+                  : REF_TRANSLATION.toString())
+              : (REFToDisplay = state.isArabicNumbers
+                  ? convertToEasternArabicNumerals(REF.toString())
+                  : REF.toString())}
           </Text>
-      </ScrollView>
+        </ScrollView>
         <TouchableOpacity
           onPress={() => navigation.navigate("Menu")}
           style={styles.shareButton}
         ></TouchableOpacity>
         <TouchableOpacity onPress={Share} style={styles.shareButton}>
           <View style={styles.dotContainer}>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
-            <Text style={[styles.dot,{color:selectedColor}]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
+            <Text style={[styles.dot, { color: selectedColor }]}>&#8226;</Text>
           </View>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
 
 export default HADITHVerseScreen;

@@ -37,16 +37,16 @@ const AboutScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515", 
+      backgroundColor: "#111111", 
     },
     appNameText: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#262626",
+      borderColor: "#242424",
     }, 
     rectangleWrapper: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black", 
     },
     rectangleText: {

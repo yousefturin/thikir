@@ -45,10 +45,10 @@ const Menu = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     button: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     buttonText: {
@@ -59,7 +59,7 @@ const Menu = ({ navigation }) => {
       shadowColor: "black",
     },
     horizontalLine: {
-      borderColor: "#262626",
+      borderColor: "#242424",
     },
   });
   //#endregion

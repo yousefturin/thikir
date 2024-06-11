@@ -46,7 +46,8 @@
     "react-navigation": "^4.4.4",
     "react-navigation-shared-element": "^3.1.3",
     "react-navigation-stack": "^2.10.4",
-    "expo-localization": "~14.3.0"
+    "expo-localization": "~14.3.0",
+    "expo-background-fetch": "~11.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

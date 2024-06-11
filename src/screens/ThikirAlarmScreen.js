@@ -19,6 +19,9 @@ import { ThikirAlarmStyles } from "../Styles/commonStyles";
 import { useNumberContext } from "../context/NumberContext";
 import { useLanguage } from "../context/LanguageContext";
 import { Appearance } from "react-native";
+import ThikirAlarmComponents from "../components/ThikirAlarmComponents"
+import { updatePrayerTimings } from "../screens/azanScreen"
+
 const { width } = Dimensions.get("window");
 
 const ThikirAlarmScreen = () => {
@@ -27,7 +30,7 @@ const ThikirAlarmScreen = () => {
   const { selectedLanguage } = useLanguage();
   const { state, convertToEasternArabicNumerals } = useNumberContext();
   const systemTheme = selectedTheme === "system";
-  
+  const [storedTimings, setStoredTimings] = useState(null)
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
@@ -49,17 +52,17 @@ const ThikirAlarmScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     notificationContainer: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     title: {
       color: "#dddddd",
     },
     horizontalLineWrapper: {
-      borderColor: "#262626",
+      borderColor: "#242424",
     },
   });
   //#endregion
@@ -69,8 +72,8 @@ const ThikirAlarmScreen = () => {
       ? darkTheme
       : lightTheme
     : selectedTheme === "dark"
-    ? darkTheme
-    : lightTheme;
+      ? darkTheme
+      : lightTheme;
 
   //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({
@@ -179,61 +182,31 @@ const ThikirAlarmScreen = () => {
   };
   //#endregion
 
-  //#region NotificationsTitlesAndBodyText
-  const thikirSleepTranslationTitle =
-    selectedLanguage != "Arabic" ? "Sleeping Remembrance" : "أذكار النوم";
-  const thikirWakeupTranslationTitle =
-    selectedLanguage != "Arabic"
-      ? "Waking up Remembrance"
-      : "أذكار الاستيقاظ من النوم";
-  const thikirMorningTranslationTitle =
-    selectedLanguage != "Arabic" ? "Morning Remembrance" : "أذكار الصباح";
-  const thikirEveningTranslationTitle =
-    selectedLanguage != "Arabic" ? "Evening Remembrance" : "أذكار المساء";
-
-  const thikirSleepTranslationBody =
-    selectedLanguage != "Arabic"
-      ? "In Your name my Lord, I lie down and in Your name I rise, so if You should take my soul then have mercy upon it, and if You should return my soul then protect it in the manner You do so with Your righteous servants."
-      : "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِن أَمْسَكْتَ نَفْسِي فارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا، بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ";
-  const thikirWakeupTranslationBody =
-    selectedLanguage != "Arabic"
-      ? "All praise is for Allah who gave us life after having taken it from us and unto Him is the resurrection."
-      : "الْحَمْدُ للَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ";
-  const thikirMorningTranslationBody =
-    selectedLanguage != "Arabic"
-      ? "O Allah, by your leave we have reached the morning and by Your leave we have reached the evening, by Your leave we live and die and unto You is our resurrection."
-      : "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا ، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ";
-  const thikirEveningTranslationBody =
-    selectedLanguage != "Arabic"
-      ? "O Allah, what blessing I or any of Your creation have risen upon, is from You alone, without partner, so for You is all praise and unto You all thanks."
-      : "اللَّهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير";
-  //#endregion
-
   //#region notification structure
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [notifications, setNotifications] = useState([
     {
-      title: thikirSleepTranslationTitle,
-      body: thikirSleepTranslationBody,
+      title: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirSleepTranslationTitle,
+      body: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirSleepTranslationBody,
       id: "thikir_sleep",
       isActive: true,
     },
     {
-      title: thikirWakeupTranslationTitle,
-      body: thikirWakeupTranslationBody,
+      title: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirWakeupTranslationTitle,
+      body: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirWakeupTranslationBody,
       id: "thikir_wakeup",
       isActive: true,
     },
     {
-      title: thikirMorningTranslationTitle,
-      body: thikirMorningTranslationBody,
+      title: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirMorningTranslationTitle,
+      body: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirMorningTranslationBody,
       id: "thikir_morning",
       isActive: true,
     },
     {
-      title: thikirEveningTranslationTitle,
-      body: thikirEveningTranslationBody,
+      title: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirEveningTranslationTitle,
+      body: ThikirAlarmComponents.remembranceTitleAndBody(selectedLanguage).thikirEveningTranslationBody,
       id: "thikir_evening",
       isActive: true,
     },
@@ -299,7 +272,7 @@ const ThikirAlarmScreen = () => {
     }
 
     // Save the updated notification state to storage
-    saveNotificationData(updatedNotifications);
+    saveNotificationData(updatedNotifications, flag = "supplications");
   };
   //#endregion
 
@@ -355,7 +328,7 @@ const ThikirAlarmScreen = () => {
     }
 
     // Save the updated alarm times to storage
-    saveNotificationData(updatedNotifications);
+    saveNotificationData(updatedNotifications, flag = "supplications");
   };
 
   //#endregion
@@ -363,7 +336,7 @@ const ThikirAlarmScreen = () => {
   //#region loadStatesAlarmTimeAndNotifications
   const loadNotificationStatesAndAlarmTimes = async () => {
     try {
-      const storedDataJSON = await AsyncStorage.getItem("notificationData");
+      const storedDataJSON = await AsyncStorage.getItem("supplicationsNotificationData");
       const storedData = storedDataJSON ? JSON.parse(storedDataJSON) : {};
 
       const updatedNotifications = notifications.map((notification) => {
@@ -395,20 +368,28 @@ const ThikirAlarmScreen = () => {
   //#endregion
 
   //#region handleSaveNotificationData
-  const saveNotificationData = async (notificationsToSave) => {
+  const saveNotificationData = async (notificationsToSave, flag) => {
     try {
       const notificationData = {};
       for (const notification of notificationsToSave) {
         notificationData[notification.id] = {
           isActive: notification.isActive,
-          date: notification.date ? notification.date.toString() : null,
+          date: notification.date ? notification.date.toString() : flag === "supplications" ? getDefaultTime(notification.id, flag = "supplications") : getDefaultTime(notification.id, flag = "azan"),
         };
       }
-      await AsyncStorage.setItem(
-        "notificationData",
-        JSON.stringify(notificationData)
-      );
-      console.log("Notification data saved.");
+      if (flag === "supplications") {
+        await AsyncStorage.setItem(
+          "supplicationsNotificationData",
+          JSON.stringify(notificationData)
+        );
+        console.log("Supplications Notification data saved.");
+      } if (flag === "azan") {
+        await AsyncStorage.setItem(
+          "azanNotificationData",
+          JSON.stringify(notificationData)
+        );
+        console.log("Azan Notification data saved.");
+      }
     } catch (error) {
       console.error("Error saving notification data:", error);
     }
@@ -416,8 +397,15 @@ const ThikirAlarmScreen = () => {
   //#endregion
 
   //#region DisplayBorderRadiusBasedOnItemCount
-  const renderBorderRadius = (index) => {
-    const itemCount = notifications.length;
+  const renderBorderRadius = (index, flag) => {
+    let itemCount
+
+    if (flag === "supplications") {
+      itemCount = notifications.length;
+    } else if (flag === "azan") {
+      itemCount = prayerNotifications.length;
+    }
+
     if (index === 0) {
       return {
         borderTopLeftRadius: 10,
@@ -430,8 +418,175 @@ const ThikirAlarmScreen = () => {
   };
   //#endregion
 
+  const [prayerNotifications, setPrayerNotifications] = useState([
+    {
+      title:
+        ThikirAlarmComponents.azanTitleAndBody(selectedLanguage).azanFajrTitle,
+      body: ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+        .azanFajrBodyText,
+      id: "Fajr_Prayer",
+      isActive: false,
+    },
+    {
+      title:
+        ThikirAlarmComponents.azanTitleAndBody(selectedLanguage).azanDhuhrTitle,
+      body: ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+        .azanDhuhrBodyText,
+      id: "Dhuhr_Prayer",
+      isActive: false,
+    },
+    {
+      title:
+        ThikirAlarmComponents.azanTitleAndBody(selectedLanguage).azanAsrTitle,
+      body: ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+        .azanAsrBodyText,
+      id: "Asr_Prayer",
+      isActive: false,
+    },
+    {
+      title:
+        ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+          .azanMaghrebTitle,
+      body: ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+        .azanMaghrebBodyText,
+      id: "Maghreb_Prayer",
+      isActive: false,
+    },
+    {
+      title:
+        ThikirAlarmComponents.azanTitleAndBody(selectedLanguage).azanIshaTitle,
+      body: ThikirAlarmComponents.azanTitleAndBody(selectedLanguage)
+        .azanIshaBodyText,
+      id: "Isha_Prayer",
+      isActive: false,
+    },
+  ]);
+
+  //#region toggleAlarm
+  const toggleAzan = async (newValue, notificationData) => {
+    try {
+      setSelectedNotification(notificationData);
+      const updatedNotifications = prayerNotifications.map((notification) =>
+        notification.id === notificationData.id
+          ? { ...notification, isActive: newValue }
+          : notification
+      );
+
+      setPrayerNotifications(updatedNotifications);
+
+      const selectedNotification = updatedNotifications.find(
+        (n) => n.id === notificationData.id
+      );
+      console.log(
+        `Selected ${selectedNotification.id} isActive:`,
+      );
+      console.log(formatTime(selectedNotification.date))
+      if (selectedNotification.date && selectedNotification.isActive) {
+        // If a time is picked and the toggle is active, schedule the notification
+        await scheduleNotification(notificationData.id, selectedNotification);
+        console.log(`Alarm for ${selectedNotification.id} activated.`);
+      } else {
+        // If the toggle is manually switched to inactive, cancel the notification
+
+        await cancelNotification(notificationData.id);
+        console.log(`Alarm for ${selectedNotification.id} deactivated.`);
+      }
+
+      // Save the updated notification state to storage
+      saveNotificationData(updatedNotifications, flag = "azan");
+    } catch (error) {
+      console.error("Error toggle azan:", error);
+    }
+  };
+  //#endregion
+
+  const fetchData = async () => {
+    // Fetch stored prayer times
+    try {
+      const storedPrayerTimes = await AsyncStorage.getItem(
+        "prayer_times_of_day"
+      );
+      const storedPrayerOffset = await AsyncStorage.getItem(
+        "offset_time_prayer"
+      );
+      const storedDataJSON = await AsyncStorage.getItem("azanNotificationData");
+      if (storedDataJSON) {
+        setFetchedData(JSON.parse(storedDataJSON))
+      }
+      if (storedPrayerTimes && storedPrayerOffset) {
+        setStoredTimings(
+          updatePrayerTimings(
+            JSON.parse(storedPrayerTimes),
+            JSON.parse(storedPrayerOffset)
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching prayer data:", error);
+    }
+  }
+  const [fetchedData, setFetchedData] = useState(null)
+
+  const setFetchedPrayerTimings = async () => {
+    const notificationIdMap = {
+      Fajr_Prayer: 'Fajr',
+      Dhuhr_Prayer: 'Dhuhr',
+      Asr_Prayer: 'Asr',
+      Maghreb_Prayer: 'Maghrib',
+      Isha_Prayer: 'Isha',
+    };
+
+    // Iterate over all notifications
+    const updatedNotifications = prayerNotifications.map(notification => {
+      const storedTimingKey = notificationIdMap[notification.id];
+      if (storedTimings && storedTimingKey && storedTimings.hasOwnProperty(storedTimingKey)) {
+        // If the timing exists in storedTimings, use it
+        const storedTime = storedTimings[storedTimingKey];
+        const [hours, minutes] = storedTime.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes, 0, 0);
+        // Update the notification's date and isActive property\
+        if (fetchedData) {
+          const savedData = fetchedData[notification.id];
+          const storedDate = savedData ? new Date(savedData.date) : null;
+          const isActive = savedData ? savedData.isActive : false;
+          if (!storedDate || date.getTime() !== storedDate.getTime()) {
+            return { ...notification, date, isActive };
+          }
+          return { ...notification, date, isActive };
+        }
+        return { ...notification, date };
+      }
+      // If the timing doesn't exist in storedTimings, return the original notification
+      return notification;
+    });
+    saveNotificationData(updatedNotifications, flag = "azan")
+    setFetchedData(updatedNotifications)
+    // Update all notifications with the new timings
+    setPrayerNotifications(updatedNotifications);
+    // Schedule notifications for active notifications
+    for (const prayerNotifications of updatedNotifications) {
+      if (prayerNotifications.isActive && prayerNotifications.date) {
+        await scheduleNotification(prayerNotifications.id, prayerNotifications);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (storedTimings !== null) {
+      setFetchedPrayerTimings();
+    }
+  }, [storedTimings]);
+
   return (
     <View style={styles.container}>
+      <View style={[styles.wrapHeaderText, { alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end", }]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Supplications" : "الأذكار"}</Text>
+      </View>
       {notifications.map((notification, index) => (
         <React.Fragment key={notification.id}>
           <TouchableOpacity
@@ -439,7 +594,7 @@ const ThikirAlarmScreen = () => {
             activeOpacity={0.7}
           >
             <View
-              style={[styles.notificationContainer, renderBorderRadius(index)]}
+              style={[styles.notificationContainer, renderBorderRadius(index, flag = "supplications")]}
             >
               <View style={styles.leftContent}>
                 <Text
@@ -462,15 +617,15 @@ const ThikirAlarmScreen = () => {
                   {
                     (TimeToDisplay = state.isArabicNumbers
                       ? convertToEasternArabicNumerals(
-                          notification.date
-                            ? formatTime(notification.date)
-                            : formatTime(
-                                getDefaultTime(notification.id)
-                              ).toString()
-                        )
+                        notification.date
+                          ? formatTime(notification.date)
+                          : formatTime(
+                            getDefaultTime(notification.id, flag = "supplications")
+                          ).toString()
+                      )
                       : notification.date
-                      ? formatTime(notification.date)
-                      : formatTime(getDefaultTime(notification.id)).toString())
+                        ? formatTime(notification.date)
+                        : formatTime(getDefaultTime(notification.id, flag = "supplications")).toString())
                   }
                 </Text>
               </View>
@@ -492,13 +647,63 @@ const ThikirAlarmScreen = () => {
           </TouchableOpacity>
         </React.Fragment>
       ))}
+      <View style={[styles.wrapHeaderText, { alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end", }]}>
+        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Azan" : "أذان"}</Text>
+      </View>
+      {prayerNotifications.map((notification, index) => (
+        <React.Fragment key={notification.id}>
+        <View>
+          <View
+            style={[styles.notificationContainer, renderBorderRadius(index, flag = "azan")]}
+          >
+            <View style={styles.leftContent}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                allowFontScaling={false}
+                style={[
+                  styles.title,
+                  {
+                    fontFamily:
+                      selectedLanguage != "Arabic"
+                        ? "Montserrat"
+                        : "ScheherazadeNewBold",
+                  },
+                ]}
+              >
+                {notification.title}
+              </Text>
+              <Text allowFontScaling={false} style={styles.time}>
+                {notification.date
+                  ? formatTime(notification.date)
+                  : formatTime(getDefaultTime(notification.id, flag = "azan")).toString()}
+
+              </Text>
+            </View>
+            <View style={styles.rightContent}>
+              <Switch
+                value={notification.isActive}
+                onValueChange={() =>
+                  toggleAzan(!notification.isActive, notification)
+                }
+                thumbColor={notification.isActive ? "#fefffe" : "#fefffe"}
+                trackColor={{ true: selectedColor, false: "#454545" }}
+              />
+            </View>
+          </View>
+          {index < prayerNotifications.length - 1 && (
+            <View style={styles.horizontalLineWrapper} />
+          )}
+          </View>
+        </React.Fragment>
+      ))}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="time"
         date={
           selectedNotification
             ? selectedNotification.date ||
-              getDefaultTime(selectedNotification.id)
+            getDefaultTime(selectedNotification.id, flag = "supplications")
             : new Date()
         }
         onConfirm={handleConfirm}
@@ -515,16 +720,30 @@ const formatTime = (time) => {
 //#endregion
 
 //#region GetDefaultTimeOfNotifications
-const getDefaultTime = (notificationId) => {
+const getDefaultTime = (notificationId, flag) => {
   // Define default times for each notification based on their IDs
-  const defaultTimes = {
-    thikir_sleep: new Date().setHours(23, 0, 0, 0),
-    thikir_wakeup: new Date().setHours(6, 0, 0, 0),
-    thikir_morning: new Date().setHours(7, 0, 0, 0),
-    thikir_evening: new Date().setHours(18, 0, 0, 0),
-  };
-  return new Date(defaultTimes[notificationId]) || new Date();
+  let defaultTimes;
+  if (flag === "supplications") {
+    defaultTimes = {
+      thikir_sleep: new Date().setHours(23, 0, 0, 0),
+      thikir_wakeup: new Date().setHours(6, 0, 0, 0),
+      thikir_morning: new Date().setHours(7, 0, 0, 0),
+      thikir_evening: new Date().setHours(18, 0, 0, 0),
+    };
+  } if (flag === "azan") {
+    defaultTimes = {
+      Fajr_Prayer: new Date().setHours(6, 0, 0, 0),
+      Dhuhr_Prayer: new Date().setHours(13, 0, 0, 0),
+      Asr_Prayer: new Date().setHours(16, 0, 0, 0),
+      Maghreb_Prayer: new Date().setHours(18, 0, 0, 0),
+      Isha_Prayer: new Date().setHours(20, 0, 0, 0),
+    };
+  }
+
+  return new Date(defaultTimes[notificationId]);
 };
 //#endregion
+
+
 
 export default ThikirAlarmScreen;

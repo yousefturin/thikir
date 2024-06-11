@@ -45,7 +45,7 @@ export function LanguageProvider({ children }) {
     if (loading) {
         // Return a loading indicator while the language is being loaded
         return (
-            <View style={{ flex: 1, backgroundColor: "#151515" ,paddingTop:240}}>
+            <View style={{ flex: 1, backgroundColor: "#111111" ,paddingTop:240}}>
             <View style={{ flex: 1, justifyContent:"flex-start", alignItems: 'center'  }}>
                 <Image
                 source={appIconImage}
@@ -53,7 +53,7 @@ export function LanguageProvider({ children }) {
                 />
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="small" color="#262626" style={{ width: "100%", height: 20 }} />
+                <ActivityIndicator size="small" color="#242424" style={{ width: "100%", height: 20 }} />
             </View>
             </View>
         );

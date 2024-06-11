@@ -66,17 +66,17 @@ const QuranVerseScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#111111",
     },
     rectangle: {
-      backgroundColor: "#262626",
+      backgroundColor: "#242424",
       shadowColor: "black",
     },
     title: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "#111111",
     },
   });
   //#endregion
@@ -167,6 +167,7 @@ const QuranVerseScreen = ({ navigation }) => {
     systemTheme
   );
   useEffect(() => {
+    console.log(verseData)
     startAnimation();
   }, []);
 
@@ -258,7 +259,7 @@ const QuranVerseScreen = ({ navigation }) => {
             {
               padding: 20,
               paddingHorizontal: 20,
-              justifyContent: "space-around",
+              justifyContent:"space-evenly",
             },
           ]}
         >
@@ -268,6 +269,7 @@ const QuranVerseScreen = ({ navigation }) => {
               { backgroundColor: backgroundColorInterpolation },
             ]}
           />
+          
           <View style={[styles.horizontalLine]} />
           <Animated.View
             style={[

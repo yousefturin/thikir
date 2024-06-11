@@ -9,11 +9,13 @@ const fetchRandomVerseFromFile = async () => {
     const randomIndex = Math.floor(Math.random() * data.length);
     const randomVerse = data[randomIndex];
 
-    if (randomVerse.ID && randomVerse.HADITH && randomVerse.REF) {
+    if (randomVerse.ID && randomVerse.HADITH && randomVerse.REF && randomVerse.TRANSLATION &&randomVerse.REF_TRANSLATION ) {
       return {
         ID: randomVerse.ID,
         HADITH: randomVerse.HADITH,
         REF: randomVerse.REF,
+        TRANSLATION: randomVerse.TRANSLATION,
+        REF_TRANSLATION:randomVerse.REF_TRANSLATION
       };
     } else {
       throw new Error('Invalid JSON data structure');
@@ -24,6 +26,8 @@ const fetchRandomVerseFromFile = async () => {
       ID: 'Error',
       HADITH: 'Error',
       REF: 'Error reading JSON file.',
+      TRANSLATION:'Error',
+      REF_TRANSLATION:'Error',
     };
   }
 };
