@@ -47,8 +47,7 @@
     },
     "plugins": [
       "expo-localization"
-    ],
-    "sdkVersion": "50.0.0"
+    ]
   },
   "name": "thikir"
 }
