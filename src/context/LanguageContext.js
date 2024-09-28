@@ -48,7 +48,7 @@ export function LanguageProvider({ children }) {
     if (loading) {
         // Return a loading indicator while the language is being loaded
         return (
-            <View style={{ flex: 1, backgroundColor: "#151515", paddingTop: moderateScale(200) }}>
+            <View style={{ flex: 1, backgroundColor: "#050505", paddingTop: moderateScale(200) }}>
                 <View style={{ flex: 1, justifyContent: "flex-start", alignItems: 'center' }}>
                     <Image
                         source={appIconImage}

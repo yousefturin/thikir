@@ -23,7 +23,7 @@ const SettingScreen = ({ navigation }) => {
   const { selectedTheme, toggleTheme } = useTheme(); 
   const systemTheme = selectedTheme === 'system'; // Check if the theme is set to "system"
   const {selectedLanguage, setLanguage} = useLanguage();
-  const { scale, verticalScale, moderateScale } = initializeScalingUtils(Dimensions);
+  const { moderateScale } = initializeScalingUtils(Dimensions);
 
   const { selectedFont, setFont } = useFont();
 
@@ -53,13 +53,13 @@ const SettingScreen = ({ navigation }) => {
       shadowColor: "gray", 
     },
     horizontalLine: {
-      borderColor: "#f2f2f6",
-    },  
+      borderColor: "rgba(198, 198, 200, 0.45)",
+    },
     textColorToggle:{
       color:"#000",
     },
     selectedColorCircle: {
-      borderColor: '#5c5b5b',
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
   });
   //#endregion
@@ -67,26 +67,26 @@ const SettingScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     textColor:{
       color:"#fff",
     },
     rectangle: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black", 
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
     textColorToggle:{
       color:"#fff",
     },
     selectedColorCircle: {
-      borderColor: '#EBEAEA',
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
   });
   //#endregion
@@ -96,7 +96,6 @@ const SettingScreen = ({ navigation }) => {
     selectedTheme,
     systemTheme
   );
-
 
   //#region ArabicLanguage
   const ArabicLanguage = StyleSheet.create({
@@ -112,7 +111,11 @@ const SettingScreen = ({ navigation }) => {
     textColorToggle:{
       paddingRight:22
     },
-    textColor: {},
+    textColor: {
+    },
+    horizontalLine: {
+      marginRight: 20,
+    },
   });
   //#endregion
 
@@ -131,12 +134,14 @@ const SettingScreen = ({ navigation }) => {
       paddingLeft:22
     },
     textColor: {
-      fontFamily:"Montserrat"
+      fontFamily:"Montserrat",
+      marginLeft:5
+    },
+    horizontalLine: {
+      marginLeft: 20,
     },
   });
   //#endregion
-
-
 
   //#region StylesMapping
   const styles = {
@@ -162,7 +167,8 @@ const SettingScreen = ({ navigation }) => {
     },
     horizontalLine: {
       ...SettingStyles.horizontalLine, 
-      ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine, 
+      ...selectedTheme  === 'dark'? themeStyles.horizontalLine : themeStyles.horizontalLine,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine)
     },
     themeOption:{
       ...SettingStyles.themeOption, 
@@ -200,7 +206,7 @@ const SettingScreen = ({ navigation }) => {
   ];
 
   const renderThemeItem = ({ item, index }) => (
-    <View>
+    <>
       <TouchableOpacity
         style={styles.themeOption}
         onPress={() => {
@@ -219,16 +225,16 @@ const SettingScreen = ({ navigation }) => {
         <Text style={styles.textColor}>{item.label}</Text>
       </TouchableOpacity>
       {index !== themes.length - 1 && <View style={styles.horizontalLine}></View>}
-    </View>
+    </>
   );
   //#endregion
 
   const colorOptions = [ 
-    { label: '#8d5b3c', value: '#8d5b3c' },//Oragish Color
-    { label: '#AA767C', value: '#AA767C' },//Pinkish Color
-    { label: '#9AB06B', value: '#9AB06B' },//Greenish Color
-    { label: '#6081b5', value: '#6081b5' },//Blueish Color
-    { label: '#f2b784', value: '#f2b784' },//System Orang Color
+    { label: '#FACFAD', value: '#FACFAD' },//Oragish Color
+    { label: '#006C67', value: '#006C67' },//Pinkish Color
+    { label: '#615de9', value: '#615de9' },//Greenish Color
+    { label: '#96E6B3', value: '#96E6B3' },//System Orang Color
+    { label: '#4bbfe2', value: '#4bbfe2' },//Blueish Color
   ];
   
   const renderColorItem = ({ item }) => (
@@ -264,44 +270,6 @@ const SettingScreen = ({ navigation }) => {
   const QuranFontLabel = selectedLanguage != "Arabic" ? "Times Font" : "خط القران";
   const HafsFontLabel = selectedLanguage != "Arabic" ? "lexend Font" : "خط حفص";
 
-  // useEffect(() => {
-    // if (selectedLanguage === "English" && selectedFont === "ScheherazadeNew") {
-    //   selectedFont="Montserrat";
-    // }else if (selectedLanguage === "English" && selectedFont === "MeQuran") {
-    //   selectedFont="TimesRoman";
-    // } else if (selectedLanguage === "English" && selectedFont === "Hafs") {
-    //   selectedFont="lexend";
-    // }else{
-    //   selectedFont;
-    // }
-
-
-  //   } if (selectedLanguage === "Arabic" && selectedFont === "Montserrat") {
-  //     setFont("ScheherazadeNew");
-  //   } else if (selectedFont === "TimesRoman") {
-  //     setFont("MeQuran");
-  //   } else if (selectedFont === "lexend"){
-  //     setFont("Hafs");
-  //   }
-
-  //   if (selectedLanguage === "Arabic" && selectedFont === "ScheherazadeNew") {
-  //     setFont("ScheherazadeNew");
-  //   } else if (selectedFont === "MeQuran") {
-  //     setFont("MeQuran");
-  //   } else if (selectedFont === "lexHafsend"){
-  //     setFont("Hafs");
-  //   }
-
-  //   if (selectedLanguage === "English" && selectedFont === "Montserrat") {
-  //     setFont("Montserrat");
-  //   }else if (selectedFont === "TimesRoman") {
-  //     setFont("TimesRoman");
-  //   }else if (selectedFont === "lexend") {
-  //     setFont("lexend");
-  //   }
-  // }, [selectedLanguage]);
-
-
   //#region renderingFontitem
   const fontOptions = [
     { label: systemFontLabel, value: "ScheherazadeNew" },
@@ -310,7 +278,7 @@ const SettingScreen = ({ navigation }) => {
   ];
 
   const renderFontItem = ({ item, index }) => (
-    <View>
+    <>
       <TouchableOpacity
         style={styles.themeOption}
         onPress={() => {
@@ -330,7 +298,7 @@ const SettingScreen = ({ navigation }) => {
         <Text style={styles.textColor}>{item.label}</Text>
       </TouchableOpacity>
       {index !== fontOptions.length - 1 && <View style={styles.horizontalLine}></View>}
-    </View>
+    </>
   );
   //#endregion
 
@@ -341,7 +309,7 @@ const SettingScreen = ({ navigation }) => {
       { label: 'English', value: 'English' },
     ];
     const renderLanguageItem = ({ item, index }) => (
-      <View>
+      <>
         <TouchableOpacity
           style={styles.themeOption}
           onPress={() => {
@@ -369,7 +337,7 @@ const SettingScreen = ({ navigation }) => {
           <Text style={styles.textColor}>{item.label}</Text>
         </TouchableOpacity>
         {index !== LanguageOptions.length - 1 && <View style={styles.horizontalLine}></View>}
-      </View>
+      </>
     );
     //#endregion
   
@@ -380,7 +348,7 @@ const SettingScreen = ({ navigation }) => {
       >
         <TouchableOpacity onPress={() => navigation.navigate('Menu')}></TouchableOpacity>
         <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Theme" : "المظهر"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Theme" : "المظهر"}</Text>
         </View>
         <View style={styles.rectangle}>
           <View style={styles.themeOptionsContainer}>
@@ -394,7 +362,7 @@ const SettingScreen = ({ navigation }) => {
           </View>
         </View>
         <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Font" : "خط العرض"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Font" : "خط العرض"}</Text>
         </View>
         <View style={styles.rectangle}>
           <View style={styles.fontOptionsContainer}>
@@ -408,7 +376,7 @@ const SettingScreen = ({ navigation }) => {
           </View>
         </View>
         <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Language" : "لغة العرض"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Language" : "لغة العرض"}</Text>
         </View>
         <View style={styles.rectangle}>
           <View style={styles.fontOptionsContainer}>
@@ -422,7 +390,7 @@ const SettingScreen = ({ navigation }) => {
           </View>
         </View>
         <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Color" : "لون التطبيق"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Color" : "لون التطبيق"}</Text>
         </View>
       <View style={styles.rectangle}>
         <View style={styles.colorOptionsContainer}>
@@ -436,7 +404,7 @@ const SettingScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={[styles.wrapHeaderText,{ alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end",}]}>
-      <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Numbers Style" : "نظام الارقام"}</Text>
+      <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Numbers Style" : "نظام الارقام"}</Text>
       </View>
         <View style={styles.rectangle}>
           <View style={styles.toggleContainer}>

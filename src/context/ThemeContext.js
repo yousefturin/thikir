@@ -9,7 +9,7 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  backgroundColor: '#151515',
+  backgroundColor: '#000000',
   textColor: '#FFFFFF',
 };
 

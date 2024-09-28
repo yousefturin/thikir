@@ -43,23 +43,23 @@ const AboutScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     appNameText: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#242424",
+      borderColor: "#1C1C1E",
     },
     rectangleWrapper: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     },
     rectangleText: {
       color: "#fff",
     },
     WrapperAppLogoIcon:{
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     }
   });
@@ -145,7 +145,7 @@ const AboutScreen = ({ navigation }) => {
                 قالوا: "وما المُفَرِّدونَ يا رسول الله"؟!
                 قال: «<Text style={{ color: selectedColor, fontFamily: "ScheherazadeNewBold", }}> الذاكرون الله كثيرًا والذاكرات</Text>».
 
-                {'\n'}  <Text style={{ fontSize: moderateScale(16), fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
+                {'\n'}  <Text style={{ fontSize: moderateScale(14), fontFamily: "ScheherazadeNew", }}> - (صحيح مسلم [4/2062] برقم [2676])</Text>
               </Text>
             )}
           </View>

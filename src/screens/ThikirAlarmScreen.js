@@ -30,6 +30,7 @@ const ThikirAlarmScreen = () => {
   const { state, convertToEasternArabicNumerals } = useNumberContext();
   const systemTheme = selectedTheme === "system";
   const [storedTimings, setStoredTimings] = useState(null)
+
   //#region LightTheme
   const lightTheme = StyleSheet.create({
     container: {
@@ -37,32 +38,38 @@ const ThikirAlarmScreen = () => {
     },
     notificationContainer: {
       backgroundColor: "#fefffe",
-      shadowColor: "gray",
     },
     title: {
       color: "#000",
     },
-    horizontalLineWrapper: {
-      borderColor: "#fefffe",
+    horizontalLine: {
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
+    wrapperButton:{
+      backgroundColor: "#fefffe",
+      shadowColor: "gray",
+    }
   });
   //#endregion
 
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     notificationContainer: {
-      backgroundColor: "#242424",
-      shadowColor: "black",
+      backgroundColor: "#1C1C1E",
     },
     title: {
       color: "#dddddd",
     },
-    horizontalLineWrapper: {
-      borderColor: "#242424",
+    horizontalLine: {
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
+    wrapperButton:{
+      backgroundColor: "#1C1C1E",
+      shadowColor: "black",
+    }
   });
   //#endregion
 
@@ -79,8 +86,9 @@ const ThikirAlarmScreen = () => {
     notificationContainer: {
       flexDirection: "row-reverse",
     },
-    horizontalLineWrapper: {
-      marginLeft: width > 600 ? 610 : 350,
+    horizontalLine: {
+      marginRight: 20,
+      overflow: "hidden",
     },
     leftContent: {
       alignItems: "flex-end",
@@ -105,8 +113,9 @@ const ThikirAlarmScreen = () => {
     notificationContainer: {
       flexDirection: "row",
     },
-    horizontalLineWrapper: {
-      marginRight: width > 600 ? 610 : 350,
+    horizontalLine: {
+      marginLeft: 20,
+      overflow: "hidden",
     },
     leftContent: {
       alignItems: "flex-start",
@@ -151,14 +160,14 @@ const ThikirAlarmScreen = () => {
         ? EnglishLanguage.title
         : ArabicLanguage.title),
     },
-    horizontalLineWrapper: {
-      ...ThikirAlarmStyles.horizontalLineWrapper,
+    horizontalLine: {
+      ...ThikirAlarmStyles.horizontalLine,
       ...(selectedTheme === "dark"
-        ? themeStyles.horizontalLineWrapper
-        : themeStyles.horizontalLineWrapper),
+        ? themeStyles.horizontalLine
+        : themeStyles.horizontalLine),
       ...(selectedLanguage != "Arabic"
-        ? EnglishLanguage.horizontalLineWrapper
-        : ArabicLanguage.horizontalLineWrapper),
+        ? EnglishLanguage.horizontalLine
+        : ArabicLanguage.horizontalLine),
     },
     leftContent: {
       ...ThikirAlarmStyles.leftContent,
@@ -177,6 +186,12 @@ const ThikirAlarmScreen = () => {
       ...(selectedLanguage != "Arabic"
         ? EnglishLanguage.time
         : ArabicLanguage.time),
+    },
+    wrapperButton: {
+      ...ThikirAlarmStyles.wrapperButton,
+      ...(selectedTheme === "dark"
+        ? themeStyles.wrapperButton
+        : themeStyles.wrapperButton),
     },
   };
   //#endregion
@@ -584,17 +599,15 @@ const ThikirAlarmScreen = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.wrapHeaderText, { alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end", }]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Supplications" : "الأذكار"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Supplications" : "الأذكار"}</Text>
       </View>
       {notifications.map((notification, index) => (
-        <React.Fragment key={notification.id}>
+        <View key={notification.id} style={[styles.wrapperButton, renderBorderRadius(index, flag = "supplications"),]}>
           <TouchableOpacity
+            style={[styles.notificationContainer, renderBorderRadius(index, flag = "supplications")]}
             onPress={() => showDatePicker(notification)}
             activeOpacity={0.7}
           >
-            <View
-              style={[styles.notificationContainer, renderBorderRadius(index, flag = "supplications")]}
-            >
               <View style={styles.leftContent}>
                 <Text
                   numberOfLines={1}
@@ -639,22 +652,19 @@ const ThikirAlarmScreen = () => {
                   trackColor={{ true: selectedColor, false: "#454545" }}
                 />
               </View>
-            </View>
-            {index < notifications.length - 1 && (
-              <View style={styles.horizontalLineWrapper} />
-            )}
           </TouchableOpacity>
-        </React.Fragment>
+          {index < notifications.length - 1 && (
+              <View style={styles.horizontalLine} />
+            )}
+        </View>
       ))}
+      
       <View style={[styles.wrapHeaderText, { alignItems: selectedLanguage != "Arabic" ? "flex-start" : "flex-end", }]}>
-        <Text style={styles.HeadertextColor}>{selectedLanguage != "Arabic" ? "Azan" : "أذان"}</Text>
+        <Text style={styles.HeaderTextColor}>{selectedLanguage != "Arabic" ? "Azan" : "أذان"}</Text>
       </View>
       {prayerNotifications.map((notification, index) => (
-        <React.Fragment key={notification.id}>
-        <View>
-          <View
-            style={[styles.notificationContainer, renderBorderRadius(index, flag = "azan")]}
-          >
+        <View key={notification.id} style={[styles.wrapperButton, renderBorderRadius(index, flag = "azan"),]}>
+          <View style={[styles.notificationContainer, renderBorderRadius(index, flag = "azan")]}>
             <View style={styles.leftContent}>
               <Text
                 numberOfLines={1}
@@ -691,10 +701,9 @@ const ThikirAlarmScreen = () => {
             </View>
           </View>
           {index < prayerNotifications.length - 1 && (
-            <View style={styles.horizontalLineWrapper} />
+            <View style={styles.horizontalLine} />
           )}
-          </View>
-        </React.Fragment>
+        </View>
       ))}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

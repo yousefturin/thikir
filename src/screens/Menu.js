@@ -31,7 +31,7 @@ const Menu = ({ navigation }) => {
     },
     button: {
       backgroundColor: "#fefffe",
-      shadowColor: "gray",
+      // shadowColor: "gray",
     },
     buttonText: {
       color: "#000",
@@ -41,33 +41,40 @@ const Menu = ({ navigation }) => {
       shadowColor: "gray",
     },
     horizontalLine: {
-      borderColor: "#fefffe",
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
+    wrapperButton:{
+      backgroundColor: "#fefffe",
+      shadowColor: "gray",
+    }
   });
   //#endregion
 
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     button: {
-      backgroundColor: "#242424",
-      shadowColor: "black",
+      backgroundColor: "#1C1C1E",
     },
     buttonText: {
       color: "#fff",
     },
     iconWrapper: {
-      backgroundColor: "#454545",
+      backgroundColor: "#3a3a3a",
       shadowColor: "black",
     },
     horizontalLine: {
-      borderColor: "#242424",
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
+    wrapperButton:{
+      backgroundColor: "#1C1C1E",
+      shadowColor: "black",
+    }
   });
   //#endregion
-  
+
   const themeStyles = getColorForTheme(
     { dark: darkTheme, light: lightTheme },
     selectedTheme,
@@ -80,44 +87,44 @@ const Menu = ({ navigation }) => {
       flexDirection: "row",
     },
     iconWrapper: {
-      marginRight: 5,
+      marginRight: 10,
     },
     buttonText: {
       textAlign: "right",
-      marginRight: 20,
+      marginRight: 15,
     },
     icon: {
-      transform: [{ rotate: 0  + "deg" }],
+      transform: [{ rotate: 0 + "deg" }],
       marginLeft: 20,
     },
-    horizontalLine:{
-      alignSelf:"flex-end",
-      marginLeft:moderateScale(16,1.5),
+    horizontalLine: {
+      marginRight: 60,
+      overflow: "hidden",
     },
   });
   //#endregion
 
   //#region EnglishLanguage
   const EnglishLanguage = StyleSheet.create({
-  button: {
-    flexDirection: "row-reverse",
-  },
-  iconWrapper: {
-    marginLeft: 5,
-  },
-  buttonText: {
-    textAlign: "left",
-    marginLeft: 20,
-    fontFamily:"Montserrat",
-  },
-  icon: {
-    transform: [{ rotate: 180  + "deg" }],
-    marginRight: 20,
-  },
-  horizontalLine:{
-    alignSelf:"flex-start",
-    marginLeft:moderateScale(16,1.5),
-  },
+    button: {
+      flexDirection: "row-reverse",
+    },
+    iconWrapper: {
+      marginLeft: 5,
+    },
+    buttonText: {
+      textAlign: "left",
+      marginLeft: 20,
+      fontFamily: "Montserrat",
+    },
+    icon: {
+      transform: [{ rotate: 180 + "deg" }],
+      marginRight: 20,
+    },
+    horizontalLine: {
+      marginLeft: 60,
+      overflow: "hidden",
+    },
   });
   //#endregion
 
@@ -135,31 +142,37 @@ const Menu = ({ navigation }) => {
       ...(selectedTheme === "dark"
         ? themeStyles.buttonText
         : themeStyles.buttonText),
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText )
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.buttonText : ArabicLanguage.buttonText)
     },
     button: {
       ...MainStyles.button,
       ...(selectedTheme === "dark" ? themeStyles.button : themeStyles.button),
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button )
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.button : ArabicLanguage.button)
     },
     iconWrapper: {
       ...MainStyles.iconWrapper,
       ...(selectedTheme === "dark"
         ? themeStyles.iconWrapper
         : themeStyles.iconWrapper),
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapper : ArabicLanguage.iconWrapper )
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.iconWrapper : ArabicLanguage.iconWrapper)
     },
     horizontalLine: {
       ...MainStyles.horizontalLine,
       ...(selectedTheme === "dark"
         ? themeStyles.horizontalLine
         : themeStyles.horizontalLine),
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine )
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine)
     },
-    icon:{
+    icon: {
       ...MainStyles.icon,
-      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon )
-    }
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.icon : ArabicLanguage.icon)
+    },
+    wrapperButton: {
+      ...MainStyles.wrapperButton,
+      ...(selectedTheme === "dark"
+        ? themeStyles.wrapperButton
+        : themeStyles.wrapperButton),
+    },
   };
   //#endregion
 
@@ -168,9 +181,9 @@ const Menu = ({ navigation }) => {
       <TouchableOpacity
         style={[
           styles.button,
-          { borderRadius: 10, marginBottom: 30, marginTop:30 },
+          { borderRadius: 10, marginBottom: 30, marginTop: 30 },
         ]}
-        onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Notifications") : navigation.navigate("التذكيرات")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Notifications") : navigation.navigate("التذكيرات")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -192,217 +205,220 @@ const Menu = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
+      <View style={styles.wrapperButton}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
+          ]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Glorification") : navigation.navigate("سبحة")}
+          activeOpacity={0.7}
+        >
+
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Glorification" : "السبحة"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="TasbihSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+        <View style={styles.horizontalLine} />
+
+
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Prayer Times") : navigation.navigate("مواعيد الصلاة")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Prayer Times" : "مواعيد الصلاة"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="AzanSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+
+        <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Favorite") : navigation.navigate("الأذكار المفضلة")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Favorite Supplications" : "الأذكار المفضلة"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="FavThikirSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+        <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Names Of Allah") : navigation.navigate("أسماء الله الحسنى")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Names of Allah" : "أسماء الله الحسنى"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="NamesOfAllahSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+          <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Verse of Quran") : navigation.navigate("آية")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Verse of Quran" : "آية"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="AyaSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+        <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Hadith") : navigation.navigate("حديث")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Hadith" : "حديث"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="HadithSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+        <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Direction of Prayer") : navigation.navigate("القبلة")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Direction of Prayer" : "القبلة"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="QiblaSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+
+        <View style={styles.horizontalLine} />
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
+          ]}
+          onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Invocational") : navigation.navigate("دعاء")}
+          activeOpacity={0.7}
+        >
+          <View style={styles.iconWrapperLeft}>
+            <FontAwesomeIcon
+              name="angle-left"
+              size={moderateScale(16)}
+              color={selectedColor}
+              style={styles.icon}
+            />
+          </View>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Invocational" : "دعاء"}</Text>
+          </View>
+          <View style={styles.iconWrapper}>
+            <SvgComponent svgKey="DuaaSVG" fill={selectedColor} style={styles.iconleft} />
+          </View>
+
+          <View style={styles.imageWrapper}>
+            <Image style={styles.image} />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={[styles.wrapperButton,{marginTop: 30}]}>
       <TouchableOpacity
         style={[
           styles.button,
-          { borderTopRightRadius: 10, borderTopLeftRadius: 10 },
-        ]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Glorification"): navigation.navigate("سبحة")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Glorification" : "السبحة"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="TasbihSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-      <View style={styles.horizontalLine} />
-
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Prayer Times"): navigation.navigate("مواعيد الصلاة")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Prayer Times" : "مواعيد الصلاة"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="AzanSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Favorite"): navigation.navigate("الأذكار المفضلة")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-        <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Favorite Supplications" : "الأذكار المفضلة"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="FavThikirSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ?  navigation.navigate("Names Of Allah"): navigation.navigate("أسماء الله الحسنى")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Names of Allah" : "أسماء الله الحسنى"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="NamesOfAllahSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Verse of Quran") : navigation.navigate("آية")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Verse of Quran" : "آية"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="AyaSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Hadith") : navigation.navigate("حديث")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Hadith" : "حديث"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="HadithSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Direction of Prayer") : navigation.navigate("القبلة")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Direction of Prayer" : "القبلة"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="QiblaSVG"  fill={selectedColor} style={styles.iconleft} />
-        </View>
-
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-
-      <View style={styles.horizontalLine} />
-      <TouchableOpacity
-        style={[
-          styles.button,
-          { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },
-        ]}
-        onPress={() =>  selectedLanguage != "Arabic" ? navigation.navigate("Invocational") : navigation.navigate("دعاء")}
-        activeOpacity={0.7}
-      >
-        <View style={styles.iconWrapperLeft}>
-          <FontAwesomeIcon
-            name="angle-left"
-            size={moderateScale(16)}
-            color={selectedColor}
-            style={styles.icon}
-          />
-        </View>
-        <View style={styles.nameWrapper}>
-          <Text style={styles.buttonText}>{selectedLanguage != "Arabic" ? "Invocational" : "دعاء"}</Text>
-        </View>
-        <View style={styles.iconWrapper}>
-          <SvgComponent svgKey="DuaaSVG" fill={selectedColor} style={styles.iconleft} />
-        </View>
-
-        <View style={styles.imageWrapper}>
-          <Image style={styles.image} />
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[
-          styles.button,
-          { borderTopRightRadius: 10, borderTopLeftRadius: 10, marginTop: 30 },
+          { borderTopRightRadius: 10, borderTopLeftRadius: 10},
         ]}
         onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("Settings") : navigation.navigate("الاعدادات")}
         activeOpacity={0.7}
@@ -427,9 +443,9 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
       <View style={styles.horizontalLine} />
       <TouchableOpacity
-        style={[styles.button,       
+        style={[styles.button,
         { borderBottomRightRadius: 10, borderBottomLeftRadius: 10 },]}
-        onPress={() =>selectedLanguage != "Arabic" ? navigation.navigate("About us") :  navigation.navigate("عن البرنامج")}
+        onPress={() => selectedLanguage != "Arabic" ? navigation.navigate("About us") : navigation.navigate("عن البرنامج")}
         activeOpacity={0.7}
       >
         <View style={styles.iconWrapperLeft}>
@@ -450,6 +466,7 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity>
+      </View>
       {/* <TouchableOpacity
         style={[
           styles.button,
@@ -476,6 +493,7 @@ const Menu = ({ navigation }) => {
           <Image style={styles.image} />
         </View>
       </TouchableOpacity> */}
+
     </View>
   );
 };

@@ -56,7 +56,7 @@ const TasbihScreen = () => {
 
     const keyboardTheme = getColorForTheme({ dark: "dark", light: "light" }, selectedTheme, systemTheme);
     const backgroundSwapDisplay = getColorForTheme(
-        { dark: "#242424", light: "#fefffe" },
+        { dark: "#1C1C1E", light: "#fefffe" },
         selectedTheme,
         systemTheme
     );
@@ -94,7 +94,7 @@ const TasbihScreen = () => {
         countValue: {
             color: "#000",
         },
-        thikirNameDispalyBtn: {
+        thikirNameDisplayBtn: {
             backgroundColor: "#fefffe",
             shadowColor: "gray",
         },
@@ -107,6 +107,9 @@ const TasbihScreen = () => {
         },
         addNewThikirModalContainer: {
             backgroundColor: "#f2f2f6",
+        },
+        wrapperButton: {
+            backgroundColor: "#fefffe",
         },
         buttonThikirDisplayInModal: {
             backgroundColor: "#fefffe",
@@ -122,8 +125,8 @@ const TasbihScreen = () => {
         rectangle: {
             backgroundColor: "#f2f2f6",
         },
-        separator: {
-            borderColor: "#f2f2f6",
+        horizontalLine: {
+            borderColor: "rgba(198, 198, 200, 0.45)",
         },
         itemText: {
             color: "#000",
@@ -137,45 +140,48 @@ const TasbihScreen = () => {
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
         },
         circle: {
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         countValue: {
             color: "#fff",
         },
-        thikirNameDispalyBtn: {
-            backgroundColor: "#242424",
+        thikirNameDisplayBtn: {
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         pickThikirText: {
             color: "#fff",
         },
         ModalTopNotch: {
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         addNewThikirModalContainer: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
+        },
+        wrapperButton: {
+            backgroundColor: "#1C1C1E",
         },
         buttonThikirDisplayInModal: {
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
         },
         newThikirTextInModal: {
             color: "#fff",
         },
         inputTextContainerInModa: {
             color: "#fff",
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         rectangle: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
         },
-        separator: {
-            borderColor: "#151515",
+        horizontalLine: {
+            borderColor: "rgba(84, 84, 84, 0.45)",
         },
         itemText: {
             color: "#fff",
@@ -208,11 +214,11 @@ const TasbihScreen = () => {
                 ? themeStyles.countValue
                 : themeStyles.countValue),
         },
-        thikirNameDispalyBtn: {
-            ...TasbehScreenStyle.thikirNameDispalyBtn,
+        thikirNameDisplayBtn: {
+            ...TasbehScreenStyle.thikirNameDisplayBtn,
             ...(selectedTheme === "dark"
-                ? themeStyles.thikirNameDispalyBtn
-                : themeStyles.thikirNameDispalyBtn),
+                ? themeStyles.thikirNameDisplayBtn
+                : themeStyles.thikirNameDisplayBtn),
         },
         pickThikirText: {
             ...TasbehScreenStyle.pickThikirText,
@@ -256,11 +262,9 @@ const TasbihScreen = () => {
                 ? themeStyles.rectangle
                 : themeStyles.rectangle),
         },
-        separator: {
-            ...TasbehScreenStyle.separator,
-            ...(selectedTheme === "dark"
-                ? themeStyles.separator
-                : themeStyles.separator),
+        horizontalLine: {
+            ...TasbehScreenStyle.horizontalLine,
+            ...(selectedTheme === 'dark' ? themeStyles.horizontalLine : themeStyles.horizontalLine),
         },
         itemText: {
             ...TasbehScreenStyle.itemText,
@@ -275,6 +279,12 @@ const TasbihScreen = () => {
         modaldisplay: {
             ...TasbehScreenStyle.modaldisplay,
             ...(selectedLanguage != "Arabic" ? EnglishLanguage.modaldisplay : ArabicLanguage.modaldisplay)
+        },
+        wrapperButton: {
+            ...TasbehScreenStyle.wrapperButton,
+            ...(selectedTheme === "dark"
+                ? themeStyles.wrapperButton
+                : themeStyles.wrapperButton),
         },
     };
     //#endregion
@@ -528,11 +538,11 @@ const TasbihScreen = () => {
     };
     //#endregion
 
+    //#region pressControl for long/short
     let pressTimeout;
     let startX = 0; // Initial X-coordinate of the touch
     let startY = 0; // Initial Y-coordinate of the touch
 
-    //#region pressControl for long/short
     const handleContainerPressIn = (e) => {
         pressTimeout = setTimeout(() => {
             setIsLongPress(true); // Detect long press
@@ -547,14 +557,12 @@ const TasbihScreen = () => {
         const endY = e.nativeEvent.pageY; // Get the final Y-coordinate
         const swipeDistanceX = Math.abs(endX - startX); // Calculate the horizontal distance moved
         const swipeDistanceY = Math.abs(endY - startY); // Calculate the vertical distance moved
-
+        
         //  Must be refactored to another function for better reading *** this is only for testing and it works
         if (swipeDistanceX < 50 && swipeDistanceY > 100) {
             setIsNameListVisible(!isNameListVisible);
         }
         //************************************* */
-
-
 
         if (swipeDistanceX < 10 && swipeDistanceY < 10) {
             // Only increment the count if it's not a swipe (adjust the threshold as needed)
@@ -568,329 +576,330 @@ const TasbihScreen = () => {
 
 
     return (
-        <TouchableWithoutFeedback
-            onPressIn={handleContainerPressIn}
-            onPressOut={handleContainerPressOut}
-            disabled={!names[selectedNameIndex]}
-        >
-            <View style={styles.container}>
-                <View style={styles.resetBtn}>
-                    <TouchableOpacity disabled={!names[selectedNameIndex]} onPress={handleReset}>
-                        <Svg
-                            height="24"
-                            viewBox="0 0 21 21"
-                            width="24"
-                            style={[{ margin: 20 }]}
-                        >
-                            <Path
-                                d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"
-                                fill="none"
-                                fill-rule="evenodd"
-                                strokeWidth={2}
-                                stroke={selectedColor}
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                transform="translate(2 2)"
-                            />
-                            <Path
-                                d="m12.5 5.5v-4h4"
-                                fill="none"
-                                fill-rule="evenodd"
-                                stroke={selectedColor}
-                                strokeWidth={2}
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                transform="translate(2 2)"
-                            />
-                        </Svg>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.wrapercountValue}>
-                    <View style={styles.circleContainer}>
-                        {/* Original Circle */}
-                        <View style={styles.circle}>
-                            <Text allowFontScaling={false} style={styles.countValue}>
-                                {
-                                    (NumberCountMainToDisplay = state.isArabicNumbers
-                                        ? convertToEasternArabicNumerals(count.toString())
-                                        : count.toString())
-                                }
-                            </Text>
-                        </View>
+            <TouchableWithoutFeedback
+                onPressIn={handleContainerPressIn}
+                onPressOut={handleContainerPressOut}
+                disabled={!names[selectedNameIndex]}
+            >
 
-                        {/* Animated Circle (Duplica) */}
-                        <Animated.View
-                            style={[
-                                styles.duplica,
-                                {
-                                    opacity: animation,
-                                    transform: [
-                                        {
-                                            scale: animation.interpolate({
-                                                inputRange: [0, 1],
-                                                outputRange: [1, 1.8],
-                                            }),
-                                        },
-                                    ],
-                                },
-                            ]}
-                        >
-                            <Svg width="200" height="200" viewBox="0 0 200 200">
-                                <Circle
-                                    cx="101"
-                                    cy="101"
-                                    r="98"
-                                    fill="transparent"
+                <View style={styles.container}>
+                    <View style={styles.resetBtn}>
+                        <TouchableOpacity disabled={!names[selectedNameIndex]} onPress={handleReset}>
+                            <Svg
+                                height="24"
+                                viewBox="0 0 21 21"
+                                width="24"
+                                style={[{ margin: 20 }]}
+                            >
+                                <Path
+                                    d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"
+                                    fill="none"
+                                    fill-rule="evenodd"
+                                    strokeWidth={2}
                                     stroke={selectedColor}
-                                    strokeWidth="2"
-                                    strokeOpacity={1}
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    transform="translate(2 2)"
+                                />
+                                <Path
+                                    d="m12.5 5.5v-4h4"
+                                    fill="none"
+                                    fill-rule="evenodd"
+                                    stroke={selectedColor}
+                                    strokeWidth={2}
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    transform="translate(2 2)"
                                 />
                             </Svg>
-                        </Animated.View>
+                        </TouchableOpacity>
                     </View>
-                </View>
-                <TouchableOpacity
-                    style={styles.thikirNameDispalyBtn}
-                    onPress={() => {
-                        openNameList();
-                        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-                    }}
-                >
-                    <Text
-                        allowFontScaling={false}
-                        style={[styles.thikirNameDispaly, { color: selectedColor }]}
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
+                    <View style={styles.wrapercountValue}>
+                        <View style={styles.circleContainer}>
+                            {/* Original Circle */}
+                            <View style={styles.circle}>
+                                <Text allowFontScaling={false} style={styles.countValue}>
+                                    {
+                                        (NumberCountMainToDisplay = state.isArabicNumbers
+                                            ? convertToEasternArabicNumerals(count.toString())
+                                            : count.toString())
+                                    }
+                                </Text>
+                            </View>
+
+                            {/* Animated Circle (Duplica) */}
+                            <Animated.View
+                                style={[
+                                    styles.duplica,
+                                    {
+                                        opacity: animation,
+                                        transform: [
+                                            {
+                                                scale: animation.interpolate({
+                                                    inputRange: [0, 1],
+                                                    outputRange: [1, 1.8],
+                                                }),
+                                            },
+                                        ],
+                                    },
+                                ]}
+                            >
+                                <Svg width="200" height="200" viewBox="0 0 200 200">
+                                    <Circle
+                                        cx="101"
+                                        cy="101"
+                                        r="98"
+                                        fill="transparent"
+                                        stroke={selectedColor}
+                                        strokeWidth="2"
+                                        strokeOpacity={1}
+                                    />
+                                </Svg>
+                            </Animated.View>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.thikirNameDisplayBtn}
+                        onPress={() => {
+                            openNameList();
+                            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+                        }}
                     >
-                        {names[selectedNameIndex] && names[selectedNameIndex].name
-                            ? names[selectedNameIndex].name
-                            : "اختار الذكر"}
-                    </Text>
-                </TouchableOpacity>
-
-                <Modal
-                    visible={isNameListVisible}
-                    animationType="slide"
-                    transparent={false}
-                    presentationStyle="formSheet"
-                    statusBarTranslucent={false}
-                    onRequestClose={() => {
-                        setIsNameListVisible(false);
-                        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-                    }}
-                >
-                    <View style={styles.container}>
-                        <Text allowFontScaling={false} style={[styles.pickThikirText, { fontFamily: selectedLanguage != "Arabic" ? "Montserrat" : "ScheherazadeNewBold" }]}>
-                            {selectedLanguage != "Arabic" ? "Select a Supplication" : "اختيار الذكر"}
-                        </Text>
-                        <View style={styles.ModalTopNotch} />
-                        {selectedLanguage != "Arabic" ? (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    toggleContainer();
-                                    setTimeout(() => {
-                                        inputRef.current.focus();
-                                    }, 100);
-                                }}
-                                style={{
-                                    position: "absolute",
-                                    bottom: 45,
-                                    left: 25,
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <Svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 512 512"
-                                        style={styles.ThikirNewText}
-                                    >
-                                        <Path
-                                            d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
-                                            fill="currentColor"
-                                        />
-                                    </Svg>
-                                    <Text allowFontScaling={false} style={styles.ThikirNewText}>
-                                        New Supplication
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ) : (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    toggleContainer();
-                                    setTimeout(() => {
-                                        inputRef.current.focus();
-                                    }, 100);
-                                }}
-                                style={{
-                                    position: "absolute",
-                                    bottom: 45,
-                                    right: 25,
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <Text allowFontScaling={false} style={styles.ThikirNewText}>
-                                        ذكر جديد
-                                    </Text>
-                                    <Svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 512 512"
-                                        style={styles.ThikirNewText}
-                                    >
-                                        <Path
-                                            d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
-                                            fill="currentColor"
-                                        />
-                                    </Svg>
-                                </View>
-                            </TouchableOpacity>
-                        )}
-
-                        {renderButtonCloseModal()}
-                        <TouchableWithoutFeedback
-                            onPressIn={handleContainerPressIn}
-                            onPressOut={handleContainerPressOut}
+                        <Text
+                            allowFontScaling={false}
+                            style={[styles.thikirNameDispaly, { color: selectedColor }]}
+                            numberOfLines={1}
+                            ellipsizeMode="tail"
                         >
-                            <View style={styles.rectangle}>
-                                <View style={styles.modaldisplay}>
-                                    <ScrollView
-                                        style={{ borderRadius: 10 }}
-                                        ref={scrollViewRef}
-                                        onScroll={handleScroll}
-                                        showsVerticalScrollIndicator={false}
-                                    >
-                                        {names.map((item, index) => (
-                                            <GestureHandlerRootView key={item.name}>
-                                                <Swipeable
-                                                    renderRightActions={(dragX) =>
-                                                        isDeleteButtonVisible ? (
-                                                            <DeleteButton
-                                                                onDelete={() => deleteName(index)}
-                                                                dragX={dragX}
-                                                            />
-                                                        ) : null
-                                                    }
-                                                    containerStyle={[renderBorderRadius(index), { backgroundColor: backgroundSwapDisplay }]}
-                                                    overshootRight={false}
-                                                    onSwipeableWillOpen={() => {
-                                                        Haptics.notificationAsync(
-                                                            Haptics.NotificationFeedbackType.Success
-                                                        );
-                                                    }}
-                                                    onSwipeableWillClose={() => {
-                                                        Haptics.notificationAsync(
-                                                            Haptics.NotificationFeedbackType.Error
-                                                        );
-                                                    }}
-                                                >
-                                                    <TouchableWithoutFeedback
-                                                        onPress={() => selectName(index)}
-                                                        activeOpacity={0.8}
-                                                    >
-                                                        <View
-                                                            style={[
-                                                                styles.buttonThikirDisplayInModal,
-                                                                renderBorderRadius(index),
+                            {names[selectedNameIndex] && names[selectedNameIndex].name
+                                ? names[selectedNameIndex].name
+                                : "اختار الذكر"}
+                        </Text>
+                    </TouchableOpacity>
 
-                                                            ]}
+                    <Modal
+                        visible={isNameListVisible}
+                        animationType="slide"
+                        transparent={false}
+                        presentationStyle="formSheet"
+                        statusBarTranslucent={false}
+                        onRequestClose={() => {
+                            setIsNameListVisible(false);
+                            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+                        }}
+                    >
+                        <View style={styles.container}>
+                            <Text allowFontScaling={false} style={[styles.pickThikirText, { fontFamily: selectedLanguage != "Arabic" ? "Montserrat" : "ScheherazadeNewBold" }]}>
+                                {selectedLanguage != "Arabic" ? "Select a Supplication" : "اختيار الذكر"}
+                            </Text>
+                            <View style={styles.ModalTopNotch} />
+                            {selectedLanguage != "Arabic" ? (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        toggleContainer();
+                                        setTimeout(() => {
+                                            inputRef.current.focus();
+                                        }, 100);
+                                    }}
+                                    style={{
+                                        position: "absolute",
+                                        bottom: 45,
+                                        left: 25,
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <Svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 512 512"
+                                            style={styles.ThikirNewText}
+                                        >
+                                            <Path
+                                                d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
+                                                fill="currentColor"
+                                            />
+                                        </Svg>
+                                        <Text allowFontScaling={false} style={styles.ThikirNewText}>
+                                            New Supplication
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        toggleContainer();
+                                        setTimeout(() => {
+                                            inputRef.current.focus();
+                                        }, 100);
+                                    }}
+                                    style={{
+                                        position: "absolute",
+                                        bottom: 45,
+                                        right: 25,
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <Text allowFontScaling={false} style={styles.ThikirNewText}>
+                                            ذكر جديد
+                                        </Text>
+                                        <Svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 512 512"
+                                            style={styles.ThikirNewText}
+                                        >
+                                            <Path
+                                                d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm96,224H272v80H240V272H160V240h80V160h32v80h80Z"
+                                                fill="currentColor"
+                                            />
+                                        </Svg>
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+
+                            {renderButtonCloseModal()}
+                            <TouchableWithoutFeedback
+                                onPressIn={handleContainerPressIn}
+                                onPressOut={handleContainerPressOut}
+                            >
+                                <View style={styles.rectangle}>
+                                    <View style={styles.modaldisplay}>
+                                        <ScrollView
+                                            style={{ borderRadius: 10 }}
+                                            ref={scrollViewRef}
+                                            onScroll={handleScroll}
+                                            showsVerticalScrollIndicator={false}
+                                        >
+                                            {names.map((item, index) => (
+                                                <GestureHandlerRootView key={item.name} style={styles.wrapperButton}>
+                                                    <Swipeable
+                                                        renderRightActions={(dragX) =>
+                                                            isDeleteButtonVisible ? (
+                                                                <DeleteButton
+                                                                    onDelete={() => deleteName(index)}
+                                                                    dragX={dragX}
+                                                                />
+                                                            ) : null
+                                                        }
+                                                        containerStyle={[renderBorderRadius(index), { backgroundColor: backgroundSwapDisplay }]}
+                                                        overshootRight={false}
+                                                        onSwipeableWillOpen={() => {
+                                                            Haptics.notificationAsync(
+                                                                Haptics.NotificationFeedbackType.Success
+                                                            );
+                                                        }}
+                                                        onSwipeableWillClose={() => {
+                                                            Haptics.notificationAsync(
+                                                                Haptics.NotificationFeedbackType.Error
+                                                            );
+                                                        }}
+                                                    >
+                                                        <TouchableWithoutFeedback
+                                                            onPress={() => selectName(index)}
+                                                            activeOpacity={0.8}
                                                         >
-                                                            <Text
-                                                                style={[styles.itemText]}
-                                                                numberOfLines={1}
-                                                                ellipsizeMode="tail"
-                                                            >
-                                                                {item.name}
-                                                            </Text>
-                                                            <Text
+                                                            <View
                                                                 style={[
-                                                                    styles.itemCount,
-                                                                    { color: selectedColor },
+                                                                    styles.buttonThikirDisplayInModal,
+                                                                    renderBorderRadius(index),
                                                                 ]}
-                                                                numberOfLines={1}
-                                                                ellipsizeMode="tail"
                                                             >
-                                                                {
-                                                                    (itemCountMainToDisplay = state.isArabicNumbers
-                                                                        ? convertToEasternArabicNumerals(
-                                                                            item.count.toString()
-                                                                        )
-                                                                        : item.count.toString())
-                                                                }
-                                                            </Text>
-                                                        </View>
-                                                    </TouchableWithoutFeedback>
+                                                                <Text
+                                                                    style={[styles.itemText]}
+                                                                    numberOfLines={1}
+                                                                    ellipsizeMode="tail"
+                                                                >
+                                                                    {item.name}
+                                                                </Text>
+                                                                <Text
+                                                                    style={[
+                                                                        styles.itemCount,
+                                                                        { color: selectedColor },
+                                                                    ]}
+                                                                    numberOfLines={1}
+                                                                    ellipsizeMode="tail"
+                                                                >
+                                                                    {
+                                                                        (itemCountMainToDisplay = state.isArabicNumbers
+                                                                            ? convertToEasternArabicNumerals(
+                                                                                item.count.toString()
+                                                                            )
+                                                                            : item.count.toString())
+                                                                    }
+                                                                </Text>
+
+                                                            </View>
+                                                        </TouchableWithoutFeedback>
+                                                    </Swipeable>
                                                     {index < names.length - 1 && (
                                                         <View
-                                                            key={`separator-${index}`}
-                                                            style={styles.separator}
+                                                            key={`horizontalLine-${index}`}
+                                                            style={[styles.horizontalLine, { marginRight: 20, }]}
                                                         />
                                                     )}
-                                                </Swipeable>
-                                            </GestureHandlerRootView>
-                                        ))}
-                                    </ScrollView>
-                                </View>
-                                <View>
-                                    <Modal
-                                        transparent={true}
-                                        animationType="fade"
-                                        visible={isContainerVisible}
-                                        onRequestClose={toggleContainer}
-                                    >
-                                        <TouchableOpacity
-                                            style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.8)" }}
-                                            onPress={toggleContainer}
-                                            activeOpacity={1}
+                                                </GestureHandlerRootView>
+                                            ))}
+                                        </ScrollView>
+                                    </View>
+                                    <View>
+                                        <Modal
+                                            transparent={true}
+                                            animationType="fade"
+                                            visible={isContainerVisible}
+                                            onRequestClose={toggleContainer}
                                         >
-                                            <Animatable.View
-                                                animation={
-                                                    isContainerVisible ? "slideInUp" : "fadeOutDown"
-                                                }
-                                                style={{
-                                                    flex: 1,
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    padding: 20,
-                                                    paddingBottom: 70,
-                                                }}
+                                            <TouchableOpacity
+                                                style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+                                                onPress={toggleContainer}
+                                                activeOpacity={1}
                                             >
-                                                <View style={styles.addNewThikirModalContainer}>
-                                                    <Text style={[styles.newThikirTextInModal, { fontFamily: selectedLanguage != "Arabic" ? "Montserrat" : "ScheherazadeNewBold" }]}>
-                                                        {selectedLanguage != "Arabic" ? "New Supplication" : "ذكر جديد"}
-                                                    </Text>
-                                                    <TextInput
-                                                        ref={inputRef}
-                                                        value={newName}
-                                                        onChangeText={setNewName}
-                                                        onSubmitEditing={addName}
-                                                        keyboardAppearance={keyboardTheme}
-                                                        style={styles.inputTextContainerInModa}
-                                                    />
-                                                </View>
-                                            </Animatable.View>
-                                        </TouchableOpacity>
-                                    </Modal>
+                                                <Animatable.View
+                                                    animation={
+                                                        isContainerVisible ? "slideInUp" : "fadeOutDown"
+                                                    }
+                                                    style={{
+                                                        flex: 1,
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
+                                                        padding: 20,
+                                                        paddingBottom: 70,
+                                                    }}
+                                                >
+                                                    <View style={styles.addNewThikirModalContainer}>
+                                                        <Text style={[styles.newThikirTextInModal, { fontFamily: selectedLanguage != "Arabic" ? "Montserrat" : "ScheherazadeNewBold" }]}>
+                                                            {selectedLanguage != "Arabic" ? "New Supplication" : "ذكر جديد"}
+                                                        </Text>
+                                                        <TextInput
+                                                            ref={inputRef}
+                                                            value={newName}
+                                                            onChangeText={setNewName}
+                                                            onSubmitEditing={addName}
+                                                            keyboardAppearance={keyboardTheme}
+                                                            style={styles.inputTextContainerInModa}
+                                                        />
+                                                    </View>
+                                                </Animatable.View>
+                                            </TouchableOpacity>
+                                        </Modal>
+                                    </View>
                                 </View>
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                </Modal>
-            </View>
-        </TouchableWithoutFeedback>
+                            </TouchableWithoutFeedback>
+                        </View>
+                    </Modal>
+                </View>
+            </TouchableWithoutFeedback>
     );
 };
 

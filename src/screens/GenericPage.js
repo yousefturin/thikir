@@ -26,7 +26,7 @@ import SvgComponent from "../../assets/Svg/svgComponents";
 import initializeScalingUtils from "../utils/core/NormalizeSize"
 
 const GenericPage = ({ route }) => {
-    
+
     const viewRef = React.useRef();
     const { moderateScale } = initializeScalingUtils(Dimensions);
     const { selectedTheme } = useTheme();
@@ -46,8 +46,8 @@ const GenericPage = ({ route }) => {
 
     const ControlPaneBackgroundImage = getColorForTheme(
         {
-            dark: require("../../assets/Images/HeaderBackground.jpg"),
-            light: require("../../assets/Images/HeaderBackgroundLight.jpg"),
+            dark: require("../../assets/Images/HeaderBackground.png"),
+            light: require("../../assets/Images/HeaderBackgroundLight.png"),
         },
         selectedTheme,
         systemTheme
@@ -62,13 +62,13 @@ const GenericPage = ({ route }) => {
             backgroundColor: "#f2f2f6",
         },
         circularButton: {
-            borderColor: "#151515",
+            borderColor: "#050505",
             backgroundColor: "#fefffe",
             shadowColor: "gray",
         },
         button: {
             backgroundColor: "#fefffe",
-            borderColor: "#151515",
+            borderColor: "#050505",
             shadowColor: "gray",
         },
         textcount: {
@@ -93,7 +93,7 @@ const GenericPage = ({ route }) => {
         },
         ControlPaneBackground: {},
         horizontalLine: {
-            borderColor: "#f2f2f6",
+            borderColor: "rgba(198, 198, 200, 0.45)",
         },
     });
     //#endregion
@@ -101,19 +101,19 @@ const GenericPage = ({ route }) => {
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
         },
         containerforshare: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
         },
         circularButton: {
-            borderColor: "#151515",
-            backgroundColor: "#242424",
+            borderColor: "#050505",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         button: {
-            backgroundColor: "#242424",
-            borderColor: "#151515",
+            backgroundColor: "#1C1C1E",
+            borderColor: "#050505",
             shadowColor: "black",
         },
         textcount: {
@@ -121,7 +121,7 @@ const GenericPage = ({ route }) => {
             color: "white",
         },
         rectangle: {
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         title: {
@@ -138,7 +138,7 @@ const GenericPage = ({ route }) => {
         },
         ControlPaneBackground: {},
         horizontalLine: {
-            borderColor: "#151515",
+            borderColor: "rgba(84, 84, 84, 0.45)",
         },
     });
     //#endregion
@@ -225,7 +225,7 @@ const GenericPage = ({ route }) => {
 
     const handleButtonPressTranslation = () => {
         const toValue = isTranslation ? 0 : 1; // Target value of opacity
-        
+
         // Start animation
         Animated.timing(
             fadeAnim,
@@ -235,7 +235,7 @@ const GenericPage = ({ route }) => {
                 useNativeDriver: true,
             }
         ).start();
-    
+
         // Update state after a short delay
         setTimeout(() => {
             setIsTranslation(!isTranslation);
@@ -421,36 +421,34 @@ const GenericPage = ({ route }) => {
                             </TouchableOpacity>
                         </ScrollView>
                         {selectedLanguage != "Arabic" ? (
-                            <View style={[styles.horizontalLine, { paddingTop: 5,marginBottom:5}]} />
-                        ) : null}
-                        {selectedLanguage != "Arabic" ? (
-                                <TouchableOpacity
-                                    activeOpacity={1}
-                                    style={{
-                                        paddingVertical: 5,
-                                        alignItems:"center",
-                                        flexDirection: "row", 
-                                        width:"100%",
-                                        justifyContent:"flex-start",
-                                        
-                                    }}
-                                    onPress={handleButtonPressTranslation}
-                                    >
-                                    <View style={{ width:"5%"}}>
-                                    <SvgComponent svgKey="TranslationSVG" />    
-                                    </View>
-                                    <Text
-                                        style={[styles.TranslationDescription, { fontSize: moderateScale(14) ,textAlign:"left", }]}
-                                    >
-                                        Translation
-                                    </Text>
-                                </TouchableOpacity>
-                        ) : null}
-                        {selectedLanguage != "Arabic" ? (
+                            <>
+                            <View style={[styles.horizontalLine, { marginBottom: 5, }]} />
+                        
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={{
+                                    paddingVertical: 5,
+                                    alignItems: "center",
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    justifyContent: "flex-start",
+                                }}
+                                onPress={handleButtonPressTranslation}
+                            >
+                                <View style={{ width: "5%",}}>
+                                    <SvgComponent svgKey="TranslationSVG" />
+                                </View>
+                                <Text
+                                    style={[styles.TranslationDescription, { fontSize: moderateScale(14), textAlign: "left", }]}
+                                >
+                                    Translation
+                                </Text>
+                            </TouchableOpacity>
+
                             <ScrollView
                                 contentContainerStyle={[
                                     styles.scrollContainerDescription,
-                                    { display: isTranslation ? "flex" : "none" },
+                                    { display: isTranslation ? "flex" : "none"},
                                 ]}
                                 showsVerticalScrollIndicator={false}
                             >
@@ -491,14 +489,14 @@ const GenericPage = ({ route }) => {
                                     </Animated.Text>
                                 </TouchableOpacity>
                             </ScrollView>
-                        ) : null}
+                            </>
+                            ) : null}
                         <View style={[styles.horizontalLine, { paddingTop: 5, }]} />
-
                         <Text
                             allowFontScaling={false}
                             style={[
                                 styles.description,
-                                { paddingBottom: 50, paddingTop: 10 ,fontSize: moderateScale(9)}
+                                { paddingBottom: 50, paddingTop: 10, fontSize: moderateScale(9), }
                             ]}
                         >
                             {
@@ -512,12 +510,12 @@ const GenericPage = ({ route }) => {
                         {selectedLanguage != "Arabic" ? (
                             <Text
                                 allowFontScaling={false}
-                                style={[styles.InfoReptTimeIndex, { fontFamily: "Montserrat",fontSize: moderateScale(11) }]}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "Montserrat", fontSize: moderateScale(11) }]}
                             >
                                 No:{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor ,fontSize: moderateScale(11)}]}
+                                    style={[{ color: selectedColor, fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (indexToDisplay = state.isArabicNumbers
@@ -531,7 +529,7 @@ const GenericPage = ({ route }) => {
                                 Of:{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor,fontSize: moderateScale(11) }]}
+                                    style={[{ color: selectedColor, fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (totalItemsToDisplay = state.isArabicNumbers
@@ -545,12 +543,12 @@ const GenericPage = ({ route }) => {
                         ) : (
                             <Text
                                 allowFontScaling={false}
-                                style={[styles.InfoReptTimeIndex, { fontFamily: "AmiriFont",fontSize: moderateScale(11) }]}
+                                style={[styles.InfoReptTimeIndex, { fontFamily: "AmiriFont", fontSize: moderateScale(11) }]}
                             >
                                 الذكر{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor,fontSize: moderateScale(11) }]}
+                                    style={[{ color: selectedColor, fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (indexToDisplay = state.isArabicNumbers
@@ -563,7 +561,7 @@ const GenericPage = ({ route }) => {
                                 من{" "}
                                 <Text
                                     allowFontScaling={false}
-                                    style={[{ color: selectedColor ,fontSize: moderateScale(11)}]}
+                                    style={[{ color: selectedColor, fontSize: moderateScale(11) }]}
                                 >
                                     {
                                         (totalItemsToDisplay = state.isArabicNumbers
@@ -610,13 +608,13 @@ const GenericPage = ({ route }) => {
                             activeOpacity={1}
                         >
                             <View style={styles.dotContainer}>
-                                <Text style={[styles.dot, { color: selectedColor ,fontSize: moderateScale(20)}]}>
+                                <Text style={[styles.dot, { color: selectedColor, fontSize: moderateScale(20) }]}>
                                     &#8226;
                                 </Text>
-                                <Text style={[styles.dot, { color: selectedColor,fontSize: moderateScale(20) }]}>
+                                <Text style={[styles.dot, { color: selectedColor, fontSize: moderateScale(20) }]}>
                                     &#8226;
                                 </Text>
-                                <Text style={[styles.dot, { color: selectedColor,fontSize: moderateScale(20) }]}>
+                                <Text style={[styles.dot, { color: selectedColor, fontSize: moderateScale(20) }]}>
                                     &#8226;
                                 </Text>
                             </View>
@@ -627,7 +625,7 @@ const GenericPage = ({ route }) => {
                     <ImageBackground
                         source={ControlPaneBackgroundImage}
                         style={styles.ControlPaneBackground}
-                    >
+                    >            
                         <TouchableWithoutFeedback
                             onPress={selectedLanguage != "Arabic" ? prevSubItem : nextSubItem}
                             disabled={
@@ -641,7 +639,7 @@ const GenericPage = ({ route }) => {
                             <View
                                 style={[
                                     styles.button,
-                                    { borderColor: selectedColor,height:moderateScale(60),width:moderateScale(130),alignItems:"center"},
+                                    { borderColor: selectedColor, height: moderateScale(60), width: moderateScale(130), alignItems: "center" },
                                 ]}
                             >
                                 {/*next button here button here*/}
@@ -649,7 +647,7 @@ const GenericPage = ({ route }) => {
                                     name="angle-left"
                                     size={moderateScale(24)}
                                     color="#454545"
-                                    style={{marginRight:selectedLanguage != "Arabic"? moderateScale(5):moderateScale(20)}}
+                                    style={{ marginRight: selectedLanguage != "Arabic" ? moderateScale(5) : moderateScale(20) }}
                                 />
                                 {selectedLanguage != "Arabic" ? (
                                     <Text
@@ -671,7 +669,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "AmiriFont",
-                                                fontSize: moderateScale(17)
+                                                fontSize: moderateScale(17),
                                             },
                                         ]}
                                     >
@@ -699,7 +697,7 @@ const GenericPage = ({ route }) => {
                                                 selectedLanguage != "Arabic"
                                                     ? "Montserrat"
                                                     : "ScheherazadeNew",
-                                                    fontSize: moderateScale(17)
+                                            fontSize: moderateScale(17)
                                         },
                                     ]}
                                 >
@@ -718,10 +716,10 @@ const GenericPage = ({ route }) => {
                                 count >= item.subItems[currentIndex].count
                             }
                         >
-                         <View
+                            <View
                                 style={[
                                     styles.button,
-                                    { borderColor: selectedColor,height:moderateScale(60),width:moderateScale(130),alignItems:"center"},
+                                    { borderColor: selectedColor, height: moderateScale(60), width: moderateScale(130), alignItems: "center", },
                                 ]}
                             >
                                 {/*back button here*/}
@@ -732,7 +730,7 @@ const GenericPage = ({ route }) => {
                                             styles.textcount,
                                             {
                                                 fontFamily: "Montserrat",
-                                                fontSize: moderateScale(17)
+                                                fontSize: moderateScale(17),
                                             },
                                         ]}
                                     >
@@ -757,7 +755,7 @@ const GenericPage = ({ route }) => {
                                     name="angle-right"
                                     size={moderateScale(24)}
                                     color="#454545"
-                                    style={{marginLeft:selectedLanguage != "Arabic"? moderateScale(5):moderateScale(20)}}
+                                    style={{ marginLeft: selectedLanguage != "Arabic" ? moderateScale(5) : moderateScale(20) }}
                                 />
                             </View>
                         </TouchableWithoutFeedback>

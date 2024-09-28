@@ -34,6 +34,10 @@ const FavoriteScreen = ({ navigation }) => {
     container: {
       backgroundColor: "#f2f2f6",
     },
+    wrapperButton:{
+      backgroundColor: "#fefffe",
+      shadowColor: "gray",
+    },
     button: {
       backgroundColor: "#fefffe",
     },
@@ -44,7 +48,7 @@ const FavoriteScreen = ({ navigation }) => {
       shadowColor: "white",
     },
     horizontalLine: {
-      borderColor: "#fefffe",
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
     emptyMessageText: {
       color: "#000",
@@ -55,13 +59,17 @@ const FavoriteScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
+    },
+    wrapperButton:{
+      backgroundColor: "#1C1C1E",
+      shadowColor: "black",
     },
     button: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
     },
     buttonText: {
       color: "#fff",
@@ -70,7 +78,7 @@ const FavoriteScreen = ({ navigation }) => {
       shadowColor: "black",
     },
     horizontalLine: {
-      borderColor: "#242424",
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
     emptyMessageText: {
       color: "#fff",
@@ -93,13 +101,14 @@ const FavoriteScreen = ({ navigation }) => {
       textAlign: "right",
       marginLeft: 30,
       fontFamily: "ScheherazadeNew",
+      fontSize: moderateScale(18),
     },
     icon: {
       transform: [{ rotate: 0 + "deg" }],
       marginLeft: 20,
     },
     horizontalLine: {
-      marginLeft: width > 600 ? 610 : 350,
+      marginRight: 20,
     },
     emptyMessageText: {
       fontFamily: "ScheherazadeNew",
@@ -122,7 +131,7 @@ const FavoriteScreen = ({ navigation }) => {
       marginRight: 20,
     },
     horizontalLine: {
-      marginRight: width > 600 ? 610 : 350,
+      marginLeft: 20,
     },
     emptyMessageText: {
       fontFamily: "Montserrat",
@@ -170,6 +179,12 @@ const FavoriteScreen = ({ navigation }) => {
       ...HomeStyles.emptyMessageText,
       ...(selectedTheme === 'dark' ? themeStyles.emptyMessageText : themeStyles.emptyMessageText),
       ...(selectedLanguage != "Arabic" ? EnglishLanguage.emptyMessageText : ArabicLanguage.emptyMessageText)
+    },
+    wrapperButton: {
+      ...HomeStyles.wrapperButton,
+      ...(selectedTheme === "dark"
+        ? themeStyles.wrapperButton
+        : themeStyles.wrapperButton),
     },
   };
   //#endregion
@@ -247,7 +262,7 @@ const FavoriteScreen = ({ navigation }) => {
           </View>
         ) : (
           clickedIndexes.map((index) => (
-            <View key={index}>
+            <View key={index} style={[styles.wrapperButton,renderBorderRadius(index),]}>
               <TouchableOpacity
                 style={[styles.button, renderBorderRadius(index)]}
                 onPress={() =>

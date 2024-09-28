@@ -17,7 +17,7 @@ const App = () => {
   const DarkThemeNavigator = {
     colors: {
       primary: 'rgb(10, 132, 255)',
-      background: '#151515',
+      background: '#000000',
       card: 'rgb(18, 18, 18)',
       text: 'rgb(229, 229, 231)',
       border: 'rgb(39, 39, 41)',

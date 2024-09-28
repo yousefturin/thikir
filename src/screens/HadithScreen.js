@@ -44,7 +44,7 @@ const HADITHVerseScreen = ({ navigation }) => {
       color: "#000",
     },
     horizontalLine: {
-      borderColor: "#f2f2f6",
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
   });
   //#endregion
@@ -52,16 +52,16 @@ const HADITHVerseScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     rectangle: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
     },
     title: {
       color: "#fff",
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
   });
   //#endregion

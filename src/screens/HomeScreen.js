@@ -68,9 +68,12 @@ const HomeScreen = ({ navigation }) => {
     TextMid: {
       color: "#000",
     },
-    button: {
+    wrapperButton:{
       backgroundColor: "#fefffe",
       shadowColor: "gray",
+    },
+    button: {
+      backgroundColor: "#fefffe",
     },
     buttonText: {
       color: "#000",
@@ -79,7 +82,7 @@ const HomeScreen = ({ navigation }) => {
       shadowColor: "white",
     },
     horizontalLine: {
-      borderColor: "#fefffe",
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
     containerSearchMode: {
       backgroundColor: "#f2f2f6",
@@ -90,9 +93,11 @@ const HomeScreen = ({ navigation }) => {
     searchBarInputContainer: {
       backgroundColor: "#fefffe",
       shadowColor: "gray",
+      borderColor:"rgba(198, 198, 200, 0.45)",
     },
     searchBarInput: {
       backgroundColor: "#fefffe",
+      borderColor: "rgba(198, 198, 200, 0.45)",
       color: "#dddddd",
     },
     buttonGrid: {
@@ -113,17 +118,20 @@ const HomeScreen = ({ navigation }) => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     pageContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     TextMid: {
       color: "#fff",
     },
-    button: {
-      backgroundColor: "#242424",
+    wrapperButton:{
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
+    },
+    button: {
+      backgroundColor: "#1C1C1E",
     },
     buttonText: {
       color: "#fff",
@@ -132,26 +140,28 @@ const HomeScreen = ({ navigation }) => {
       shadowColor: "black",
     },
     horizontalLine: {
-      borderColor: "#242424",
+      borderColor: "rgba(84, 84, 84, 0.45)",
     },
     containerSearchMode: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     searchBarContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     searchBarInputContainer: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
+      borderColor: "rgba(84, 84, 84, 0.45)",
       shadowColor: "black",
     },
     searchBarInput: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
+      borderColor:"rgba(56, 56, 58, 0.45)",
       color: "#dddddd",
     },
     buttonGrid: {
     },
     squareButton: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     },
     buttonTextTop: {
@@ -199,10 +209,10 @@ const HomeScreen = ({ navigation }) => {
     },
     TextMidWrapper: {
       alignItems: "flex-end",
-      marginRight: width > 600 ? 60 : 35,
+      marginRight: 20,
     },
     horizontalLine: {
-      marginLeft: width > 600 ? 610 : 350,
+      marginRight: 20,
     },
     TextMid: {
       fontFamily: "ScheherazadeNewBold",
@@ -238,10 +248,10 @@ const HomeScreen = ({ navigation }) => {
     },
     TextMidWrapper: {
       alignItems: "flex-start",
-      marginLeft: width > 600 ? 60 : 35,
+      marginLeft: 20,
     },
     horizontalLine: {
-      marginRight: width > 600 ? 610 : 350,
+      marginLeft: 20,
     },
     TextMid: {
       fontFamily: "Montserrat",
@@ -353,6 +363,12 @@ const HomeScreen = ({ navigation }) => {
     TextMidWrapper: {
       ...HomeStyles.TextMidWrapper,
       ...(selectedLanguage != "Arabic" ? EnglishLanguage.TextMidWrapper : ArabicLanguage.TextMidWrapper)
+    },
+    wrapperButton: {
+      ...HomeStyles.wrapperButton,
+      ...(selectedTheme === "dark"
+        ? themeStyles.wrapperButton
+        : themeStyles.wrapperButton),
     },
   };
   //#endregion
@@ -539,7 +555,7 @@ const HomeScreen = ({ navigation }) => {
           rightIconContainerStyle={{opacity:RightIconContainerStyle}}
           inputStyle={[
             styles.searchBarInput,
-            { textAlign: selectedLanguage != "Arabic" ? "left" : "right" },
+            { textAlign: selectedLanguage != "Arabic" ? "left" : "right", },
           ]}
           // onCancel={handleCancel}
         
@@ -560,7 +576,7 @@ const HomeScreen = ({ navigation }) => {
           <>
             <View style={styles.containerSearchMode}>
               {searchedItems.map((item, index) => (
-                <View key={item.name}>
+                <View key={item.name}style={[styles.wrapperButton, renderBorderRadius(index, true)]}>
                   <TouchableOpacity
                     style={[
                       styles.button,
@@ -664,7 +680,7 @@ const HomeScreen = ({ navigation }) => {
               <Text style={styles.TextMid}>{selectedLanguage != "Arabic" ? "Catalogue" : "الفهرس"}</Text>
             </View>
             {items.map((item, index) => (
-              <View key={item.name}>
+              <View key={item.name} style={[styles.wrapperButton,renderBorderRadius(index),]}>
                 <TouchableOpacity
                   style={[styles.button, renderBorderRadius(index), searchMode]}
                   onPress={() =>

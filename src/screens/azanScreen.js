@@ -41,12 +41,12 @@ const AzanScreen = () => {
     systemTheme
   );
   const horizontalLineTheme = getColorForTheme(
-    { dark: "#242424", light: "#f2f2f6" },
+    { dark: "rgba(84, 84, 84, 0.35)", light: "#f2f2f6" },
     selectedTheme,
     systemTheme
   );
   const backgroundColorTheme = getColorForTheme(
-    { dark: "#151515", light: "#fefffe" },
+    { dark: "#050505", light: "#fefffe" },
     selectedTheme,
     systemTheme
   );
@@ -116,7 +116,7 @@ const AzanScreen = () => {
       color: "#666",
     },
     horizontalLine: {
-      borderColor: "#f2f2f6",
+      borderColor: "rgba(198, 198, 200, 0.45)",
     },
     pikerContainer: {
       backgroundColor: "#fefffe",
@@ -130,10 +130,10 @@ const AzanScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     nextPrayerContainer: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     },
     time: {
@@ -143,14 +143,14 @@ const AzanScreen = () => {
       color: "#666",
     },
     dateContainerWrapper: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     },
     date: {
       color: "#666",
     },
     prayerContainer: {
-      backgroundColor: "#242424",
+      backgroundColor: "#1C1C1E",
       shadowColor: "black",
     },
     prayerName: {
@@ -173,17 +173,38 @@ const AzanScreen = () => {
       color: "#666",
     },
     horizontalLine: {
-      borderColor: "#151515",
+      borderColor: "rgba(84, 84, 84, 0.35)",
     },
     pikerContainer: {
-      backgroundColor: "#151515",
+      backgroundColor: "#0e0e0e",
     },
     pickerCancelBtn: {
-      backgroundColor: "#151515",
+      backgroundColor: "#0e0e0e",
+    },
+  });
+  //#endregion
+  
+  //#region ArabicLanguage
+  const ArabicLanguage = StyleSheet.create({
+    prayerItem: {
+      flexDirection:"row-reverse",
+    },
+    horizontalLine: {
+      marginRight:30,
     },
   });
   //#endregion
 
+  //#region EnglishLanguage
+  const EnglishLanguage = StyleSheet.create({
+    prayerItem: {
+      flexDirection: "row",
+    },
+    horizontalLine: {
+      marginLeft:30,
+    },
+  });
+  //#endregion
   const themeStyles = getColorForTheme(
     { dark: darkTheme, light: lightTheme },
     selectedTheme,
@@ -272,6 +293,11 @@ const AzanScreen = () => {
       ...(selectedTheme === "dark"
         ? themeStyles.horizontalLine
         : themeStyles.horizontalLine),
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.horizontalLine : ArabicLanguage.horizontalLine)
+    },
+    prayerItem: {
+      ...AzanScreenStyle.prayerItem,
+      ...(selectedLanguage != "Arabic" ? EnglishLanguage.prayerItem : ArabicLanguage.prayerItem)
     },
     pikerContainer: {
       ...AzanScreenStyle.pikerContainer,
@@ -881,7 +907,7 @@ const AzanScreen = () => {
                               allowFontScaling={false}
                               style={[
                                 {
-                                  color: "#666",
+                                  color: "#202022",
                                   fontFamily: "Montserrat",
                                   margin: 5,
                                   paddingTop: 10,
@@ -922,7 +948,7 @@ const AzanScreen = () => {
                             <View
                               style={[
                                 styles.horizontalLine,
-                                { borderColor: horizontalLineTheme },
+                                { borderColor: horizontalLineTheme,width:"100%", marginRight:0,},
                               ]}
                             />
                             <View style={styles.pickerConfirmBtn}>
@@ -1012,12 +1038,13 @@ const AzanScreen = () => {
                                   />
                                 ))}
                               </Picker>
+
                               <View
-                                style={[
-                                  styles.horizontalLine,
-                                  { borderColor: horizontalLineTheme },
-                                ]}
-                              />
+                              style={[
+                                styles.horizontalLine,
+                                { borderColor: horizontalLineTheme,width:"100%", marginRight:0,},
+                              ]}
+                            />
                               <View style={styles.pickerConfirmBtn}>
                                 <Button
                                   title="Confirm"
@@ -1040,11 +1067,7 @@ const AzanScreen = () => {
                   <View
                     style={[
                       styles.prayerItem,
-                      prayer === nextPrayer ? styles.prayerDecorator : null,
-                      selectedLanguage !== "Arabic"
-                        ? { flexDirection: "row" }
-                        : { flexDirection: "row-reverse" },
-                    ]}
+                      prayer === nextPrayer ? styles.prayerDecorator : null,]}
                   >
                     <Text
                       allowFontScaling={false}

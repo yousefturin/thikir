@@ -31,17 +31,17 @@ export const generateAndCaptureJsx = async ({ selectedTheme, selectedFont, selec
     //#region DarkTheme
     const darkTheme = StyleSheet.create({
         container: {
-            backgroundColor: "#151515",
+            backgroundColor: "#050505",
         },
         rectangle: {
-            backgroundColor: "#242424",
+            backgroundColor: "#1C1C1E",
             shadowColor: "black",
         },
         title: {
             color: "#fff",
         },
         horizontalLine: {
-            borderColor: "#151515",
+            borderColor: "#050505",
         },
     });
     //#endregion

@@ -31,7 +31,7 @@ const ReportProblemScreen = () => {
   //#region DarkTheme
   const darkTheme = StyleSheet.create({
     container: {
-      backgroundColor: "#151515",
+      backgroundColor: "#050505",
     },
     heading: {
       color: '#fff',
