@@ -2,6 +2,7 @@
   "expo": {
     "name": "Al Mufrdun",
     "slug": "almufrdun",
+    "sdkVersion": "51.0.38",
     "description": "Islamic application.",
     "version": "1.0.0",
     "orientation": "portrait",
