@@ -2,7 +2,6 @@
   "expo": {
     "name": "Al Mufrdun",
     "slug": "almufrdun",
-    "sdkVersion": "49.0.0",
     "description": "Islamic application.",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,15 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#151515"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": [
-          "remote-notification"
-        ]
+        "UIBackgroundModes": ["remote-notification"]
       }
     },
     "android": {
@@ -29,9 +24,7 @@
         "foregroundImage": "./assets/Images/splashEntro.png",
         "backgroundColor": "#151515"
       },
-      "permissions": [
-        "android.permission.NOTIFICATION"
-      ]
+      "permissions": ["android.permission.NOTIFICATION"]
     },
     "web": {
       "favicon": "./assets/Images/icon.png"
@@ -47,8 +40,6 @@
     "updates": {
       "url": "https://u.expo.dev/82006e3a-5c19-4949-9631-069673d77d93"
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"]
   }
 }
