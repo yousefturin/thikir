@@ -1,0 +1,738 @@
+[
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 4149.202141046524
+        },
+        "identifier": "adf14c9b-e32e-4fbd-91c7-9c14e7c4ccbb",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 9849.196058034897
+        },
+        "identifier": "68f60a68-b3ba-43b5-a676-23cf719a39a7",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 51729.18964898586
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "f50e0568-bfe8-445d-b96e-34b3d8bebe4f"
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 73989.18345403671
+        },
+        "identifier": "dcc11981-79bb-4721-80fa-e8c1117e4c5d"
+    },
+    {
+        "identifier": "501a4a17-f969-4699-91b2-d3e83d6668aa",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 82329.1786160469
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 90549.15052294731
+        },
+        "identifier": "75d66893-56d3-407b-ab4f-5b1bceb90726",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 96249.14581000805
+        },
+        "identifier": "e28983b6-e42b-44b3-8e53-ea1e49f73e6a",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "identifier": "570be864-121f-4f11-8833-ccc1f87754a0",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 138129.14084494114
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "identifier": "8ad18583-1940-4969-9d83-2653dcec8f8c",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 160389.1367520094
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 168729.13304901123
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "cae7e836-c8a6-4a07-b24a-ebf4866a7bc9"
+    },
+    {
+        "identifier": "6d460366-c158-4206-9cf2-16e2322c8022",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 177009.12892901897
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 182709.12523198128
+        },
+        "identifier": "af819495-9d98-4979-9400-82a8fbd0637d",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 224589.1202390194
+        },
+        "identifier": "fafcaa4d-4de9-4cb4-8262-a00aa201adb1",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 246849.11639904976
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "bfeda855-7553-4c1d-b2b3-64ce1121ecf0"
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 255189.11156702042
+        },
+        "identifier": "42a1cf16-2523-4435-a758-42f1135725ad",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 263409.10754299164
+        },
+        "identifier": "98ded173-d2be-49d5-b9cf-4896200d6028"
+    },
+    {
+        "identifier": "f2415874-5800-4d2b-b5a0-788f26c2ac4b",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 269109.1022069454
+        }
+    },
+    {
+        "identifier": "2438adee-6b19-4bed-947b-789374955c9b",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 310989.09792494774
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 333249.09255194664
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "1069d2cb-6ae5-4414-b64d-bb9208b05e97"
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 341589.088070035
+        },
+        "identifier": "0379b597-23fb-40e8-8451-36763f5f1e06"
+    },
+    {
+        "identifier": "dafce198-07e8-4836-b732-e98e62309ba1",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 349869.0823099613
+        }
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "3194c515-c573-403a-8676-7d451b29a17f",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 355569.0775940418
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 397389.07110095024
+        },
+        "identifier": "a768adc6-60c7-4995-b5c2-2d4384c4cf82",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "identifier": "6b3f7682-03fa-4b40-a32c-9c351e105e6d",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 419709.066305995
+        }
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 428049.0598150492
+        },
+        "identifier": "878466a3-9e4e-42a3-937d-bb5c77cb8897"
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 436329.05466496944
+        },
+        "identifier": "667fa4b4-65c3-410d-87c9-ecb3891c77d7",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        }
+    },
+    {
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 441969.04772496223
+        },
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "75a8e29c-2189-44ec-a937-55487e326770"
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Fajr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "04c03e73-9030-423e-bca8-a6907292ebd9",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 483849.04055702686
+        }
+    },
+    {
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Dhuhr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "identifier": "db750039-539b-4d78-85c9-437b0f64a8c6",
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 506109.03347301483
+        }
+    },
+    {
+        "identifier": "c26a2d08-2ba9-4257-9268-dd1a862a1a90",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Asr Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 514449.0265510082
+        }
+    },
+    {
+        "identifier": "856feee8-b32d-4df7-ba13-fd8c327deb06",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Maghrib Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 522729.01883900166
+        }
+    },
+    {
+        "identifier": "8e4a7cd7-b811-47ab-84f5-266485de46b8",
+        "content": {
+            "body": "It is time for prayer",
+            "subtitle": null,
+            "sound": "custom",
+            "launchImageName": "",
+            "badge": null,
+            "title": "Isha Azan",
+            "categoryIdentifier": "AZAN_CATEGORY",
+            "data": {},
+            "interruptionLevel": "active",
+            "attachments": [],
+            "threadIdentifier": "",
+            "targetContentIdentifier": null
+        },
+        "trigger": {
+            "repeats": false,
+            "class": "UNTimeIntervalNotificationTrigger",
+            "type": "timeInterval",
+            "seconds": 528429.0115250349
+        }
+    }
+]

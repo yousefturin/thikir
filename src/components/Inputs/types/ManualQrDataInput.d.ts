@@ -1,0 +1,71 @@
+export export interface QRDataInputProps {
+    value?: string;
+    onChangeText?: (text: string) => void;
+    placeholder?: string;
+    secureTextEntry?: boolean;
+    textContentType?:
+    | "none"
+    | "URL"
+    | "addressCity"
+    | "addressCityAndState"
+    | "addressState"
+    | "countryName"
+    | "creditCardNumber"
+    | "creditCardExpiration"
+    | "creditCardExpirationMonth"
+    | "creditCardExpirationYear"
+    | "creditCardSecurityCode"
+    | "creditCardType"
+    | "creditCardName"
+    | "creditCardGivenName"
+    | "creditCardMiddleName"
+    | "creditCardFamilyName"
+    | "emailAddress"
+    | "familyName"
+    | "fullStreetAddress"
+    | "givenName"
+    | "jobTitle"
+    | "location"
+    | "middleName"
+    | "name"
+    | "namePrefix"
+    | "nameSuffix"
+    | "nickname"
+    | "organizationName"
+    | "postalCode"
+    | "streetAddressLine1"
+    | "streetAddressLine2"
+    | "sublocality"
+    | "telephoneNumber"
+    | "username"
+    | "password"
+    | "newPassword"
+    | "oneTimeCode"
+    | "birthdate"
+    | "birthdateDay"
+    | "birthdateMonth"
+    | "birthdateYear"
+    | "cellularEID"
+    | "cellularIMEI"
+    | "dateTime"
+    | "flightNumber"
+    | "shipmentTrackingNumber"
+    | undefined;
+    keyboardType?:
+    | "ascii-capable"
+    | "numbers-and-punctuation"
+    | "name-phone-pad"
+    | "twitter"
+    | "web-search"
+    | "default"
+    | "number-pad"
+    | "decimal-pad"
+    | "numeric"
+    | "email-address"
+    | "phone-pad"
+    | "url"
+    | "visible-password";
+    autoComplete?: string;
+    onKeyPress?: (e: unknown) => void;
+    isCorrectInput?: boolean;
+}

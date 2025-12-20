@@ -1,46 +1,63 @@
 {
   "expo": {
-    "name": "Al Mufrdun",
-    "slug": "almufrdun",
-    "sdkVersion": "51.0.38",
-    "description": "Islamic application.",
+    "name": "Thikir",
+    "description": "App description",
+    "slug": "thikir",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Images/icon.png",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/Images/splashEntro.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#151515"
+    "platforms": ["ios", "android"],
+    "backgroundColor": "#FFFFFF",
+    "primaryColor": "#FFFFFF",
+    "androidNavigationBar": {
+      "backgroundColor": "#F2F4F7",
+      "barStyle": "light-content"
     },
-    "assetBundlePatterns": ["**/*"],
+    "androidStatusBar": {
+      "backgroundColor": "#FFFFFF",
+      "barStyle": "light-content"
+    },
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "UIBackgroundModes": ["remote-notification"]
+      "bundleIdentifier": "com.yusefturin.thikir",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "buildNumber": "0000",
+      "userInterfaceStyle": "light",
+      "splash": {
+        "backgroundColor": "#FFFFFF"
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/Images/splashEntro.png",
-        "backgroundColor": "#151515"
+      "package": "com.yusefturin.thikir",
+      "edgeToEdgeEnabled": true,
+      "userInterfaceStyle": "light",
+      "splash": {
+        "resizeMode": "contain",
+        "backgroundColor": "#FFFFFF",
+        "image": "./assets/AndroidSplash.png"
       },
-      "permissions": ["android.permission.NOTIFICATION"]
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/AndroidAdaptiveIcon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "softwareKeyboardLayoutMode": "resize"
     },
-    "web": {
-      "favicon": "./assets/Images/icon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "82006e3a-5c19-4949-9631-069673d77d93"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/82006e3a-5c19-4949-9631-069673d77d93"
-    },
-    "plugins": ["expo-localization"]
+    "plugins": [
+      ["expo-font"],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location. This enables features such as prayer time calculations based on your location.",
+          "locationAlwaysPermission": "Allow $(PRODUCT_NAME) to use your location. This enables features such as prayer time calculations based on your location.",
+          "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location. This enables features such as prayer time calculations based on your location."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "sounds": ["./assets/sounds/azan.caf"]
+        }
+      ]
+    ]
   }
 }
